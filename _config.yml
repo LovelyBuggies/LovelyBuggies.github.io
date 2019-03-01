@@ -102,11 +102,11 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "WY",
-        href: "http://zhengwuyang.com"
+        title: "GitHub",
+        href: "https://github.com/LovelyBuggies"
     },{
-        title: "简书·BY",
-        href: "http://www.jianshu.com/u/e71990ada2fd"
+        title: "简书",
+        href: "https://www.jianshu.com/u/ad132373fc48"
     },{
         title: "Apple",
         href: "https://apple.com"
