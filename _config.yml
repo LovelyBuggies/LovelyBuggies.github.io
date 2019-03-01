@@ -108,10 +108,7 @@ friends: [
         title: "简书",
         href: "https://www.jianshu.com/u/ad132373fc48"
     },{
-        title: "Apple",
-        href: "https://apple.com"
-    },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
+        title: "知乎",
+        href: "https://www.zhihu.com/people/liu-shuo-23-28/activities"
     }
 ]
