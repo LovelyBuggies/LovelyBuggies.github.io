@@ -8,7 +8,7 @@ header-img: img/post-bg-rwd.jpg
 catalog: true
 tags:
     - 实验
-    - 多媒体技术
+    - 多媒体
 
 
 ---
