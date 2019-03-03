@@ -8,7 +8,7 @@ header-img: img/post-bg-swift.jpg
 catalog: true
 tags:
     - 实验
-    - 数据可视化
+    - 数据挖掘
 
 ---
 
