@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Numpy & PyTorch
-subtitle:   
+subtitle:   深度学习笔记（二）
 date:       2019-02-28
 author:     Nino Lau
 header-img: img/Snip20190312_71.png
@@ -50,9 +50,7 @@ plt.show()
     (4.0, -0.80000001)
     (5.0, -1.0)
 
-
-
-![png](output_1_1.png)
+![](https://ws1.sinaimg.cn/large/006tKfTcgy1g13ikioccxj30ao070t8p.jpg)
 
 
 ## Using numpy to create tensor
