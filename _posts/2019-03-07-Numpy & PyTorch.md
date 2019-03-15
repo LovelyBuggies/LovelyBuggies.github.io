@@ -2,7 +2,7 @@
 layout:     post
 title:      Numpy & PyTorch
 subtitle:   深度学习笔记（二）
-date:       2019-02-28
+date:       2019-03-07
 author:     Nino Lau
 header-img: img/Snip20190312_71.png
 catalog: true
