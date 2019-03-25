@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      Linear Regression
-subtitle:   GD, SGD
+title:     Multivariate Linear Regression
+subtitle:   GD, SGD method
 date:       2019-03-25
 author:     Nino Lau
 header-img: img/Snip20190312_61.png
@@ -11,10 +11,6 @@ tags:
     - 数据挖掘
 
 ---
-
-
-
-## Multivariate Linear Regression
 
 In this homework, we will investigate multivariate linear regression using Gradient Descent and Stochastic Gradient Descent. We will also examine the relationship between the cost function, the convergence of gradient descent, overfitting problem, and the learning rate.
 
@@ -175,7 +171,7 @@ class LinearRegression(object):
         
 ```
 
-### Exercise 1
+## Exercise 1
 
 How many parameters do you use to tune this linear regression model?  Please use **Gradient Descent** to obtain the optimal parameters. Before you train the model, please set the number of iterations to be 1500000, the learning rate to 0.00015, the initial values of all the parameters to 0.0. During training, at every 100000 iterations, i.e., 100000 , 200000,…, 1500000, report the current training error and the testing error in a figure (you can draw it by hands or by any software). What can you find in the plots? Please analyze the plots.
 
@@ -290,8 +286,8 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 ​    
 ​    -------------------------------------------- Test Results --------------------------------------------
 ​    
-    The average test error is : [11.10900937].
-    
+​    The average test error is : [11.10900937].
+​    
     The average test loss is : [66.87310085].
 
 
@@ -302,7 +298,7 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 
 Errors and losses gradually decrease with the iteration. And the result finally converged on (w_sizes, w_distances, w_bias) = (6.76, -72.38, 79.46). After testing, we find the results pretty accurate and only suffer an error of about 2w RMB.
 
-### Exercise 2
+## Exercise 2
 
 Now, you change the learning rate to a number of different values, for instance, to 0.0002 (you may also change the number of iterations as well) and then train the model again. What can you find? Please conclude your findings.
 
@@ -416,8 +412,8 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 ​    
 ​    -------------------------------------------- Test Results --------------------------------------------
 ​    
-    The average test error is : [11.1090291].
-    
+​    The average test error is : [11.1090291].
+​    
     The average test loss is : [66.87324595].
 
 
@@ -428,7 +424,7 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 
 Errors and losses gradually decrease with the iteration. And the result finally converged on (w_sizes, w_distances, w_bias) = (6.76, -72.38, 79.46). After testing, we find the results pretty accurate and only suffer an error of about 2w RMB. **Same results as lr = 0.00015, but this model converges a little faster.**
 
-### Exercise 3
+## Exercise 3
 
 Now, we turn to use other optimization methods to get the optimal parameters. Can you use **Stochastic Gradient Descent** to get the optimal parameters? Plots the training error and the testing error at each K-step iterations (the size of K is set by yourself). Can you analyze the plots and make comparisons to those findings in Exercise 1?
 
@@ -542,8 +538,8 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 ​    
 ​    -------------------------------------------- Test Results --------------------------------------------
 ​    
-    The average test error is : [11.10925859].
-    
+​    The average test error is : [11.10925859].
+​    
     The average test loss is : [66.88540843].
 
 
