@@ -6,11 +6,9 @@ Welcome to the small world of LovelyBuggies, Gzz~~~
 
 More info, please view  
 
-[Jian](https://www.jianshu.com/u/ad132373fc48) 
+- [Jian](https://www.jianshu.com/u/ad132373fc48) 
 
-[GitHub](https://github.com/LovelyBuggies)
+- [GitHub](https://github.com/LovelyBuggies)
 
-[Blog](https://lovelybuggies.github.io/)
-
-
+- [Blog](https://lovelybuggies.github.io/)
 
