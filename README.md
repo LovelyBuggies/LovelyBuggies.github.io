@@ -2,7 +2,7 @@
 
 Hey, 👏 this is [my personal blog](http://lovelybuggies.github.io/)! -- http://lovelybuggies.github.io/
 
-Welcome to the small world of LovelyBuggies, Gzz~~~
+Welcome to the small world of LovelyBuggies
 
 More info, please view  
 
