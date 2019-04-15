@@ -7,7 +7,6 @@ author:     Nino Lau
 header-img: img/Snip20190312_61.png
 catalog: true
 tags:
-    - 实验
     - 数据挖掘
 
 ---
@@ -288,7 +287,7 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 ​    
 ​    The average test error is : [11.10900937].
 ​    
-    The average test loss is : [66.87310085].
+​    The average test loss is : [66.87310085].
 
 
 
@@ -414,7 +413,7 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 ​    
 ​    The average test error is : [11.1090291].
 ​    
-    The average test loss is : [66.87324595].
+​    The average test loss is : [66.87324595].
 
 
 
@@ -540,7 +539,7 @@ show_regression(train_sizes, train_distances, train_prices, test_sizes, test_dis
 ​    
 ​    The average test error is : [11.10925859].
 ​    
-    The average test loss is : [66.88540843].
+​    The average test loss is : [66.88540843].
 
 
 

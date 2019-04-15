@@ -7,7 +7,6 @@ author:     Nino Lau
 header-img: img/tag-bg.jpg
 catalog: true
 tags:
-    - 实验
     - 数据挖掘
 
 ---

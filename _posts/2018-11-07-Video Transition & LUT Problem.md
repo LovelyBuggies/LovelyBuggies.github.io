@@ -7,7 +7,6 @@ author:     Nino Lau
 header-img: img/post-bg-unix-linux.jpg
 catalog: true
 tags:
-    - 实验
     - 多媒体
 
 

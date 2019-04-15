@@ -7,7 +7,6 @@ author:     Nino Lau
 header-img: img/post-bg-os-metro.jpg
 catalog: true
 tags:
-    - 实验
     - 区块链
 
 ---
