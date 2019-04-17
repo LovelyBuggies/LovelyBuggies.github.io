@@ -30,8 +30,7 @@ Since you have noticed this blog, I believe you must have known the advantages (
 
 ## Requirements
 
-Here I use `Github` + `[Gitbook]([https://www.gitbook.com/](https://www.gitbook.com/)
-) Pages` + `Typora ` to write a fitness manual 📓 as an example. (*You can also use other methods to do the same job, but this seems to be the simplest way I found to build pages on [Gitbook]([https://www.gitbook.com/](https://www.gitbook.com/)
+Here I use `Github` + `Gitbook Pages` + `Typora ` to write a fitness manual 📓 as an example. (*You can also use other methods to do the same job, but this seems to be the simplest way I found to build pages on [Gitbook]([https://www.gitbook.com/](https://www.gitbook.com/)
 ).*)
 
 ## Personal Account
