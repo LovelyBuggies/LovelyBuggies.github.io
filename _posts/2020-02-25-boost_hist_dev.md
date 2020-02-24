@@ -32,7 +32,7 @@ In this part, we need to establish a virtual environment to develop in a good ma
 1. Create a python 3 environment named `.env` and activate it. 
 
    ```shell
-   python3 -m venv .env  				# remove your env: rm -r .env
+   python3 -m venv .env
    source .env/bin/activate
    ```
 
@@ -68,9 +68,20 @@ jupyter lab
 
 ![](https://tva1.sinaimg.cn/large/0082zybply1gc7vtlubk2j31nb0u07ev.jpg)
 
+To rebuild, you may need to delete the `/build` directory, and rerun `pip3 install -e .` from the environment.
+
+```
+rm -r ./build
+pip3 install -e .
+```
+
 **You can also build your developer environment using CMake**. I tried it and found it not convinient as pip3.
 
 ### Testing
+
+
+
+
 
 
 
@@ -90,3 +101,16 @@ I browsed [some solutions](https://stackoverflow.com/questions/38658014/ninja-no
 - I also tried to symlink "ninja-build" to "ninja" according to `# ln -s /usr/bin/ninja /usr/bin/ninja-build` OR `# ln -s /usr/local/bin/ninja /usr/local/bin/ninja-build`. But the error still existed.
 
 Considering I don't have to build two test enviroment, I continued my exploration using pip.
+
+#### Rebuild Error
+
+When trying to rebuild in a different director by `pip3 install -e .`, we will meet some problem `boost-hist already exist.` 
+
+- The simplest solution is to change your project folder. You can see the existed installation in the last line of error thrown.
+
+#### Pytest Lacks Module 
+
+When we are testing using `python3 -m pytest`, a normal error is `ModuleNotFoundError: No module named 'pybind11_tests'`. Why this happens? How to deal with it?
+
+
+
