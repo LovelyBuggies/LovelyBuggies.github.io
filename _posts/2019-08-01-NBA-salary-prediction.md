@@ -4,7 +4,7 @@ title:     用Azure Notebook预测NBA球员薪水
 subtitle:   
 date:       2019-08-01
 author:     Nino Lau
-header-img: img/Snip20190312_61.png
+header-img: img/unsplash/christin-hume-hBuwVLcYTnA-unsplash.jpg
 catalog: true
 tags:
     - 数据挖掘
