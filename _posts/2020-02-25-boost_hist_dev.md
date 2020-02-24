@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:     Boost Histogram for Python (Developer Mode)
+title:     Boost Histogram for Python - The Developer Mode
 subtitle:   
 date:       2020-02-28
 author:     Nino Lau
-header-img: img/unsplash/jp-desvigne-wVRqisV_mPk-unsplash.jpg
+header-img: img/jp-desvigne-wVRqisV_mPk-unsplash.jpg
 catalog: true
 tags:
     - 知识介绍
