@@ -4,7 +4,7 @@ title:     Boost Histogram for Python (Junior)
 subtitle:   
 date:       2020-02-24
 author:     Nino Lau
-header-img: img/tomasz-smal-vT_JAucWU00-unsplash.jpg
+header-img: img/unsplash/tomasz-smal-vT_JAucWU00-unsplash.jpg
 catalog: true
 tags:
     - 知识介绍
