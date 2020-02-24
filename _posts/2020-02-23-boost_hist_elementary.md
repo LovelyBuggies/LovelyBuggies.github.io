@@ -1,16 +1,18 @@
 ---
 layout:     post
-title:      Boost-hist-Py (elementary)
+title:     Boost Histogram for Python (Junior)
 subtitle:   
 date:       2020-02-24
 author:     Nino Lau
-header-img: img/Snip20190312_61.png
+header-img: img/christin-hume-slbqShqAhEo-unsplash.jpg
 catalog: true
 tags:
     - 知识介绍
-		- Hist Plotting
+    - Boost Histogram
 
 ---
+
+
 
 If you are a Pythoner, you have must used [Matplotlib](https://matplotlib.org/). [Matplotlib](https://matplotlib.org/) is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms. It is a toolkit build in Python scripts, so you will meet some problems when you are trying to access the C++-based plotting toolkits. Some projects are aiming at to provide Python blinding for plotting toolkits. [Boost-histogram](https://github.com/scikit-hep/boost-histogram) is one of them and it provides Python bindings for the C++14 Boost::Histogram library. Let's get a quickstart for this tool and see its amazing effects!
 
