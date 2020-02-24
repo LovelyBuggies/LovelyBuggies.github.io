@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:     Boost-hist-Py (elementary)
+title:      Boost-hist-Py (elementary)
 subtitle:   
 date:       2020-02-24
 author:     Nino Lau
