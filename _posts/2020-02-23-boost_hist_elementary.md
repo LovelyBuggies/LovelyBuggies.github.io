@@ -20,13 +20,13 @@ If you are a Pythoner, you have must used [Matplotlib](https://matplotlib.org/).
 
 You can install this library from [PyPI](https://pypi.org/project/boost-histogram/) with pip (here I used pip3 installation and run it on my local Jupyter Notebook):
 
-```
+```shell
 python -m pip install boost-histogram
 ```
 
 or you can use Conda through [conda-forge](https://github.com/conda-forge/boost-histogram-feedstock):
 
-```
+```shell
 conda install -c conda-forge boost-histogram
 ```
 
@@ -37,7 +37,7 @@ All the normal best-practices for Python apply; you should be in a virtual envir
 Open your Jupyter Notebook:
 
 
-```
+```shell
 mkdir hist-plot
 Jupyter Notebook
 ```
@@ -298,4 +298,6 @@ In this article, I show some simple examples of powerful boost-hist, *i.e.*, sim
 
 "Practice makes perfect!" Try it by yourself!
 
-![](https://tva1.sinaimg.cn/large/0082zybply1gc7gmnmtxij30md096t9u.jpg)
+
+
+![](https://tva1.sinaimg.cn/bmiddle/0082zybply1gc7gmnmtxij30md096t9u.jpg)

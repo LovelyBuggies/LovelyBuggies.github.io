@@ -4,7 +4,7 @@ title:     Boost Histogram for Python - The Developer Mode
 subtitle:   
 date:       2020-02-28
 author:     Nino Lau
-header-img: img/jp-desvigne-wVRqisV_mPk-unsplash.jpg
+header-img: img/isaac-quesada-MspsNfWf3q8-unsplash.jpg
 catalog: true
 tags:
     - 知识介绍
@@ -13,8 +13,6 @@ tags:
 ---
 
 Once you've mastered boost-hist, it's time to consider becoming a developer to contribute to [Scikit-HEP](https://scikit-hep.org/)! It's a creative and challenging job. So let's see how to build developing environment and become a developer!
-
-![](https://tva1.sinaimg.cn/large/0082zybply1gc7sxqmduaj31it0u0h48.jpg)
 
 ### Building from Source 
 
@@ -25,7 +23,7 @@ git clone --recursive https://github.com/scikit-hep/boost-histogram.git
 cd boost-histogram
 ```
 
-### Developer Environment
+### Pip Environment
 
 Then let's build our developer environment!
 
@@ -33,34 +31,62 @@ In this part, we need to establish a virtual environment to develop in a good ma
 
 1. Create a python 3 environment named `.env` and activate it. 
 
-   ```
-   python3 -m venv .env
-   source ./.env/bin/activate
+   ```shell
+   python3 -m venv .env  				# remove your env: rm -r .env
+   source .env/bin/activate
    ```
 
 2. Install modules needed from PyPI with pip3. 
 
-   ```
+   ```shell 
    pip3 install numpy ipykernel pytest-sugar numba matplotlib
    ```
 
 3. Create a kernel named `boost-hist`. 
 
-   ```
+   ```shell
    python -m ipykernel install --user --name boost-hist
    ```
 
 4. Specify pip extra requirement -  VCS projects can be installed in [editable mode](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs) (using the [--editable](https://pip.pypa.io/en/stable/reference/pip_install/#install-editable) option) or not. You can install local projects or VCS projects in “editable” mode:
 
-   ```
+   ```shell
    pip3 install -e .[test]
    ```
 
 5. Deactivate `.env`. 
 
-   ```
+   ```shell
    deactivate
    ```
 
-Now, you can run notebooks using your system jupyter lab, and it will list the environment as available! See your kernel according to `jupyter kernelspec list`. 
+Now, you can run notebooks using your system [Jupyter Lab](https://jupyter.org/) ([the next generation Jupyter Notebook](https://www.sohu.com/a/341219920_487512)), and it will list the environment as available (*view your kernel according to `jupyter kernelspec list`*)!
 
+```shell
+jupyter lab
+```
+
+![](https://tva1.sinaimg.cn/large/0082zybply1gc7vtlubk2j31nb0u07ev.jpg)
+
+**You can also build your developer environment using CMake**. I tried it and found it not convinient as pip3.
+
+### Testing
+
+
+
+### Q&A
+
+#### CMake Error
+
+When using CMake to build my environment, I met an error: 
+
+```
+CMake Error: CMake was unable to find a build program corresponding to "Ninja".
+```
+
+I browsed [some solutions](https://stackoverflow.com/questions/38658014/ninja-not-found-by-cmake) but only to find that nothing changed. 
+
+- I guessed maybe `ninja` is not installed in local `usr/bin` and tried to move binary `ninja` to it. But system did not allow for that operation. 
+- I also tried to symlink "ninja-build" to "ninja" according to `# ln -s /usr/bin/ninja /usr/bin/ninja-build` OR `# ln -s /usr/local/bin/ninja /usr/local/bin/ninja-build`. But the error still existed.
+
+Considering I don't have to build two test enviroment, I continued my exploration using pip.
