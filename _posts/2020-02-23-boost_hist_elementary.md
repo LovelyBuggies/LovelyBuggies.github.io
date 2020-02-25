@@ -14,7 +14,7 @@ tags:
 
 
 
-If you are a Pythoner, you have must used [Matplotlib](https://matplotlib.org/). [Matplotlib](https://matplotlib.org/) is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms. It is a toolkit build in Python scripts, so you will meet some problems when you are trying to access the C++-based plotting toolkits. Some projects are aiming at to provide Python blinding for plotting toolkits. [Boost-histogram](https://github.com/scikit-hep/boost-histogram) is one of them and it provides Python bindings for the C++14 Boost::Histogram library. Let's get a quickstart for this tool and see its amazing effects!
+If you are a Pythoner, you must have used [Matplotlib](https://matplotlib.org/). [Matplotlib](https://matplotlib.org/) is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms. It is a toolkit build in Python scripts, so you will meet some problems when you are trying to access the C++-based plotting toolkits. Some projects are aiming to provide Python blinding for plotting toolkits. [Boost-histogram](https://github.com/scikit-hep/boost-histogram) is one of them and it provides Python bindings for the C++14 Boost::Histogram library. Let's get a quick start for this tool and see its amazing effects!
 
 ### Install
 
@@ -61,13 +61,13 @@ plt.savefig("simple_1d.png")
 
 ### Simple 2D Histogram 
 
-In this part, I am going to show you how to draw a simple 2D histogram (note that this is not offen used in [Matplotlib](https://matplotlib.org/) without help of [Seaborn](http://seaborn.pydata.org/)). Before we deep into the source code, we need to figure out WHAT IS A 2D HISTOGRAM. This is pretty important for it well help you to understand the basic structure of [boost-histogram](https://github.com/scikit-hep/boost-histogram). 
+In this part, I am going to show you how to draw a simple 2D histogram (note that this is not often used in [Matplotlib](https://matplotlib.org/) without the help of [Seaborn](http://seaborn.pydata.org/)). Before we deep into the source code, we need to figure out WHAT IS A 2D HISTOGRAM. This is pretty important for it will help you to understand the basic structure of [boost-histogram](https://github.com/scikit-hep/boost-histogram). 
 
-In boost-histogram, a histogram is collection of Axis objects and a storage.
+In a boost-histogram, a histogram is a collection of Axis objects and storage.
 
 ![](https://tva1.sinaimg.cn/large/0082zybply1gc6tc19q4aj30ff09qjs3.jpg)
 
-A 2D-histogram has two independent variables (x and y), and one dependent variable. Just like building our city, we neet two independent variables (latitude and longtitude ) to figure out the location, and we can bulid a skyscraper (altitude) at one place.
+A 2D-histogram has two independent variables (x and y), and one dependent variable. Just like building our city, we neet two independent variables (latitude and longitude ) to figure out the location, and we can build a skyscraper (altitude) in one place.
 
 ![](https://tva1.sinaimg.cn/large/0082zybply1gc6thjclaij30hs0b4my8.jpg)
 
@@ -107,18 +107,18 @@ plt.savefig("simple_2d.png")
 
 ![](https://tva1.sinaimg.cn/large/0082zybply1gc6tyrq940j30c0080mx9.jpg)
 
-Let me to get this straight:
+Let me get this straight:
 
 1. First, we need to create a `Histogram` object.
 2. Then create x and y axes using two np-arrays.
 3. Fill the `Histogram` object.
-4. Get the x and y scales and weights. Note that this x is NOT same as the x in 2. (so is y). The difference is the x in 2. is the observation-x; while, this x is the x-scale.
+4. Get the x and y scales and weights. Note that this x is NOT the same as the x in 2. (so is y). The difference is the x in 2. is the observation-x; while, this x is the x-scale.
 5. Create a subplot.
-6. Plot color on mesh. Note that we need to use TRANSPOSE of weights to get the mesh.
+6. Plot color on the mesh. Note that we need to use TRANSPOSE of weights to get the mesh.
 7. *Optional: create a color bar*.
 8. Show and/or save the figure.
 
-Follow the steps above and get your own simple 2D-histogram now!
+Follow the steps above and get your simple 2D-histogram now!
 
 ### Density Histogram
 
@@ -159,9 +159,9 @@ Dense historgram is similar to the simple 2D-histogram. This only difference is 
 
 ### Save and Load Histogram
 
-We save our histogram in figure format above. So you must be curious about how to save and load histogram object?
+We save our histogram in figure format above. So you must be curious about how to save and load histogram objects?
 
-Here I am going to show how to manipulate bins and use pickle to dump and load our histograms. *P.S., make sure you have install pickle package before running this code.*
+Here I am going to show how to manipulate bins and use `pickle` to dump and load our histograms. *P.S., make sure you have installed pickle package before running this code.*
 
 ```python
 import boost_histogram as bh
@@ -204,7 +204,7 @@ Succeeded in pickling a histogram!
 
 ### Accumulator Storage & Flow
 
-In the final part of our exploration, I will introduce the powerful accumulator storage of boost-hist. Boost-hist can not only store basic type like integer, float, and double, it can also store weights and means. I use the modification of sample code [simple_log_weight.py](https://github.com/scikit-hep/boost-histogram/blob/develop/examples/simple_log_weight.py) to show its usage.
+In the final part of our exploration, I will introduce the powerful accumulator storage of boost-hist. Boost-hist can not only store basic types like integer, float, and double, it can also store weights and means. I use the modification of sample code [simple_log_weight.py](https://github.com/scikit-hep/boost-histogram/blob/develop/examples/simple_log_weight.py) to show its usage.
 
 ```python
 import boost_histogram as bh
@@ -281,11 +281,11 @@ The "multidimensional histogram + easy indexing" can redefine histogramming, thi
 
 <details><summary>A2 (click to expand)</summary>
 
-Yes, a 2D histogram plot is like a heat map, or mesh grid in Matplotlib. You can probably see a variety of plots (and other things) that HEP physicists are used to in the [ROOT users guide](https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html).
+Yes, a 2D histogram plot is like a heat map or mesh grid in Matplotlib. You can probably see a variety of plots (and other things) that HEP physicists are used to in the ROOT users' guide: https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html.
 
 </details>
 
-#### Q3: What's the superiority of boost-hist with repected to performance?
+#### Q3: What's the superiority of boost-hist concerning performance?
 
 <details><summary>A3 (click to expand)</summary>
 

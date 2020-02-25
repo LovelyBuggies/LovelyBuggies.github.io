@@ -31,38 +31,38 @@ In this part, we need to establish a virtual environment to develop in a good ma
 
 1. Create a python 3 environment named `.env` and activate it. 
 
-   ```shell
+   ```bash
    python3 -m venv .env
    source .env/bin/activate
    ```
 
 2. Install modules needed from PyPI with pip3. 
 
-   ```shell 
+   ```bash 
    pip3 install numpy ipykernel pytest-sugar numba matplotlib
    ```
 
 3. Create a kernel named `boost-hist`. 
 
-   ```shell
+   ```bash
    python -m ipykernel install --user --name boost-hist
    ```
 
 4. Specify pip extra requirement -  VCS projects can be installed in [editable mode](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs) (using the [--editable](https://pip.pypa.io/en/stable/reference/pip_install/#install-editable) option) or not. You can install local projects or VCS projects in “editable” mode:
 
-   ```shell
+   ```bash
    pip3 install -e .[test]
    ```
 
 5. Deactivate `.env`. 
 
-   ```shell
+   ```bash
    deactivate
    ```
 
 Now, you can run notebooks using your system [Jupyter Lab](https://jupyter.org/) ([the next generation Jupyter Notebook](https://www.sohu.com/a/341219920_487512)), and it will list the environment as available (*view your kernel according to `jupyter kernelspec list`*)!
 
-```shell
+```bash
 jupyter lab
 ```
 
