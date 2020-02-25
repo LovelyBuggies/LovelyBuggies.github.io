@@ -79,7 +79,7 @@ pip3 install -e .
 
 ### Testing
 
-
+Now we can test our project using `pytest`.
 
 
 

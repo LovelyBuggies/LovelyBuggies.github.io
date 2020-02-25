@@ -20,13 +20,13 @@ If you are a Pythoner, you have must used [Matplotlib](https://matplotlib.org/).
 
 You can install this library from [PyPI](https://pypi.org/project/boost-histogram/) with pip (here I used pip3 installation and run it on my local Jupyter Notebook):
 
-```shell
+```bash
 python -m pip install boost-histogram
 ```
 
 or you can use Conda through [conda-forge](https://github.com/conda-forge/boost-histogram-feedstock):
 
-```shell
+```bash
 conda install -c conda-forge boost-histogram
 ```
 
@@ -37,7 +37,7 @@ All the normal best-practices for Python apply; you should be in a virtual envir
 Open your Jupyter Notebook:
 
 
-```shell
+```bash
 mkdir hist-plot
 Jupyter Notebook
 ```
@@ -267,25 +267,31 @@ Accumulator storages hold more than one number internally. They return a smart v
 
 ### Q&A
 
-#### What is the motivation of design boost-Hist package?
+#### Q1: What is the importance of designing boost-Hist package?
 
-According to boost-hist C++:
+<details><summary>A1 (click to expand)</summary>
 
-> C++ lacks a widely-used, free multi-dimensional histogram class. While it is easy to write a one-dimensional histogram, writing a general multi-dimensional histogram poses more of a challenge. If a few more features required by scientific professionals are added onto the wish-list, then the implementation becomes non-trivial and a well-tested library solution desirable.
+Since Matplotlib has almost established a uniform drawing specification for Python,  boost-histogram does not provide plotting utilities partially. It’s not that hard to take a boost-histogram and plot it with Matplotlib. But it should be made simpler and easy, and that’s one of the things Hist should do. Also, some of the plots (like pull plots) take quite a few lines of code in Python currently.
 
-Boost-hist Python is a binding for boost-hist C++. In my opinion, they were created mainly for three reasons:
+The "multidimensional histogram + easy indexing" can redefine histogramming, this is also something we can do that even ROOT (which is a massive dependency with many downsides) cannot do, and it is almost impossible in any other Python tool (save for Physt, but that is quite slow).
 
-1. C++ has limited number of histogram plotting tools.
-2. It is not easy for C++ to plot high-dimentional histograms.
-3. We need some performance enhancement for previous tools.
+</details>
 
-But what is the necessity or importance of this tool?
+#### Q2: Isn't it better to call boost-hist 2D-histogram a "heatmap"?
 
-1. It's true that C++ lacks plotting tools. But Matplotlib have almost established a uniform drawing specification for Python, meaning that this urgent job for C++ may not be an emergency for Python.
-2. After thinking about the meaning of 2D-histogram, I find it represent data of 2 independent variables and 1 dependent variable. Other tools can cover this requirements, too.
-   - We could use Seaborn to plot a heatmap to represent this kind of data. (Actually, I think it's might be more accurate to call boost-hist 2D-histogram a "heatmap" ).
-   - For data of higher-dimension, if we need to show it, we might use matplotlib-3D. Specifically, we could use scatter plot with scatters in different color to show data of 3 independent variables and 1 dependent variable. (However, I don't find ways to represent this kind of data by only using boost-hist without MPL-3D.)
-3. Yeah, I know that histogram plotting is not just a matter of drawing but storaging as well, and I know that boost-hist has a powerful Storage function. But I don't know what is the superiority compared with others. *I see that C++ boost-hist have a Doc section named benchmarks. Maybe we can also add this section to our Doc to attract potential users?*
+<details><summary>A2 (click to expand)</summary>
+
+Yes, a 2D histogram plot is like a heat map, or mesh grid in Matplotlib. You can probably see a variety of plots (and other things) that HEP physicists are used to in the [ROOT users guide](https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html).
+
+</details>
+
+#### Q3: What's the superiority of boost-hist with repected to performance?
+
+<details><summary>A3 (click to expand)</summary>
+
+The superiority of boost-hist (Py) will be shown majorly by comparing with benchmarks, just like boost-hist (C++). We are now expanding the boost-histogram benchmarks. We will make new benchmarks soon.
+
+</details>
 
 ### Contribution
 
