@@ -64,13 +64,13 @@ disqus_username: disqus_BVVEAa0e05
 
 # Gitalk
 gitalk:
-  enable: true    #是否开启Gitalk评论
+  enable: false    #是否开启Gitalk评论
   clientID: a5ac7a8d735d94e8db1a                           #生成的clientID
   clientSecret: c7aabfb4bc0ec32ed32845fbe43640485e26ff7e   #生成的clientSecret
   repo: Github LovelyBuggies.github.io    #仓库名称
   owner: LovelyBuggies    #github用户名
   admin: [Github LovelyBuggies]
-  distractionFreeMode: true #是否启用类似FB的阴影遮罩
+  distractionFreeMode: false #是否启用类似FB的阴影遮罩
 
 
 # 统计
