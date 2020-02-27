@@ -295,8 +295,10 @@ The superiority of boost-hist (Py) will be shown majorly by comparing with bench
 
 ### Contribution
 
-- **PR**: [#307](https://github.com/scikit-hep/boost-histogram/pull/307)
-- **Issue**: [#306](https://github.com/scikit-hep/boost-histogram/issues/306), [#308](https://github.com/scikit-hep/boost-histogram/issues/308)
+- **Ideas**: [#306](https://github.com/scikit-hep/boost-histogram/issues/306).
+- **Report Bugs**: [#308](https://github.com/scikit-hep/boost-histogram/issues/308) (fixed by Henry [#309](https://github.com/scikit-hep/boost-histogram/pull/309)).
+- **Fix Bugs**: [#307](https://github.com/scikit-hep/boost-histogram/pull/307) (merged).
+- Became a contributor [#310](https://github.com/scikit-hep/boost-histogram/pull/310).
 
 ### Conclusion
 
