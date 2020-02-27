@@ -8,7 +8,7 @@ header-img: img/tomasz-smal-vT_JAucWU00-unsplash.jpg
 catalog: true
 tags:
     - 知识介绍
-    - Boost Histogram
+    - Boost-hist
 
 ---
 
