@@ -270,27 +270,19 @@ Accumulator storages hold more than one number internally. They return a smart v
 #### Q1: What is the importance of designing boost-Hist package?
 
 <details><summary>A1 (click to expand)</summary>
-
-Since Matplotlib has almost established a uniform drawing specification for Python,  boost-histogram does not provide plotting utilities partially. It’s not that hard to take a boost-histogram and plot it with Matplotlib. But it should be made simpler and easy, and that’s one of the things Hist should do. Also, some of the plots (like pull plots) take quite a few lines of code in Python currently.
-
+<br>Since Matplotlib has almost established a uniform drawing specification for Python,  boost-histogram does not provide plotting utilities partially. It’s not that hard to take a boost-histogram and plot it with Matplotlib. But it should be made simpler and easy, and that’s one of the things Hist should do. Also, some of the plots (like pull plots) take quite a few lines of code in Python currently.<br><br>
 The "multidimensional histogram + easy indexing" can redefine histogramming, this is also something we can do that even ROOT (which is a massive dependency with many downsides) cannot do, and it is almost impossible in any other Python tool (save for Physt, but that is quite slow).
-
 </details>
-
 #### Q2: Isn't it better to call boost-hist 2D-histogram a "heatmap"?
 
 <details><summary>A2 (click to expand)</summary>
-
-Yes, a 2D histogram plot is like a heat map or mesh grid in Matplotlib. You can probably see a variety of plots (and other things) that HEP physicists are used to in the ROOT users' guide: https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html.
-
+<br>Yes, a 2D histogram plot is like a heat map or mesh grid in Matplotlib. You can probably see a variety of plots (and other things) that HEP physicists are used to in the ROOT users' guide: https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html.
 </details>
 
 #### Q3: What's the superiority of boost-hist concerning performance?
 
 <details><summary>A3 (click to expand)</summary>
-
-The superiority of boost-hist (Py) will be shown majorly by comparing with benchmarks, just like boost-hist (C++). We are now expanding the boost-histogram benchmarks. We will make new benchmarks soon.
-
+<br>The superiority of boost-hist (Py) will be shown majorly by comparing with benchmarks, just like boost-hist (C++). We are now expanding the boost-histogram benchmarks. We will make new benchmarks soon.
 </details>
 
 ### Contribution

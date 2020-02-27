@@ -83,7 +83,7 @@ Now we can test our project using `pytest`.
 
 Just re-activate our environment and run `pytest` is ok. 
 
-*P.S. As a developer, I think you should also have `pytest\*` installed in your pip root sake of convinience. Of course, this is NOT a good developing manner, but sometimes convinience and manner is a tradeoff.*
+*P.S. As a developer, I think you should also have `pytest` installed in your pip root sake of convinience. Of course, this is NOT a good developing manner, but sometimes convinience and manner is a tradeoff.*
 
 ```bash
 python3 -m pytest tests
@@ -132,50 +132,34 @@ Then, we can compare the two testings to see the influence of the modifications.
 #### Q1: CMake was unable to find program "Ninja".
 
 <details><summary>A1 (click to expand)</summary>
-
-When building my environment, I met an error: 
-
-```
-CMake Error: CMake was unable to find a build program corresponding to "Ninja".
-```
-
-I browsed [some solutions](https://stackoverflow.com/questions/38658014/ninja-not-found-by-cmake) but only to find that nothing changed. 
-
-- I guessed maybe `ninja` is not installed in local `usr/bin` and tried to move binary `ninja` to it. But system did not allow for that operation. 
-- I also tried to symlink "ninja-build" to "ninja" according to `# ln -s /usr/bin/ninja /usr/bin/ninja-build` OR `# ln -s /usr/local/bin/ninja /usr/local/bin/ninja-build`. But the error still existed.
-
-If your situation is same as mine and you cannot solve this error by using the ways mention above, I recommend you to use the powerful `pytest` for your unit test.
-
+<br>When building my environment, I met an error <code>CMake Error: CMake was unable to find a build program corresponding to 'Ninja'</code>. I browsed <a href="https://stackoverflow.com/questions/38658014/ninja-not-found-by-cmake">some solutions</a>, but only to find that nothing changed. 
+<ul>
+  <li>I guessed maybe <code>ninja</code> is not installed in local path <code>usr/bin</code> and tried to move <code>ninja</code> binary to it. But system did not allow for that operation.</li> 
+ <li>I also tried to symlink "ninja-build" to "ninja" according to 
+   <code>ln -s /usr/bin/ninja /usr/bin/ninja-build</code> OR <code>ln -s /usr/local/bin/ninja /usr/local/bin/ninja-build</code>, but the error still existed.</li>
+</ul>
+If your situation is same as mine and you cannot solve this error by using the ways mention above, I recommend you to use the powerful <code>pytest</code> for your unit test.
 </details>
-
 #### Q2: Boost-hist already exist in … when rebuilding.
 
 <details><summary>A2 (click to expand)</summary>
-
-When trying to rebuild in a different director by `pip3 install -e .`, we will meet some problem `boost-hist already exist.` 
-
+<br>When trying to rebuild in a different director by <code>pip3 install -e .</code>, we will meet the problem: <code>boost-hist already exist</code>.
 The simplest solution is to move your project folder to the right place. You can see the existed installation in the last line of error thrown.
-
 </details>
 
 #### Q3: Pytest lacks "pybind11_tests".
 
 <details><summary>A3 (click to expand)</summary>
-
-When we are testing using `python3 -m pytest`, a normal error is `ModuleNotFoundError: No module named 'pybind11_tests'`. I reported this bug and proposed an issue [#312](https://github.com/scikit-hep/boost-histogram/issues/312), Henry gave me the solution timely:
-
-> I guess I habitually run `python3 -m pytest tests`, which forces the `tests` dir to be the only place searched. Without that, we aren't limiting the search locations, so it picks up `extern/pybind11/tests`, which it (obviously) should not pick up.
->
-> For now, you can add the `tests` part to your command, and we can add a pytest configuration option to disable searching for tests in `/extern`. I can help add that soon.
-
+<br>When we are testing using <code>python3 -m pytest</code>, a normal error is <code>ModuleNotFoundError: No module named 'pybind11_tests'</code>. I reported this bug and proposed an issue <a href="https://github.com/scikit-hep/boost-histogram/issues/312">#312</a>, Henry gave me the solution timely:
+<blockquote>I guess I habitually run <code>python3 -m pytest tests</code>, which forces the <code>tests</code> dir to be the only place searched. Without that, we aren't limiting the search locations, so it picks up <code>extern/pybind11/tests</code>>, which it (obviously) should not pick up. For now, you can add the <code>tests</code> part to your command, and we can add a pytest configuration option to disable searching for tests in <code>extern</code>. I can help add that soon. </blockquote>
 </details>
 
 #### Q4: No modules named "pytest" found.
 
 <details><summary>A4 (click to expand)</summary>
-If you are puzzled by this issue, you might pip install `pytest` in your virtual environment. Of course, pip root cannot find your `pytest` after your deactivation. Note that you are still in original folder if you activate your virtual environment (`ls -a` can see), so just run `python3 -m pytest tests` is ok, instead of `python3 - m pytest ../tests`, else you will still meet lacks "pybind11_tests" problem, i.e. Q3.
-
+  <br>If you are puzzled by this issue, you might pip install <code>pytest</code> in your virtual environment. Of course, pip root cannot find your <code>pytest</code> after your deactivation. Note that you are still in original folder if you activate your virtual environment (<code>ls -a</code> can see), so just run <code>python3 -m pytest tests</code> is ok, instead of <code>python3 - m pytest ../tests</code>, else you will still meet lacks "pybind11_tests" problem, i.e. Q3.
 </details>
+
 
 ### Contribution
 
