@@ -2,7 +2,7 @@
 layout:     post
 title:     Boost Histogram for Python - The Developer Mode
 subtitle:   
-date:       2020-02-28
+date:       2020-02-27
 author:     Nino Lau
 header-img: img/isaac-quesada-MspsNfWf3q8-unsplash.jpg
 catalog: true
@@ -102,7 +102,7 @@ python3 -m pytest tests --benchmark-enable --benchmark-autosave
 
 python3 -m pytest tests --benchmark-enable --benchmark-autosave
 
-pip3 pygal pygaljs
+pip3 install pygal pygaljs
 
 pytest-benchmark compare 0001 0002 --sort fullname --histogram
 ```
@@ -129,7 +129,7 @@ Then, we can compare the two testings to see the influence of the modifications.
 
 ### Q&A
 
-#### Q1: CMake was unable to find program "Ninja".
+#### Q1: CMake was unable to find program 'Ninja'.
 
 <details><summary>A1 (click to expand)</summary>
 <br>When building my environment, I met an error <code>CMake Error: CMake was unable to find a build program corresponding to 'Ninja'</code>. I browsed <a href="https://stackoverflow.com/questions/38658014/ninja-not-found-by-cmake">some solutions</a>, but only to find that nothing changed. 
@@ -147,14 +147,15 @@ If your situation is same as mine and you cannot solve this error by using the w
 The simplest solution is to move your project folder to the right place. You can see the existed installation in the last line of error thrown.
 </details>
 
-#### Q3: Pytest lacks "pybind11_tests".
+#### Q3: Pytest lacks 'pybind11_tests'.
 
 <details><summary>A3 (click to expand)</summary>
 <br>When we are testing using <code>python3 -m pytest</code>, a normal error is <code>ModuleNotFoundError: No module named 'pybind11_tests'</code>. I reported this bug and proposed an issue <a href="https://github.com/scikit-hep/boost-histogram/issues/312">#312</a>, Henry gave me the solution timely:
-<blockquote>I guess I habitually run <code>python3 -m pytest tests</code>, which forces the <code>tests</code> dir to be the only place searched. Without that, we aren't limiting the search locations, so it picks up <code>extern/pybind11/tests</code>>, which it (obviously) should not pick up. For now, you can add the <code>tests</code> part to your command, and we can add a pytest configuration option to disable searching for tests in <code>extern</code>. I can help add that soon. </blockquote>
+<blockquote>I guess I habitually run <code>python3 -m pytest tests</code>, which forces the <code>tests</code> dir to be the only place searched. Without that, we aren't limiting the search locations, so it picks up <code>extern/pybind11/tests</code>, which it (obviously) should not pick up. For now, you can add the <code>tests</code> part to your command, and we can add a pytest configuration option to disable searching for tests in <code>extern</code>. I can help add that soon. </blockquote>
 </details>
 
-#### Q4: No modules named "pytest" found.
+
+#### Q4: No modules named 'pytest' found.
 
 <details><summary>A4 (click to expand)</summary>
   <br>If you are puzzled by this issue, you might pip install <code>pytest</code> in your virtual environment. Of course, pip root cannot find your <code>pytest</code> after your deactivation. Note that you are still in original folder if you activate your virtual environment (<code>ls -a</code> can see), so just run <code>python3 -m pytest tests</code> is ok, instead of <code>python3 - m pytest ../tests</code>, else you will still meet lacks "pybind11_tests" problem, i.e. Q3.
