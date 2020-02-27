@@ -12,7 +12,7 @@ tags:
 
 ---
 
-Once you've mastered boost-hist, it's time to consider becoming a developer to contribute to [Scikit-HEP](https://scikit-hep.org/)! It's a creative and challenging job. So let's see how to build developing environment and become a developer!
+Once you've mastered boost-hist, it's time to consider becoming a developer to contribute to [Scikit-HEP](https://scikit-hep.org/)! It's a creative and challenging job. So let's see how to build a developing environment and become a developer!
 
 ### Building from Source 
 
@@ -68,14 +68,14 @@ jupyter lab
 
 ![](https://tva1.sinaimg.cn/large/0082zybply1gc7vtlubk2j31nb0u07ev.jpg)
 
-To rebuild, you may need to delete the `/build` directory, and rerun `pip3 install -e .` from the environment.
+To rebuild, you may need to delete the `/build` directory and rerun `pip3 install -e .` from the environment.
 
 ```
 rm -r ./build
 pip3 install -e .
 ```
 
-**You can also build your developer environment using CMake**. I tried it and found it not convinient as pip3.
+**You can also build your developer environment using CMake**. I tried it and found it not convenient as pip3.
 
 ### Testing
 
@@ -83,7 +83,7 @@ Now we can test our project using `pytest`.
 
 Just re-activate our environment and run `pytest` is ok. 
 
-*P.S. As a developer, I think you should also have `pytest` installed in your pip root sake of convinience. Of course, this is NOT a good developing manner, but sometimes convinience and manner is a tradeoff.*
+*P.S. As a developer, I think you should also have `pytest` installed in your pip root sake of convenience. Of course, this is NOT a good developing manner, but sometimes convenience and manner is a tradeoff.*
 
 ```bash
 python3 -m pytest tests
@@ -107,7 +107,7 @@ pip3 install pygal pygaljs
 pytest-benchmark compare 0001 0002 --sort fullname --histogram
 ```
 
-Let's see what's shown by adding benchmark to our command.
+Let's see what's shown by adding a benchmark to our command.
 
 ![](https://tva1.sinaimg.cn/large/0082zybply1gcawhrmoruj322l0u04qp.jpg)
 
@@ -129,7 +129,7 @@ Then, we can compare the two testings to see the influence of the modifications.
 
 ### Q&A
 
-#### Q1: CMake was unable to find program 'Ninja'.
+#### Q1: CMake was unable to find the program 'Ninja'.
 
 <details><summary>A1 (click to expand)</summary>
 <br>When building my environment, I met an error <code>CMake Error: CMake was unable to find a build program corresponding to 'Ninja'</code>. I browsed <a href="https://stackoverflow.com/questions/38658014/ninja-not-found-by-cmake">some solutions</a>, but only to find that nothing changed. 
@@ -175,4 +175,5 @@ Testing is a slow process, keep patient and enjoy your time as a developer!
 
 
 ![](https://tva1.sinaimg.cn/bmiddle/0082zybply1gc7gmnmtxij30md096t9u.jpg)
+
 
