@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:     Boost Histogram for Python - The Developer Mode
+title:     Boost Histogram for Python - Developing
 subtitle:   
 date:       2020-02-27
 author:     Nino Lau
