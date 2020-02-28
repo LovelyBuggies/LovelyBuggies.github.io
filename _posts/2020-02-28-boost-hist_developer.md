@@ -8,7 +8,7 @@ header-img: img/isaac-quesada-MspsNfWf3q8-unsplash.jpg
 catalog: true
 tags:
     - 知识介绍
-    - Boost-hist
+    - Hist
 
 ---
 
