@@ -164,8 +164,9 @@ The simplest solution is to move your project folder to the right place. You can
 
 ### Contribution
 
+- **Questions**: [#318](https://github.com/scikit-hep/boost-histogram/issues).
 - **Ideas**: [#311](https://github.com/scikit-hep/boost-histogram/issues/311).
-- **Report Bugs**: [#312](https://github.com/scikit-hep/boost-histogram/issues/312) (fixed by Henry [#313](https://github.com/scikit-hep/boost-histogram/pull/313)).
+- **Report Bugs**: [#312](https://github.com/scikit-hep/boost-histogram/issues/312) (fixed by Henry [#313](https://github.com/scikit-hep/boost-histogram/pull/313)), [#319](https://github.com/scikit-hep/boost-histogram/issues/319).
 - **Fix Bugs**: [#315](https://github.com/scikit-hep/boost-histogram/pull/315) (merged), [#317](https://github.com/scikit-hep/boost-histogram/pull/317) (merged).
 
 ### Conclusion
