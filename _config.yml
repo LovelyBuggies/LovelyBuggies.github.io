@@ -5,7 +5,7 @@ header-img: img/post-bg-desk.jpg
 email: ninomyemail@gmail.com
 description: "I'm awake!"
 keyword: "Nino, Nino Lau, Lovely Buggies, LovelyBuggies"
-url: "http://LovelyBuggies.github.io"          # your host, for absolute URL
+url: "http://lovelybuggies.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/LovelyBuggies/LovelyBuggies.github.io" # you code repository
 
@@ -13,7 +13,7 @@ github_repo: "https://github.com/LovelyBuggies/LovelyBuggies.github.io" # you co
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "In order to be indispensable, we must be different."
+sidebar-about-description: "Stay hungry, stay foolish."
 sidebar-avatar: /img/profile-photo.jpeg     # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
