@@ -5,9 +5,9 @@ header-img: img/post-bg-desk.jpg
 email: ninomyemail@gmail.com
 description: "I'm awake!"
 keyword: "Nino, Nino Lau, Lovely Buggies, LovelyBuggies"
-url: "https://LovelyBuggies.com.cn"          # your host, for absolute URL
+url: "http://LovelyBuggies.com.cn"          # your host, for absolute URL
 baseurl: "/blog"      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "http://github.com/LovelyBuggies/LovelyBuggies.github.io" # you code repository
+github_repo: "https://github.com/LovelyBuggies/LovelyBuggies.github.io" # you code repository
 
 
 
