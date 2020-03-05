@@ -7,7 +7,7 @@ description: "I'm awake!"
 keyword: "Nino, Nino Lau, Lovely Buggies, LovelyBuggies"
 url: "https://LovelyBuggies.com.cn"          # your host, for absolute URL
 baseurl: "/blog"      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://github.com/LovelyBuggies/LovelyBuggies.github.io" # you code repository
+github_repo: "http://github.com/LovelyBuggies/LovelyBuggies.github.io" # you code repository
 
 
 
