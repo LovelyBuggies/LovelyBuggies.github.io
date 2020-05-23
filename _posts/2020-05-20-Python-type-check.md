@@ -83,7 +83,7 @@ $ mypy headlines.py
 Success: no issues found in 1 source file
 ```
 
-如果没有报错，说明格式检查通过；否则，会提示出问题的地方。*值得注意的是，类型检查向下兼容，比如整数就可以在 Mypy 中通过浮点数类型标注的检查。*
+如果没有报错，说明格式检查通过；否则，会提示出问题的地方。*值得注意的是，类型检查可以向下（subtype  not subclass）兼容，比如整数就可以在 Mypy 中通过浮点数类型标注的检查（int 是 double 的 subtype，但不是其 subclass）。*
 
 这种检查对于写出可读性较好的代码是十分有帮助的——Bernát Gábor 曾在他的 [The State of Type Hints in Python](https://www.bernat.tech/the-state-of-type-hints-in-python/) 中说过，“类型提示应当出现在任何值得单元测试的代码里”。
 
@@ -152,3 +152,14 @@ print(headline("type comments work", width=40))
 #### 类型别名
 
 当然 Python 有更强大的类型提示功能，支持复杂的类型提示，例如 `List[Tuple[str, str]]`。我们可以为这些类型制作别名来让代码可读性更好，`Card = Tuple[str, str]`。
+
+#### 特殊函数返回类型
+
+- 空返回：如果没有显式定义返回什么的话，默认返回的是 `None` 类型；
+- 不返回：如果一个函数上来就抛出了异常，那么它就不应该被返回，可以引用 `typing.NoReturn`；
+- 任意类型：可以使用 `Any`，不过一般不常用，因为一旦使用可能会丢失类型信息。
+
+### 更多资源
+
+使用类型提示可以让您更容易地推断代码、发现细微的错误并维护干净的体系结构。对于 OIer 来说，掌握 Python 类型检查系统的基本操作就足够了，项目实操中，如果你想写出风格更好的、易于类型检查的代码，你可以参考 [Mypy 的文档](https://mypy.readthedocs.io/)。
+
