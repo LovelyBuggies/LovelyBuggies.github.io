@@ -83,7 +83,7 @@ $ mypy headlines.py
 Success: no issues found in 1 source file
 ```
 
-如果没有报错，说明格式检查通过；否则，会提示出问题的地方。*值得注意的是，类型检查可以向下（subtype  not subclass）兼容，比如整数就可以在 Mypy 中通过浮点数类型标注的检查（int 是 double 的 subtype，但不是其 subclass）。*
+如果没有报错，说明类型检查通过；否则，会提示出问题的地方。*值得注意的是，类型检查可以向下（subtype  not subclass）兼容，比如整数就可以在 Mypy 中通过浮点数类型标注的检查（int 是 double 的 subtype，但不是其 subclass）。*
 
 这种检查对于写出可读性较好的代码是十分有帮助的——Bernát Gábor 曾在他的 [The State of Type Hints in Python](https://www.bernat.tech/the-state-of-type-hints-in-python/) 中说过，“类型提示应当出现在任何值得单元测试的代码里”。
 
