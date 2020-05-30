@@ -162,6 +162,3 @@ print(headline("type comments work", width=40))
 ### 更多资源
 
 使用类型提示可以让您更容易地推断代码、发现细微的错误并维护干净的体系结构。对于 OIer 来说，掌握 Python 类型检查系统的基本操作就足够了，项目实操中，如果你想写出风格更好的、易于类型检查的代码，你可以参考 [Mypy 的文档](https://mypy.readthedocs.io/)。
-
-
-
