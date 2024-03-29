@@ -20,7 +20,7 @@ document.write(`
         </p>
         805 Columbus Ave<br>
         Boston, MA, 02120<br>
-        sl4921 [<font style="font-family:'Schoolbell'">at</font>] columbia [<font style="font-family:'Schoolbell'">dot</font>] com
+        liu [<font style="font-family:'Schoolbell'">dot</font>] shuo2 [<font style="font-family:'Schoolbell'">at</font>] northeastern [<font style="font-family:'Schoolbell'">dot</font>] edu
         <br>
         <br>
 
