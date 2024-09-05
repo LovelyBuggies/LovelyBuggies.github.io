@@ -14,11 +14,11 @@ document.write(`
         </p>
 
         <p><img src="./imgs/proto2.png" height=180 align="right" style="padding: 0px 0px 0px 0px;" />
-            <b>Incoming Ph.D. Student</b> <br> <br> 
+            <b>Ph.D. Student</b> <br> <br> 
             <a href = "https://llpr.ccs.neu.edu/"><em>Lab for Learning and Planning in Robotics</em></a><br>
             <a href = "https://www.khoury.northeastern.edu/research/"><em>Khoury College of Computer Sciences<br>Northeastern University</em><br></a>
         </p>
-        805 Columbus Ave<br>
+        Room 760, 815 Columbus Ave<br>
         Boston, MA, 02120<br>
         liu [<font style="font-family:'Schoolbell'">dot</font>] shuo2 [<font style="font-family:'Schoolbell'">at</font>] northeastern [<font style="font-family:'Schoolbell'">dot</font>] edu
         <br>
