@@ -119,3 +119,9 @@ ps {
 	font-size: 80%;
 	font-weight: bold;
 }
+
+annotate {
+	font-size: 80%;
+	font-style: italic;
+	color: #888888;
+}
