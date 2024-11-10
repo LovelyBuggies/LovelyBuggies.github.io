@@ -8,7 +8,7 @@ document.write(`
                   border-bottom: 2px solid #aaaaaa;
                   font-size: 180%;">
         <b>Shuo Liu</b>
-        <span style="float:right; font-family:Verdana;">
+        <span style="float:right;">
             <top-bar><a href="./index.html">Home</a> | <a href="./research.html">Research</a> | <a href="./publications.html">Publications</a> | <a href="./posts.html">Posts</a> | <a href="./software.html">Softwares</a></top-bar>
         </span>
         </p>
