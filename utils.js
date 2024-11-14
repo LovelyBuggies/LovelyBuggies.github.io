@@ -52,12 +52,13 @@ function addTagAndDateInfo() {
     lists.forEach(item => {
         const annotateElement = item.querySelector("annotate");
         const date = item.getAttribute("data-date");
+        const depth = item.getAttribute("data-depth");
         const tags = item.getAttribute("data-tag") || "NULL";
         const infoElement = document.createElement("span");
         infoElement.style.fontSize = "0.8em"; 
         infoElement.style.color = "#888888";
         infoElement.style.fontStyle = "italic";
-        infoElement.innerHTML = `Tags: ${tags}; Date: ${date}.`;
+        infoElement.innerHTML = `Tags: ${tags}; Specialty: ${depth}; Last Update: ${date}.`;
         annotateElement.insertAdjacentHTML("afterend", "<br>");
         annotateElement.insertAdjacentElement("afterend", infoElement);
         annotateElement.insertAdjacentHTML("afterend", "</br>");
