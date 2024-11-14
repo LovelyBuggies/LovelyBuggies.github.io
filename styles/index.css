@@ -93,10 +93,10 @@ li p, dd p {
 /*https://isotropic.co/tool/hex-color-to-css-filter/*/
 
 #filtered-list paper {
-    color: purple;
+    color: #664b8d;
 }
 #filtered-list paper a {
-    color: purple;
+    color: #664b8d;
 }
 
 .no-border {
