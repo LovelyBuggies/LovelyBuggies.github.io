@@ -3,6 +3,14 @@
     <link rel="stylesheet" href="./styles/index.css" type="text/css" />
 </head>
 
+<!-- !!!!!!!  Depth Meaning !!!!!!!!!
+1: Fundamental and extensions, every students should learn.
+2. Core idea, researchers in this area should know.
+3. Core idea recent works, people doing similar projects would like to know.
+4. 
+5. Trivial, detailed proof of an interesting paper.
+-->
+
 <body>
     <div id="layout-content">
         
@@ -24,15 +32,15 @@
             | <button onclick="rlSortList('depth')" style="color: #224b8d">Primary</button>
         </h2>
         <ul id="rl-post-list" style="list-style-type: square;">
-            <li data-date="2024-12-10" data-depth="1" data-tag="Bellman,WIP">
-                <paper><a href="wip.html">Understanding DP through Bellman Operator</a></paper>
-                <br>
-                <annotate>Why policy/value iteration can converge to the optima?</annotate>
-            </li>
             <li data-date="2025-01-01" data-depth="3" data-tag="Advantage,WIP">
                 <paper><a href="wip.html">Advantage Learning</a></paper>
                 <br>
                 <annotate>Learning advantage rather than Q-value?</annotate>
+            </li>
+            <li data-date="2024-12-10" data-depth="1" data-tag="Bellman,WIP">
+                <paper><a href="wip.html">Understanding DP through Bellman Operator</a></paper>
+                <br>
+                <annotate>Why policy/value iteration can converge to the optima?</annotate>
             </li>
         </ul>
 
@@ -42,17 +50,17 @@
             | <button onclick="marlSortList('depth')" style="color: #224b8d">Primary</button>
         </h2>
         <ul id="marl-post-list" style="list-style-type: square;">
-            <li data-date="2024-12-01" data-depth="2" data-tag="Dec-POMDP,WIP">
-                <paper><a href="wip.html">Complexity of Dec-POMDP</a></paper>
-                <br>
-                <annotate>Why decentralized planning cannot easily be reduced to centralized problems?</annotate>
-            </li>
             <li data-date="2024-12-10" data-depth="5" data-tag="Advantage,WIP">
                 <paper><a href = "wip.html">Completeness of Advantage-IGM</a></paper>
                 <br>
                 <annotate>The mystery of Advantage-IGM.</annotate>
             </li>
-            <li data-date="2024-11-11" data-depth="1" data-tag="Dec-POMDP">
+            <li data-date="2024-12-01" data-depth="2" data-tag="Dec-POMDP,WIP">
+                <paper><a href="wip.html">Complexity of Dec-POMDP</a></paper>
+                <br>
+                <annotate>Why decentralized planning cannot easily be reduced to centralized problems?</annotate>
+            </li>
+            <li data-date="2024-11-11" data-depth="2" data-tag="Dec-POMDP">
                 <paper><a href="./archive/posts/On_Optimal_Q_Value_Functions_for_Dec_POMDP.pdf">On Optimal Q-functions for Dec-POMDP</a></paper>
                 <br>
                 <annotate>Why can't we compute &pi;<sup>*</sup> via normative definition of Q<sup>*</sup> in Dec-POMDP?</annotate>
