@@ -26,10 +26,17 @@ function sortList(listId, sortBy) {
     items.forEach(item => list.appendChild(item));
 }
 
+let lastSelectedTag = null;
 function showTaggedItems(tag) {
     const lists = ['rl-post-list', 'marl-post-list'];
     const filteredList = document.getElementById("filtered-list");
 
+    if (lastSelectedTag === tag) {
+        filteredList.innerHTML = ""; 
+        lastSelectedTag = null; 
+        return;
+    }
+    lastSelectedTag = tag;
     filteredList.innerHTML = "";
 
     lists.forEach(listId => {
