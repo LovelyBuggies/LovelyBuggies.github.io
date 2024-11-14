@@ -7,7 +7,7 @@
     <div id="layout-content">
         
         <script src="head.js"></script>
-        <script src="sort-posts.js"></script>
+        <script src="utils.js"></script>
 
         <h2>
             Reinforcement Learning Fundamentals
@@ -15,13 +15,13 @@
             | <button onclick="rlSortList('depth')">Primary</button>
         </h2>
         <ul id="rl-post-list" style="list-style-type: square;">
-            <li data-date="2024-11-13" data-depth="1">
-                <a href = "wip.html"><paper>Understanding DP through Bellman Operator</paper></a>
+            <li data-date="2024-12-10" data-depth="1" data-tag="WIP">
+                <a href="wip.html"><paper>Understanding DP through Bellman Operator</paper></a>
                 <br>
                 <annotate>Why policy/value iteration can converge to the optima?</annotate>
             </li>
-            <li  data-date="2024-11-20" data-depth="3">
-                <a href = "wip.html"><paper>Advantage Learning</paper></a>
+            <li data-date="2025-01-01" data-depth="3" data-tag="WIP">
+                <a href="wip.html"><paper>Advantage Learning</paper></a>
                 <br>
                 <annotate>Learning advantage rather than Q-value?</annotate>
             </li>
@@ -32,31 +32,37 @@
             | <button onclick="marlSortList('date')">Latest</button>
             | <button onclick="marlSortList('depth')">Primary</button>
         </h2>
-
         <ul id="marl-post-list" style="list-style-type: square;">
-
-            <li data-date="2024-12-01" data-depth="2">
+            <li data-date="2024-12-01" data-depth="2" data-tag="WIP">
                 <a href="wip.html"><paper>Complexity of Dec-POMDP</paper></a>
                 <br>
                 <annotate>Why decentralized planning cannot easily be reduced to centralized problems?</annotate>
             </li>
-
-            <li data-date="2024-11-13" data-depth="1">
-                <a href="./archive/posts/On_Optimal_Q_Value_Functions_for_Dec_POMDP.pdf"><paper>On Optimal Q-functions for Dec-POMDP</paper></a>
-                <br>
-                <annotate>Why can't we compute &pi;<sup>*</sup> via normative definition of Q<sup>*</sup> in Dec-POMDP?</annotate>
-            </li>
-            <li>
+            <li data-date="2024-12-10" data-depth="5" data-tag="WIP">
                 <a href = "wip.html"><paper>Completeness of Advantage-IGM</paper></a>
                 <br>
                 <annotate>The mystery of Advantage-IGM.</annotate>
             </li>
+            <li data-date="2024-11-11" data-depth="1" data-tag="Dec-POMDP">
+                <a href="./archive/posts/On_Optimal_Q_Value_Functions_for_Dec_POMDP.pdf"><paper>On Optimal Q-functions for Dec-POMDP</paper></a>
+                <br>
+                <annotate>Why can't we compute &pi;<sup>*</sup> via normative definition of Q<sup>*</sup> in Dec-POMDP?</annotate>
+            </li>
         </ul>
 
-        <br><br>
-        <ps><em style="color: grey;">
-        I’m aiming for accuracy, but no promises that those are perfect! If you spot anything interesting or off, feel free to shoot me an email!
+        <h2 class="no-border"><em>Tags*</em> | 
+        <button onclick="showTaggedItems('Dec-POMDP')"><em>Dec-POMDP</em></button> | 
+        <button onclick="showTaggedItems('WIP')"><em style="font-size: 100%;">WIP</em></button>
+        </h2> 
+        <ul id="filtered-list"></ul>
+
+        <ps style="font-size: 66%;"><em style="color: grey;">
+        I’m aiming for accuracy, but no promises that those are perfect. If you spot anything interesting or off, please shoot me an email!
         </em></ps>
+
+        <script>
+            document.addEventListener("DOMContentLoaded",addTagAndDateInfo);
+        </script>
         
     </div>
 </body>

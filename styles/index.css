@@ -92,6 +92,10 @@ li p, dd p {
 }
 /*https://isotropic.co/tool/hex-color-to-css-filter/*/
 
+.no-border {
+    border-bottom: none;
+}
+
 img {
     border: none;
 }
