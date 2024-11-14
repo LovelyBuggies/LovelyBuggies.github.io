@@ -9,18 +9,27 @@
         <script src="head.js"></script>
         <script src="utils.js"></script>
 
+
+        <h2 class="no-border" style="color: #664b8d"><em>Tags*</em> | 
+        <button onclick="showTaggedItems('Bellman')" style="color: #664b8d"><em>Bellman</em></button> | 
+        <button onclick="showTaggedItems('Advantage')" style="color: #664b8d"><em>Advantage</em></button> | 
+        <button onclick="showTaggedItems('Dec-POMDP')" style="color: #664b8d"><em>Dec-POMDP</em></button> | 
+        <button onclick="showTaggedItems('WIP')" style="color: #664b8d"><em>WIP</em></button>
+        </h2> 
+        <ul id="filtered-list"></ul>
+
         <h2>
             Reinforcement Learning Fundamentals
-            | <button onclick="rlSortList('date')">Latest</button>
-            | <button onclick="rlSortList('depth')">Primary</button>
+            | <button onclick="rlSortList('date')" style="color: #224b8d">Latest</button>
+            | <button onclick="rlSortList('depth')" style="color: #224b8d">Primary</button>
         </h2>
         <ul id="rl-post-list" style="list-style-type: square;">
-            <li data-date="2024-12-10" data-depth="1" data-tag="WIP">
+            <li data-date="2024-12-10" data-depth="1" data-tag="Bellman,WIP">
                 <paper><a href="wip.html">Understanding DP through Bellman Operator</a></paper>
                 <br>
                 <annotate>Why policy/value iteration can converge to the optima?</annotate>
             </li>
-            <li data-date="2025-01-01" data-depth="3" data-tag="WIP">
+            <li data-date="2025-01-01" data-depth="3" data-tag="Advantage,WIP">
                 <paper><a href="wip.html">Advantage Learning</a></paper>
                 <br>
                 <annotate>Learning advantage rather than Q-value?</annotate>
@@ -29,16 +38,16 @@
 
         <h2>
             Multi-Agent Reinforcement Learning
-            | <button onclick="marlSortList('date')">Latest</button>
-            | <button onclick="marlSortList('depth')">Primary</button>
+            | <button onclick="marlSortList('date')" style="color: #224b8d">Latest</button>
+            | <button onclick="marlSortList('depth')" style="color: #224b8d">Primary</button>
         </h2>
         <ul id="marl-post-list" style="list-style-type: square;">
-            <li data-date="2024-12-01" data-depth="2" data-tag="WIP">
+            <li data-date="2024-12-01" data-depth="2" data-tag="Dec-POMDP,WIP">
                 <paper><a href="wip.html">Complexity of Dec-POMDP</a></paper>
                 <br>
                 <annotate>Why decentralized planning cannot easily be reduced to centralized problems?</annotate>
             </li>
-            <li data-date="2024-12-10" data-depth="5" data-tag="WIP">
+            <li data-date="2024-12-10" data-depth="5" data-tag="Advantage,WIP">
                 <paper><a href = "wip.html">Completeness of Advantage-IGM</a></paper>
                 <br>
                 <annotate>The mystery of Advantage-IGM.</annotate>
@@ -50,11 +59,6 @@
             </li>
         </ul>
 
-        <h2 class="no-border" style="color: #664b8d"><em>Tags*</em> | 
-        <button onclick="showTaggedItems('Dec-POMDP')"><em>Dec-POMDP</em></button> | 
-        <button onclick="showTaggedItems('WIP')"><em>WIP</em></button>
-        </h2> 
-        <ul id="filtered-list"></ul>
 
         <ps style="font-size: 66%;"><em style="color: grey;">
         I’m aiming for accuracy, but no promises that those are perfect. If you spot anything interesting or off, please shoot me an email!
