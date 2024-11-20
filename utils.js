@@ -11,10 +11,14 @@ function sortList(listId, sortBy) {
     const items = Array.from(list.getElementsByTagName("li"));
 
     items.sort((a, b) => {
-        if (sortBy === "date") {
+        if (sortBy === "latest") {
             const dateA = new Date(a.dataset.date);
             const dateB = new Date(b.dataset.date);
             return dateB - dateA;
+        } else if (sortBy === "earliest") {
+            const dateA = new Date(a.dataset.date);
+            const dateB = new Date(b.dataset.date);
+            return dateA - dateB;
         } else if (sortBy === "depth") {
             const depthA = parseInt(a.dataset.depth);
             const depthB = parseInt(b.dataset.depth);
