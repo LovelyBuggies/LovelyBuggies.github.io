@@ -19,6 +19,10 @@ function sortList(listId, sortBy) {
             const dateA = new Date(a.dataset.date);
             const dateB = new Date(b.dataset.date);
             return dateA - dateB;
+        } else if (sortBy === "alphabetic") {
+            const textA = a.querySelector("paper a").textContent.toLowerCase();
+            const textB = b.querySelector("paper a").textContent.toLowerCase();
+            return textA.localeCompare(textB);
         } else if (sortBy === "depth") {
             const depthA = parseInt(a.dataset.depth);
             const depthB = parseInt(b.dataset.depth);
