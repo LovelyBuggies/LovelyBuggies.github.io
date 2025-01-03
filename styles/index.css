@@ -90,6 +90,9 @@ li p, dd p {
 .filter-svg-green{
     filter: invert(15%) sepia(88%) saturate(2517%) hue-rotate(105deg) brightness(95%) contrast(106%);
 }
+.filter-svg-plum{
+    filter: invert(34%) sepia(59%) saturate(421%) hue-rotate(233deg) brightness(88%) contrast(94%);
+}
 /*https://isotropic.co/tool/hex-color-to-css-filter/*/
 
 #filtered-list paper {

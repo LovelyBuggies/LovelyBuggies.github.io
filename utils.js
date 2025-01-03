@@ -38,7 +38,12 @@ let lastSelectedTag = null;
 function showTaggedItems(tag) {
     const lists = ['rl-post-list', 'marl-post-list'];
     const filteredList = document.getElementById("filtered-list");
-
+    const descriptionElementId = "tag-description";
+    const parentElement = filteredList.parentElement;
+    let descriptionElement = document.getElementById(descriptionElementId);
+    if (descriptionElement) {
+        descriptionElement.remove();
+    }
     if (lastSelectedTag === tag) {
         filteredList.innerHTML = ""; 
         lastSelectedTag = null; 
@@ -46,6 +51,24 @@ function showTaggedItems(tag) {
     }
     lastSelectedTag = tag;
     filteredList.innerHTML = "";
+    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized") {
+        descriptionElement = document.createElement("div");
+        descriptionElement.id = descriptionElementId;
+        descriptionElement.style.marginBottom = "10px";
+        descriptionElement.style.fontStyle = "italic";
+        descriptionElement.style.fontWeight = "bold";
+        descriptionElement.style.fontSize = "80%";
+        descriptionElement.style.color = "#444444";
+        if (tag === "Planning") {
+            descriptionElement.textContent = "Planning is the process of deciding on a course of action to achieve specified goals.";
+        } else if (tag === "Learning") {
+            descriptionElement.textContent = "Learning is the process of improving performance based on experience.";
+        } else if (tag === "Decentralized") {
+            descriptionElement.textContent = "Decentralization is the decision-making distribution from a central entity to multiple agents for scalability."
+        }
+
+        parentElement.insertBefore(descriptionElement, filteredList);
+    }
 
     lists.forEach(listId => {
         const list = document.getElementById(listId);
@@ -60,6 +83,8 @@ function showTaggedItems(tag) {
         });
     });
 }
+
+
 
 function addTagAndDateInfo() {
     const lists = document.querySelectorAll("#rl-post-list li, #marl-post-list li");
