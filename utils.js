@@ -67,7 +67,7 @@ function showTaggedItems(tag) {
         } else if (tag === "Decentralized") {
             descriptionElement.textContent = "Decentralization is the decision-making distribution from a central entity to multiple agents for scalability."
         } else if (tag === "Brainstorm") {
-            descriptionElement.textContent = "Let's play some mind games 🧠";
+            descriptionElement.textContent = "Let's play some mind games!";
         }
 
         parentElement.insertBefore(descriptionElement, filteredList);
