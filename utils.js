@@ -58,6 +58,8 @@ function showTaggedItems(tag) {
         descriptionElement.style.fontStyle = "italic";
         descriptionElement.style.fontWeight = "bold";
         descriptionElement.style.fontSize = "80%";
+        // descriptionElement.style.color = "#222222";
+        // here  I manually use the same style as <ps> in the index.css
         if (tag === "Planning") {
             descriptionElement.textContent = "Planning is the process of deciding on a course of action to achieve specified goals.";
         } else if (tag === "Learning") {
