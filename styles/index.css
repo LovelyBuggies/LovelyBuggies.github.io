@@ -140,3 +140,7 @@ annotate {
 	font-style: italic;
 	color: #888888;
 }
+
+button {
+	font-size: 75%;
+}
