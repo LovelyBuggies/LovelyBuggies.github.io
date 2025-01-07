@@ -132,6 +132,7 @@ sub {
 ps {
 	font-size: 80%;
 	font-weight: bold;
+	font-style: italic;
 }
 
 annotate {
