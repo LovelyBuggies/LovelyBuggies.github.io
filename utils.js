@@ -65,7 +65,7 @@ function showTaggedItems(tag) {
         } else if (tag === "Learning") {
             descriptionElement.textContent = "Learning is the process of improving performance based on experience.";
         } else if (tag === "Decentralized") {
-            descriptionElement.textContent = "Decentralization is the decision-making distribution from a central entity to multiple agents for scalability."
+            descriptionElement.textContent = "Decentralization distributes the decision-making from a central entity to multiple agents."
         } else if (tag === "Brainstorm") {
             descriptionElement.textContent = "Let's play some mind games!";
         }
