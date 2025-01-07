@@ -51,21 +51,21 @@ function showTaggedItems(tag) {
     }
     lastSelectedTag = tag;
     filteredList.innerHTML = "";
-    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized") {
+    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized" || tag === "Brainstorm") {
         descriptionElement = document.createElement("div");
         descriptionElement.id = descriptionElementId;
         descriptionElement.style.marginBottom = "10px";
         descriptionElement.style.fontStyle = "italic";
         descriptionElement.style.fontWeight = "bold";
         descriptionElement.style.fontSize = "80%";
-        // descriptionElement.style.color = "#222222";
-        // here  I manually use the same style as <ps> in the index.css
         if (tag === "Planning") {
             descriptionElement.textContent = "Planning is the process of deciding on a course of action to achieve specified goals.";
         } else if (tag === "Learning") {
             descriptionElement.textContent = "Learning is the process of improving performance based on experience.";
         } else if (tag === "Decentralized") {
             descriptionElement.textContent = "Decentralization is the decision-making distribution from a central entity to multiple agents for scalability."
+        } else if (tag === "Brainstorm") {
+            descriptionElement.textContent = "Let's play some mind games 🧠";
         }
 
         parentElement.insertBefore(descriptionElement, filteredList);
