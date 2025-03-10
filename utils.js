@@ -101,7 +101,7 @@ function addTagAndDateInfo() {
         infoElement.style.fontSize = "0.8em"; 
         infoElement.style.color = "#888888";
         infoElement.style.fontStyle = "italic";
-        infoElement.innerHTML = `Tags: ${tags}; Specialty: ${depth}; Date: ${date}.`;
+        infoElement.innerHTML = `Tags: ${tags}; Specialty: ${depth}; Created on: ${date}.`;
         annotateElement.insertAdjacentHTML("afterend", "<br>");
         annotateElement.insertAdjacentElement("afterend", infoElement);
         annotateElement.insertAdjacentHTML("afterend", "</br>");
