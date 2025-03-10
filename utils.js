@@ -6,6 +6,10 @@ function marlSortList(sortBy) {
     sortList('marl-post-list', sortBy);
 }
 
+function alSortList(sortBy) {
+    sortList('al-post-list', sortBy);
+}
+
 function sortList(listId, sortBy) {
     const list = document.getElementById(listId);
     const items = Array.from(list.getElementsByTagName("li"));
@@ -36,7 +40,7 @@ function sortList(listId, sortBy) {
 
 let lastSelectedTag = null;
 function showTaggedItems(tag) {
-    const lists = ['rl-post-list', 'marl-post-list'];
+    const lists = ['rl-post-list', 'marl-post-list', 'al-post-list'];
     const filteredList = document.getElementById("filtered-list");
     const descriptionElementId = "tag-description";
     const parentElement = filteredList.parentElement;
@@ -88,9 +92,8 @@ function showTaggedItems(tag) {
 }
 
 
-
 function addTagAndDateInfo() {
-    const lists = document.querySelectorAll("#rl-post-list li, #marl-post-list li");
+    const lists = document.querySelectorAll("#rl-post-list li, #marl-post-list li, #al-post-list li");
 
     lists.forEach(item => {
         const annotateElement = item.querySelector("annotate");
