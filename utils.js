@@ -7,7 +7,7 @@ function marlSortList(sortBy) {
 }
 
 function alSortList(sortBy) {
-    sortList('al-post-list', sortBy);
+    sortList('gl-post-list', sortBy);
 }
 
 function sortList(listId, sortBy) {
@@ -40,7 +40,7 @@ function sortList(listId, sortBy) {
 
 let lastSelectedTag = null;
 function showTaggedItems(tag) {
-    const lists = ['rl-post-list', 'marl-post-list', 'al-post-list'];
+    const lists = ['rl-post-list', 'marl-post-list', 'gl-post-list'];
     const filteredList = document.getElementById("filtered-list");
     const descriptionElementId = "tag-description";
     const parentElement = filteredList.parentElement;
@@ -55,7 +55,7 @@ function showTaggedItems(tag) {
     }
     lastSelectedTag = tag;
     filteredList.innerHTML = "";
-    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized" || tag === "Brainstorm") {
+    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized" || tag === "Agent" || tag === "Brainstorm") {
         descriptionElement = document.createElement("div");
         descriptionElement.id = descriptionElementId;
         descriptionElement.style.marginBottom = "10px";
@@ -65,11 +65,13 @@ function showTaggedItems(tag) {
         // descriptionElement.style.color = "#222222";
         // here  I manually use the same style as <ps> in the index.css
         if (tag === "Planning") {
-            descriptionElement.textContent = "Planning is the process of deciding on a course of action to achieve specified goals.";
+            descriptionElement.textContent = "The process of deciding on a course of action to achieve specified goals.";
         } else if (tag === "Learning") {
-            descriptionElement.textContent = "Learning is the process of improving performance based on experience.";
+            descriptionElement.textContent = "The process of improving performance based on experience.";
         } else if (tag === "Decentralized") {
             descriptionElement.textContent = "Decentralization distributes the decision-making from a central entity to multiple agents."
+        } else if (tag === "Agent") {
+            descriptionElement.textContent = "An autonomous system with proactivity and the ability to take action."
         } else if (tag === "Brainstorm") {
             descriptionElement.textContent = "Let's play some mind games!";
         }
@@ -93,7 +95,7 @@ function showTaggedItems(tag) {
 
 
 function addTagAndDateInfo() {
-    const lists = document.querySelectorAll("#rl-post-list li, #marl-post-list li, #al-post-list li");
+    const lists = document.querySelectorAll("#rl-post-list li, #marl-post-list li, #gl-post-list li");
 
     lists.forEach(item => {
         const annotateElement = item.querySelector("annotate");
