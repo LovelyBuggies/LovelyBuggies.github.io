@@ -55,7 +55,7 @@ function showTaggedItems(tag) {
     }
     lastSelectedTag = tag;
     filteredList.innerHTML = "";
-    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized" || tag === "Agent" || tag === "Brainstorm") {
+    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized" || tag === "Agent") {
         descriptionElement = document.createElement("div");
         descriptionElement.id = descriptionElementId;
         descriptionElement.style.marginBottom = "10px";
@@ -72,8 +72,6 @@ function showTaggedItems(tag) {
             descriptionElement.textContent = "Decentralization distributes the decision-making from a central entity to multiple agents."
         } else if (tag === "Agent") {
             descriptionElement.textContent = "An autonomous system with proactivity and the ability to take action."
-        } else if (tag === "Brainstorm") {
-            descriptionElement.textContent = "Let's play some mind games!";
         }
 
         parentElement.insertBefore(descriptionElement, filteredList);
