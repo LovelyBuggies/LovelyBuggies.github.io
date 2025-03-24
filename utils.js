@@ -6,7 +6,7 @@ function marlSortList(sortBy) {
     sortList('marl-post-list', sortBy);
 }
 
-function alSortList(sortBy) {
+function glSortList(sortBy) {
     sortList('gl-post-list', sortBy);
 }
 
