@@ -55,7 +55,7 @@ function showTaggedItems(tag) {
     }
     lastSelectedTag = tag;
     filteredList.innerHTML = "";
-    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized" || tag === "Agent") {
+    if (tag === "Planning" || tag === "Learning" || tag === "Decentralized" || tag === "LLM") {
         descriptionElement = document.createElement("div");
         descriptionElement.id = descriptionElementId;
         descriptionElement.style.marginBottom = "10px";
@@ -69,9 +69,9 @@ function showTaggedItems(tag) {
         } else if (tag === "Learning") {
             descriptionElement.textContent = "The process of improving performance based on experience.";
         } else if (tag === "Decentralized") {
-            descriptionElement.textContent = "Decentralization distributes the decision-making from a central entity to multiple agents."
-        } else if (tag === "Agent") {
-            descriptionElement.textContent = "An autonomous system with proactivity and the ability to take action."
+            descriptionElement.textContent = "Decision-making from a central entity to multiple agents."
+        } else if (tag === "LLM") {
+            descriptionElement.textContent = "Language models designed for solving tasks in natural languages."
         }
 
         parentElement.insertBefore(descriptionElement, filteredList);
