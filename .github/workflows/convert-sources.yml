@@ -1,0 +1,99 @@
+name: Convert LaTeX sources to Markdown
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "archive/**"
+      - ".github/workflows/convert-sources.yml"
+  workflow_dispatch:
+
+jobs:
+  convert:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Convert LaTeX to Markdown
+        shell: bash
+        run: |
+          set -e
+          # Helper to prepend front matter + katex shortcode, then append Pandoc output
+          convert() {
+            local tex="$1" bib="$2" out="$3" rpath="$4"
+            mkdir -p "$(dirname "$out")"
+            # Front matter and KaTeX shortcode
+            cat > "$out" <<'EOF'
+---
+math: true
+---
+
+{{< katex />}}
+
+EOF
+            # Run pandoc to append content
+            pandoc "$tex" \
+              --from=latex --to=gfm+tex_math_dollars \
+              --resource-path="$rpath" \
+              --citeproc --bibliography="$bib" \
+              --wrap=none >> "$out"
+          }
+
+          # PPO → RL
+          if [ -f "archive/PPO/main.tex" ]; then
+            convert "archive/PPO/main.tex" "archive/PPO/ref.bib" "notes-src/content/docs/rl/from-pg-2-ppo.md" "archive/PPO"
+            sed -i '1i\---\ntitle: "From PG 2 PPO"\n' "notes-src/content/docs/rl/from-pg-2-ppo.md"
+          fi
+
+          # Bellman → RL
+          if [ -f "archive/Bellman/main.tex" ]; then
+            convert "archive/Bellman/main.tex" "archive/Bellman/ref.bib" "notes-src/content/docs/rl/understanding-bellman.md" "archive/Bellman"
+            sed -i '1i\---\ntitle: "Understanding Bellman"\n' "notes-src/content/docs/rl/understanding-bellman.md"
+          fi
+
+          # Dec-POMDP Intro → RL/MARL
+          if [ -f "archive/Dec-POMDP Intro/main.tex" ]; then
+            convert "archive/Dec-POMDP Intro/main.tex" "archive/Dec-POMDP Intro/ref.bib" "notes-src/content/docs/rl/marl/introduction-2-decpomdp.md" "archive/Dec-POMDP Intro"
+            sed -i '1i\---\ntitle: "Introduction 2 DecPOMDP"\n' "notes-src/content/docs/rl/marl/introduction-2-decpomdp.md"
+          fi
+
+          # Optimal Q-Value in Dec-POMDP → RL/MARL
+          if [ -f "archive/Optimal Q-Value in Dec-POMDP/main.tex" ]; then
+            convert "archive/Optimal Q-Value in Dec-POMDP/main.tex" "archive/Optimal Q-Value in Dec-POMDP/ref.bib" "notes-src/content/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp.md" "archive/Optimal Q-Value in Dec-POMDP"
+            sed -i '1i\---\ntitle: "Optimal Q Value Functions for Dec POMDP"\n' "notes-src/content/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp.md"
+          fi
+
+          # LLM Reward → LLM
+          if [ -f "archive/LLM Reward/main.tex" ]; then
+            convert "archive/LLM Reward/main.tex" "archive/LLM Reward/ref.bib" "notes-src/content/docs/large-language-models/reward-modeling-llm.md" "archive/LLM Reward"
+            sed -i '1i\---\ntitle: "Reward Modeling LLM"\n' "notes-src/content/docs/large-language-models/reward-modeling-llm.md"
+          fi
+
+          # Diffusion → LLM
+          if [ -f "archive/Diffusion/main.tex" ]; then
+            convert "archive/Diffusion/main.tex" "archive/Diffusion/ref.bib" "notes-src/content/docs/large-language-models/intro-2-diffusion.md" "archive/Diffusion"
+            sed -i '1i\---\ntitle: "Intro 2 Diffusion"\n' "notes-src/content/docs/large-language-models/intro-2-diffusion.md"
+          fi
+
+      - name: Commit converted Markdown
+        run: |
+          set -e
+          if git status --porcelain | grep -qE "^\s*[AMDR]"; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add notes-src/content/docs
+            git commit -m "chore: convert LaTeX sources to Markdown [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
