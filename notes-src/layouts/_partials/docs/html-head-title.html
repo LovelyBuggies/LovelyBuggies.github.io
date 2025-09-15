@@ -1,0 +1,9 @@
+{{/* Override Book theme: use site title on docs root, and "Page | Site" elsewhere */}}
+{{- $bookSection := default "docs" .Site.Params.BookSection -}}
+{{- $root := .Site.GetPage $bookSection -}}
+{{- $title := partial "docs/title" . -}}
+{{- if eq . $root -}}
+  {{- .Site.Title -}}
+{{- else -}}
+  {{- $title }} | {{ .Site.Title -}}
+{{- end -}}
