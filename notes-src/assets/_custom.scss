@@ -34,17 +34,16 @@
   font-size: 13pt;
 }
 
-/* Bottom Home button in sidebar */
+/* Plain, left-aligned Home link at bottom of sidebar */
 .book-menu .home-button {
   display: block;
-  width: 100%;
-  text-align: center;
-  margin-top: 0.75rem;
-  padding: 0.4rem 0.6rem;
-  background: #224b8d;
-  color: #fff !important;
-  border-radius: 6px;
+  text-align: left;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0;
+  color: inherit;
+  font-size: 10pt;
+  font-weight: 400;
 }
 .book-menu .home-button:hover {
-  background: #1a3a6b;
+  text-decoration: underline;
 }
