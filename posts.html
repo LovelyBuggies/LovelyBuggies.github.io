@@ -1,105 +1,15 @@
 <!DOCTYPE html>
-<head>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=./notes/" />
     <link rel="stylesheet" href="./styles/index.css" type="text/css" />
-</head>
-
-<body>
+  </head>
+  <body>
     <div id="layout-content">
-        
-        <script src="head.js"></script>
-        <script src="utils.js"></script>
-
-
-        <h2 class="no-border" style="color: #664b8d"><img src="./imgs/icon/tag.svg" class="filter-svg-plum" height="16"/></i>&nbsp; Tags | 
-        <button onclick="showTaggedItems('Planning')" style="color: #664b8d"><em><b>Planning</b></em></button> | 
-        <button onclick="showTaggedItems('Learning')" style="color: #664b8d"><em><b>Learning</b></em></button> | 
-        <button onclick="showTaggedItems('Decentralized')" style="color: #664b8d"><em><b>Decentralized</b></em></button> | 
-        <button onclick="showTaggedItems('LLM')" style="color: #664b8d"><em><b>LLM</b></em></button> | 
-        <button style="color: #664b8d" onclick="window.open('https://gist.github.com/LovelyBuggies', '_blank')">
-        <em><b>Dev</b></em>
-        </button>
-        </h2> 
-        <ul id="filtered-list"></ul>
-
-
-
-        <h2>
-            Reinforcement Learning
-            | <button onclick="rlSortList('alphabetic')" style="color: #224b8d">Alphabetic</button>
-            | <button onclick="rlSortList('depth')" style="color: #224b8d">Primary</button>
-            | <button onclick="rlSortList('latest')" style="color: #224b8d">Latest</button>
-            | <button onclick="rlSortList('earliest')" style="color: #224b8d">Earliest</button>
-        </h2>
-        <ul id="rl-post-list" style="list-style-type: square;">
-            <li data-date="2025-03-10" data-depth="1" data-tag="Learning">
-                <paper><a href="./archive/posts/From_PG_2_PPO.pdf">From Policy Gradient to PPO</a></paper>
-                <br>
-                <annotate>PPO, one of the most widely-used RL algorithms.</annotate>
-            </li>
-            <li data-date="2025-01-05" data-depth="1" data-tag="Planning,Learning">
-                <paper><a href="./archive/posts/Understanding_Bellman.pdf">Understanding Bellman Equations</a></paper>
-                <br>
-                <annotate>Why and how are Bellman equations used in RL?</annotate>
-            </li>
-        </ul>
-
-
-
-        <h2>
-            Multi-Agent Systems
-            | <button onclick="marlSortList('alphabetic')" style="color: #224b8d">Alphabetic</button>
-            | <button onclick="marlSortList('depth')" style="color: #224b8d">Primary</button>
-            | <button onclick="marlSortList('latest')" style="color: #224b8d">Latest</button>
-            | <button onclick="marlSortList('earliest')" style="color: #224b8d">Earliest</button>
-        </h2>
-        <ul id="marl-post-list" style="list-style-type: square;">
-            <!-- <li data-date="2024-12-10" data-depth="3" data-tag="Advantage,WIP">
-                <paper><a href = "wip.html">IGM-Completeness</a></paper>
-                <br>
-                <annotate>An important principle in cooperative MARL.</annotate>
-            </li> -->
-            <li data-date="2024-12-21" data-depth="3" data-tag="Planning,Decentralized">
-                <paper><a href="./archive/posts/Introduction_2_DecPOMDP.pdf">A Brief Introduction to Dec-POMDP</a></paper>
-                <br>
-                <annotate>About Dec-POMDP, its computation, and planning.</annotate>
-            </li>
-            <li data-date="2024-11-11" data-depth="4" data-tag="Planning,Decentralized">
-                <paper><a href="./archive/posts/Optimal_Q_Value_Functions_for_Dec_POMDP.pdf">Optimal Q-functions for Dec-POMDP</a></paper>
-                <br>
-                <annotate>Why can't we compute &pi;<sup>*</sup> via normative definition of Q<sup>*</sup> in Dec-POMDP?</annotate>
-            </li>
-        </ul>
-
-        <h2>
-            Large Language Models
-            | <button onclick="glSortList('alphabetic')" style="color: #224b8d">Alphabetic</button>
-            | <button onclick="glSortList('depth')" style="color: #224b8d">Primary</button>
-            | <button onclick="glSortList('latest')" style="color: #224b8d">Latest</button>
-            | <button onclick="glSortList('earliest')" style="color: #224b8d">Earliest</button>
-        </h2>
-        <ul id="gl-post-list" style="list-style-type: square;">
-            <!-- <li data-date="2024-01-16" data-depth="1" data-tag="Learning">
-                <paper><a href="./archive/posts/Intro_2_Diffusion.pdf">A Brief Introduction to Diffusion Models</a></paper>
-                <br>
-                <annotate>Math foundations of diffusion models.</annotate>
-            </li> -->
-            <li data-date="2025-03-24" data-depth="3" data-tag="LLM">
-                <paper><a href="./archive/posts/Reward_Modeling_LLM.pdf">Reward Modeling in LLM Alignment</a></paper>
-                <br>
-                <annotate>How the reward models in RLHF are built?</annotate>
-            </li>
-        </ul>
-
-
-        <ps style="font-size: 60%;"><em style="color: grey;">
-        See instructions <a href="./archive/posts/instructions.html">here</a>.
-        If you spot anything off, please send me an email.
-        </em></ps>
-
-        <script>
-            document.addEventListener("DOMContentLoaded",addTagAndDateInfo);
-        </script>
-        
+      <script src="head.js"></script>
+      <h2>Notes moved</h2>
+      <p>This page has moved to <a href="./notes/">Notes</a>.
+      If you are not redirected automatically, click the link.</p>
     </div>
-</body>
+  </body>
 </html>

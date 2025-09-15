@@ -1,0 +1,3 @@
+[submodule "notes-src/themes/book"]
+	path = notes-src/themes/book
+	url = https://github.com/alex-shpak/hugo-book
