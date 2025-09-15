@@ -3,8 +3,5 @@ title: "Back Home"
 weight: 1
 ---
 
-Return to the homepage.
-
-- Go back: <a href="/">Home</a>
-- Or open in a new tab: <a href="/" target="_blank">Home ↗</a>
-
+<meta http-equiv="refresh" content="0; url=/" />
+<p>If you are not redirected, <a href="/">click here</a>.</p>
