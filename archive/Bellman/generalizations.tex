@@ -1,0 +1,42 @@
+\section{Bellman Generalizations}
+
+\subsection{Soft Bellman Equation}
+The Soft Bellman Equation incorporates an entropy regularization term, encouraging exploration by penalizing overly deterministic policies. It is useful where balancing exploration and exploitation is critical, such as environments with sparse rewards or high uncertainty.
+\begin{equation}
+Q(s, a) = R(s,a) + \gamma \mathbb{E}_{a'\sim \pi(\cdot|s'), s' \sim P(\cdot | s, a)} \Big[Q(s', a') - \lambda \log\pi(\cdot|s') \Big],
+\end{equation}
+where $\lambda$ controls the weight of the entropy term $\mathcal{H}(\cdot|s)$.
+
+\subsection{Continuous-Time Bellman Equation}
+Hamilton-Jacobi-Bellman (HJB) Equation is the continuous-time analogue of the Bellman Equation and used in problems involving continuous state and action spaces. Given system dynamics $f(s, a)$, 
+\begin{equation}
+\frac{\partial Q(s,a)}{\partial t} + \max_a \Big[ R(s,a) + \nabla_s Q(s,a)^T f(s, a) \Big]=0.
+\end{equation}
+
+\subsection{Distributional Bellman Equation}
+The Distributional Bellman Equation models the return as a distribution $\mathcal{Q}$, which is particularly useful in risk-sensitive scenarios with specific demands of quantifying the variability of returns,
+\begin{equation}
+\mathcal{Q}(s, a) \stackrel{\text{D}}{=} R(s,a) + \gamma \mathcal{Q}(s', a'),
+\end{equation}
+where $\mathcal{Q}$ is distributional expected returns, and $\stackrel{\text{D}}{=}$ denotes equility in distribution.
+
+\subsection{Multi-Agent Bellman Equation}
+The Multi-Agent (MA) Bellman Equation generalizes the Bellman Equation to cooperative MA systems, where multiple agents collaborate to achieve a common goal.
+
+\paragraph{Joint Bellman Equation} The Joint MA Bellman Equation models the group of agents as an entity, considering their collective actions $\mathbf{a} = (a_1, \dots, a_N)$ and expected returns $Q$,
+\begin{equation}
+Q(s, \mathbf{a}) = R(s, \mathbf{a}) + \gamma \mathbb{E}_{\mathbf{a}' \sim \pi(\cdot |s'), s' \sim P(\cdot | s, \mathbf{a})} \Big[ Q(s', \mathbf{a'}) \Big].
+\end{equation}
+
+\paragraph{Individual Bellman Equation} The Individual Bellman Equation computes $Q_i$ for each agent, assuming that agents' execution and rewards are independent (but observing a shared reward $R(s, \mathbf{a})$),
+\begin{equation}
+Q_i(s, a_i) = R(s, \mathbf{a}) + \gamma \mathbb{E}_{a_i' \sim \pi_i(\cdot |s'), s' \sim P(\cdot | s, a_i)} \Big[ Q_i(s', a_i') \Big].
+\end{equation}
+
+\subsection{Multi-Task Bellman Equation}
+The Generalized Bellman Equation extends the Bellman Equation to include additional objectives. It is particularly useful in multi-task learning, constrained RL or hierarchical RL with additional objectives $\phi(s, a)$ or constraints $\phi(s, a)\gets\lambda c(s, a)$ alongside the primary goal,
+\begin{equation}
+Q(s, a) = R(s,a) + \phi(s, a) + \gamma \mathbb{E}_{a' \sim \pi(\cdot |s'), s' \sim P(\cdot | s, a)} \Big[ Q(s', a') \Big].
+\end{equation}
+
+\clearpage

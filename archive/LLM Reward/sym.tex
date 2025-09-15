@@ -1,0 +1,36 @@
+\newpage
+\section{Symmetric Reward Modeling}
+
+As cliché as it sounds, modeling rewards of LLM responses through symmetric preference signals is indeed feasible. Symmetric models predict the reward for each prompt-response pair independently, without reference to alternative responses.
+
+\subsection{Regression-based Reward Model}
+
+A common symmetric approach is to train a regression-based reward model on scalar human ratings. Given a dataset $\{(x_n, y_n, s_n)\}_{n=1}^N$, where $s_n \in \mathbb{R}$ denotes the score assigned to response $y_n$ for prompt $x_n$, the reward model $r(x, y)$ is trained to minimize a squared loss:
+\begin{equation}
+    \mathcal{L}_{\text{reg}} = \sum_{n=1}^N \left(r(x_n, y_n) - s_n\right)^2.
+\end{equation}
+Such scalar-labeled data is available in open datasets like \texttt{Anthropic HH}, \texttt{OpenAssistant}, and \texttt{MT-Bench}, where annotators assign numeric quality scores to individual responses without ranking alternatives.
+
+\subsection{Classification-based Reward Model}
+
+Alternatively, a reward model can be trained as a binary classifier to predict whether a response satisfies certain alignment criteria (e.g., helpfulness or harmlessness). In this case, binary labels $s_n \in \{0, 1\}$ indicate whether a response is considered acceptable, and the reward model is trained using a standard cross-entropy loss with sigmoid $\sigma$ activation,
+\begin{equation}
+    \mathcal{L}_{\text{cls}} = - \sum_{n=1}^N \left[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \right].
+\end{equation}
+
+
+\section{Other Reward Modeling Techniques}
+
+\subsection{Inverse Reinforcement Learning}
+
+Inverse Reinforcement Learning (IRL) aims to recover an underlying reward function that explains the behavior of an expert operating within a MDP. Formally, consider an MDP defined by the tuple $(\mathcal{X}, \mathcal{Y}, T, \gamma)$, where $\mathcal{X}$ is the set of states, $\mathcal{Y}$ the set of actions, $T(x' | x, y)$ the transition dynamics, and $\gamma$ the discount factor. Given a set of expert trajectories ${\tau_i}$, where each trajectory $\tau_i = (x_0, y_0, x_1, y_1, \dots)$, the goal of IRL is to infer a reward function $r: \mathcal{X} \times \mathcal{Y} \rightarrow \mathbb{R}$ such that the optimal policy induced by this reward function explains the observed expert behavior. However, this does not match seamlessly for reward modeling in LLM alignment due to,
+\begin{itemize}
+    \item \texttt{Unstructuredness:} IRL assumes access to expert trajectories in a well-defined MDP, which does not align with the unstructured, high-dimensional nature of language modeling.
+    \item \texttt{Incompatible feedback format:} Human feedback for LLMs is typically given as relative preferences between completions rather than as optimal action sequences.
+    \item \texttt{Huge computation:} IRL methods are computationally expensive and require solving RL problems repeatedly, which is impractical for large-scale language models.
+\end{itemize}
+
+\subsection{Bayesian Reward Learning}
+
+Bayesian reward learning explicitly represents uncertainty about the reward function by maintaining a posterior distribution $p(\theta | D)$ over reward parameters $\theta$, given observed demonstration data $D$. Using Bayesian inference, it updates a prior distribution $p(\theta)$ to a posterior, $p(\theta | D) \propto p(D | \theta) p(\theta)$
+allowing the derived policy to incorporate uncertainty (e.g., via posterior sampling). However, Bayesian inference in high-dimensional reward spaces is computationally expensive and impractical for large-scale LLMs, since the exact posterior inference is often intractable.

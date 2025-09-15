@@ -1,0 +1,107 @@
+
+\documentclass{article} % For LaTeX2e
+\usepackage{style,times}
+\usepackage{amsmath,amsfonts,bm,amssymb}
+
+
+%%%%% customized by shuo begin
+\usepackage{amsthm,hyperref,url,dutchcal}
+\usepackage{tikz,colortbl,xcolor}
+\usetikzlibrary{arrows, positioning, calc, decorations.pathmorphing}
+\DeclareMathOperator*{\argmax}{argmax}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+
+\newcommand{\todo}[1]{\textcolor{red}{#1}}
+%%%% customized by shuo end
+
+\title{A Brief Introduction to Diffusion Models}
+\author{Shuo Liu \\
+Computer Science\\
+Northeastern University\\
+\texttt{shuo.liu2@northeastern.edu} \\
+}
+
+\iclrfinalcopy % Uncomment for camera-ready version, but NOT for submission.
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This article introduces mathematical foundations of diffusion models.
+\end{abstract}
+
+\section{Diffusion Models}
+
+The diffusion model originates from the molecular motion of thermodynamics, which degrades the data distribution by gradually adding Gaussian noise and then uses a learnable model to recover it. Compared to other generative models like Generative Adversarial Networks (GANs) \cite{GAN}, Variational Autoencoders (VAEs), and flow models, the diffusion model is learned by one network with high-dimensional latent variables in flexible architecture, avoiding unstable training, mode collapse, and surrogated loss. 
+
+\subsection{Problem Formulation}
+
+Given a dataset $X=\{x_1, x_2, \cdots x_n\}$, where each sample is drawn independently from an underlying data distribution $p(x)$, the goal of generative learning is to fit a model to the data distribution such that we can synthesize new data points at will by sampling from the distribution.
+
+\subsection{Noise Conditional Score-Based Network (NCSN)}
+
+The Score Matching with Langevin Dynamics (SMLD) is one of the first representative works of the diffusion model \cite{NCSN}, which utilizes iterative \textit{Langevin dynamics} to draw the samples. Langevin dynamics provides a Monte Carlo Markov Chain (MCMC) procedure to sample from a distribution $p(x)$ with only its score function $\nabla_x \log p(x)$ \cite{langevin}. It initializes the chain from an arbitrary prior distribution $x_0\sim \pi(x)$ and iterates as follows,
+\begin{equation} \label{equ:langevin}
+    x_{i+1} \leftarrow x_i + \epsilon \nabla_x \log p(x) + \sqrt{2 \epsilon} z_i,
+\end{equation}
+where $z_i \sim \mathcal{N}(0, I)$. When $\epsilon \rightarrow 0$ and $K \rightarrow \infty$, $x_K$ obtained from Equ. \ref{equ:langevin} converges to a sample from $p(x)$ under some regularity conditions.
+
+In the perturbing process, SMLD adds a sequence of multi-scale random Gaussian noises to the original data distribution $p(x)$,
+\begin{equation}
+    p_{\sigma_k}(x)=\int p(y) \mathcal{N}(x; y, \sigma_k^2 I) dy, k=1, 2, \cdots, K,
+\end{equation}
+
+The SMLD then approximates the score function $\nabla_x p_{\sigma_k}(x)$ of each noise-perturbed distribution by training a Noise Conditional Score-Based Network (NCSN) $s_\theta(x, k)$. The score-matching objective of an NCSN is to minimize the weighted sum of Fisher divergences for all noise scales,
+\begin{equation} \label{equ:score_matching}
+    L(\theta)=\sum_{k=1}^K \lambda(k) \mathbb{E}_{p_{\sigma_k}(x)}[||\nabla_x \log p_{\sigma_k}(x) - s_\theta(x, k)||_2^2],
+\end{equation}
+where $\lambda(i)\in \mathbb{R}_{>0}$ is a positive weighting function ($\lambda(i)=\sigma_k^2$). After obtaining the score-based model $s_\theta(x, k)$, we can produce the samples from it by running the Langevin dynamics for $k=K, K-1, \cdots, 1$ in sequence (so-called annealed Langevin dynamics).
+
+\subsection{Denoising Diffusion Probabilistic Model (DDPM)}
+
+Compared to NCSN which uses the score-based function (though convertible), the Denoising Diffusion Probabilistic Model (DDPM) reconstructs the samples from the noise according to \textit{variational inference}. 
+
+In the forward chain, the DDPM gradually perturbs the raw data distribution $x_0 \sim q(x_0)$ to converge to the standard Gaussian distribution $q(x_k)$,
+\begin{equation}
+    \begin{gathered}
+    q(x_k|x_{k-1})=\mathcal{N}(x_k; \sqrt{1-\beta_k} x_{k-1}, \beta_k I), \\ 
+    q(x_{1:K}|x_0)=\prod_{t=1}^T q(x_k|x_{k-1}),
+\end{gathered}\label{equ:diffusion_forward}
+\end{equation}
+where $\beta_k \in (0, 1)$ is the coefficient of noise added at step $t$. On the other hand, the reverse chain seeks to train a parameterized Gaussian transition kernel with $\theta$ to recover the data distribution,
+\begin{equation}
+    \begin{gathered}
+    p_\theta(x_{k-1}|x_k)=\mathcal{N}(x_{k-1}; \mu_\theta(x_k, k), \sigma_\theta(x_k, k)I), \\ 
+    p_\theta(x_{1:K}|x_k)=\prod_{t=1}^T p_\theta(x_{k-1}|x_k).
+\end{gathered}\label{equ:diffusion_reverse}
+\end{equation}
+Our objective is to estimate the maximum likelihood of original distribution $p_\theta(x_{0:K})$ by maximizing the variational lower bound $\mathbb{E}_q[\frac{p_\theta(x_{0:K})}{q(x_{1:K|x_0})}]$. After parameterization \cite{hodiffusion}, we optimize the loss function,
+\begin{equation}
+    \mathcal{L(\theta)} = \mathbb{E}_{x_0 \sim q(x_0), \epsilon \sim \mathcal{N}(0, I), k} \vert \vert\epsilon - \epsilon_
+    \theta(x_k, k) \vert \vert ^2_2,
+\end{equation}
+where $\epsilon_\theta$ estimates the noise input. Once trained, we can sample $x_0$ from Equ. \ref{equ:diffusion_reverse}.
+
+\subsection{Score-based Generative Model (SGM)}
+
+The Score-based Generative Model (SGM) using \textit{Stochastic Differential Equation} (SDE) \cite{song2021scorebased} describes the diffusion process in continuous time steps with a standard Wiener process, which unifies NCSN and DDPM. The forward diffusion process in infinitesimal time can be formally represented as
+\begin{equation}
+    dx = f(x, k) dk + \sigma(k) dw,
+\end{equation}
+where $w$ denotes a standard Winener process and $\sigma(\cdot)$ denotes the diffusion coefficient, which is supposed to be a scalar independent of $x$. The reserve SDE describes the diffusion process running backward in time to generate new samples from the known prior $x_k$ \cite{reversesde}, which is
+\begin{equation}
+    dx = [f(x, k) - \sigma(k)^2 \nabla_x \log p_k(x)] dk + \sigma(k) d\bar{w},
+\end{equation}
+which incorporate a backward induction score function $\log p_k(x)$. Similar to NCSN, the score function can be approximated using a step-dependent score-based model $s_\theta(x, k)$ with the score-matching optimization objective Equ. \ref{equ:score_matching}.
+
+
+\clearpage
+\bibliography{ref}
+\bibliographystyle{ref}
+\input{appendix.tex}
+
+\end{document}

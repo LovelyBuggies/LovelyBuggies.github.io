@@ -1,0 +1,46 @@
+\newpage
+\appendix
+
+\section{Deep Q-Network}
+
+Deep Q-Network (DQN) approximates the Q-function with a target network to stabilize training.
+
+\begin{algorithm}[H]
+    \centering 
+    \caption{Deep Q-learning with Experience Replay}\label{alg:dqn}
+    \begin{algorithmic}[1]
+    \State \textbf{Initialize}: parameter $\theta$ for Q-network $Q_{\theta}$, target Q-network $\theta'\leftarrow \theta$, replay memory $\mathcal{D}$
+    \For{each episode}
+        \State Choose $s_0$ from $\mathcal{S}$ as initial state
+        \For{$t=0$ to $T-1$}
+        \State Take action $a_t$ according to policy derived by $Q$ (e.g. $\epsilon$-greedy)
+        \State Observe reward $r_{t+1}$ and next state $s_{t+1}$
+        \State Store transition $(s_t, a_t, r_{t+1}, s_{t+1})$ into $\mathcal{D}$
+        \For{each mini-batch of $N$ transitions $\{s_i, a_i, r_{i+1}, s_{i+1}\}$}
+        \State $\delta_i\leftarrow \underbrace{r_{i+1} +\gamma \max_{a'} Q_{\theta'}(s_{i+1}, a')}_{\text{target Q prediction}} - Q_{\theta}(s_i, a_i)$
+        \State $\theta \leftarrow \theta + \frac{1}{N} \sum_i \alpha \delta_i \nabla_{\theta} Q_{\theta}(s_i, a_i)$
+        \EndFor
+        \State $\theta'\leftarrow \tau \theta' + (1-\tau) \theta$
+        \EndFor
+    \EndFor
+\State \Return value function $Q$
+\end{algorithmic}
+\end{algorithm}
+
+%\section{Theorems}
+%
+%\subsection{Banach Fixed-Point Theorem}
+%
+%\begin{theorem} \label{them:banach}
+%Let $(X, d)$ be a non-empty complete metric space with a contraction mapping $T : X \rightarrow X$. Then $T$ admits a unique \textit{fixed-point} $x^* \in X$ (i.e. $T(x^*) = x^*$). Furthermore, $x^*$ can be found as follows: start with an arbitrary element $x_0 \in X$ and define a sequence $(x_n)_{n \in \mathbb{N}}$ by $x_n = T(x_{n-1})$ for $n \geq 1$. Then $\lim_{n \to \infty} x_n = x^*$.
+%\end{theorem}
+%
+%The proof can find in \cite{szepesvari2010algorithms}
+%
+%\subsection{Stochastic Approximation Theorem}
+%
+%\section{Examples}
+%
+%\subsection{Baird's Counterexample}
+%
+%The star problem.
