@@ -28,3 +28,23 @@
   font-size: 12pt;
   font-weight: 700;
 }
+
+/* Increase brand/site title size */
+.book-brand span {
+  font-size: 13pt;
+}
+
+/* Bottom Home button in sidebar */
+.book-menu .home-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  background: #224b8d;
+  color: #fff !important;
+  border-radius: 6px;
+}
+.book-menu .home-button:hover {
+  background: #1a3a6b;
+}

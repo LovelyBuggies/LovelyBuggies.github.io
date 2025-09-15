@@ -1,6 +1,6 @@
 baseURL = "https://lovelybuggies.github.io/notes/"
 languageCode = "en-us"
-title = "LovelyBuggies’s Blog"
+title = "LovelyBuggies' Blog"
 enableGitInfo = true
 
 # Publish the built site into the repo at /notes
