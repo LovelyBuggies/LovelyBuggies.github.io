@@ -1,6 +1,6 @@
 baseURL = "https://lovelybuggies.github.io/notes/"
 languageCode = "en-us"
-title = "Notes"
+title = "Blog"
 enableGitInfo = true
 
 # Publish the built site into the repo at /notes
@@ -18,8 +18,12 @@ theme = "book"
   BookSection = "docs"
   # Show page last modified time (needs enableGitInfo)
   ShowLastMod = true
+  # Enable KaTeX for math rendering across the site
+  BookMath = true
 
 [markup]
   [markup.highlight]
     style = "github"
     noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true

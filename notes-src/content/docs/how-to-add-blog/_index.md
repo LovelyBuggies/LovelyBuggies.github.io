@@ -45,7 +45,8 @@ Tips
 
 Math
 - Use `$...$` for inline math and `$$...$$` for block equations.
-- KaTeX assets are included by the theme; nothing extra is needed per page.
+- Add `math: true` in the page front matter to enable KaTeX on that page.
+- KaTeX is enabled site‑wide via config, but page flag ensures scripts run where needed.
 - See the "Math Demo" page for examples.
 
 Build and publish
