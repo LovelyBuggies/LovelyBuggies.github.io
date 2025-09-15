@@ -1,18 +1,30 @@
-/* Sidebar hierarchy sizes: section > subsection > article (1pt steps) */
-.book-menu .book-menu-content nav > ul > li > a,
+/* Sidebar sizing: all article links 10pt, not bold; section labels scale by depth (12/11/10) */
+/* Default for all links (articles) */
+.book-menu .book-menu-content nav a {
+  font-size: 10pt;
+  font-weight: 400;
+}
+
+/* Top-level section label (no content, rendered as span) */
 .book-menu .book-menu-content nav > ul > li > span {
-  font-weight: 700;
-  font-size: 13pt;
-}
-
-.book-menu .book-menu-content nav > ul > li > ul > li > a,
-.book-menu .book-menu-content nav > ul > li > ul > li > span {
-  font-weight: 600;
   font-size: 12pt;
+  font-weight: 700;
 }
 
-.book-menu .book-menu-content nav > ul > li > ul > li > ul > li > a,
-.book-menu .book-menu-content nav > ul > li > ul > li > ul > li > span {
-  font-weight: 500;
+/* Subsection label (depth 2) */
+.book-menu .book-menu-content nav > ul > li > ul > li > span {
   font-size: 11pt;
+  font-weight: 700;
+}
+
+/* Deeper section label (depth 3+) */
+.book-menu .book-menu-content nav > ul > li > ul > li > ul > li > span {
+  font-size: 10pt;
+  font-weight: 700;
+}
+
+/* Make the Home item look like a main section (even though it is a link) */
+.book-menu .book-menu-content nav a[href$="/docs/back-home/"] {
+  font-size: 12pt;
+  font-weight: 700;
 }

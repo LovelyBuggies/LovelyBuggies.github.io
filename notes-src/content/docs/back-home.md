@@ -1,5 +1,4 @@
----
-title: "Back Home"
+title: "Home"
 weight: 1
 ---
 
