@@ -30,18 +30,36 @@ jobs:
           set -e
           # Helper to create front matter + katex shortcode, then append Pandoc output
           convert() {
-            local tex="$1"; local bib="$2"; local out="$3"; local rpath="$4"; local title="$5"; local baseprefix="$6"
+            local tex="$1"; local bib="$2"; local out="$3"; local rpath="$4"; local title="$5"
+            local dir
+            dir="$(dirname "$tex")"
             mkdir -p "$(dirname "$out")"
+            # Create a combined LaTeX file including simple \input{...} files from same dir
+            tmptex="$(mktemp)"
+            cp "$tex" "$tmptex"
+            while IFS= read -r inc; do
+              if [ -f "$dir/${inc}.tex" ]; then
+                printf '\n' >> "$tmptex"
+                cat "$dir/${inc}.tex" >> "$tmptex"
+              fi
+            done < <(sed -n 's/.*\\input{\\([^}]*\\)}.*/\1/p' "$tex")
+
             # Front matter (with title) and KaTeX shortcode
             printf '%s\n' '---' "title: \"${title}\"" 'math: true' '---' '' '{{< katex />}}' '' > "$out"
             # Run pandoc to append content
-            pandoc "$tex" \
+            pandoc "$tmptex" \
               --from=latex --to=gfm+tex_math_dollars \
               --resource-path="$rpath" \
               --citeproc --bibliography="$bib" \
               --wrap=none >> "$out"
-            # Rewrite relative image links to absolute /archive/... paths
-            perl -0777 -pe "s/!\\[([^\\]]*)\\]\\(((?!https?:|\/)[^\")'\\s]+\.(?:png|jpe?g|svg|gif|pdf))\\)/![$1](${baseprefix}\$2)/gi" -i "$out"
+
+            # Copy common image assets next to the output so relative links work
+            for ext in png jpg jpeg svg gif pdf; do
+              for f in "$dir"/*."$ext"; do
+                [ -e "$f" ] && cp -n "$f" "$(dirname "$out")/" || true
+              done
+            done
+            rm -f "$tmptex"
           }
 
           # PPO → RL
