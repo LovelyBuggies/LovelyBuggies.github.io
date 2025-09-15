@@ -2,6 +2,7 @@
 title: "Math Demo"
 date: 2025-01-02
 weight: 50
+math: true
 ---
 
 Inline math like $a^2 + b^2 = c^2$ and display math:
@@ -16,4 +17,3 @@ If this renders as formatted equations, KaTeX is working.
 Notes
 - Use `$...$` for inline, `$$...$$` for block equations.
 - No extra escaping is needed inside code blocks; use Markdown fences for code, math fences for equations.
-
