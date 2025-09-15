@@ -1,8 +1,8 @@
-/* Sidebar hierarchy sizes: section > subsection > article */
+/* Sidebar hierarchy sizes: section > subsection > article (1pt steps) */
 .book-menu .book-menu-content nav > ul > li > a,
 .book-menu .book-menu-content nav > ul > li > span {
   font-weight: 700;
-  font-size: 16pt;
+  font-size: 13pt;
 }
 
 .book-menu .book-menu-content nav > ul > li > ul > li > a,
@@ -14,5 +14,5 @@
 .book-menu .book-menu-content nav > ul > li > ul > li > ul > li > a,
 .book-menu .book-menu-content nav > ul > li > ul > li > ul > li > span {
   font-weight: 500;
-  font-size: 8pt;
+  font-size: 11pt;
 }
