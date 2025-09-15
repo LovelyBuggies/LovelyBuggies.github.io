@@ -34,7 +34,7 @@ jobs:
         run: |
           set -e
           convert() {
-            local tex="$1"; local bib="$2"; local out="$3"; local rpath="$4"; local title="$5"
+            local tex="$1"; local bib="$2"; local out="$3"; local rpath="$4"; local title="$5"; local baseprefix="$6"
             mkdir -p "$(dirname "$out")"
             printf '%s\n' '---' "title: \"${title}\"" 'math: true' '---' '' '{{< katex />}}' '' > "$out"
             pandoc "$tex" \
@@ -42,37 +42,37 @@ jobs:
               --resource-path="$rpath" \
               --citeproc --bibliography="$bib" \
               --wrap=none >> "$out"
+            # Rewrite relative image links to absolute /archive/... paths for common extensions
+            # Only replace when link does not start with http(s) or '/'
+            perl -0777 -pe "s/!\\[([^\\]]*)\\]\\(((?!https?:|\/)[^\")'\\s]+\.(?:png|jpe?g|svg|gif|pdf))\\)/![$1](${baseprefix}\$2)/gi" -i "$out"
           }
 
           # PPO → RL
           if [ -f "archive/PPO/main.tex" ]; then
-            convert "archive/PPO/main.tex" "archive/PPO/ref.bib" "notes-src/content/docs/rl/from-pg-2-ppo.md" "archive/PPO" "From PG 2 PPO"
+            convert "archive/PPO/main.tex" "archive/PPO/ref.bib" "notes-src/content/docs/rl/from-pg-2-ppo.md" "archive/PPO" "From PG 2 PPO" "/archive/PPO/"
           fi
 
           # Bellman → RL
           if [ -f "archive/Bellman/main.tex" ]; then
-            convert "archive/Bellman/main.tex" "archive/Bellman/ref.bib" "notes-src/content/docs/rl/understanding-bellman.md" "archive/Bellman" "Understanding Bellman"
+            convert "archive/Bellman/main.tex" "archive/Bellman/ref.bib" "notes-src/content/docs/rl/understanding-bellman.md" "archive/Bellman" "Understanding Bellman" "/archive/Bellman/"
           fi
 
           # Dec-POMDP Intro → RL/MARL
           if [ -f "archive/Dec-POMDP Intro/main.tex" ]; then
-            convert "archive/Dec-POMDP Intro/main.tex" "archive/Dec-POMDP Intro/ref.bib" "notes-src/content/docs/rl/marl/introduction-2-decpomdp.md" "archive/Dec-POMDP Intro" "Introduction 2 DecPOMDP"
+            convert "archive/Dec-POMDP Intro/main.tex" "archive/Dec-POMDP Intro/ref.bib" "notes-src/content/docs/rl/marl/introduction-2-decpomdp.md" "archive/Dec-POMDP Intro" "Introduction 2 DecPOMDP" "/archive/Dec-POMDP Intro/"
           fi
 
           # Optimal Q-Value in Dec-POMDP → RL/MARL
           if [ -f "archive/Optimal Q-Value in Dec-POMDP/main.tex" ]; then
-            convert "archive/Optimal Q-Value in Dec-POMDP/main.tex" "archive/Optimal Q-Value in Dec-POMDP/ref.bib" "notes-src/content/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp.md" "archive/Optimal Q-Value in Dec-POMDP" "Optimal Q Value Functions for Dec POMDP"
+            convert "archive/Optimal Q-Value in Dec-POMDP/main.tex" "archive/Optimal Q-Value in Dec-POMDP/ref.bib" "notes-src/content/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp.md" "archive/Optimal Q-Value in Dec-POMDP" "Optimal Q Value Functions for Dec POMDP" "/archive/Optimal Q-Value in Dec-POMDP/"
           fi
 
           # LLM Reward → LLM
           if [ -f "archive/LLM Reward/main.tex" ]; then
-            convert "archive/LLM Reward/main.tex" "archive/LLM Reward/ref.bib" "notes-src/content/docs/large-language-models/reward-modeling-llm.md" "archive/LLM Reward" "Reward Modeling LLM"
+            convert "archive/LLM Reward/main.tex" "archive/LLM Reward/ref.bib" "notes-src/content/docs/large-language-models/reward-modeling-llm.md" "archive/LLM Reward" "Reward Modeling LLM" "/archive/LLM Reward/"
           fi
 
-          # Diffusion → LLM
-          if [ -f "archive/Diffusion/main.tex" ]; then
-            convert "archive/Diffusion/main.tex" "archive/Diffusion/ref.bib" "notes-src/content/docs/large-language-models/intro-2-diffusion.md" "archive/Diffusion" "Intro 2 Diffusion"
-          fi
+          # Diffusion conversion removed per request
 
       - name: Setup Hugo (latest, extended)
         uses: peaceiris/actions-hugo@v2

@@ -1,0 +1,12 @@
+{{/* Ensure sidebar label uses the exact page Title when set */}}
+{{ $title := "" }}
+{{ if .Title }}
+  {{ $title = .Title }}
+{{ else if .LinkTitle }}
+  {{ $title = .LinkTitle }}
+{{ else if and .IsSection .File }}
+  {{ $title = path.Base .File.Dir | humanize | title }}
+{{ else if and .IsPage .File }}
+  {{ $title = .File.BaseFileName | humanize | title }}
+{{ end }}
+{{ return $title }}
