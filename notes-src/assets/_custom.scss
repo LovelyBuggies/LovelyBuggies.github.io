@@ -9,18 +9,21 @@
 .book-menu .book-menu-content nav > ul > li > span {
   font-size: 12pt;
   font-weight: 700;
+  color: #224b8d;
 }
 
 /* Subsection label (depth 2) — no deeper levels, size 10pt */
 .book-menu .book-menu-content nav > ul > li > ul > li > span {
   font-size: 10pt;
   font-weight: 700;
+  color: #224b8d;
 }
 
 /* Optional: keep for safety if deeper levels ever appear */
 .book-menu .book-menu-content nav > ul > li > ul > li > ul > li > span {
   font-size: 10pt;
   font-weight: 700;
+  color: #224b8d;
 }
 
 /* Make the Home item look like a main section (even though it is a link) */
@@ -32,6 +35,7 @@
 /* Increase brand/site title size */
 .book-brand span {
   font-size: 13pt;
+  font-weight: 700;
 }
 
 /* Plain, left-aligned Home link at bottom of sidebar */
