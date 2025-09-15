@@ -30,3 +30,5 @@ Build and publish
 - Build: `cd notes-src && hugo` → outputs to `../notes/`.
 - Commit and push the updated `notes/` folder (or let CI build if you use Actions).
 
+Legacy note
+- Older instructions remain available at `/archive/posts/instructions.html`.

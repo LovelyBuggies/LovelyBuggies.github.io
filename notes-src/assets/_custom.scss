@@ -1,0 +1,10 @@
+/* Bold top-level section links in the sidebar for RL, MAS, and LLM */
+.book-menu a[href$="/docs/reinforcement-learning/"] {
+  font-weight: 700;
+}
+.book-menu a[href$="/docs/multi-agent-systems/"] {
+  font-weight: 700;
+}
+.book-menu a[href$="/docs/large-language-models/"] {
+  font-weight: 700;
+}
