@@ -1,0 +1,25 @@
+baseURL = "https://lovelybuggies.github.io/notes/"
+languageCode = "en-us"
+title = "Notes"
+enableGitInfo = true
+
+# Publish the built site into the repo at /notes
+publishDir = "../notes"
+
+# Use a local theme (no Go/Hugo Modules required)
+theme = "book"
+
+[params]
+  BookTheme = "auto"
+  BookToC = true
+  BookSearch = true
+  BookRepo = "https://github.com/LovelyBuggies/LovelyBuggies.github.io"
+  BookDateFormat = "Jan 2, 2006"
+  BookSection = "docs"
+  # Show page last modified time (needs enableGitInfo)
+  ShowLastMod = true
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    noClasses = false

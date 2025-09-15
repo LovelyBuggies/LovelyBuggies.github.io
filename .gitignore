@@ -1,0 +1,15 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Hugo (local build artifacts inside notes-src)
+notes-src/resources/
+notes-src/public/
+notes-src/.hugo_build.lock
+notes-src/_vendor/
+
+
+# Logs
+*.log

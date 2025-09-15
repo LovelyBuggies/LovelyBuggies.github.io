@@ -1,0 +1,15 @@
+{{- $limit := .Get "limit" | default 10 -}}
+{{- $pages := where .Site.RegularPages "Section" "docs" -}}
+{{- $pages = sort $pages "Date" "desc" -}}
+<ul>
+  {{- range first $limit $pages -}}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <span style="color: #777;">— {{ .Date.Format "2006-01-02" }}</span>
+    </li>
+  {{- end -}}
+  {{- if not (gt (len $pages) 0) -}}
+    <li>No notes yet. Add a page under <code>content/docs/...</code>.</li>
+  {{- end -}}
+</ul>
+
