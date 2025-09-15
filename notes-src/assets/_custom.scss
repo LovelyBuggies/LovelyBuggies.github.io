@@ -11,13 +11,13 @@
   font-weight: 700;
 }
 
-/* Subsection label (depth 2) */
+/* Subsection label (depth 2) — no deeper levels, size 10pt */
 .book-menu .book-menu-content nav > ul > li > ul > li > span {
-  font-size: 11pt;
+  font-size: 10pt;
   font-weight: 700;
 }
 
-/* Deeper section label (depth 3+) */
+/* Optional: keep for safety if deeper levels ever appear */
 .book-menu .book-menu-content nav > ul > li > ul > li > ul > li > span {
   font-size: 10pt;
   font-weight: 700;
