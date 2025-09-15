@@ -5,7 +5,7 @@ weight: 20
 math: true
 ---
 
-{{< katex >}}
+{{< katex />}}
 
 Inline math like $a^2 + b^2 = c^2$ (also works with \(a^2 + b^2 = c^2\)) and display math:
 
