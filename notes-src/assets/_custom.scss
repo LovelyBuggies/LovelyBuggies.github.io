@@ -27,29 +27,9 @@
   color: #000;
 }
 
-/* Make the Home item look like a main section (even though it is a link) */
-.book-menu .book-menu-content nav a[href$="/docs/back-home/"] {
-  font-size: 12pt;
-  font-weight: 700;
-}
-
 /* Increase brand/site title size */
 .book-brand span {
   font-size: 13pt;
   font-weight: 700;
   color: #000;
-}
-
-/* Plain, left-aligned Home link at bottom of sidebar */
-.book-menu .home-button {
-  display: block;
-  text-align: left;
-  margin-top: 0.5rem;
-  padding: 0.2rem 0;
-  color: inherit;
-  font-size: 10pt;
-  font-weight: 400;
-}
-.book-menu .home-button:hover {
-  text-decoration: underline;
 }
