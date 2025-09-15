@@ -3,27 +3,28 @@
 .book-menu .book-menu-content nav a {
   font-size: 10pt;
   font-weight: 400;
+  color: #224b8d;
 }
 
 /* Top-level section label (no content, rendered as span) */
 .book-menu .book-menu-content nav > ul > li > span {
   font-size: 12pt;
   font-weight: 700;
-  color: #224b8d;
+  color: #000;
 }
 
 /* Subsection label (depth 2) — no deeper levels, size 10pt */
 .book-menu .book-menu-content nav > ul > li > ul > li > span {
   font-size: 10pt;
   font-weight: 700;
-  color: #224b8d;
+  color: #000;
 }
 
 /* Optional: keep for safety if deeper levels ever appear */
 .book-menu .book-menu-content nav > ul > li > ul > li > ul > li > span {
   font-size: 10pt;
   font-weight: 700;
-  color: #224b8d;
+  color: #000;
 }
 
 /* Make the Home item look like a main section (even though it is a link) */
