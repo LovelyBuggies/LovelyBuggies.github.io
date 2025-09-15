@@ -1,10 +1,18 @@
-/* Bold top-level section links in the sidebar for RL, MAS, and LLM */
-.book-menu a[href$="/docs/reinforcement-learning/"] {
+/* Sidebar hierarchy sizes: section > subsection > article */
+.book-menu .book-menu-content nav > ul > li > a,
+.book-menu .book-menu-content nav > ul > li > span {
   font-weight: 700;
+  font-size: 16pt;
 }
-.book-menu a[href$="/docs/multi-agent-systems/"] {
-  font-weight: 700;
+
+.book-menu .book-menu-content nav > ul > li > ul > li > a,
+.book-menu .book-menu-content nav > ul > li > ul > li > span {
+  font-weight: 600;
+  font-size: 12pt;
 }
-.book-menu a[href$="/docs/large-language-models/"] {
-  font-weight: 700;
+
+.book-menu .book-menu-content nav > ul > li > ul > li > ul > li > a,
+.book-menu .book-menu-content nav > ul > li > ul > li > ul > li > span {
+  font-weight: 500;
+  font-size: 8pt;
 }

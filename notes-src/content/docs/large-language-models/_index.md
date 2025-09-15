@@ -1,5 +1,3 @@
----
-title: "Large Language Models"
+title: "LLM"
 weight: 30
 ---
-
