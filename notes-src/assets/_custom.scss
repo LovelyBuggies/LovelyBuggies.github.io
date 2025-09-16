@@ -69,3 +69,11 @@ h2#references {
   margin-left: 0.4rem;
   text-decoration: none;
 }
+
+/* Footnote-style hints: light gray box, slightly smaller text */
+.book-hint.info {
+  background-color: var(--gray-100) !important;
+  border-color: var(--gray-200) !important;
+  font-size: 0.9375rem; /* 1pt smaller than 16px base */
+}
+.book-hint.info p { margin: 0.25rem 0; }
