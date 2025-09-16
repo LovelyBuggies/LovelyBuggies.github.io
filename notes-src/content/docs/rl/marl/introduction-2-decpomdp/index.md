@@ -139,14 +139,17 @@ Calculating a shared belief state in Dec-POMDP is hard, because the policy can n
 Policy can also be represented by other forms, like approximating functions (Sutton and Barto 2018), neural networks, diffusion models (Chi et al. 2024), etc.
 {{< /hint >}}
 
+{{< columns >}}
 <figure>
+  <img src="pt.png" alt="Policy Tree" style="width:100%; height:auto;" />
+  <figcaption>Policy Tree (PT)</figcaption>
+</figure>
+<--->
 <figure>
-<img src="pt.png" />
+  <img src="fsc.png" alt="Finite State Controller" style="width:100%; height:auto;" />
+  <figcaption>Finite State Controller (FSC)</figcaption>
 </figure>
-<figure>
-<img src="fsc.png" />
-</figure>
-</figure>
+{{< /columns >}}
 
 ## Optimal Approaches
 

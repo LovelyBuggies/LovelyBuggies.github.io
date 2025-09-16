@@ -9,7 +9,7 @@ document.write(`
                   font-size: 180%;">
         <b>Shuo Liu</b>
         <span style="float:right;">
-            <top-bar><a href="./index.html">Home</a> | <a href="./research.html">Research</a> | <a href="./publications.html">Publications</a> | <a href="./software.html">Softwares</a> | <a href="./notes/">Blog</a></top-bar>
+            <top-bar><a href="./index.html">Home</a> | <a href="./research.html">Research</a> | <a href="./publications.html">Publications</a> | <a href="./software.html">Softwares</a> | <a href="./notes/">My Blog</a></top-bar>
         </span>
         </p>
 
