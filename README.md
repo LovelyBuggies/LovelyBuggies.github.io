@@ -37,17 +37,26 @@ Notes
 - Site config is in `notes-src/config.toml`.
 
 References and citations
-- Add references to a page’s front matter under `references` using ids:
+- Add references to a page’s front matter under `references` using ids (structured fields supported):
 
 ```
 references:
   wang2024:
-    text: "Wang, X. et al. Great Paper. NeurIPS, 2024."
-    url: "https://arxiv.org/abs/xxxx.xxxxx"
+    authors: "Wang, X.; Li, Y.; Kim, S."
+    title: "Great Paper"
+    venue: "NeurIPS"
+    year: 2024
+    doi: 10.48550/arXiv.2401.12345
+    arxiv: 2401.12345
+    url: https://arxiv.org/abs/2401.12345
   doe2023:
-    text: "Doe, J. Another Work. ICML, 2023."
+    authors: "Doe, J.; Roe, R."
+    title: "Another Work"
+    venue: "ICML"
+    year: 2023
 ```
 
 - Cite in text where needed: `{{< cite id="wang2024" text="Wang et al., 2024" >}}`.
-- The page automatically appends a “References” section listing cited entries in order of first appearance, with anchors for jump navigation.
+- The page automatically appends a “References” section listing cited entries in order of first appearance, with anchors for jump navigation. If a page defines `references` but no cites, all entries are listed.
+- You can also define shared entries in `notes-src/data/references.yaml` and cite them from any page.
 - Citation link color matches the sidebar article title color.
