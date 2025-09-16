@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+
+
+  
+
+
+
+  Policy Gradient (PG)
+  
+  #
+  
+
+Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://lovelybuggies.github.io/notes/docs/rl/from-pg-2-ppo/">
+  <meta property="og:site_name" content="LovelyBuggies&#39; Blog">
+  <meta property="og:title" content="From PG 2 PPO">
+  <meta property="og:description" content="Policy Gradient (PG) # Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:modified_time" content="2025-09-16T10:16:19-04:00">
+<title>From PG 2 PPO | LovelyBuggies&#39; Blog</title>
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="canonical" href="https://lovelybuggies.github.io/notes/docs/rl/from-pg-2-ppo/">
+<link rel="stylesheet" href="/notes/book.min.a482db4ff40e4539a82f3a9bfb0e3c5f7db0799cb9fde583a4a16768fd8e5c80.css" integrity="sha256-pILbT/QORTmoLzqb&#43;w48X32weZy5/eWDpKFnaP2OXIA=" crossorigin="anonymous"><!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs book-layout-">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LovelyBuggies&#39; Blog</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>RL</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/rl/from-pg-2-ppo/" class="active">From PG 2 PPO</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/rl/understanding-bellman/" class="">Understanding Bellman</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>MARL</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/rl/marl/introduction-2-decpomdp/" class="">Introduction 2 DecPOMDP</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp/" class="">Optimal Q Value Functions for Dec POMDP</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>LLM</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/large-language-models/reward-modeling-llm/" class="">Reward Modeling LLM</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/welcome/" class="">Welcome</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>From PG 2 PPO</h3>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pg-theorem">PG Theorem</a></li>
+    <li><a href="#pg-with-baseline">PG with Baseline</a></li>
+    <li><a href="#off-policy-pg">Off-Policy PG</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#clip-ppo">Clip-PPO</a></li>
+    <li><a href="#kl-ppo">KL-PPO</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#multi-agent-ppo">Multi-Agent PPO</a></li>
+    <li><a href="#group-relative-policy-optimization-grpo">Group Relative Policy Optimization (GRPO)</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article">
+<link rel="stylesheet" href="/notes/katex/katex.min.css" />
+<script defer src="/notes/katex/katex.min.js"></script>
+
+  <script defer src="/notes/katex/auto-render.min.js" onload="renderMathInElement(document.body, {
+  &#34;delimiters&#34;: [
+    {&#34;left&#34;: &#34;$$&#34;, &#34;right&#34;: &#34;$$&#34;, &#34;display&#34;: true},
+    {&#34;left&#34;: &#34;$&#34;, &#34;right&#34;: &#34;$&#34;, &#34;display&#34;: false},
+    {&#34;left&#34;: &#34;\\(&#34;, &#34;right&#34;: &#34;\\)&#34;, &#34;display&#34;: false},
+    {&#34;left&#34;: &#34;\\[&#34;, &#34;right&#34;: &#34;\\]&#34;, &#34;display&#34;: true}
+  ],
+  &#34;throwOnError&#34;: false,
+  &#34;strict&#34;: false,
+  &#34;trust&#34;: true,
+  &#34;macros&#34;: {
+    &#34;\\label&#34;: &#34;\\htmlId{#1}{}&#34;,
+    &#34;\\eqref&#34;: &#34;(\\ref{#1})&#34;
+  }
+}
+);"></script>
+
+
+<h1 id="policy-gradient-pg">
+  Policy Gradient (PG)
+  
+  <a class="anchor" href="#policy-gradient-pg">#</a>
+  
+</h1>
+<p>Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$.</p>
+<blockquote class="book-hint info">
+  
+All methods following this schema are PG, whether or not they also learn an approximate value function.
+
+</blockquote>
+
+<p>$$\label{eq:pg}
+\theta^{(i+1)} \leftarrow \theta^{(i)} + \alpha\nabla J(\theta^{(i)}).$$ There are 2 main advantages of PG methods,</p>
+<ul>
+<li>
+<p>Approximating policy can approach a deterministic policy, whereas $\epsilon$-greedy always has probability of selecting a random action;</p>
+</li>
+<li>
+<p>With continuous policy parameterization, the action probabilities change smoothly as a function of the learned parameter, whereas $\epsilon$-greedy may change dramatically for an arbitrarily small change in the estimated action values.</p>
+</li>
+</ul>
+<p>Since the major purpose of this article is to introduce PPO methods from PG, we omit some other important forms of PG here. Readers can find them in the Appendix.</p>
+<h2 id="pg-theorem">
+  PG Theorem
+  
+  <a class="anchor" href="#pg-theorem">#</a>
+  
+</h2>
+<p>An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="ref" data-reference="eq:pg">[eq:pg]</a> is to replace $J(\theta)$ with $V^{\pi_{\theta}} (s_0)$. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.</p>
+<blockquote class="book-hint info">
+  
+Notation: we omit $\theta$ in subscripts/superscripts and gradients, assuming $\pi$ depends on $\theta$ and all gradients are w.r.t. $\theta$; i.e., $V^{\pi}\equiv V^{\pi_{\theta}}$, $Q^{\pi}\equiv Q^{\pi_{\theta}}$ and $\nabla\equiv\nabla_{\theta}$.
+
+</blockquote>
+
+<div id="them:PG" class="theorem">
+<p><strong>Theorem 1</strong>. <em>Taking the state-value function as the optimizing target, the objective gradient follows, $$\label{equ:pgthem}
+\nabla J(\theta) \propto \sum_s d^\pi(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s),$$ where $d^\pi(s)$ is the stationary distribution of the policy $\pi_{\theta}$.</em></p>
+</div>
+<p>To sample with expectation equals or approximates the expression Equ. <a href="#equ:pgthem" data-reference-type="ref" data-reference="equ:pgthem">[equ:pgthem]</a>,</p>
+
+<span>
+  \[ 
+\label{equ:pgtheorem-sample}
+\nabla J(\theta) \propto \sum_s d^\pi(s)\sum_a Q^\pi(s,a) \, \nabla\pi(a|s) \\
+= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a) \, \nabla\pi(a|s) \right] \\
+= \mathbb{E}_{d^\pi}\!\left[\sum_a \pi(a|s) \, Q^\pi(s,a) \, \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
+= \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
+= \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \nabla\ln\pi(a|s) \right] \, .
+ \]
+  </span>
+
+
+<p>The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy parameterization appears, which can be omitted $L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]$ since it will be automatically recovered when differentiating.</p>
+<h2 id="pg-with-baseline">
+  PG with Baseline
+  
+  <a class="anchor" href="#pg-with-baseline">#</a>
+  
+</h2>
+<div id="them:PG-baseline" class="theorem">
+<p><strong>Theorem 2</strong>. <em>PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. $$\label{equ:reinforce-baseline}
+\begin{aligned}
+\nabla J(\theta) &amp;\propto \sum_s d^\pi(s)\sum_a (Q^\pi (s,a) -b(s)) \nabla\pi(a|s) \
+&amp;= \mathbb{E}_{\pi} \left[(Q^\pi(s,a) -b(s)) \nabla\ln\pi(a|s)\right].
+\end{aligned}$$</em></p>
+</div>
+<p>According to the Theorem <a href="#them:PG-baseline" data-reference-type="ref" data-reference="them:PG-baseline">2</a>, the expected return $Q(s,a)$ in Theorem <a href="#them:PG" data-reference-type="ref" data-reference="them:PG">1</a> can be replaced by $G$ (expected return of the full or following trajectory by Monte Carlo), $A$ (advantage by Generalized Advantage Estimation or state-value prediction), and $\delta$ (TD-residual by critic prediction).</p>
+<h2 id="off-policy-pg">
+  Off-Policy PG
+  
+  <a class="anchor" href="#off-policy-pg">#</a>
+  
+</h2>
+<p>Off-policy sampling reuses any past episodes, which has a higher efficiency and brings more exploration. To make PG off-policy, we adjust it with an importance weight $\frac{\pi(a|s)}{\beta(a|s)}$ to correct the mismatch between behavior and target policies.</p>
+
+<span>
+  \[ 
+\label{equ:pgthem-off-policy}
+\nabla J(\theta) = \nabla \Bigl(\sum_s d^\beta(s) \, V^\pi(s)\Bigr) \\
+= \nabla\Bigl(\sum_s d^\beta(s) \sum_a \pi(a|s) \, Q^\pi(s,a)\Bigr) \\
+= \sum_s d^\beta(s) \sum_a \Bigl(\nabla \pi(a|s) \, Q^\pi(s,a) + \pi(a|s) \, \nabla Q^\pi(s,a)\Bigr) \\
+\stackrel{\text{(i)}}{\approx} \sum_s d^\beta(s) \sum_a Q^\pi(s,a) \, \nabla \pi(a|s) \\
+= \mathbb{E}_{d^\beta}\!\left[\sum_a \beta(a|s) \, \frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \frac{\nabla \pi(a|s)}{\pi(a|s)}\right] \\
+= \mathbb{E}_{\beta}\!\left[\frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \nabla\ln \pi(a|s)\right] \, .
+ \]
+  </span>
+
+
+<p>where $d^\beta(s)$ is the stationary distribution of the behavior policy $\beta$, and $Q^\pi$ is the Q-function estimated regard to the target policy $\pi$. Because of hard computation in reality (i), we ignore the approximation term $\nabla Q^\pi(s,a)$.</p>
+<h1 id="proximal-policy-optimization-ppo">
+  Proximal Policy Optimization (PPO)
+  
+  <a class="anchor" href="#proximal-policy-optimization-ppo">#</a>
+  
+</h1>
+<p>In this section, we introduce standard PPO and it variants in different domains.</p>
+<h2 id="clip-ppo">
+  Clip-PPO
+  
+  <a class="anchor" href="#clip-ppo">#</a>
+  
+</h2>
+<p>Schulman et al., 2017 proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate $\hat{A}^{\pi_{\theta_{\text{old}}}}$ to reduce the variance of policy gradient methods and maintain low bias Schulman et al., 2015, $$\label{equ:Clip-PPO}
+J^{\text{CLIP}}(\theta) = \mathbb{E}<em>{\pi</em>{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right],$$ where $\hat{A}^\text{GAE}<em>t = \sum</em>{l=0}^{\infty} (\gamma \lambda)^l \delta_{t+l}$, $\delta$ is the TD error, and $\lambda$ is a hyperparameter controlling the trade-off between bias and variance. Note that the clipping could also occur in the value network to stabilize the training process.</p>
+<p>The objective function can be augmented with an entropy term to encourage exploration, $$\label{equ:PPO}
+J^{\text{CLIP+}}(\theta) =\mathbb{E}<em>{\pi</em>{\theta_{\text{old}}}} \left[J^{\text{CLIP}}(\theta)- c\sum_{a} \pi_{\theta}(a|s) \log \pi_{\theta}(a|s))\right].$$</p>
+<div class="algorithm">
+<div class="algorithmic">
+<p><strong>Initialize</strong>: policy parameter $\theta$ for actor network $\pi_{\theta}$, parameter $w$ for critic network $V_{w}$, replay memory $\mathcal{D}$ Generate an episode following policy $\pi_{\theta_{\text{old}}}$ and store it into $\mathcal{D}$ Estimate reward-to-go $\hat{R}$ and $\hat{A}^{\pi_{\theta_{\text{old}}}}$ using GAE Compute $J^{\text{CLIP+}}(\theta)$ for all samples according to Equ. <a href="#equ:PPO" data-reference-type="ref" data-reference="equ:PPO">[equ:PPO]</a> $w \leftarrow w + \alpha_w \frac{1}{N}\sum_i\nabla_w (V_w(s_i)-\hat{R}(s_i, a_i))^2$ $\theta \leftarrow \theta + \alpha_\theta \frac{1}{N}\sum_i \nabla_\theta J^{\text{CLIP+H}}(\theta)$ $\theta_{\text{old}} \leftarrow \theta$</p>
+</div>
+</div>
+<h2 id="kl-ppo">
+  KL-PPO
+  
+  <a class="anchor" href="#kl-ppo">#</a>
+  
+</h2>
+<p>Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration Schulman et al., 2017.</p>
+
+<span>
+  \[ 
+\label{alg:TRPO}
+J^{\text{KL}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) - c\, \mathcal{D}_\text{KL}(\pi_{\theta_{\text{old}}} \| \pi_{\theta}) \right] \, .
+ \]
+  </span>
+
+
+<p>where $\mathcal{D}<em>\text{KL}(\pi</em>{\theta_{\text{old}}} | \pi_{\theta}) = \sum_{a} \pi_{\theta_{\text{old}}}(a | s) \log \frac{\pi_{\theta_{\text{old}}}(a | s)}{\pi_{\theta}(a| s)}$.</p>
+<p>Sometimes, the KL-penalty can be combined with policy clipping to achieve better performance in practice.</p>
+<h4 id="adaptive-kl-ppo">
+  Adaptive-KL-PPO
+  
+  <a class="anchor" href="#adaptive-kl-ppo">#</a>
+  
+</h4>
+<p>(Schulman et al. 2017) also mentioned Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive $\left( \mathcal{D}<em>\text{KL} \gg \mathcal{D}</em>\text{threshold} \right)$, $c$ is increased to penalize large updates; else if the update is too conservative $\left( \mathcal{D}<em>\text{KL} \ll \mathcal{D}</em>\text{threshold} \right)$, $c$ is decreased to allow larger updates.</p>
+<h2 id="multi-agent-ppo">
+  Multi-Agent PPO
+  
+  <a class="anchor" href="#multi-agent-ppo">#</a>
+  
+</h2>
+<p>In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). In IPPO, each agent has its own actor and critic and learns independently according to a joint reward Schroeder de Witt et al., 2020. Like IPPO, MAPPO employs weight sharing between agents’ critics, and the advantage in MAPPO is estimated through joint GAE Yu et al., 2022.</p>
+
+<span>
+  \[ 
+\label{equ:MAPPO}
+J^\text{IPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{i, \text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{i, \text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\pi_{\theta_{i,\text{old}}}}(s, a) \right) \right] \\
+J^\text{MAPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right] \, .
+ \]
+  </span>
+
+
+<p>Note that there are some other instantiations of IPPO, but not all of them are vulnerable to non-convergence issues. The one with full actor critic parameter or information sharing can be regarded as a centralized method. Besides, for cases where a general solution is still intangible even with parameter sharing (e.g. the exclusive game), heterogeneous-agent PPO allows the agents to take turns learning by using others’ information, which can work well with strong assumptions.</p>
+<blockquote class="book-hint info">
+  
+A great example is PettingZoo’s agent cycle and parallel environments.
+
+</blockquote>
+
+<h2 id="group-relative-policy-optimization-grpo">
+  Group Relative Policy Optimization (GRPO)
+  
+  <a class="anchor" href="#group-relative-policy-optimization-grpo">#</a>
+  
+</h2>
+<p>As DeepSeek has made a splash in the LLM community, the RL method GRPO involved has received a lot of attention (Zhihong Shao 2024). GRPO is a variant of PPO, where the advantage is estimated using group-relative comparisons rather than GAE. This approach eliminates the critic model, which improves the training efficiency and stability. The DeepSeek framework consists of: (i) a frozen <em>reference model</em>, which is a stable baseline for computing rewards; (ii) a given <em>reward model</em>, responsible for evaluating generated outputs and assigning scores; (iii) a <em>value model</em>, which estimates the expected return of a given state to aid in policy optimization; and (iv) a <em>policy model</em>, which generates $|\mathcal{G}|$ responses and is continuously updated to improve performance based on feedback from the other components. The learning objective for GRPO is, $$\small
+J^\text{GRPO}(\theta) = \mathbb{E}<em>{\pi</em>{\theta_\text{old}}, i \in \mathcal{G}} \left[ \min \left( \frac{\pi_{\theta}(a_{i} | s, \vec{a}<em>{i})}{\pi</em>{\theta_\text{old}}(a_{i} | s, \vec{a}<em>{i})} \hat{A}^\mathcal{G}, \text{clip}(\frac{\pi</em>{\theta}(a_{i} | s, \vec{a}<em>{i})}{\pi</em>{\theta_\text{old}}(a_{i} | s, \vec{a}<em>{i})}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\mathcal{G}}\right)-c\mathcal{D}</em>\text{KL}(\pi_\text{ref} | \pi_{\theta})\right],$$ where the advantage $\hat{A}^\mathcal{G}<em>i=\frac{r_i-\text{mean}(r)}{\text{std}(r)}$ is estimated by grouped actions produced at the same state. $\mathcal{D}</em>\text{KL}(\pi_\text{ref} | \pi_{\theta})=\frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}<em>{i})}{\pi</em>{\theta}(a_{i} \mid s, \vec{a}_{i})}</p>
+<ul>
+<li>\ln \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}<em>{i})}{\pi</em>{\theta}(a_{i} \mid s, \vec{a}_i)} - 1$ is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).</li>
+</ul>
+<figure id="fig:grpo">
+<p><img src="grpo.png" alt="image" /> <span id="fig:grpo" label="fig:grpo"></span></p>
+</figure>
+<!-- footnotes converted to hints above -->
+</article>
+ 
+      
+
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+    </span>
+    <span>
+    
+      <a href="/notes/docs/rl/understanding-bellman/" class="flex align-center">
+        <span>Understanding Bellman</span>
+        <img src="/notes/svg/forward.svg" class="book-icon" alt="Next" title="Understanding Bellman" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+<aside class="book-toc">
+  <div class="book-toc-content">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pg-theorem">PG Theorem</a></li>
+    <li><a href="#pg-with-baseline">PG with Baseline</a></li>
+    <li><a href="#off-policy-pg">Off-Policy PG</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#clip-ppo">Clip-PPO</a></li>
+    <li><a href="#kl-ppo">KL-PPO</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#multi-agent-ppo">Multi-Agent PPO</a></li>
+    <li><a href="#group-relative-policy-optimization-grpo">Group Relative Policy Optimization (GRPO)</a></li>
+  </ul>
+</nav>
+
+
+
+  </div>
+</aside>
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
