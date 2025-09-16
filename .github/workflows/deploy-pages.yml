@@ -1,0 +1,68 @@
+name: Deploy Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.150.0'
+          extended: true
+
+      - name: Build blog (Hugo)
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          # Build Hugo notes site into dist/notes
+          hugo -s notes-src --minify -d ../dist/notes
+
+      - name: Copy root site files
+        run: |
+          rsync -av \
+            --exclude '.git' \
+            --exclude 'notes' \
+            --exclude 'notes-src' \
+            --exclude '.github' \
+            --exclude '.DS_Store' \
+            ./ dist/
+          # Ensure favicon and disable Jekyll
+          [ -f notes-src/static/nameicon.svg ] && cp notes-src/static/nameicon.svg dist/nameicon.svg || true
+          touch dist/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+

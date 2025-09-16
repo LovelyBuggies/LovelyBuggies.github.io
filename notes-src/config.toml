@@ -18,7 +18,7 @@ theme = "book"
   BookDateFormat = "Jan 2, 2006"
   BookSection = "docs"
   # Use custom favicon for the site
-  BookFavicon = "myicon.svg"
+  BookFavicon = "nameicon.svg"
   # Show page last modified time (needs enableGitInfo)
   ShowLastMod = true
   # Enable KaTeX for math rendering across the site
