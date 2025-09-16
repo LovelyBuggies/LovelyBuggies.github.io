@@ -77,3 +77,12 @@ h2#references {
   font-size: 0.9375rem; /* 1pt smaller than 16px base */
 }
 .book-hint.info p { margin: 0.25rem 0; }
+
+/* Figures: avoid cropping/zoom; keep natural aspect */
+.markdown figure img {
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+}
