@@ -1,6 +1,8 @@
 // Site-specific CSS overrides
 // Footnote-style hints: smaller font and light gray colors
-.markdown blockquote.book-hint {
+.markdown blockquote.book-hint,
+// Increase specificity to override .book-hint.info/.note/etc from theme
+.markdown blockquote.book-hint[class] {
   // Base body is 1rem (~16px). 2pt ≈ 2.666px, so ~0.833rem
   font-size: 0.833rem;
 
