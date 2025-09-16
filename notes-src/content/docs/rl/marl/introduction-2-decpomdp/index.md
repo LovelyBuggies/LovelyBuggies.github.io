@@ -56,7 +56,7 @@ A decentralized control model might be factorized with independent local variabl
 
 #### Complexity
 
-The worst-case complexity of finite-horizon problems is: (by {{< cite "DecPOMDPsurvey" >}})
+The worst-case complexity of finite-horizon problems is: (by Amato et al., 2013)
 
 <div id="tab:complexity">
 
@@ -186,7 +186,7 @@ Memory-bounded dynamic programming (MBDP) techniques mitigate the scalability pr
 
 #### JESP
 
-The joint equilibrium search for policies (JESP) {{< cite "nair2003taming" >}} uses alternating best response. Initial policies are generated for all agents, and then all but one is held fixed. The remaining agent can then calculate the best response (local optimum) to the fixed policies. The policy of this agent becomes fixed and the next agent calculates the best response. These best-response calculations to fixed other agent policies continue until no agent changes its policy.
+The joint equilibrium search for policies (JESP) Nair et al., 2003 uses alternating best response. Initial policies are generated for all agents, and then all but one is held fixed. The remaining agent can then calculate the best response (local optimum) to the fixed policies. The policy of this agent becomes fixed and the next agent calculates the best response. These best-response calculations to fixed other agent policies continue until no agent changes its policy.
 
 # Complexity Classes
 
