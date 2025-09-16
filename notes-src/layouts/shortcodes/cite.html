@@ -26,6 +26,46 @@ Effect:
   {{- .Page.Scratch.Set "cites" (append $cites $id) -}}
 {{- end -}}
 
+{{- /* Build automatic text if not provided, using authors/year if available */ -}}
+{{- if not $text -}}
+  {{- $refsPage := .Page.Params.references | default dict -}}
+  {{- $refsSite := (index .Site.Data "references") | default dict -}}
+  {{- $entry := or (index $refsPage $id) (index $refsSite $id) -}}
+  {{- if $entry -}}
+    {{- $authors := (index $entry "authors") | default (index $entry "author") | default "" -}}
+    {{- $std := replaceRE `\s+and\s+` ";" $authors -}}
+    {{- $partsRaw := split $std ";" -}}
+    {{- $.Scratch.Set "names" (slice) -}}
+    {{- range $partsRaw -}}
+      {{- $t := . | trim -}}
+      {{- if $t -}}
+        {{- if in $t "," -}}
+          {{- $.Scratch.Add "names" (slice (index (split $t ",") 0 | trim)) -}}
+        {{- else -}}
+          {{- $w := split $t " " -}}
+          {{- $.Scratch.Add "names" (slice (index $w (sub (len $w) 1))) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $names := $.Scratch.Get "names" | default (slice) -}}
+    {{- $n := len $names -}}
+    {{- $label := $id -}}
+    {{- if eq $n 1 -}}
+      {{- $label = index $names 0 -}}
+    {{- else if eq $n 2 -}}
+      {{- $label = printf "%s and %s" (index $names 0) (index $names 1) -}}
+    {{- else if gt $n 2 -}}
+      {{- $label = printf "%s et al." (index $names 0) -}}
+    {{- end -}}
+    {{- $year := printf "%v" ((index $entry "year") | default "") -}}
+    {{- if $year -}}
+      {{- $text = printf "%s, %s" $label $year -}}
+    {{- else -}}
+      {{- $text = $label -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 {{- /* Use a URL-safe key for anchor ids */ -}}
 {{- $key := $id | urlize -}}
 <a class="citation" href="#ref-{{ $key }}" id="cite-{{ $key }}" data-cite-id="{{ $id }}">{{ $text }}</a>

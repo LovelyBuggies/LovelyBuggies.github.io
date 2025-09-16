@@ -1,0 +1,73 @@
+{{- /*
+Usage:
+  {{< cites ids="key1, key2, key3" >}}
+  or positional: {{< cites "key1" "key2" >}}
+Options:
+  mode="textual"  -> outputs textual form: Wang et al. (2024); Doe and Roe (2023)
+Default (parenthetical): (Wang et al., 2024; Doe and Roe, 2023)
+*/ -}}
+{{- $ids := slice -}}
+{{- with .Get "ids" -}}
+  {{- $norm := replaceRE `[,;\s]+` "," . -}}
+  {{- $ids = split $norm "," -}}
+{{- end -}}
+{{- if eq (len $ids) 0 -}}
+  {{- range seq 0 19 -}}
+    {{- $v := $.Get . -}}
+    {{- if $v -}}
+      {{- $ids = append $ids $v -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- /* Build each citation text and track order */ -}}
+{{- $.Scratch.Set "parts" (slice) -}}
+{{- range $ids -}}
+  {{- $id := . | trim -}}
+  {{- if not $id }}{{ continue }}{{ end -}}
+  {{- $cites := $.Page.Scratch.Get "cites" | default (slice) -}}
+  {{- $seen := false -}}
+  {{- range $cites }}{{ if eq . $id }}{{ $seen = true }}{{ end }}{{ end -}}
+  {{- if not $seen -}}{{ $.Page.Scratch.Set "cites" (append $cites $id) }}{{- end -}}
+
+  {{- $refsPage := $.Page.Params.references | default dict -}}
+  {{- $refsSite := (index $.Site.Data "references") | default dict -}}
+  {{- $entry := or (index $refsPage $id) (index $refsSite $id) -}}
+  {{- $authors := (index $entry "authors") | default (index $entry "author") | default "" -}}
+  {{- $std := replaceRE `\s+and\s+` ";" $authors -}}
+  {{- $partsRaw := split $std ";" -}}
+  {{- $.Scratch.Set "names" (slice) -}}
+  {{- range $partsRaw -}}
+    {{- $t := . | trim -}}
+    {{- if $t -}}
+      {{- if in $t "," -}}
+        {{- $.Scratch.Add "names" (slice (index (split $t ",") 0 | trim)) -}}
+      {{- else -}}
+        {{- $w := split $t " " -}}
+        {{- $.Scratch.Add "names" (slice (index $w (sub (len $w) 1))) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $names := $.Scratch.Get "names" | default (slice) -}}
+  {{- $n := len $names -}}
+  {{- $label := $id -}}
+  {{- if eq $n 1 -}}
+    {{- $label = index $names 0 -}}
+  {{- else if eq $n 2 -}}
+    {{- $label = printf "%s and %s" (index $names 0) (index $names 1) -}}
+  {{- else if gt $n 2 -}}
+    {{- $label = printf "%s et al." (index $names 0) -}}
+  {{- end -}}
+  {{- $year := printf "%v" ((index $entry "year") | default "") -}}
+  {{- $key := $id | urlize -}}
+  {{- $text := cond (ne $year "") (printf "%s, %s" $label $year) $label -}}
+  {{- $.Scratch.Add "parts" (slice (printf "<a class=\"citation\" href=\"#ref-%s\" id=\"cite-%s\" data-cite-id=\"%s\">%s</a>" $key $key $id $text)) -}}
+{{- end -}}
+
+{{- $mode := .Get "mode" | default "paren" -}}
+{{- $joined := (delimit ($.Scratch.Get "parts") "; ") -}}
+{{- if eq $mode "textual" -}}
+  {{- $joined | safeHTML -}}
+{{- else -}}
+  ({{ $joined | safeHTML }})
+{{- end -}}
+
