@@ -33,11 +33,21 @@ math: true
 
 </div>
 
-In Dec-POMDP, the Bellman recursive formulation of the history V-function is, $$\label{eq:decpomdp-V}
+In Dec-POMDP, the Bellman recursive formulation of the history V-function is,
+
+$$\label{eq:decpomdp-V}
 \begin{aligned}
     V^{\boldsymbol{\pi}}(\boldsymbol{h}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\left[R(s, \boldsymbol{\pi}(\boldsymbol{h}))+\gamma \sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h})) \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') V^{\boldsymbol{\pi}}(\boldsymbol{h}') \right]\\
     &\equiv R(\boldsymbol{h}, \boldsymbol{\pi})+\gamma\sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{h}, \boldsymbol{\pi}) V^{\boldsymbol{\pi}}(\boldsymbol{h}'),
-\end{aligned}$$ the Bellman recursive formulation of the **history-policy** Q-function is,[^2] $$\label{eq:decpomdp-q}
+\end{aligned}$$
+
+{{< hint info >}}
+The definition of the value function is flexible: it may be based on the value of a state, a belief state, an observation, a state history, an observation history, a single action (single-step policy), a full policy (action history), observation–action history, or combinations of these.
+{{< /hint >}}
+
+the Bellman recursive formulation of the **history-policy** Q-function is,
+
+$$\label{eq:decpomdp-q}
 \small
 \begin{aligned}
     Q^{\boldsymbol{\pi}}(\boldsymbol{h}, \boldsymbol{\pi}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\left[R(s, \boldsymbol{\pi}(\boldsymbol{h}))+\gamma\sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h})) \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') Q^{\boldsymbol{\pi}}(\boldsymbol{h}', \boldsymbol{\pi}(\boldsymbol{h}')) \right]\\
@@ -123,7 +133,11 @@ The worst-case complexity of finite-horizon problems is: (by Amato et al., 2013)
 
 ## Policy Structure
 
-Calculating a shared belief state in Dec-POMDP is hard, because the policy can not be recovered from the value function. The policies are normally maintained in a policy tree or FSC. Policies can be extracted by starting at the root (or initial node) and continuing to the subtree (or next node) based on observations, and can be evaluated by summing the rewards weighted by transition probability.[^3]
+Calculating a shared belief state in Dec-POMDP is hard, because the policy can not be recovered from the value function. The policies are normally maintained in a policy tree or FSC. Policies can be extracted by starting at the root (or initial node) and continuing to the subtree (or next node) based on observations, and can be evaluated by summing the rewards weighted by transition probability.
+
+{{< hint info >}}
+Policy can also be represented by other forms, like approximating functions (Sutton and Barto 2018), neural networks, diffusion models (Chi et al. 2024), etc.
+{{< /hint >}}
 
 <figure>
 <figure>
@@ -211,11 +225,7 @@ Assuming $c$ and $k$ are constants, $\mathcal{C}$ is a complexity class, the tab
 
 
 
-[^1]: This introduction is **heavily** based on (Amato et al. 2013).
-
-[^2]: The definition of the value function is pretty flexible, which can be based on various aspects, such as the value of a state, a belief state, an observation, a state history, an observation history, an action (single-step policy), a policy (action history), observation-action history, and their combinations.
-
-[^3]: Policy can also be represented by other forms, like approximating functions (Sutton and Barto 2018), neural networks, diffusion models (Chi et al. 2024), etc.
+<!-- footnotes converted to hints above -->
 
 <div id="ref-DecPOMDPsurvey" class="csl-entry">
 

@@ -8,7 +8,13 @@ weight: 11
 
 # Policy Gradient (PG)
 
-Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$,[^1] $$\label{eq:pg}
+Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$.
+
+{{< hint info >}}
+All methods following this schema are PG, whether or not they also learn an approximate value function.
+{{< /hint >}}
+
+$$\label{eq:pg}
     \theta^{(i+1)} \leftarrow \theta^{(i)} + \alpha\nabla J(\theta^{(i)}).$$ There are 2 main advantages of PG methods,
 
 - Approximating policy can approach a deterministic policy, whereas $\epsilon$-greedy always has probability of selecting a random action;
@@ -19,7 +25,11 @@ Since the major purpose of this article is to introduce PPO methods from PG, we 
 
 ## PG Theorem
 
-An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="ref" data-reference="eq:pg">[eq:pg]</a> is to replace $J(\theta)$ with $V^{\pi_{\theta}} (s_0)$.[^2] However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
+An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="ref" data-reference="eq:pg">[eq:pg]</a> is to replace $J(\theta)$ with $V^{\pi_{\theta}} (s_0)$. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
+
+{{< hint info >}}
+Notation: we omit $\theta$ in subscripts/superscripts and gradients, assuming $\pi$ depends on $\theta$ and all gradients are w.r.t. $\theta$; i.e., $V^{\pi}\equiv V^{\pi_{\theta}}$, $Q^{\pi}\equiv Q^{\pi_{\theta}}$ and $\nabla\equiv\nabla_{\theta}$.
+{{< /hint >}}
 
 <div id="them:PG" class="theorem">
 
@@ -120,7 +130,11 @@ J^\text{IPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{i, \text{old}}}} \left[ \min 
 J^\text{MAPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right] \, .
 {{< /katex >}}
 
-Note that there are some other instantiations of IPPO, but not all of them are vulnerable to non-convergence issues. The one with full actor critic parameter or information sharing can be regarded as a centralized method. Besides, for cases where a general solution is still intangible even with parameter sharing (e.g. the exclusive game), heterogeneous-agent PPO allows the agents to take turns learning by using others’ information, which can work well with strong assumptions.[^3]
+Note that there are some other instantiations of IPPO, but not all of them are vulnerable to non-convergence issues. The one with full actor critic parameter or information sharing can be regarded as a centralized method. Besides, for cases where a general solution is still intangible even with parameter sharing (e.g. the exclusive game), heterogeneous-agent PPO allows the agents to take turns learning by using others’ information, which can work well with strong assumptions.
+
+{{< hint info >}}
+A great example is PettingZoo’s agent cycle and parallel environments.
+{{< /hint >}}
 
 ## Group Relative Policy Optimization (GRPO)
 
@@ -134,8 +148,4 @@ J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} 
 
 
 
-[^1]: All methods following this schema are PG, whether or not they also learn an approximate value function.
-
-[^2]: To simplify the notation, we omit $\theta$ in the subscripts, superscripts, and gradient operators, assuming $\pi$ is a function of $\theta$ and all gradients are implicit with respect to $\theta$, i.e., $V^{\pi}\equiv V^{\pi_{\theta}}$, $Q^{\pi}\equiv Q^{\pi_{\theta}}$ and $\nabla\equiv\nabla_{\theta}$.
-
-[^3]: A great example is PettingZoo’s agent cycle and parallel environments.
+<!-- footnotes converted to hints above -->

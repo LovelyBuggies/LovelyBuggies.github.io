@@ -10,23 +10,39 @@ weight: 12
 
 ## Definition
 
-The Bellman Equation and optimal Bellman Equation for V-values are, (Sutton and Barto 2018),[^1] $$\begin{aligned}
-    V^\pi(s) &\doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right], \\
-    &= \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right],  \\
-    V^*(s) &\doteq \max_{a} \left[ Q^*(s, a) \right], \\
-    &= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right].
-\end{aligned}$$ and the Bellman Equation and optimal Bellman Equation for Q-values are, $$\begin{aligned}
-    Q^\pi(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right], \\
-    &= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right]. \\
-    Q^*(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right], \\
-    &= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right]. 
-\end{aligned}$$ where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. $$\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).$$ Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are, $$\begin{aligned}
-    (\mathcal{T}^\pi\circ V^\pi)(s) &\doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right], \\
-    (\mathcal{T}^*\circ V^\pi)(s) &\doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]. 
-\end{aligned}$$ The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are, $$\begin{aligned}
-    (\mathcal{T}^\pi\circ Q^\pi)(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \mathbb{E}_{a' \sim \pi(a'|s')} Q^\pi(s', a') \right],  \\
-    (\mathcal{T}^*\circ Q^\pi)(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right].
-\end{aligned}$$
+The Bellman Equation and optimal Bellman Equation for V-values are, (Sutton and Barto 2018).
+{{< hint info >}}
+Note on determinism: The deterministic form is $V(s) = \max_{a} \{ R(s, a) + \gamma V(s')\}$, where $s'\gets T(s,a)$.
+{{< /hint >}}
+
+$$
+V^\pi(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
+= \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
+V^*(s) \doteq \max_{a} \left[ Q^*(s, a) \right] \\
+= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right]
+$$
+
+and the Bellman Equation and optimal Bellman Equation for Q-values are,
+
+$$
+Q^\pi(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
+= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right] \\
+Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right] \\
+= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right]
+$$
+
+where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. $$\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).$$ Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
+$$
+(\mathcal{T}^\pi\circ V^\pi)(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
+(\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
+$$
+
+The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are,
+
+$$
+(\mathcal{T}^\pi\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \mathbb{E}_{a' \sim \pi(a'|s')} Q^\pi(s', a') \right] \\
+(\mathcal{T}^*\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right]
+$$
 
 #### Curse of Dimension
 
@@ -47,26 +63,33 @@ Why do we mostly use MDP (where the future evolution is independent of its histo
 
 <div id="them:fixpoint" class="corollary">
 
-**Corollary 1** (Fixed-point Iteration). *For any $Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, after $k\to \infty$ iterations of Bellman transformation, $Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0$, or $Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0$, according to Banach’s Fixed Point Theorem, $$\begin{gathered}
-        Q^{\pi, \infty}=Q^{*, \infty}=Q^*, \\ \text{which \textbf{uniquely} satisfies } \mathcal{T}^\pi \circ Q^*  = Q^*, \text{ or } \mathcal{T}^* \circ Q^*  = Q^*.
-    \end{gathered}$$*
+**Corollary 1** (Fixed-point Iteration). *For any $Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, after $k\to \infty$ iterations of Bellman transformation, $Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0$, or $Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0$, according to Banach’s Fixed Point Theorem:*
+
+$$
+Q^{\pi, \infty}=Q^{*, \infty}=Q^*, \\
+\text{which \textbf{uniquely} satisfies } \mathcal{T}^\pi \circ Q^*  = Q^*, \text{ or } \mathcal{T}^* \circ Q^*  = Q^*.
+$$
 
 </div>
 
 <div id="them:fundamental" class="theorem">
 
-**Theorem 1** (Fundamental theorem). *Any memoryless policy that is greedy to $Q^*$ (**deterministically** maximizes) is optimal (Szepesvári 2010), $$\begin{aligned}
-        \tilde{\pi}^{*} \doteq \mathop{\mathrm{argmax}}_aQ^* = \pi^*.
-    \end{aligned}$$*
+**Theorem 1** (Fundamental theorem). *Any memoryless policy that is greedy to $Q^*$ (**deterministically** maximizes) is optimal (Szepesvári 2010):*
+
+$$
+\tilde{\pi}^{*} \doteq \mathop{\mathrm{argmax}}_a Q^* = \pi^*.
+$$
 
 </div>
 
 <div class="proposition">
 
-**Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values $Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, $$\begin{aligned}
-        \left (Q\leqslant Q'\right ) &\Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ),\\
-        \left (Q\leqslant Q'\right )&\Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right ).
-    \end{aligned}$$*
+**Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values $Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$:*
+
+$$
+\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) \\
+\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right )
+$$
 
 </div>
 
