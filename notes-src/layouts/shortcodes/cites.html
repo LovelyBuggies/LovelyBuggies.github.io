@@ -11,23 +11,22 @@ Default (parenthetical): (Wang et al., 2024; Doe and Roe, 2023)
   {{- $norm := replaceRE `[,;\s]+` "," . -}}
   {{- $ids = split $norm "," -}}
 {{- end -}}
-{{- if eq (len $ids) 0 -}}
-  {{- range seq 0 19 -}}
-    {{- $v := $.Get . -}}
-    {{- if $v -}}
-      {{- $ids = append $ids $v -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
 {{- /* Build each citation text and track order */ -}}
 {{- $.Scratch.Set "parts" (slice) -}}
 {{- range $ids -}}
-  {{- $id := . | trim -}}
+  {{- $id := . | strings.Trim " " -}}
   {{- if not $id }}{{ continue }}{{ end -}}
-  {{- $cites := $.Page.Scratch.Get "cites" | default (slice) -}}
+  {{- $existing := $.Page.Scratch.Get "cites" -}}
+  {{- $existingStr := printf "%v" (default "" $existing) -}}
   {{- $seen := false -}}
-  {{- range $cites }}{{ if eq . $id }}{{ $seen = true }}{{ end }}{{ end -}}
-  {{- if not $seen -}}{{ $.Page.Scratch.Set "cites" (append $cites $id) }}{{- end -}}
+  {{- range (split $existingStr ",") }}{{ if eq . $id }}{{ $seen = true }}{{ end }}{{ end -}}
+  {{- if not $seen -}}
+    {{- if $existingStr -}}
+      {{- $.Page.Scratch.Set "cites" (print $existingStr "," $id) -}}
+    {{- else -}}
+      {{- $.Page.Scratch.Set "cites" $id -}}
+    {{- end -}}
+  {{- end -}}
 
   {{- $refsPage := $.Page.Params.references | default dict -}}
   {{- $refsSite := (index $.Site.Data "references") | default dict -}}
@@ -37,10 +36,10 @@ Default (parenthetical): (Wang et al., 2024; Doe and Roe, 2023)
   {{- $partsRaw := split $std ";" -}}
   {{- $.Scratch.Set "names" (slice) -}}
   {{- range $partsRaw -}}
-    {{- $t := . | trim -}}
+    {{- $t := . | strings.Trim " " -}}
     {{- if $t -}}
       {{- if in $t "," -}}
-        {{- $.Scratch.Add "names" (slice (index (split $t ",") 0 | trim)) -}}
+        {{- $.Scratch.Add "names" (slice (index (split $t ",") 0 | strings.Trim " ")) -}}
       {{- else -}}
         {{- $w := split $t " " -}}
         {{- $.Scratch.Add "names" (slice (index $w (sub (len $w) 1))) -}}
@@ -70,4 +69,3 @@ Default (parenthetical): (Wang et al., 2024; Doe and Roe, 2023)
 {{- else -}}
   ({{ $joined | safeHTML }})
 {{- end -}}
-

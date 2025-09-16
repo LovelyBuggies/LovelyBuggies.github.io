@@ -71,7 +71,7 @@ In this section, we introduce standard PPO and it variants in different domains.
 
 ## Clip-PPO
 
-(Schulman et al. 2017) proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate $\hat{A}^{\pi_{\theta_{\text{old}}}}$ to reduce the variance of policy gradient methods and maintain low bias (Schulman et al. 2015), $$\label{equ:Clip-PPO}
+{{< cites ids="schulman2017proximalpolicyoptimizationalgorithms" >}} proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate $\hat{A}^{\pi_{\theta_{\text{old}}}}$ to reduce the variance of policy gradient methods and maintain low bias {{< cites ids="schulman2015gae" >}}, $$\label{equ:Clip-PPO}
 J^{\text{CLIP}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right],$$ where $\hat{A}^\text{GAE}_t = \sum_{l=0}^{\infty} (\gamma \lambda)^l \delta_{t+l}$, $\delta$ is the TD error, and $\lambda$ is a hyperparameter controlling the trade-off between bias and variance. Note that the clipping could also occur in the value network to stabilize the training process.
 
 The objective function can be augmented with an entropy term to encourage exploration, $$\label{equ:PPO}
@@ -89,7 +89,7 @@ The objective function can be augmented with an entropy term to encourage explor
 
 ## KL-PPO
 
-Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration (Schulman et al. 2017). $$\label{alg:TRPO}
+Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration {{< cites ids="schulman2017proximalpolicyoptimizationalgorithms" >}}. $$\label{alg:TRPO}
 \begin{gathered}
     J^{\text{KL}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a)-c
      \mathcal{D}_\text{KL}(\pi_{\theta_{\text{old}}} \| \pi_{\theta}) \right],
@@ -103,7 +103,7 @@ Sometimes, the KL-penalty can be combined with policy clipping to achieve better
 
 ## Multi-Agent PPO
 
-In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). In IPPO, each agent has its own actor and critic and learns independently according to a joint reward (Witt et al. 2020). Like IPPO, MAPPO employs weight sharing between agents’ critics, and the advantage in MAPPO is estimated through joint GAE (Yu et al. 2022). $$\label{equ:MAPPO}
+In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). In IPPO, each agent has its own actor and critic and learns independently according to a joint reward {{< cites ids="ippo" >}}. Like IPPO, MAPPO employs weight sharing between agents’ critics, and the advantage in MAPPO is estimated through joint GAE {{< cites ids="mappo" >}}. $$\label{equ:MAPPO}
 \small
 \begin{gathered}
     J^\text{IPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{i, \text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{i, \text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\pi_{\theta_{i,\text{old}}}}(s, a) \right) \right],\\
@@ -122,39 +122,7 @@ J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} 
 <p><img src="grpo.png" alt="image" /> <span id="fig:grpo" label="fig:grpo"></span></p>
 </figure>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-schulman2015gae" class="csl-entry">
-
-Schulman, John, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. 2015. “High-Dimensional Continuous Control Using Generalized Advantage Estimation.” *arXiv Preprint arXiv:1506.02438*. <https://arxiv.org/abs/1506.02438>.
-
-</div>
-
-<div id="ref-schulman2017proximalpolicyoptimizationalgorithms" class="csl-entry">
-
-Schulman, John, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. 2017. “Proximal Policy Optimization Algorithms.” <https://arxiv.org/abs/1707.06347>.
-
-</div>
-
-<div id="ref-ippo" class="csl-entry">
-
-Witt, Christian Schroeder de, Tarun Gupta, Denys Makoviichuk, Viktor Makoviychuk, Philip H. S. Torr, Mingfei Sun, and Shimon Whiteson. 2020. “Is Independent Learning All You Need in the StarCraft Multi-Agent Challenge?” <https://arxiv.org/abs/2011.09533>.
-
-</div>
-
-<div id="ref-mappo" class="csl-entry">
-
-Yu, Chao, Akash Velu, Eugene Vinitsky, Jiaxuan Gao, Yu Wang, Alexandre Bayen, and Yi Wu. 2022. “The Surprising Effectiveness of PPO in Cooperative, Multi-Agent Games.” <https://arxiv.org/abs/2103.01955>.
-
-</div>
-
-<div id="ref-deepseek-math" class="csl-entry">
-
-Zhihong Shao, Qihao Zhu, Peiyi Wang. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” *CoRR*. <https://arxiv.org/abs/2402.03300>.
-
-</div>
-
-</div>
 
 [^1]: All methods following this schema are PG, whether or not they also learn an approximate value function.
 

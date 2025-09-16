@@ -17,13 +17,18 @@ Effect:
 {{- end -}}
 
 {{- /* Track unique citation order per page */ -}}
-{{- $cites := .Page.Scratch.Get "cites" | default (slice) -}}
+{{- $existing := .Page.Scratch.Get "cites" -}}
+{{- $existingStr := printf "%v" (default "" $existing) -}}
 {{- $seen := false -}}
-{{- range $cites }}
+{{- range (split $existingStr ",") -}}
   {{- if eq . $id }}{{ $seen = true }}{{ end -}}
 {{- end -}}
 {{- if not $seen -}}
-  {{- .Page.Scratch.Set "cites" (append $cites $id) -}}
+  {{- if $existingStr -}}
+    {{- .Page.Scratch.Set "cites" (print $existingStr "," $id) -}}
+  {{- else -}}
+    {{- .Page.Scratch.Set "cites" $id -}}
+  {{- end -}}
 {{- end -}}
 
 {{- /* Build automatic text if not provided, using authors/year if available */ -}}
@@ -37,10 +42,10 @@ Effect:
     {{- $partsRaw := split $std ";" -}}
     {{- $.Scratch.Set "names" (slice) -}}
     {{- range $partsRaw -}}
-      {{- $t := . | trim -}}
+      {{- $t := . | strings.Trim " " -}}
       {{- if $t -}}
         {{- if in $t "," -}}
-          {{- $.Scratch.Add "names" (slice (index (split $t ",") 0 | trim)) -}}
+          {{- $.Scratch.Add "names" (slice (index (split $t ",") 0 | strings.Trim " ")) -}}
         {{- else -}}
           {{- $w := split $t " " -}}
           {{- $.Scratch.Add "names" (slice (index $w (sub (len $w) 1))) -}}

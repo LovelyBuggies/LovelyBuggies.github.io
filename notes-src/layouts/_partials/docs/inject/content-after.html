@@ -3,7 +3,14 @@ Auto-append References section after page content if citations were used.
 Looks up full entries from .Params.references keyed by citation id.
 Each entry may be a string or a map with fields: text (required), url (optional).
 */ -}}
-{{- $cites := .Page.Scratch.Get "cites" | default (slice) -}}
+{{- $citesVal := .Page.Scratch.Get "cites" -}}
+{{- $citesType := printf "%T" $citesVal -}}
+{{- $cites := slice -}}
+{{- if or (eq $citesType "[]interface {}") (eq $citesType "[]string") -}}
+  {{- $cites = $citesVal -}}
+{{- else if eq $citesType "string" -}}
+  {{- $cites = (split (printf "%v" $citesVal) ",") -}}
+{{- end -}}
 {{- $refsPage := .Params.references | default dict -}}
 {{- $hasPageRefs := gt (len $refsPage) 0 -}}
 {{- if or (gt (len $cites) 0) $hasPageRefs -}}
