@@ -210,6 +210,13 @@ Assuming $c$ and $k$ are constants, $\mathcal{C}$ is a complexity class, the tab
 
 
 
+
+[^1]: This introduction is **heavily** based on (Amato et al. 2013).
+
+[^2]: The definition of the value function is pretty flexible, which can be based on various aspects, such as the value of a state, a belief state, an observation, a state history, an observation history, an action (single-step policy), a policy (action history), observation-action history, and their combinations.
+
+[^3]: Policy can also be represented by other forms, like approximating functions (Sutton and Barto 2018), neural networks, diffusion models (Chi et al. 2024), etc.
+
 <div id="ref-DecPOMDPsurvey" class="csl-entry">
 
 Amato, Christopher, Girish Chowdhary, Alborz Geramifard, N. Kemal Üre, and Mykel J. Kochenderfer. 2013. “Decentralized Control of Partially Observable Markov Decision Processes.” In *52nd IEEE Conference on Decision and Control*, 2398–2405. <https://doi.org/10.1109/CDC.2013.6760239>.
@@ -313,9 +320,3 @@ Wu, F., S. Zilberstein, and X. Chen. 2010. “Point-Based Policy Generation for 
 </div>
 
 </div>
-
-[^1]: This introduction is **heavily** based on (Amato et al. 2013).
-
-[^2]: The definition of the value function is pretty flexible, which can be based on various aspects, such as the value of a state, a belief state, an observation, a state history, an observation history, an action (single-step policy), a policy (action history), observation-action history, and their combinations.
-
-[^3]: Policy can also be represented by other forms, like approximating functions (Sutton and Barto 2018), neural networks, diffusion models (Chi et al. 2024), etc.
