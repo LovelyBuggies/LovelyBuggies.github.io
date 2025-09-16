@@ -28,14 +28,20 @@ An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="re
 
 </div>
 
-To sample with expectation equals or approximates the expression Equ. <a href="#equ:pgthem" data-reference-type="ref" data-reference="equ:pgthem">[equ:pgthem]</a>, $$\label{equ:pgtheorem-sample}
-    \begin{aligned}
-        \nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a Q^\pi (s,a) \nabla\pi(a|s) \\
-        &= \mathbb{E}_{d^\pi}\left[\sum_a Q^\pi (s,a) \nabla\pi(a|s) \right] \\
-        &= \mathbb{E}_{d^\pi}\left[\sum_a \pi(a|s) Q^\pi (s,a) \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
-        &= \mathbb{E}_{\pi}\left[Q^\pi (s,a) \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
-        &= \mathbb{E}_{\pi}\left[Q^\pi (s,a) \nabla\ln\pi(a|s) \right].
-    \end{aligned}$$ The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy parameterization appears, which can be omitted $L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]$ since it will be automatically recovered when differentiating.
+To sample with expectation equals or approximates the expression Equ. <a href="#equ:pgthem" data-reference-type="ref" data-reference="equ:pgthem">[equ:pgthem]</a>,
+
+\\[
+\label{equ:pgtheorem-sample}
+\begin{aligned}
+    \nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a Q^\pi (s,a) \nabla\pi(a|s) \\
+    &= \mathbb{E}_{d^\pi}\left[\sum_a Q^\pi (s,a) \nabla\pi(a|s) \right] \\
+    &= \mathbb{E}_{d^\pi}\left[\sum_a \pi(a|s) Q^\pi (s,a) \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
+    &= \mathbb{E}_{\pi}\left[Q^\pi (s,a) \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
+    &= \mathbb{E}_{\pi}\left[Q^\pi (s,a) \nabla\ln\pi(a|s) \right].
+\end{aligned}
+\\]
+
+The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy parameterization appears, which can be omitted $L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]$ since it will be automatically recovered when differentiating.
 
 ## PG with Baseline
 
@@ -55,15 +61,19 @@ According to the Theorem <a href="#them:PG-baseline" data-reference-type="ref" 
 
 Off-policy sampling reuses any past episodes, which has a higher efficiency and brings more exploration. To make PG off-policy, we adjust it with an importance weight $\frac{\pi(a|s)}{\beta(a|s)}$ to correct the mismatch between behavior and target policies.
 
-$$\label{equ:pgthem-off-policy}
-        \begin{aligned}  
-            \nabla J(\theta) &=\nabla \left(\sum_s d^\beta(s) V^\pi(s)\right)\\
-            &=\nabla\left(\sum_s d^\beta(s) \sum_a \pi(a|s) Q^\pi(s,a)\right)\\
-            &=\sum_s d^\beta(s) \sum_a (\nabla \pi(a|s) Q^\pi(s,a)+\pi(a|s) \nabla Q^\pi(s,a))\\
-            &\stackrel{\text{(i)}}{\approx} \sum_s d^\beta(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s) \\
-            &=\mathbb{E}_{d^\beta}\left[\sum_a \beta(a|s) \frac{\pi(a|s)}{\beta(a|s)}  Q^\pi(s,a) \frac{\nabla \pi(a|s)}{\pi(a|s)}\right]\\
-            &=\mathbb{E}_{\beta}\left[\frac{\pi(a|s)}{\beta(a|s)}  Q^\pi(s,a) \nabla\ln \pi(a|s)\right],
-        \end{aligned}$$ where $d^\beta(s)$ is the stationary distribution of the behavior policy $\beta$, and $Q^\pi$ is the Q-function estimated regard to the target policy $\pi$. Because of hard computation in reality (i), we ignore the approximation term $\nabla Q^\pi(s,a)$.
+\\[
+\label{equ:pgthem-off-policy}
+\begin{aligned}
+    \nabla J(\theta) &=\nabla \left(\sum_s d^\beta(s) V^\pi(s)\right) \\
+    &=\nabla\left(\sum_s d^\beta(s) \sum_a \pi(a|s) Q^\pi(s,a)\right) \\
+    &=\sum_s d^\beta(s) \sum_a (\nabla \pi(a|s) Q^\pi(s,a)+\pi(a|s) \nabla Q^\pi(s,a)) \\
+    &\stackrel{\text{(i)}}{\approx} \sum_s d^\beta(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s) \\
+    &=\mathbb{E}_{d^\beta}\left[\sum_a \beta(a|s) \frac{\pi(a|s)}{\beta(a|s)}  Q^\pi(s,a) \frac{\nabla \pi(a|s)}{\pi(a|s)}\right] \\
+    &=\mathbb{E}_{\beta}\left[\frac{\pi(a|s)}{\beta(a|s)}  Q^\pi(s,a) \nabla\ln \pi(a|s)\right],
+\end{aligned}
+\\]
+
+where $d^\beta(s)$ is the stationary distribution of the behavior policy $\beta$, and $Q^\pi$ is the Q-function estimated regard to the target policy $\pi$. Because of hard computation in reality (i), we ignore the approximation term $\nabla Q^\pi(s,a)$.
 
 # Proximal Policy Optimization (PPO)
 
