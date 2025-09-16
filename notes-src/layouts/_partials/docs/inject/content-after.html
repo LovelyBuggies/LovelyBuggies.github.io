@@ -1,0 +1,35 @@
+{{- /*
+Auto-append References section after page content if citations were used.
+Looks up full entries from .Params.references keyed by citation id.
+Each entry may be a string or a map with fields: text (required), url (optional).
+*/ -}}
+{{- $cites := .Page.Scratch.Get "cites" | default (slice) -}}
+{{- if gt (len $cites) 0 -}}
+  <hr>
+  <h2 id="references">References</h2>
+  <ol class="references-list">
+  {{- $refs := .Params.references | default dict -}}
+  {{- range $cites -}}
+    {{- $id := . -}}
+    {{- $entry := index $refs $id -}}
+    {{- $type := printf "%T" $entry -}}
+    {{- $text := $id -}}
+    {{- $url := "" -}}
+    {{- if eq $type "map[string]interface {}" -}}
+      {{- $text = (default $id (index $entry "text")) -}}
+      {{- $url = (default "" (index $entry "url")) -}}
+    {{- else if $entry -}}
+      {{- $text = (printf "%v" $entry) -}}
+    {{- end -}}
+    <li id="ref-{{ $id }}">
+      {{- if $url -}}
+        <a href="{{ $url }}" target="_blank" rel="noopener">{{ $text }}</a>
+      {{- else -}}
+        {{ $text }}
+      {{- end -}}
+      {{- /* Backlink to first in-text citation anchor, if present */ -}}
+      <a class="ref-backlink" href="#cite-{{ $id }}" aria-label="Back to citation">↑</a>
+    </li>
+  {{- end -}}
+  </ol>
+{{- end -}}

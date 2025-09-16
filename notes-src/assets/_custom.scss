@@ -33,3 +33,32 @@
   font-weight: 700;
   color: #000;
 }
+
+/* In-text citations: match sidebar article link color */
+.citation {
+  color: #224b8d;
+  text-decoration: none;
+  cursor: pointer;
+}
+.citation:visited {
+  color: #224b8d;
+}
+.citation:hover {
+  text-decoration: underline;
+}
+
+/* References section styling */
+h2#references {
+  margin-top: 1.5rem;
+}
+.references-list {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+}
+.references-list li {
+  margin: 0.25rem 0;
+}
+.ref-backlink {
+  margin-left: 0.4rem;
+  text-decoration: none;
+}

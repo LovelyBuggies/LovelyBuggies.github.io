@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MARL on LovelyBuggies' Blog</title><link>https://lovelybuggies.github.io/notes/docs/rl/marl/</link><description>Recent content in MARL on LovelyBuggies' Blog</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://lovelybuggies.github.io/notes/docs/rl/marl/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction 2 DecPOMDP</title><link>https://lovelybuggies.github.io/notes/docs/rl/marl/introduction-2-decpomdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/marl/introduction-2-decpomdp/</guid><description>&lt;h1 id="dec-pomdp"&gt;
+ Dec-POMDP
+ 
+ &lt;a class="anchor" href="#dec-pomdp"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;div class="definition"&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;. &lt;em&gt;A Dec-POMDP is a tuple $\langle \mathbb{I}, \mathcal{S}, {\mathbb{A}_i}, T, R, {\mathbb{O}_i}, O, \mathcal{H}, \gamma\rangle$:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\mathbb{I}$ is a finite sets of agents, $|\mathbb{I}|=n$;&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\mathcal{S}$ is a set of states with designated initial state distribution $b^0$;&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\mathbb{A}_i$ is a set of actions for agent $i$ with $\mathbb{A}\doteq \times_i \mathbb{A}_i$ the set of joint actions;&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$T$ is the state transition probability function, $T$: $\mathcal{S} \times \mathbb{A} \times \mathcal{S} \rightarrow [0, 1]$, that specifies the probability of transitioning from state $s \in \mathcal{S}$ to $s&amp;rsquo; \in \mathcal{S}$ when the actions $\boldsymbol{a} \in \mathbb{A}$ are taken by agents (i.e., $T(s, \boldsymbol{a}, s&amp;rsquo;)=P(s&amp;rsquo;|s, \textbf{a})$);&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Optimal Q Value Functions for Dec POMDP</title><link>https://lovelybuggies.github.io/notes/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp/</guid><description>&lt;h1 id="notions"&gt;
+ Notions
+ 
+ &lt;a class="anchor" href="#notions"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th style="text-align: left"&gt;&lt;/th&gt;
+ &lt;th style="text-align: left"&gt;&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$s^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the state at $t$ with problem horizon $h$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$o^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint observation of agents $o^t=\langle o_1^t, \dots, o_n^t \rangle$ at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\mathcal{O}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint observation space&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\vec{\theta}^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint observation-action history until $t$, $\vec{\theta}^t=(o^0, a^0, \dots, o^t)$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\vec{\Theta}^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint history space at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\vec{\Theta}^t_\pi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the set of $\vec{\theta}^t$ consistent with policy $\pi$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\delta^{t}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the decision rule (a temporal structure of policy) at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\delta^{t,*}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal decision rule at $t$ following $\psi^{t-1, *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\delta^{t,\circledast}_\psi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal decision rule at $t$ following $\psi^{t-1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\Delta^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the decision rule space at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\psi^{t}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the past joint policy until $t$, $\psi^{t} = \delta^{[0, t)}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\psi^{t, *}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal past joint policy until $t$, $\psi^{t, *} = \delta^{[0, t), *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\psi^{t, \circledast}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the past joint policy until $t$ with non-optimal $\psi^{t-1}$ and optimal $\delta^{t-1, \circledast}_\psi$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\Psi^{t}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the past joint policy space at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\xi^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the subsequent joint policy from $t$, $\xi^{t} = \delta^{[t, h)}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\xi^{t, *}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal subsequent joint policy from $t$, $\xi^{t} = \delta^{[t, h), *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\xi^{t, \circledast}_\psi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal subsequent joint policy from $t$ following non-optimal $\psi^t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\pi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint pure policy $\pi=\delta^{[0, h)}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\pi^*$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint optimal pure policy $\pi^*=\delta^{[0, h), *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$R(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the immediate reward function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$Q(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the history-policy value function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$Q^*(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal history-policy value function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$Q^\circledast(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the sequentially rational optimal history-policy value function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id="normative-optimal-q-value-function"&gt;
+ Normative Optimal Q-Value Function
+ 
+ &lt;a class="anchor" href="#normative-optimal-q-value-function"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;div id="defn:normative-Q" class="definition"&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;. &lt;em&gt;The optimal Q-value function $Q^&lt;/em&gt;$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{&lt;em&gt;}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, &lt;em&gt;}}, \forall \psi^{t+1}\in(\psi^{t, &lt;em&gt;},\Delta^t)$, is defined as, $$Q^&lt;/em&gt;(\vec{\theta}^t, \psi^{t+1}) = \left{
+\begin{aligned}
+&amp;amp;R(\vec{\theta}^t, \psi^{t+1}), &amp;amp;t=h-1 \
+&amp;amp;R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) Q^&lt;/em&gt;(\vec{\theta}^{t+1}, \pi^&lt;/em&gt;(\vec{\theta}^{t+1})). &amp;amp;0\leqslant t &amp;lt; h-1 \
+\end{aligned}
+\right .\label{eq:normative-Q}$$*&lt;/p&gt;</description></item></channel></rss>

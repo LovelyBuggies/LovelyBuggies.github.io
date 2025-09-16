@@ -1,6 +1,7 @@
 ---
 title: "From PG 2 PPO"
 math: true
+weight: 11
 ---
 
 {{< katex />}}

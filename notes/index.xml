@@ -1,11 +1,231 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Notes</title>
-    <link>http://localhost:1313/notes/</link>
-    <description>Recent content on Notes</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <atom:link href="http://localhost:1313/notes/index.xml" rel="self" type="application/rss+xml" />
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LovelyBuggies' Blog</title><link>https://lovelybuggies.github.io/notes/</link><description>Recent content on LovelyBuggies' Blog</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://lovelybuggies.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>From PG 2 PPO</title><link>https://lovelybuggies.github.io/notes/docs/rl/from-pg-2-ppo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/from-pg-2-ppo/</guid><description>&lt;link rel="stylesheet" href="https://lovelybuggies.github.io/notes/katex/katex.min.css" /&gt;
+&lt;script defer src="https://lovelybuggies.github.io/notes/katex/katex.min.js"&gt;&lt;/script&gt;
+
+ &lt;script defer src="https://lovelybuggies.github.io/notes/katex/auto-render.min.js" onload="renderMathInElement(document.body, {
+ &amp;#34;delimiters&amp;#34;: [
+ {&amp;#34;left&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;display&amp;#34;: true},
+ {&amp;#34;left&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\(&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\)&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\[&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\]&amp;#34;, &amp;#34;display&amp;#34;: true}
+ ]
+}
+);"&gt;&lt;/script&gt;
+
+
+&lt;h1 id="policy-gradient-pg"&gt;
+ Policy Gradient (PG)
+ 
+ &lt;a class="anchor" href="#policy-gradient-pg"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;p&gt;Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$,&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; $$\label{eq:pg}
+\theta^{(i+1)} \leftarrow \theta^{(i)} + \alpha\nabla J(\theta^{(i)}).$$ There are 2 main advantages of PG methods,&lt;/p&gt;</description></item><item><title>Understanding Bellman</title><link>https://lovelybuggies.github.io/notes/docs/rl/understanding-bellman/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/understanding-bellman/</guid><description>&lt;link rel="stylesheet" href="https://lovelybuggies.github.io/notes/katex/katex.min.css" /&gt;
+&lt;script defer src="https://lovelybuggies.github.io/notes/katex/katex.min.js"&gt;&lt;/script&gt;
+
+ &lt;script defer src="https://lovelybuggies.github.io/notes/katex/auto-render.min.js" onload="renderMathInElement(document.body, {
+ &amp;#34;delimiters&amp;#34;: [
+ {&amp;#34;left&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;display&amp;#34;: true},
+ {&amp;#34;left&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\(&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\)&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\[&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\]&amp;#34;, &amp;#34;display&amp;#34;: true}
+ ]
+}
+);"&gt;&lt;/script&gt;
+
+
+&lt;h1 id="bellman-equation-and-operator"&gt;
+ Bellman Equation and Operator
+ 
+ &lt;a class="anchor" href="#bellman-equation-and-operator"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;h2 id="definition"&gt;
+ Definition
+ 
+ &lt;a class="anchor" href="#definition"&gt;#&lt;/a&gt;
+ 
+&lt;/h2&gt;
+&lt;p&gt;The Bellman Equation and optimal Bellman Equation for V-values are, (Sutton and Barto 2018),&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; $$\begin{aligned}
+V^\pi(s) &amp;amp;\doteq \mathbb{E}&lt;em&gt;{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right], \
+&amp;amp;= \mathbb{E}&lt;/em&gt;{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right] \right], \
+V^*(s) &amp;amp;\doteq \max&lt;/em&gt;{a} \left[ Q^&lt;em&gt;(s, a) \right], \
+&amp;amp;= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^&lt;/em&gt;(s&amp;rsquo;)\right] \right].
+\end{aligned}$$ and the Bellman Equation and optimal Bellman Equation for Q-values are, $$\begin{aligned}
+Q^\pi(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right], \
+&amp;amp;= R(s, a) + \gamma \mathbb{E}&lt;/em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[\mathbb{E}&lt;em&gt;{a&amp;rsquo;\sim\pi(a&amp;rsquo;|s&amp;rsquo;)} Q^\pi(s&amp;rsquo;, a&amp;rsquo;)\right]. \
+Q^*(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;/em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[V^&lt;em&gt;(s&amp;rsquo;)\right], \
+&amp;amp;= R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[\max&lt;/em&gt;{a&amp;rsquo;} Q^&lt;/em&gt;(s&amp;rsquo;, a&amp;rsquo;)\right].
+\end{aligned}$$ where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. $$\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}&lt;em&gt;a Q^\pi (s,a).$$ Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are, $$\begin{aligned}
+(\mathcal{T}^\pi\circ V^\pi)(s) &amp;amp;\doteq \mathbb{E}&lt;/em&gt;{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right] \right], \
+(\mathcal{T}^*\circ V^\pi)(s) &amp;amp;\doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}&lt;/em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right] \right].
+\end{aligned}$$ The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are, $$\begin{aligned}
+(\mathcal{T}^\pi\circ Q^\pi)(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[ \mathbb{E}&lt;/em&gt;{a&amp;rsquo; \sim \pi(a&amp;rsquo;|s&amp;rsquo;)} Q^\pi(s&amp;rsquo;, a&amp;rsquo;) \right], \
+(\mathcal{T}^*\circ Q^\pi)(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[ \max&lt;/em&gt;{a&amp;rsquo;} Q^\pi(s&amp;rsquo;, a&amp;rsquo;) \right].
+\end{aligned}$$&lt;/p&gt;</description></item><item><title>Introduction 2 DecPOMDP</title><link>https://lovelybuggies.github.io/notes/docs/rl/marl/introduction-2-decpomdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/marl/introduction-2-decpomdp/</guid><description>&lt;h1 id="dec-pomdp"&gt;
+ Dec-POMDP
+ 
+ &lt;a class="anchor" href="#dec-pomdp"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;div class="definition"&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;. &lt;em&gt;A Dec-POMDP is a tuple $\langle \mathbb{I}, \mathcal{S}, {\mathbb{A}_i}, T, R, {\mathbb{O}_i}, O, \mathcal{H}, \gamma\rangle$:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\mathbb{I}$ is a finite sets of agents, $|\mathbb{I}|=n$;&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\mathcal{S}$ is a set of states with designated initial state distribution $b^0$;&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$\mathbb{A}_i$ is a set of actions for agent $i$ with $\mathbb{A}\doteq \times_i \mathbb{A}_i$ the set of joint actions;&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;$T$ is the state transition probability function, $T$: $\mathcal{S} \times \mathbb{A} \times \mathcal{S} \rightarrow [0, 1]$, that specifies the probability of transitioning from state $s \in \mathcal{S}$ to $s&amp;rsquo; \in \mathcal{S}$ when the actions $\boldsymbol{a} \in \mathbb{A}$ are taken by agents (i.e., $T(s, \boldsymbol{a}, s&amp;rsquo;)=P(s&amp;rsquo;|s, \textbf{a})$);&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Optimal Q Value Functions for Dec POMDP</title><link>https://lovelybuggies.github.io/notes/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/marl/optimal-q-value-functions-for-dec-pomdp/</guid><description>&lt;h1 id="notions"&gt;
+ Notions
+ 
+ &lt;a class="anchor" href="#notions"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th style="text-align: left"&gt;&lt;/th&gt;
+ &lt;th style="text-align: left"&gt;&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$s^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the state at $t$ with problem horizon $h$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$o^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint observation of agents $o^t=\langle o_1^t, \dots, o_n^t \rangle$ at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\mathcal{O}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint observation space&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\vec{\theta}^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint observation-action history until $t$, $\vec{\theta}^t=(o^0, a^0, \dots, o^t)$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\vec{\Theta}^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint history space at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\vec{\Theta}^t_\pi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the set of $\vec{\theta}^t$ consistent with policy $\pi$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\delta^{t}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the decision rule (a temporal structure of policy) at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\delta^{t,*}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal decision rule at $t$ following $\psi^{t-1, *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\delta^{t,\circledast}_\psi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal decision rule at $t$ following $\psi^{t-1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\Delta^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the decision rule space at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\psi^{t}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the past joint policy until $t$, $\psi^{t} = \delta^{[0, t)}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\psi^{t, *}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal past joint policy until $t$, $\psi^{t, *} = \delta^{[0, t), *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\psi^{t, \circledast}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the past joint policy until $t$ with non-optimal $\psi^{t-1}$ and optimal $\delta^{t-1, \circledast}_\psi$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\Psi^{t}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the past joint policy space at $t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\xi^t$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the subsequent joint policy from $t$, $\xi^{t} = \delta^{[t, h)}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\xi^{t, *}$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal subsequent joint policy from $t$, $\xi^{t} = \delta^{[t, h), *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\xi^{t, \circledast}_\psi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal subsequent joint policy from $t$ following non-optimal $\psi^t$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\pi$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint pure policy $\pi=\delta^{[0, h)}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$\pi^*$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the joint optimal pure policy $\pi^*=\delta^{[0, h), *}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$R(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the immediate reward function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$Q(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the history-policy value function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$Q^*(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the optimal history-policy value function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td style="text-align: left"&gt;$Q^\circledast(\vec{\theta}^t, \psi^{t+1})$&lt;/td&gt;
+ &lt;td style="text-align: left"&gt;the sequentially rational optimal history-policy value function following $\psi^{t+1}$&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id="normative-optimal-q-value-function"&gt;
+ Normative Optimal Q-Value Function
+ 
+ &lt;a class="anchor" href="#normative-optimal-q-value-function"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;div id="defn:normative-Q" class="definition"&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;. &lt;em&gt;The optimal Q-value function $Q^&lt;/em&gt;$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{&lt;em&gt;}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, &lt;em&gt;}}, \forall \psi^{t+1}\in(\psi^{t, &lt;em&gt;},\Delta^t)$, is defined as, $$Q^&lt;/em&gt;(\vec{\theta}^t, \psi^{t+1}) = \left{
+\begin{aligned}
+&amp;amp;R(\vec{\theta}^t, \psi^{t+1}), &amp;amp;t=h-1 \
+&amp;amp;R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) Q^&lt;/em&gt;(\vec{\theta}^{t+1}, \pi^&lt;/em&gt;(\vec{\theta}^{t+1})). &amp;amp;0\leqslant t &amp;lt; h-1 \
+\end{aligned}
+\right .\label{eq:normative-Q}$$*&lt;/p&gt;</description></item><item><title>Reward Modeling LLM</title><link>https://lovelybuggies.github.io/notes/docs/large-language-models/reward-modeling-llm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/large-language-models/reward-modeling-llm/</guid><description>&lt;link rel="stylesheet" href="https://lovelybuggies.github.io/notes/katex/katex.min.css" /&gt;
+&lt;script defer src="https://lovelybuggies.github.io/notes/katex/katex.min.js"&gt;&lt;/script&gt;
+
+ &lt;script defer src="https://lovelybuggies.github.io/notes/katex/auto-render.min.js" onload="renderMathInElement(document.body, {
+ &amp;#34;delimiters&amp;#34;: [
+ {&amp;#34;left&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;display&amp;#34;: true},
+ {&amp;#34;left&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\(&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\)&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\[&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\]&amp;#34;, &amp;#34;display&amp;#34;: true}
+ ]
+}
+);"&gt;&lt;/script&gt;
+
+
+&lt;h1 id="reward-models-in-rlhf"&gt;
+ Reward Models in RLHF
+ 
+ &lt;a class="anchor" href="#reward-models-in-rlhf"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;p&gt;As LLMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To enable RL fine-tuning from human feedbacks (RLHF), reward models are introduced as trainable proxies for human preference. Once trained, it can generalize preference signals to unseen inputs, making alignment more scalable by reducing reliance on slow and costly human annotations. It also allows flexible fine-tuning toward different objectives, such as helpfulness, truthfulness, or safety.&lt;/p&gt;</description></item></channel></rss>

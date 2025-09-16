@@ -1,6 +1,7 @@
 ---
 title: "Understanding Bellman"
 math: true
+weight: 12
 ---
 
 {{< katex />}}

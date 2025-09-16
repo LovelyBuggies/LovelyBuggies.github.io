@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RL on LovelyBuggies' Blog</title><link>https://lovelybuggies.github.io/notes/docs/rl/</link><description>Recent content in RL on LovelyBuggies' Blog</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://lovelybuggies.github.io/notes/docs/rl/index.xml" rel="self" type="application/rss+xml"/><item><title>From PG 2 PPO</title><link>https://lovelybuggies.github.io/notes/docs/rl/from-pg-2-ppo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/from-pg-2-ppo/</guid><description>&lt;link rel="stylesheet" href="https://lovelybuggies.github.io/notes/katex/katex.min.css" /&gt;
+&lt;script defer src="https://lovelybuggies.github.io/notes/katex/katex.min.js"&gt;&lt;/script&gt;
+
+ &lt;script defer src="https://lovelybuggies.github.io/notes/katex/auto-render.min.js" onload="renderMathInElement(document.body, {
+ &amp;#34;delimiters&amp;#34;: [
+ {&amp;#34;left&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;display&amp;#34;: true},
+ {&amp;#34;left&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\(&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\)&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\[&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\]&amp;#34;, &amp;#34;display&amp;#34;: true}
+ ]
+}
+);"&gt;&lt;/script&gt;
+
+
+&lt;h1 id="policy-gradient-pg"&gt;
+ Policy Gradient (PG)
+ 
+ &lt;a class="anchor" href="#policy-gradient-pg"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;p&gt;Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$,&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; $$\label{eq:pg}
+\theta^{(i+1)} \leftarrow \theta^{(i)} + \alpha\nabla J(\theta^{(i)}).$$ There are 2 main advantages of PG methods,&lt;/p&gt;</description></item><item><title>Understanding Bellman</title><link>https://lovelybuggies.github.io/notes/docs/rl/understanding-bellman/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://lovelybuggies.github.io/notes/docs/rl/understanding-bellman/</guid><description>&lt;link rel="stylesheet" href="https://lovelybuggies.github.io/notes/katex/katex.min.css" /&gt;
+&lt;script defer src="https://lovelybuggies.github.io/notes/katex/katex.min.js"&gt;&lt;/script&gt;
+
+ &lt;script defer src="https://lovelybuggies.github.io/notes/katex/auto-render.min.js" onload="renderMathInElement(document.body, {
+ &amp;#34;delimiters&amp;#34;: [
+ {&amp;#34;left&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$$&amp;#34;, &amp;#34;display&amp;#34;: true},
+ {&amp;#34;left&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\(&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\)&amp;#34;, &amp;#34;display&amp;#34;: false},
+ {&amp;#34;left&amp;#34;: &amp;#34;\\[&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\]&amp;#34;, &amp;#34;display&amp;#34;: true}
+ ]
+}
+);"&gt;&lt;/script&gt;
+
+
+&lt;h1 id="bellman-equation-and-operator"&gt;
+ Bellman Equation and Operator
+ 
+ &lt;a class="anchor" href="#bellman-equation-and-operator"&gt;#&lt;/a&gt;
+ 
+&lt;/h1&gt;
+&lt;h2 id="definition"&gt;
+ Definition
+ 
+ &lt;a class="anchor" href="#definition"&gt;#&lt;/a&gt;
+ 
+&lt;/h2&gt;
+&lt;p&gt;The Bellman Equation and optimal Bellman Equation for V-values are, (Sutton and Barto 2018),&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; $$\begin{aligned}
+V^\pi(s) &amp;amp;\doteq \mathbb{E}&lt;em&gt;{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right], \
+&amp;amp;= \mathbb{E}&lt;/em&gt;{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right] \right], \
+V^*(s) &amp;amp;\doteq \max&lt;/em&gt;{a} \left[ Q^&lt;em&gt;(s, a) \right], \
+&amp;amp;= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^&lt;/em&gt;(s&amp;rsquo;)\right] \right].
+\end{aligned}$$ and the Bellman Equation and optimal Bellman Equation for Q-values are, $$\begin{aligned}
+Q^\pi(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right], \
+&amp;amp;= R(s, a) + \gamma \mathbb{E}&lt;/em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[\mathbb{E}&lt;em&gt;{a&amp;rsquo;\sim\pi(a&amp;rsquo;|s&amp;rsquo;)} Q^\pi(s&amp;rsquo;, a&amp;rsquo;)\right]. \
+Q^*(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;/em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[V^&lt;em&gt;(s&amp;rsquo;)\right], \
+&amp;amp;= R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo;\sim P(\cdot|s,a)} \left[\max&lt;/em&gt;{a&amp;rsquo;} Q^&lt;/em&gt;(s&amp;rsquo;, a&amp;rsquo;)\right].
+\end{aligned}$$ where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. $$\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}&lt;em&gt;a Q^\pi (s,a).$$ Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are, $$\begin{aligned}
+(\mathcal{T}^\pi\circ V^\pi)(s) &amp;amp;\doteq \mathbb{E}&lt;/em&gt;{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right] \right], \
+(\mathcal{T}^*\circ V^\pi)(s) &amp;amp;\doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}&lt;/em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[V^\pi(s&amp;rsquo;)\right] \right].
+\end{aligned}$$ The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are, $$\begin{aligned}
+(\mathcal{T}^\pi\circ Q^\pi)(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[ \mathbb{E}&lt;/em&gt;{a&amp;rsquo; \sim \pi(a&amp;rsquo;|s&amp;rsquo;)} Q^\pi(s&amp;rsquo;, a&amp;rsquo;) \right], \
+(\mathcal{T}^*\circ Q^\pi)(s, a) &amp;amp;\doteq R(s, a) + \gamma \mathbb{E}&lt;em&gt;{s&amp;rsquo; \sim P(\cdot|s,a)} \left[ \max&lt;/em&gt;{a&amp;rsquo;} Q^\pi(s&amp;rsquo;, a&amp;rsquo;) \right].
+\end{aligned}$$&lt;/p&gt;</description></item></channel></rss>

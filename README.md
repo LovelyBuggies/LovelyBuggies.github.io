@@ -35,3 +35,19 @@ Deployment options
 Notes
 - The Blog uses the Hugo Book theme located at `notes-src/themes/book` (git submodule).
 - Site config is in `notes-src/config.toml`.
+
+References and citations
+- Add references to a page’s front matter under `references` using ids:
+
+```
+references:
+  wang2024:
+    text: "Wang, X. et al. Great Paper. NeurIPS, 2024."
+    url: "https://arxiv.org/abs/xxxx.xxxxx"
+  doe2023:
+    text: "Doe, J. Another Work. ICML, 2023."
+```
+
+- Cite in text where needed: `{{< cite id="wang2024" text="Wang et al., 2024" >}}`.
+- The page automatically appends a “References” section listing cited entries in order of first appearance, with anchors for jump navigation.
+- Citation link color matches the sidebar article title color.

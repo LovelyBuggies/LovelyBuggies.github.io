@@ -1,6 +1,6 @@
 {
-  "name": "Notes",
-  "short_name": "Notes",
+  "name": "LovelyBuggies' Blog",
+  "short_name": "LovelyBuggies' Blog",
   "start_url": "/notes/",
   "scope": "/notes/",
   "display": "standalone",

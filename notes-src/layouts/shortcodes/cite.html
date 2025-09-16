@@ -1,0 +1,30 @@
+{{- /*
+Usage:
+  {{< cite id="wang2024" text="Wang et al., 2024" >}}
+  or positional: {{< cite "wang2024" "Wang et al., 2024" >}}
+
+Effect:
+  - Renders an in-text citation link to the References section.
+  - Collects the citation id in .Page.Scratch "cites" for later rendering.
+*/ -}}
+{{- $id := or (.Get "id") (.Get 0) -}}
+{{- $text := or (.Get "text") (.Get 1) -}}
+{{- if not $id -}}
+  {{- errorf "cite shortcode requires an 'id' (or first positional)" -}}
+{{- end -}}
+{{- if not $text -}}
+  {{- $text = $id -}}
+{{- end -}}
+
+{{- /* Track unique citation order per page */ -}}
+{{- $cites := .Page.Scratch.Get "cites" | default (slice) -}}
+{{- $seen := false -}}
+{{- range $cites }}
+  {{- if eq . $id }}{{ $seen = true }}{{ end -}}
+{{- end -}}
+{{- if not $seen -}}
+  {{- .Page.Scratch.Set "cites" (append $cites $id) -}}
+{{- end -}}
+
+<a class="citation" href="#ref-{{ $id }}" id="cite-{{ $id }}">{{ $text }}</a>
+
