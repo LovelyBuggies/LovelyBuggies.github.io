@@ -4,13 +4,22 @@ Looks up full entries from .Params.references keyed by citation id.
 Each entry may be a string or a map with fields: text (required), url (optional).
 */ -}}
 {{- $cites := .Page.Scratch.Get "cites" | default (slice) -}}
-{{- if gt (len $cites) 0 -}}
+{{- $refsPage := .Params.references | default dict -}}
+{{- $hasPageRefs := gt (len $refsPage) 0 -}}
+{{- if or (gt (len $cites) 0) $hasPageRefs -}}
   <hr>
   <h2 id="references">References</h2>
   <ol class="references-list">
-  {{- $refsPage := .Params.references | default dict -}}
   {{- $refsSite := (index .Site.Data "references") | default dict -}}
-  {{- range $cites -}}
+  {{- $order := $cites -}}
+  {{- if eq (len $order) 0 -}}
+    {{- $.Scratch.Set "order" (slice) -}}
+    {{- range $k, $_ := $refsPage -}}
+      {{- $.Scratch.Add "order" (slice $k) -}}
+    {{- end -}}
+    {{- $order = ($.Scratch.Get "order") -}}
+  {{- end -}}
+  {{- range $order -}}
     {{- $id := . -}}
     {{- $key := $id | urlize -}}
     {{- $entry := or (index $refsPage $id) (index $refsSite $id) -}}
