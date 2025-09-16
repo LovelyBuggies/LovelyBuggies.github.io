@@ -8,11 +8,12 @@ Each entry may be a string or a map with fields: text (required), url (optional)
   <hr>
   <h2 id="references">References</h2>
   <ol class="references-list">
-  {{- $refs := .Params.references | default dict -}}
+  {{- $refsPage := .Params.references | default dict -}}
+  {{- $refsSite := (index .Site.Data "references") | default dict -}}
   {{- range $cites -}}
     {{- $id := . -}}
     {{- $key := $id | urlize -}}
-    {{- $entry := index $refs $id -}}
+    {{- $entry := or (index $refsPage $id) (index $refsSite $id) -}}
     {{- $type := printf "%T" $entry -}}
     {{- $authors := "" -}}
     {{- $title := "" -}}
