@@ -35,19 +35,17 @@ jobs:
           rm -rf dist
           mkdir -p dist
           # Build Hugo notes site into dist/notes
-          hugo -s notes-src --minify -d ../dist/notes
+          hugo -s notes --minify -d ../dist/notes
 
       - name: Copy root site files
         run: |
           rsync -av \
             --exclude '.git' \
             --exclude 'notes' \
-            --exclude 'notes-src' \
             --exclude '.github' \
             --exclude '.DS_Store' \
             ./ dist/
-          # Ensure favicon and disable Jekyll
-          [ -f notes-src/static/nameicon.svg ] && cp notes-src/static/nameicon.svg dist/nameicon.svg || true
+          # Disable Jekyll for GitHub Pages
           touch dist/.nojekyll
 
       - name: Upload artifact
@@ -65,4 +63,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

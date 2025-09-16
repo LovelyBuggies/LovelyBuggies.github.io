@@ -31,5 +31,5 @@ build/
 # Hugo cache
 notes-src/resources/
 
-# Do not commit generated site; GitHub Actions builds to dist/
-notes/
+# Do not commit generated local build from Hugo source
+notes/public/

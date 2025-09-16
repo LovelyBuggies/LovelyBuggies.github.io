@@ -4,8 +4,8 @@ title = "LovelyBuggies' Blog"
 enableGitInfo = true
 cleanDestinationDir = true
 
-# Publish the built site into the repo at /notes
-publishDir = "../notes"
+# Local build output directory (Actions overrides with -d ../dist/notes)
+publishDir = "public"
 
 # Use a local theme (no Go/Hugo Modules required)
 theme = "book"
@@ -18,7 +18,7 @@ theme = "book"
   BookDateFormat = "Jan 2, 2006"
   BookSection = "docs"
   # Use custom favicon for the site
-  BookFavicon = "nameicon.svg"
+  BookFavicon = "img/icon/nameicon.svg"
   # Show page last modified time (needs enableGitInfo)
   ShowLastMod = true
   # Enable KaTeX for math rendering across the site
