@@ -22,8 +22,16 @@ theme = "book"
   BookMath = true
 
 [markup]
+  [markup.smartypants]
+    quotes = false
+    dashes = ""
+    ellipses = false
+    fractions = false
+    angledQuotes = false
   [markup.highlight]
     style = "github"
     noClasses = false
+  [markup.goldmark.extensions]
+    typographer = false
   [markup.goldmark.renderer]
     unsafe = true
