@@ -4,5 +4,12 @@
     {"left": "$", "right": "$", "display": false},
     {"left": "\\(", "right": "\\)", "display": false},
     {"left": "\\[", "right": "\\]", "display": true}
-  ]
+  ],
+  "throwOnError": false,
+  "strict": false,
+  "trust": true,
+  "macros": {
+    "\\label": "\\htmlId{#1}{}",
+    "\\eqref": "(\\ref{#1})"
+  }
 }

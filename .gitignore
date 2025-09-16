@@ -13,3 +13,20 @@ notes-src/_vendor/
 
 # Logs
 *.log
+# Ignore common executables and OS cruft
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node/JS build outputs (none expected here, safe)
+node_modules/
+dist/
+build/
+
+# Hugo cache
+notes-src/resources/

@@ -1,4 +1,5 @@
 {{- /*
+Plain-text multi-citation (no linking, no tracking).
 Usage:
   {{< cites ids="key1, key2, key3" >}}
   or positional: {{< cites "key1" "key2" >}}
@@ -11,22 +12,11 @@ Default (parenthetical): (Wang et al., 2024; Doe and Roe, 2023)
   {{- $norm := replaceRE `[,;\s]+` "," . -}}
   {{- $ids = split $norm "," -}}
 {{- end -}}
-{{- /* Build each citation text and track order */ -}}
+{{- /* Build each citation text (no tracking) */ -}}
 {{- $.Scratch.Set "parts" (slice) -}}
 {{- range $ids -}}
   {{- $id := . | strings.Trim " " -}}
   {{- if not $id }}{{ continue }}{{ end -}}
-  {{- $existing := $.Page.Scratch.Get "cites" -}}
-  {{- $existingStr := printf "%v" (default "" $existing) -}}
-  {{- $seen := false -}}
-  {{- range (split $existingStr ",") }}{{ if eq . $id }}{{ $seen = true }}{{ end }}{{ end -}}
-  {{- if not $seen -}}
-    {{- if $existingStr -}}
-      {{- $.Page.Scratch.Set "cites" (print $existingStr "," $id) -}}
-    {{- else -}}
-      {{- $.Page.Scratch.Set "cites" $id -}}
-    {{- end -}}
-  {{- end -}}
 
   {{- $refsPage := $.Page.Params.references | default dict -}}
   {{- $refsSite := (index $.Site.Data "references") | default dict -}}
@@ -57,9 +47,8 @@ Default (parenthetical): (Wang et al., 2024; Doe and Roe, 2023)
     {{- $label = printf "%s et al." (index $names 0) -}}
   {{- end -}}
   {{- $year := printf "%v" ((index $entry "year") | default "") -}}
-  {{- $key := $id | urlize -}}
   {{- $text := cond (ne $year "") (printf "%s, %s" $label $year) $label -}}
-  {{- $.Scratch.Add "parts" (slice (printf "<a class=\"citation\" href=\"#ref-%s\" id=\"cite-%s\" data-cite-id=\"%s\">%s</a>" $key $key $id $text)) -}}
+  {{- $.Scratch.Add "parts" (slice (printf "%s" $text)) -}}
 {{- end -}}
 
 {{- $mode := .Get "mode" | default "paren" -}}

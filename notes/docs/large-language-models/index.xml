@@ -7,7 +7,14 @@
  {&amp;#34;left&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;$&amp;#34;, &amp;#34;display&amp;#34;: false},
  {&amp;#34;left&amp;#34;: &amp;#34;\\(&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\)&amp;#34;, &amp;#34;display&amp;#34;: false},
  {&amp;#34;left&amp;#34;: &amp;#34;\\[&amp;#34;, &amp;#34;right&amp;#34;: &amp;#34;\\]&amp;#34;, &amp;#34;display&amp;#34;: true}
- ]
+ ],
+ &amp;#34;throwOnError&amp;#34;: false,
+ &amp;#34;strict&amp;#34;: false,
+ &amp;#34;trust&amp;#34;: true,
+ &amp;#34;macros&amp;#34;: {
+ &amp;#34;\\label&amp;#34;: &amp;#34;\\htmlId{#1}{}&amp;#34;,
+ &amp;#34;\\eqref&amp;#34;: &amp;#34;(\\ref{#1})&amp;#34;
+ }
 }
 );"&gt;&lt;/script&gt;
 

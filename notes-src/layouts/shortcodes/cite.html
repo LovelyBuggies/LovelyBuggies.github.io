@@ -1,11 +1,9 @@
 {{- /*
+Plain-text citation (no linking, no tracking).
 Usage:
   {{< cite id="wang2024" text="Wang et al., 2024" >}}
   or positional: {{< cite "wang2024" "Wang et al., 2024" >}}
-
-Effect:
-  - Renders an in-text citation link to the References section.
-  - Collects the citation id in .Page.Scratch "cites" for later rendering.
+If text omitted, tries to format as Author et al., YEAR from references.
 */ -}}
 {{- $id := or (.Get "id") (.Get 0) -}}
 {{- $text := or (.Get "text") (.Get 1) -}}
@@ -14,21 +12,6 @@ Effect:
 {{- end -}}
 {{- if not $text -}}
   {{- $text = $id -}}
-{{- end -}}
-
-{{- /* Track unique citation order per page */ -}}
-{{- $existing := .Page.Scratch.Get "cites" -}}
-{{- $existingStr := printf "%v" (default "" $existing) -}}
-{{- $seen := false -}}
-{{- range (split $existingStr ",") -}}
-  {{- if eq . $id }}{{ $seen = true }}{{ end -}}
-{{- end -}}
-{{- if not $seen -}}
-  {{- if $existingStr -}}
-    {{- .Page.Scratch.Set "cites" (print $existingStr "," $id) -}}
-  {{- else -}}
-    {{- .Page.Scratch.Set "cites" $id -}}
-  {{- end -}}
 {{- end -}}
 
 {{- /* Build automatic text if not provided, using authors/year if available */ -}}
@@ -71,6 +54,4 @@ Effect:
   {{- end -}}
 {{- end -}}
 
-{{- /* Use a URL-safe key for anchor ids */ -}}
-{{- $key := $id | urlize -}}
-<a class="citation" href="#ref-{{ $key }}" id="cite-{{ $key }}" data-cite-id="{{ $id }}">{{ $text }}</a>
+<span class="citation">{{ $text }}</span>
