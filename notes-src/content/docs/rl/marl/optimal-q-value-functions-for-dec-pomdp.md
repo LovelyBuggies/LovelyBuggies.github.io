@@ -63,7 +63,15 @@ Here, $\pi^*(\vec{\theta}^{t+1})\equiv \psi^{t+2, *}$ because of the consistent 
 To calculate the Pareto optima of Bayesian game at $t$, $$\textcolor{red}{\delta^{t, *}}
     = \mathop{\mathrm{argmax}}_{\delta^t}\sum_{\vec{\theta}^t \in \vec{\Theta}^t_{\psi^{t, *}}} P(\vec{\theta}^t|\psi^{t, *}) \textcolor{red}{Q^*}(\vec{\theta}^t, (\psi^{t, *}, \delta^t)),$$ note that calculating $\delta^{t,*}$ depends on $\psi^{t, *} = \delta^{[0, t), *}$ and $Q^*(\vec{\theta}^t, \cdot)$.
 
-According to Definition. <a href="#defn:normative-Q" data-reference-type="ref" data-reference="defn:normative-Q">1</a>, the optimal Bellman equation can be written as, $$\textcolor{red}{Q^*}(\vec{\theta}^t, \psi^{t+1}) = R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \max_{\delta^{t+1}}Q^*(\vec{\theta}^{t+1}, (\textcolor{red}{\psi^{t+1, *}}, \delta^{t+1})),$$ when $0\leqslant t < h-1$. This indicates that $Q^*(\vec{\theta}^t, \cdot)$ depends on $\psi^{t+1, *}$.[^1] Consequently, calculating $\delta^{t,*}$ inherently depends on $\delta^{[0, t], *}$ (includes itself), making it self-dependent and impractical to solve.[^2] ◻
+According to Definition. <a href="#defn:normative-Q" data-reference-type="ref" data-reference="defn:normative-Q">1</a>, the optimal Bellman equation can be written as, $$\textcolor{red}{Q^*}(\vec{\theta}^t, \psi^{t+1}) = R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \max_{\delta^{t+1}}Q^*(\vec{\theta}^{t+1}, (\textcolor{red}{\psi^{t+1, *}}, \delta^{t+1})),$$ when $0\leqslant t < h-1$. This indicates that $Q^*(\vec{\theta}^t, \cdot)$ depends on $\psi^{t+1, *}$. Consequently, calculating $\delta^{t,*}$ inherently depends on $\delta^{[0, t], *}$ (includes itself), making it self-dependent and impractical to solve. ◻
+
+{{< hint info >}}
+Note: The dependency of $P(o^{t+1}\mid\vec{\theta}^t, \psi^{t+1})$ is not problematic and can be handled analogously to how the stochasticity $P(s^{t+1}\mid s^t, a)$ is treated via double learning (Sutton and Barto 2018, Sec. 6.7).
+{{< /hint >}}
+
+{{< hint info >}}
+Single-agent (PO)MDP, where belief states are available, does not have this issue because the Q-value need not be history-dependent (Markov property).
+{{< /hint >}}
 
 </div>
 
@@ -106,6 +114,4 @@ Sutton, Richard S., and Andrew G. Barto. 2018. *Reinforcement Learning: An Intro
 
 </div>
 
-[^1]: The dependency of $P(o^{t+1}|\vec{\theta}^t, \psi^{t+1})$ is not a problem and can be solved just like how the stochasticity $P(s^{t+1}|s^t, a)$ tackled by double learning in Sec. 6.7, (Sutton and Barto 2018).
-
-[^2]: Single-agent (PO)MDP, where the belief states are acquirable, does not have such a problem because the Q-value function is not necessarily history-dependent, thanks to Markovian property.
+<!-- footnotes converted to hints above -->

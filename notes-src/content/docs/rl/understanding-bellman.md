@@ -204,4 +204,4 @@ Watkins, Christopher J. C. H., and Peter Dayan. 1992. “Q-Learning.” *Machine
 
 </div>
 
-[^1]: The Bellman Equations shown in the main article are stochastic, the deterministic one can be derived as, $V(s) = \max_{a} \left\{ R(s, a) + \gamma V(s')\right\}$, where $s'\gets T(s,a)$ is a deterministic succeeding state of $s$ following $a$.
+<!-- footnote converted to hint above -->
