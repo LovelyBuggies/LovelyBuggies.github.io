@@ -37,7 +37,7 @@ Notes
 - Site config is in `notes-src/config.toml`.
 
 References and citations
-- Add references to a page’s front matter under `references` using ids (structured fields supported):
+- Add references to a page’s front matter under `references` using ids (structured fields supported). Citations are plain text in content; no shortcode is required:
 
 ```
 references:
@@ -56,9 +56,7 @@ references:
     year: 2023
 ```
 
-- Cite in text where needed: `{{< cite id="wang2024" text="Wang et al., 2024" >}}`.
-- Auto text: omit `text` to format from authors/year: `{{< cite "wang2024" >}}` → “Wang et al., 2024”.
-- Multiple citations: `{{< cites ids="wang2024, doe2023" >}}` → “(Wang et al., 2024; Doe and Roe, 2023)”.
+- Example in text: “Wang et al., 2024” or “(Wang et al., 2024; Doe and Roe, 2023)”.
 - The page automatically appends a “References” section listing cited entries in order of first appearance, with anchors for jump navigation. If a page defines `references` but no cites, all entries are listed.
 - You can also define shared entries in `notes-src/data/references.yaml` and cite them from any page.
 - Citation link color matches the sidebar article title color.

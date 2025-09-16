@@ -2,6 +2,7 @@ baseURL = "https://lovelybuggies.github.io/notes/"
 languageCode = "en-us"
 title = "LovelyBuggies' Blog"
 enableGitInfo = true
+cleanDestinationDir = true
 
 # Publish the built site into the repo at /notes
 publishDir = "../notes"
@@ -12,7 +13,7 @@ theme = "book"
 [params]
   BookTheme = "auto"
   BookToC = true
-  BookSearch = true
+  BookSearch = false
   BookRepo = "https://github.com/LovelyBuggies/LovelyBuggies.github.io"
   BookDateFormat = "Jan 2, 2006"
   BookSection = "docs"
