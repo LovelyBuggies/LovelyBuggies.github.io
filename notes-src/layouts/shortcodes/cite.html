@@ -26,5 +26,6 @@ Effect:
   {{- .Page.Scratch.Set "cites" (append $cites $id) -}}
 {{- end -}}
 
-<a class="citation" href="#ref-{{ $id }}" id="cite-{{ $id }}">{{ $text }}</a>
-
+{{- /* Use a URL-safe key for anchor ids */ -}}
+{{- $key := $id | urlize -}}
+<a class="citation" href="#ref-{{ $key }}" id="cite-{{ $key }}" data-cite-id="{{ $id }}">{{ $text }}</a>

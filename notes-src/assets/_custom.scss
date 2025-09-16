@@ -56,8 +56,15 @@ h2#references {
   padding-left: 1.25rem;
 }
 .references-list li {
-  margin: 0.25rem 0;
+  margin: 0.4rem 0;
+  padding-left: 1.5em;
+  text-indent: -1.5em; /* hanging indent */
+  line-height: 1.4;
+  scroll-margin-top: 4.5rem; /* keep target visible below sticky header */
 }
+.references-list .ref-title { font-style: italic; }
+.references-list a { text-decoration: none; border-bottom: 1px dotted var(--color-link); }
+.references-list a:hover { text-decoration: underline; border-bottom: none; }
 .ref-backlink {
   margin-left: 0.4rem;
   text-decoration: none;

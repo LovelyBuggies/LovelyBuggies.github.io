@@ -11,24 +11,34 @@ Each entry may be a string or a map with fields: text (required), url (optional)
   {{- $refs := .Params.references | default dict -}}
   {{- range $cites -}}
     {{- $id := . -}}
+    {{- $key := $id | urlize -}}
     {{- $entry := index $refs $id -}}
     {{- $type := printf "%T" $entry -}}
-    {{- $text := $id -}}
-    {{- $url := "" -}}
+    {{- $authors := "" -}}
+    {{- $title := "" -}}
+    {{- $venue := "" -}}{{- $year := "" -}}{{- $url := "" -}}{{- $doi := "" -}}{{- $arxiv := "" -}}
     {{- if eq $type "map[string]interface {}" -}}
-      {{- $text = (default $id (index $entry "text")) -}}
-      {{- $url = (default "" (index $entry "url")) -}}
-    {{- else if $entry -}}
-      {{- $text = (printf "%v" $entry) -}}
+      {{- $authors = (index $entry "authors") | default (index $entry "author") | default "" -}}
+      {{- $title = (index $entry "title") | default "" -}}
+      {{- $venue = (index $entry "venue") | default (index $entry "journal") | default (index $entry "conference") | default (index $entry "booktitle") | default "" -}}
+      {{- $year = (printf "%v" ((index $entry "year") | default "")) -}}
+      {{- $url = (index $entry "url") | default "" -}}
+      {{- $doi = (index $entry "doi") | default "" -}}
+      {{- $arxiv = (index $entry "arxiv") | default "" -}}
     {{- end -}}
-    <li id="ref-{{ $id }}">
-      {{- if $url -}}
-        <a href="{{ $url }}" target="_blank" rel="noopener">{{ $text }}</a>
+    {{- /* Fallback to 'text' if provided */ -}}
+    {{- $text := (index $entry "text") -}}
+    <li id="ref-{{ $key }}">
+      {{- if $text -}}
+        {{- if $url -}}<a href="{{ $url }}" target="_blank" rel="noopener">{{ $text }}</a>{{- else -}}{{ $text }}{{- end -}}
       {{- else -}}
-        {{ $text }}
+        {{- if $authors -}}<span class="ref-authors">{{ $authors }}</span>. {{- end -}}
+        {{- if $url -}}<a href="{{ $url }}" target="_blank" rel="noopener"><span class="ref-title">{{ $title }}</span></a>{{- else -}}<span class="ref-title">{{ $title }}</span>{{- end -}}.
+        {{- if $venue }} <span class="ref-venue">{{ $venue }}</span>{{- end -}}{{- if $year }}, <span class="ref-year">{{ $year }}</span>{{- end -}}.
+        {{- if and (not $url) $doi }} <a href="https://doi.org/{{ $doi }}" target="_blank" rel="noopener">doi:{{ $doi }}</a>.{{- end -}}
+        {{- if and (not $url) $arxiv }} <a href="https://arxiv.org/abs/{{ $arxiv }}" target="_blank" rel="noopener">arXiv:{{ $arxiv }}</a>.{{- end -}}
       {{- end -}}
-      {{- /* Backlink to first in-text citation anchor, if present */ -}}
-      <a class="ref-backlink" href="#cite-{{ $id }}" aria-label="Back to citation">↑</a>
+      <a class="ref-backlink" href="#cite-{{ $key }}" aria-label="Back to citation">↑</a>
     </li>
   {{- end -}}
   </ol>
