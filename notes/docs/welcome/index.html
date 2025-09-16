@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="Starter post using Hugo Book in Markdown.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://lovelybuggies.github.io/notes/categories/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://lovelybuggies.github.io/notes/docs/welcome/">
   <meta property="og:site_name" content="LovelyBuggies&#39; Blog">
-  <meta property="og:title" content="Categories">
+  <meta property="og:title" content="Welcome">
+  <meta property="og:description" content="Starter post using Hugo Book in Markdown.">
   <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
-<title>Categories | LovelyBuggies&#39; Blog</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:tag" content="Getting-Started">
+<title>Welcome | LovelyBuggies&#39; Blog</title>
 <link rel="icon" href="/notes/favicon.png" >
 <link rel="manifest" href="/notes/manifest.json">
-<link rel="canonical" href="https://lovelybuggies.github.io/notes/categories/">
-<link rel="stylesheet" href="/notes/book.min.a482db4ff40e4539a82f3a9bfb0e3c5f7db0799cb9fde583a4a16768fd8e5c80.css" integrity="sha256-pILbT/QORTmoLzqb&#43;w48X32weZy5/eWDpKFnaP2OXIA=" crossorigin="anonymous"><link rel="alternate" type="application/rss+xml" href="https://lovelybuggies.github.io/notes/categories/index.xml" title="LovelyBuggies' Blog" />
-<!--
+<link rel="canonical" href="https://lovelybuggies.github.io/notes/docs/welcome/">
+<link rel="stylesheet" href="/notes/book.min.a482db4ff40e4539a82f3a9bfb0e3c5f7db0799cb9fde583a4a16768fd8e5c80.css" integrity="sha256-pILbT/QORTmoLzqb&#43;w48X32weZy5/eWDpKFnaP2OXIA=" crossorigin="anonymous"><!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
@@ -41,7 +43,7 @@ https://github.com/alex-shpak/hugo-book
 );"></script>
   
 </head>
-<body dir="ltr" class="book-kind-taxonomy book-type-categories book-layout-">
+<body dir="ltr" class="book-kind-page book-type-docs book-layout-">
   <input type="checkbox" class="hidden toggle" id="menu-control" />
   <input type="checkbox" class="hidden toggle" id="toc-control" />
   <main class="container flex">
@@ -134,7 +136,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/notes/docs/welcome/" class="">Welcome</a>
+    <a href="/notes/docs/welcome/" class="active">Welcome</a>
   
 
         </li>
@@ -176,7 +178,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Categories</h3>
+  <h3>Welcome</h3>
 
   <label for="toc-control">
     
@@ -190,7 +192,13 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#whats-included">What’s Included</a></li>
+    <li><a href="#tips">Tips</a></li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
 
 
 
@@ -201,7 +209,50 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"></article>
+  <article class="markdown book-article"><h1 id="welcome">
+  Welcome
+  
+  <a class="anchor" href="#welcome">#</a>
+  
+</h1>
+<p>This is a fresh Markdown post rendered with the Hugo Book theme. Use it as a template for your future notes and posts.</p>
+<h2 id="whats-included">
+  What’s Included
+  
+  <a class="anchor" href="#whats-included">#</a>
+  
+</h2>
+<ul>
+<li>Sections and ToC are automatic based on headings.</li>
+<li>KaTeX math support is enabled: $V(s) = \max_a Q(s,a)$.</li>
+<li>Syntax-highlighted code blocks:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></span></span></code></pre></div><h2 id="tips">
+  Tips
+  
+  <a class="anchor" href="#tips">#</a>
+  
+</h2>
+<blockquote class="book-hint info">
+  
+Place images next to this file, e.g., `docs/welcome/diagram.png`, and reference with `![Alt](diagram.png)`.
+
+</blockquote>
+
+<ul>
+<li>Add front matter fields like <code>tags</code>, <code>weight</code>, or <code>draft: true</code> as needed.</li>
+<li>For math blocks, wrap in <code>$$ ... $$</code> for display equations.</li>
+</ul>
+<h2 id="next-steps">
+  Next Steps
+  
+  <a class="anchor" href="#next-steps">#</a>
+  
+</h2>
+<p>Create your own post by copying this folder and editing the front matter and content. Example:</p>
+<pre tabindex="0"><code>notes-src/content/docs/&lt;section&gt;/&lt;my-post&gt;/index.md</code></pre><p>Set a descriptive <code>title</code> and <code>description</code>, and start writing in Markdown.</p>
+</article>
  
       
 
@@ -236,6 +287,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
       <label for="menu-control" class="hidden book-menu-overlay"></label>
     </div>
@@ -246,7 +301,13 @@ https://github.com/alex-shpak/hugo-book
   <div class="book-toc-content">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#whats-included">What’s Included</a></li>
+    <li><a href="#tips">Tips</a></li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
 
 
 
