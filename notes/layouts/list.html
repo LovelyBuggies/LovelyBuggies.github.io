@@ -1,6 +1,10 @@
 {{ define "main" }}
 <article class="markdown book-article">
-  <h1>{{ .Title }}</h1>
+  {{ if .IsHome }}
+    <h2>Welcome to LovelyBuggies' blog</h2>
+  {{ else }}
+    <h1>{{ .Title }}</h1>
+  {{ end }}
   {{- with .Content }}{{ . }}{{ end -}}
 
   {{ template "section-tree" . }}
