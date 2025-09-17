@@ -126,5 +126,6 @@
 /* Types results list spacing (title and date) */
 #types-results li small {
   margin-left: 8px;              /* space between title and date */
+  font-style: italic;            /* show dates in italic */
   color: var(--gray-600);
 }

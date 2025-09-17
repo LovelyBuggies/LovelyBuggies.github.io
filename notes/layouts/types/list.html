@@ -1,8 +1,6 @@
 {{ define "main" }}
 <article class="markdown book-article">
-  <h1>Browse by Type</h1>
-  <p>Showing posts for type: <code id="type-label"></code></p>
-  <div id="types-error" class="hidden" style="color: var(--color-link);">Unknown type.</div>
+  <h1 id="types-title"></h1>
   <ul id="types-results"></ul>
 </article>
 
@@ -11,26 +9,24 @@
 (function(){
   const params = new URLSearchParams(location.search);
   const t = (params.get('t') || '').toLowerCase();
-  const typeLabel = t === 'notes' || t === 'overview' ? 'Overview' : (t === 'thoughts' ? 'Thoughts' : (t ? (t.charAt(0).toUpperCase()+t.slice(1)) : 'All'));
-  document.getElementById('type-label').textContent = typeLabel;
+  const labelFor = (slug) => slug === 'notes' || slug === 'overview' ? 'Overview' : (slug === 'thoughts' ? 'Thoughts' : (slug ? slug.charAt(0).toUpperCase()+slug.slice(1) : ''));
+  document.getElementById('types-title').textContent = labelFor(t);
   const list = document.getElementById('types-results');
-  const err = document.getElementById('types-error');
   fetch('{{ $typesData.RelPermalink }}').then(r=>r.json()).then(items => {
     let slug = t;
     if (t === 'overview') slug = 'notes';
     const filtered = slug ? items.filter(i => i.type === slug) : items;
-    if (slug && filtered.length === 0) { err.classList.remove('hidden'); }
     filtered.sort((a,b)=>a.title.localeCompare(b.title));
     for (const p of filtered) {
       const li = document.createElement('li');
       li.innerHTML = '<a></a><small></small>';
-      li.querySelector('a').href = p.href;
-      li.querySelector('a').textContent = p.title;
-      li.querySelector('small').textContent = p.date;
+      const a = li.querySelector('a'), small = li.querySelector('small');
+      a.href = p.href;
+      a.textContent = p.title;
+      small.textContent = p.date;
       list.appendChild(li);
     }
   });
 })();
 </script>
 {{ end }}
-
