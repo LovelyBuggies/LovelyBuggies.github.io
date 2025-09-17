@@ -112,13 +112,7 @@ where {{< katex >}}\psi^{t+2, \circledast}=(\psi^{t+1}, \delta^{t+1, \circledast
 
 Note that the only difference of {{< katex >}}Q^\circledast{{< /katex >}} from {{< katex >}}Q^*{{< /katex >}} is {{< katex >}}\psi^{t+2, \circledast}{{< /katex >}}, consequently expanding {{< katex >}}Q^*{{< /katex >}}’s candidates of history from {{< katex >}}\vec{\theta}^t \in \vec{\Theta}^t_{\psi^{t, *}}{{< /katex >}} to {{< katex >}}\vec{\theta}^t \in \vec{\Theta}^t_{\Psi^{t}}{{< /katex >}} and policy from {{< katex >}}\psi^{t+1}\in(\psi^{t, *},\Delta^t){{< /katex >}} to {{< katex >}}\psi^{t+1}\in(\Psi^t,\Delta^t){{< /katex >}}.
 
-Beyond solving the problem of Proposition <a href="#prop:problem" data-reference-type="ref" data-reference="prop:problem">1</a>, another advantage of {{< katex >}}Q^\circledast{{< /katex >}} is that it allows for the computation of optimal subsequent policy {{< katex >}}\xi^{t, *}_\psi{{< /katex >}} following any past policy {{< katex >}}\psi^{t}{{< /katex >}}. This is beneficial in online applications where agents may occasionally deviate from the optimal policy.
-
-## Open Questions
-
-- We have seen some advantages of defining the optimal Q-value function as {{< katex >}}Q^\circledast{{< /katex >}}, what are the downsides to defining it this way (e.g., high computational costs)?
-
-
+Beyond solving the problem of Proposition <a href="#prop:problem" data-reference-type="ref" data-reference="prop:problem">1</a>, another advantage of {{< katex >}}Q^\circledast{{< /katex >}} is that it allows for the computation of optimal subsequent policy {{< katex >}}\xi^{t, *}_\psi{{< /katex >}} following any past policy {{< katex >}}\psi^{t}{{< /katex >}}. This is beneficial in online applications where agents may occasionally deviate from the optimal policy. 
 
 ## References
 
