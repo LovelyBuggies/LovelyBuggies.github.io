@@ -9,7 +9,7 @@ linkTitle: "From PG to PPO"
 
 {{< katex />}}
 
-# "From PG to PPO"
+# From PG to PPO
 {{< postbadges >}}
 
 ## Policy Gradient (PG)

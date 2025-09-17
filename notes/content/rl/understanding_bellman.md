@@ -9,7 +9,7 @@ linkTitle: "Understanding Bellman"
 
 {{< katex />}}
 
-# "Understanding Bellman"
+# Understanding Bellman
 {{< postbadges >}}
 
 ## Bellman Equation and Operator

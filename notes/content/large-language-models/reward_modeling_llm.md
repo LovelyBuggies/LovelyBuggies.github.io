@@ -8,7 +8,7 @@ linkTitle: "Reward Modeling LLM"
 
 {{< katex />}}
 
-# "Reward Modeling LLM"
+# Reward Modeling LLM
 {{< postbadges >}}
 
 ## Reward Models in RLHF

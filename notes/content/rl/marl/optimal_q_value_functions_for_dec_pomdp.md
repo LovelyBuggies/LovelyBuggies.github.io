@@ -8,7 +8,7 @@ linkTitle: "Optimal Q Value Functions for Dec-POMDP"
 
 {{< katex />}}
 
-# "Optimal Q Value Functions for Dec-POMDP"
+# Optimal Q Value Functions for Dec-POMDP
 {{< postbadges >}}
 
 ## Notions
