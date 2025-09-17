@@ -1,13 +1,14 @@
+---
 date: 2025-03-10
-title: "From PG 2 PPO"
+title: "From PG to PPO"
 math: true
-weight: 11
+weight: 1
 postType: notes
 ---
 
 {{< katex />}}
 
-# From PG 2 PPO
+# From PG to PPO
 {{< postbadges >}}
 
 ## Policy Gradient (PG)

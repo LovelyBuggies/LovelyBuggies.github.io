@@ -1,13 +1,13 @@
 ---
 date: 2024-11-11
-title: "Optimal Q Value Functions for Dec POMDP"
+title: "Optimal Q Value Functions for Dec-POMDP"
 math: true
 postType: thoughts
 ---
 
 {{< katex />}}
 
-# Optimal Q Value Functions for Dec POMDP
+# Optimal Q Value Functions for Dec-POMDP
 {{< postbadges >}}
 
 ## Notions

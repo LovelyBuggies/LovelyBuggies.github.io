@@ -1,13 +1,13 @@
 ---
 date: 2024-12-21
-title: "Introduction 2 DecPOMDP"
+title: "Introduction to Dec-POMDP"
 math: true
 postType: notes
 ---
 
 {{< katex />}}
 
-# Introduction 2 DecPOMDP
+# Introduction to Dec-POMDP
 {{< postbadges >}}
 
 ## Dec-POMDP
