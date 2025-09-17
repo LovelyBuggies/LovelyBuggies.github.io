@@ -22,3 +22,18 @@
   width: 70%;
   height: auto;
 }
+
+// Sidebar tweaks: bold non-clickable section titles; color post links
+// Match homepage name color (#224b8d) for clickable post titles
+.book-menu .book-menu-content nav li > label,
+.book-menu .book-menu-content nav li > span {
+  font-weight: 700;
+}
+
+.book-menu .book-menu-content nav a {
+  color: #224b8d;
+}
+
+.book-menu .book-menu-content nav a:hover {
+  opacity: 0.85;
+}
