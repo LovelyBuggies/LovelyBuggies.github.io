@@ -141,13 +141,9 @@ which uniquely satisfies,
 
 According to the Fundamental Theorem, we can find {{< katex >}}\pi^*{{< /katex >}} efficiently once having access to {{< katex >}}Q^*{{< /katex >}}, without the need to find the policy whose Q-function **dominates** the others’ brute-force-ly. To avoid the Bellman Curse of Dimensionality, we can apply Dynamic Programming (DP) methods to solve MDPs by keeping track of Q-values during calculations, thanks to Bellman recursions.
 
-#### Value Iteration
+**Value iteration** (so-called backward induction) involves iteratively applying {{< katex >}}\mathcal{T}^*{{< /katex >}} to arbitrarily initialized values {{< katex >}}Q^0{{< /katex >}} until convergence. According to Corollary <a href="#them:fixpoint" data-reference-type="ref" data-reference="them:fixpoint">1</a> and Theorem <a href="#them:fundamental" data-reference-type="ref" data-reference="them:fundamental">1</a>, value iteration converges to {{< katex >}}Q^*{{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}}, then an optimal policy {{< katex >}}\pi^*{{< /katex >}} can be derived by greedifying {{< katex >}}Q^*{{< /katex >}}.
 
-Value iteration (so-called backward induction) involves iteratively applying {{< katex >}}\mathcal{T}^*{{< /katex >}} to arbitrarily initialized values {{< katex >}}Q^0{{< /katex >}} until convergence. According to Corollary <a href="#them:fixpoint" data-reference-type="ref" data-reference="them:fixpoint">1</a> and Theorem <a href="#them:fundamental" data-reference-type="ref" data-reference="them:fundamental">1</a>, value iteration converges to {{< katex >}}Q^*{{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}}, then an optimal policy {{< katex >}}\pi^*{{< /katex >}} can be derived by greedifying {{< katex >}}Q^*{{< /katex >}}.
-
-#### Policy Iteration
-
-Policy iteration starts with an arbitrary policy {{< katex >}}\pi^0{{< /katex >}} and values {{< katex >}}Q^0{{< /katex >}}. In each iterative step {{< katex >}}k{{< /katex >}}, {{< katex >}}Q^{\pi, k}{{< /katex >}} is calculated by applying Bellman Operator {{< katex >}}\mathcal{T}^{\pi, k}{{< /katex >}} that follows current policy {{< katex >}}{\pi^k}{{< /katex >}} to {{< katex >}}Q^{\pi, {k-1}}{{< /katex >}} from the last iteration, and then {{< katex >}}\pi^{k+1}{{< /katex >}} is derived from greedifying {{< katex >}}Q^{\pi, k}{{< /katex >}}. This process is repeated until convergence, and policy iteration can produce optimal policy after sufficient iterations.
+**Policy iteration** starts with an arbitrary policy {{< katex >}}\pi^0{{< /katex >}} and values {{< katex >}}Q^0{{< /katex >}}. In each iterative step {{< katex >}}k{{< /katex >}}, {{< katex >}}Q^{\pi, k}{{< /katex >}} is calculated by applying Bellman Operator {{< katex >}}\mathcal{T}^{\pi, k}{{< /katex >}} that follows current policy {{< katex >}}{\pi^k}{{< /katex >}} to {{< katex >}}Q^{\pi, {k-1}}{{< /katex >}} from the last iteration, and then {{< katex >}}\pi^{k+1}{{< /katex >}} is derived from greedifying {{< katex >}}Q^{\pi, k}{{< /katex >}}. This process is repeated until convergence, and policy iteration can produce optimal policy after sufficient iterations.
 
 ## Bellman Residual for Learning
 
@@ -161,16 +157,12 @@ When the transition model is unavailable (model-free), we can use the residuals 
 {{< /katex >}}
  Assuming that our sampling and parameter updating roughly follow the true state distribution {{< katex >}}\mu(s){{< /katex >}}, the expectation of Bellman residual will be closed to zero at the optima. This approach is often called temporal difference (TD) learning.
 
-#### TD-learning
-
-In TD-learning with learning rate $\alpha$, the update rule for Q-values is, {{< katex display=true >}}
+In **TD-learning** with learning rate $\alpha$, the update rule for Q-values is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td-learning}
 {{< /katex >}}
  According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following TD-learning updates, {{< katex >}}Q^{\pi, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ((Jaakkola, Jordan, and Singh 1994)).
 
-#### Q-learning
-
-In Q-learning that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
+In **Q-learning** that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}
 {{< /katex >}}
  According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following Q-learning updates, {{< katex >}}Q^{*, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ((Watkins and Dayan 1992)). The deep version of Q-learning algorithm, Deep Q-Network (DQN), is shown in Appendix.
