@@ -18,8 +18,8 @@ readingTime: 20
 Bellman equations establish recusive relations between states and succeeding states, which can be applied as updating rules for value prediction.
 
 <div class="definition">
-  <strong>Definition.</strong> The Bellman Equations characterize value recursions in MDPs.
-For V-values (Sutton and Barto 2018),
+  <strong>Definition.</strong> The Bellman equations for V-values are (Sutton and Barto 2018),
+
 
 {{< katex display=true >}}
 
@@ -39,7 +39,7 @@ V^*(s) &\doteq \max_{a} \left[ Q^*(s, a) \right] \\
 
 {{< /katex >}}
 
-For Q-values,
+The Bellman equations for Q-values are,
 
 {{< katex display=true >}}
 
@@ -50,20 +50,19 @@ For Q-values,
 Q^\pi(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
 = R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right] \\
 Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right] \\
-= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right],\nonumber
+= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right].\nonumber
 
 \end{aligned}
 
 \end{equation}
 
 {{< /katex >}}
+</div>
 
-where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, {{< katex display=true >}}
+$V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, and {{< katex display=true >}}
 \pi^*(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
 
 {{< /katex >}}
-
-</div>
 
 <div class="definition" id="curse-of-dimension">
 <strong>Curse of Dimension.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
@@ -97,7 +96,6 @@ For convenience, we use Q-value as the representative in the following parts of 
         \text{and }\|\mathcal{T}^* \circ Q - \mathcal{T}^* \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty.
     \end{aligned}
 {{< /katex >}}
-
 </div>
 
 <div id="them:fixpoint" class="corollary">
