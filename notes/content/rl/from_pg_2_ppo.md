@@ -1,4 +1,5 @@
 ---
+date: 2025-09-15
 title: "From PG 2 PPO"
 math: true
 weight: 11

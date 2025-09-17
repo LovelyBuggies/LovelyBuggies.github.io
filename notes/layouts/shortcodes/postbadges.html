@@ -3,10 +3,11 @@
 {{- $date := $page.Date -}}
 {{- $dateYear := $date | time.Format "2006" -}}
 {{- $dateFmt := cond (ne $dateYear "0001") ($date | time.Format "Jan 2, 2006") ($page.Lastmod | time.Format "Jan 2, 2006") -}}
-{{- $reading := printf "%d min" $page.ReadingTime -}}
+{{- $rt := $page.ReadingTime -}}
+{{- $rtAdj := cond (lt $rt 1) 1 $rt -}}
+{{- $reading := printf "%d min" $rtAdj -}}
 {{- $author := or .Site.Params.AuthorName .Site.Params.Author "Shuo Liu" -}}
 
+<span class="book-badge success"><span class="book-badge-title">Author</span><span class="book-badge-value">{{ $author }}</span></span>
 <span class="book-badge info"><span class="book-badge-title">Date</span><span class="book-badge-value">{{ $dateFmt }}</span></span>
 <span class="book-badge default"><span class="book-badge-title">Reading</span><span class="book-badge-value">{{ $reading }}</span></span>
-<span class="book-badge success"><span class="book-badge-title">Author</span><span class="book-badge-value">{{ $author }}</span></span>
-

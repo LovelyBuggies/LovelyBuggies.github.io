@@ -1,4 +1,5 @@
 ---
+date: 2025-09-16
 title: "Optimal Q Value Functions for Dec POMDP"
 math: true
 ---
