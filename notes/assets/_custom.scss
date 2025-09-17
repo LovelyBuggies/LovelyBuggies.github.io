@@ -81,3 +81,22 @@
 .book-page .markdown .katex-display {
   font-size: 0.85em;
 }
+
+/* References list numbering as [1], [2], ... without affecting other lists */
+.book-page .markdown ol.references {
+  list-style: none;          /* remove default 1. 2. */
+  counter-reset: ref-counter; /* start counter at 0 */
+  margin-left: 0;
+  padding-left: 1.75rem;     /* space for the [n] marker */
+}
+.book-page .markdown ol.references > li {
+  position: relative;
+  margin: 0.25rem 0;
+}
+.book-page .markdown ol.references > li::before {
+  counter-increment: ref-counter;
+  content: "[" counter(ref-counter) "] ";
+  position: absolute;
+  left: 0;
+  color: inherit;
+}

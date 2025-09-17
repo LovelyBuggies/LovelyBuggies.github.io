@@ -129,10 +129,10 @@ Beyond solving the problem of Proposition <a href="#prop:problem" data-reference
 
 ## References
 
-<ol>
+{{< references >}}
 <li>Oliehoek, Frans A., Matthijs T. J. Spaan, and Nikos Vlassis. 2008. “Optimal and Approximate Q-Value Functions for Decentralized POMDPs.” <em>Journal of Artificial Intelligence Research</em> 32: 289–353.</li>
 <li>Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.</li>
-</ol>
+{{< /references >}}
 
 
 

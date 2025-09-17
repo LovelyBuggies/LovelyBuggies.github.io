@@ -24,11 +24,11 @@ A typical alignment pipeline consists of 3 stages: supervised fine-tuning (SFT),
 
 ## References
 
-<ol>
+{{< references >}}
 <li>Achiam, Josh, Steven Adler, and Sandhini Agarwal. 2024. “GPT-4 Technical Report.” <https://arxiv.org/abs/2303.08774>.</li>
 <li>Shao, Zhihong, Peiyi Wang, and Qihao Zhu. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <https://arxiv.org/abs/2402.03300>.</li>
 <li>Touvron, Hugo, Louis Martin, and Kevin Stone. 2023. “Llama 2: Open Foundation and Fine-Tuned Chat Models.” <https://arxiv.org/abs/2307.09288>.</li>
-</ol>
+{{< /references >}}
 
 
 <!-- moved to root content -->

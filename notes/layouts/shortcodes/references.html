@@ -1,0 +1,30 @@
+{{/*
+Usage:
+
+1) Markdown list (easiest):
+
+   {{< references >}}
+   - Author, Title, Venue, Year. <https://link>
+   - Author, Book, Year.
+   {{< /references >}}
+
+   This will render as an ordered list with [1], [2], ... markers.
+
+2) Raw <li> items:
+
+   {{< references >}}
+   <li>Author, Title …</li>
+   <li>Author, Title …</li>
+   {{< /references >}}
+*/}}
+
+{{- $inner := .Inner -}}
+{{- if in $inner "<li" -}}
+  <ol class="references">{{ $inner | safeHTML }}</ol>
+{{- else -}}
+  {{- $html := $inner | markdownify -}}
+  {{- $html = $html | replaceRE "^\\s*<ul[^>]*>" "<ol class=\"references\">" -}}
+  {{- $html = $html | replaceRE "</ul>\\s*$" "</ol>" -}}
+  {{- $html | safeHTML -}}
+{{- end -}}
+

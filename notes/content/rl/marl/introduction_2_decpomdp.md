@@ -245,7 +245,7 @@ Assuming $c$ and $k$ are constants, $\mathcal{C}$ is a complexity class, the tab
 
 ## References
 
-<ol>
+{{< references >}}
 <li>Amato, Christopher, Girish Chowdhary, Alborz Geramifard, N. Kemal Üre, and Mykel J. Kochenderfer. 2013. “Decentralized Control of Partially Observable Markov Decision Processes.” In <em>52nd IEEE Conference on Decision and Control</em>, 2398–2405. <https://doi.org/10.1109/CDC.2013.6760239>.</li>
 <li>Becker, Raphen, Shlomo Zilberstein, Victor Lesser, and Claudia V. Goldman. 2004. “Solving Transition Independent Decentralized Markov Decision Processes.” <em>Journal of Artificial Intelligence Research</em> 22: 423–55.</li>
 <li>Bernstein, Daniel S., Robert Givan, Neil Immerman, and Shlomo Zilberstein. 2002. “The Complexity of Decentralized Control of Markov Decision Processes.” <em>Mathematics of Operations Research</em> 27 (4): 819–40.</li>
@@ -263,7 +263,7 @@ Assuming $c$ and $k$ are constants, $\mathcal{C}$ is a complexity class, the tab
 <li>Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.</li>
 <li>Szer, Daniel, François Charpillet, and Shlomo Zilberstein. 2005. “MAA*: A Heuristic Search Algorithm for Solving Decentralized POMDPs.” In <em>Proceedings of the 21st Conference on Uncertainty in Artificial Intelligence (UAI)</em>, 576–90. AUAI Press.</li>
 <li>Wu, F., S. Zilberstein, and X. Chen. 2010. “Point-Based Policy Generation for Decentralized POMDPs.” In <em>Proceedings of the Ninth International Conference on Autonomous Agents and Multiagent Systems</em>, 1307–14.</li>
-</ol>
+{{< /references >}}
 
 
 
