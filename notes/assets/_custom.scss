@@ -123,6 +123,34 @@
 }
 .book-menu .book-menu-content .type-tags .type-tag:hover { opacity: 0.85; text-decoration: none; }
 
+/* Content page type tags (list pages) */
+.book-page .markdown .type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 16px 0; /* some space below tags before list */
+}
+.book-page .markdown .type-tags .type-tag {
+  font-size: 12px;
+  line-height: 20px;
+  padding: 0 8px;
+  border: 1px solid var(--gray-400);
+  border-radius: 4px;
+  color: var(--gray-700);
+  background: var(--gray-100);
+}
+
+/* Home link style on list page */
+.book-page .markdown p.home-link {
+  margin-top: 16px;
+}
+.book-page .markdown p.home-link a {
+  font-size: 11px;
+  line-height: 18px;
+  color: #666;
+  font-style: italic;
+}
+
 /* Theorem / Proposition / Fact blocks: styled like green hint */
 .book-page .markdown div.theorem,
 .book-page .markdown div.proposition,
