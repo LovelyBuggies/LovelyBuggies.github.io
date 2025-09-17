@@ -9,7 +9,7 @@
 (function(){
   const params = new URLSearchParams(location.search);
   const t = (params.get('t') || '').toLowerCase();
-  const labelFor = (slug) => slug === 'notes' || slug === 'overview' ? 'Overview' : (slug === 'thoughts' ? 'Thoughts' : (slug ? slug.charAt(0).toUpperCase()+slug.slice(1) : ''));
+  const labelFor = (slug) => slug === 'notes' || slug === 'overview' ? 'Review' : (slug === 'thoughts' ? 'Thoughts' : (slug ? slug.charAt(0).toUpperCase()+slug.slice(1) : ''));
   document.getElementById('types-title').textContent = labelFor(t);
   const list = document.getElementById('types-results');
   fetch('{{ $typesData.RelPermalink }}').then(r=>r.json()).then(items => {
