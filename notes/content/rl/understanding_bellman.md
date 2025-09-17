@@ -86,6 +86,10 @@ The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are,
 
 For convenience, we use Q-value as the representative in the following parts of this article.
 
+
+
+## Bellman Properties
+
 <div class="proposition">
 <strong>Proposition 1</strong> ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
 \begin{aligned}
