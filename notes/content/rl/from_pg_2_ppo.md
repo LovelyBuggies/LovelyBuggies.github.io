@@ -176,6 +176,8 @@ Off-policy sampling reuses any past episodes, which has a higher efficiency and 
 = \mathbb{E}_{\beta}\!\left[\frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \nabla\ln \pi(a|s)\right] \, .
 {{< /katex >}}
 
+where {{< katex >}}d^\beta(s){{< /katex >}} is the stationary distribution of the behavior policy {{< katex >}}\beta{{< /katex >}}, and {{< katex >}}Q^\pi{{< /katex >}} is the Q-function estimated regard to the target policy {{< katex >}}\pi{{< /katex >}}. Because of hard computation in reality (i), we ignore the approximation term {{< katex >}}\nabla Q^\pi(s,a){{< /katex >}}.
+
 ### Other PG Variants
 
 Since the intent of this post is to introduce how PPO comes from PG, we do not focus on other PG variants. Readers can refer to them in the hidden boxes.
@@ -221,8 +223,6 @@ Due to the efficiency of the GPU-cluster in training, some workers (machines or 
 <p><strong>Synchronous v.s. Asynchronous</strong> In the centralized paradigm, weight updates can be conducted synchronously, where gradients from all workers are aggregated (typically through summation or averaging) before updating the model parameters. This ensures a globally consistent update but may introduce inefficiencies due to synchronization delays. Alternatively, asynchronous updating allows each worker to update the global parameters independently, without waiting for all gradients to be collected. This method can improve computational throughput but may lead to stale gradients and slower convergence. The difference between these 2 approaches is exemplified in Advantage Actor-Critic (A2C) and Asynchronous Advantage Actor-Critic (A3C).</p>
 
 {{% /details %}}
-
-where {{< katex >}}d^\beta(s){{< /katex >}} is the stationary distribution of the behavior policy {{< katex >}}\beta{{< /katex >}}, and {{< katex >}}Q^\pi{{< /katex >}} is the Q-function estimated regard to the target policy {{< katex >}}\pi{{< /katex >}}. Because of hard computation in reality (i), we ignore the approximation term {{< katex >}}\nabla Q^\pi(s,a){{< /katex >}}.
 
 ## Proximal Policy Optimization (PPO)
 
