@@ -1,18 +1,22 @@
 ---
 date: 2025-03-24
-title: "Reward Modeling LLM"
+title: "Rewards from Human Feedback"
 math: true
 postType: notes
-linkTitle: "Reward Modeling LLM"
+linkTitle: "Rewards from Human Feedback"
 readingTime: 12
 ---
 
 {{< katex />}}
 
-# Reward Modeling LLM
+# Rewards from Human Feedback
 {{< postbadges >}}
 
 ## Reward Models in RLHF
+
+<div class="definition">
+<strong>Abstract</strong>. Constructing rewards is crucial yet challenging to achieve RL objectives. This post explores how to guide LLM optimization via a proper RLHF reward model.
+</div>
 
 As LLMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To enable RL fine-tuning from human feedbacks (RLHF), reward models are introduced as trainable proxies for human preference. Once trained, it can generalize preference signals to unseen inputs, making alignment more scalable by reducing reliance on slow and costly human annotations. It also allows flexible fine-tuning toward different objectives, such as helpfulness, truthfulness, or safety.
 
