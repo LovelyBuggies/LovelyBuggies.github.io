@@ -177,6 +177,19 @@
   border-radius: 4px;
   padding: 0.375rem 0.5rem;              /* even tighter inner spacing */
   margin: 0.25rem 0;                     /* even tighter outer spacing */
+  font-style: normal;                    /* ensure non-italic text */
+}
+
+/* Remove italic emphasis inside theorem-like boxes */
+.book-page .markdown div.theorem em,
+.book-page .markdown div.theorem i,
+.book-page .markdown div.proposition em,
+.book-page .markdown div.proposition i,
+.book-page .markdown div.corollary em,
+.book-page .markdown div.corollary i,
+.book-page .markdown div.fact em,
+.book-page .markdown div.fact i {
+  font-style: normal;
 }
 
 /* Definition blocks: styled like blue/info hint */
