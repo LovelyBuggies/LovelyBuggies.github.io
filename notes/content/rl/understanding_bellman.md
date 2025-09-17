@@ -168,7 +168,7 @@ To introduce generalization to the value function, we represent the approximated
 {{< /katex >}}
  where {{< katex >}}Q^\text{target}{{< /katex >}} is the ground truth and {{< katex >}}Q_\theta{{< /katex >}} is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
  
-{{< columns ratio="1:1" class="figs" >}}
+{{% columns ratio="1:1" class="figs" %}}
 ![Figure 1](/imgs/understanding_bellman/ga.png)
 <p class="figcaption"><em>Figure 1.</em> Gradient ascent by semi-gradient.</p>
 
@@ -176,7 +176,7 @@ To introduce generalization to the value function, we represent the approximated
 
 ![Figure 2](/imgs/understanding_bellman/gd.png)
 <p class="figcaption"><em>Figure 2.</em> Gradient descent by semi-gradient.</p>
-{{< /columns >}}
+{{% /columns %}}
 
 Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is, {{< katex display=true >}}
 \begin{aligned}
