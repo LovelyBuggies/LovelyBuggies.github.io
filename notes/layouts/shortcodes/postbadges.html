@@ -3,8 +3,9 @@
 {{- $date := $page.Date -}}
 {{- $dateYear := $date | time.Format "2006" -}}
 {{- $dateFmt := cond (ne $dateYear "0001") ($date | time.Format "Jan 2, 2006") ($page.Lastmod | time.Format "Jan 2, 2006") -}}
-{{- $rt := $page.ReadingTime -}}
-{{- $rtAdj := cond (lt $rt 1) 1 $rt -}}
+{{- $rt := or ($page.Param "readingTime") $page.ReadingTime -}}
+{{- $rtInt := int $rt -}}
+{{- $rtAdj := cond (lt $rtInt 1) 1 $rtInt -}}
 {{- $reading := printf "%d min" $rtAdj -}}
 {{- $author := or .Site.Params.AuthorName .Site.Params.Author "Shuo" -}}
 

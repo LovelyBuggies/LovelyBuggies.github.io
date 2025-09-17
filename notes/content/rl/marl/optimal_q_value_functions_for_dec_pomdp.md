@@ -4,6 +4,7 @@ title: "Optimal Q Value Functions for Dec-POMDP"
 math: true
 postType: thoughts
 linkTitle: "Optimal Q Value Functions for Dec-POMDP"
+readingTime: 4
 ---
 
 {{< katex />}}

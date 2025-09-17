@@ -4,6 +4,7 @@ title: "Reward Modeling LLM"
 math: true
 postType: notes
 linkTitle: "Reward Modeling LLM"
+readingTime: 12
 ---
 
 {{< katex />}}

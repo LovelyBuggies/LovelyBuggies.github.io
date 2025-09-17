@@ -5,6 +5,7 @@ math: true
 weight: 2
 postType: notes
 linkTitle: "Understanding Bellman"
+readingTime: 20
 ---
 
 {{< katex />}}

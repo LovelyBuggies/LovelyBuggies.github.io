@@ -4,6 +4,7 @@ title: "From PG to PPO"
 math: true
 weight: 1
 postType: notes
+readingTime: 20
 linkTitle: "From PG to PPO"
 ---
 
