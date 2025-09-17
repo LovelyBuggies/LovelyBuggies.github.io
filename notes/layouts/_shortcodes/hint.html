@@ -1,4 +1,3 @@
 <blockquote class="book-hint {{ default "default" (.Get 0) }}">
-  {{ .Inner | markdownify }}
+  {{ .Page.RenderString (dict "display" "block" "content" .Inner) }}
 </blockquote>
-
