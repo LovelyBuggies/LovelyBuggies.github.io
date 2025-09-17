@@ -36,11 +36,11 @@ An intuitive way to calculate policy gradient is to replace {{< katex >}}J(\thet
 We omit {{< katex >}}\theta{{< /katex >}} in subscripts/superscripts and gradients, assuming {{< katex >}}\pi{{< /katex >}} depends on {{< katex >}}\theta{{< /katex >}} and all gradients are w.r.t. {{< katex >}}\theta{{< /katex >}}; i.e., {{< katex >}}V^{\pi} \equiv V^{\pi_{\theta}}{{< /katex >}}, {{< katex >}}Q^{\pi} \equiv Q^{\pi_{\theta}}{{< /katex >}} and {{< katex >}}\nabla \equiv \nabla_{\theta}{{< /katex >}}.
 
 <div id="them:PG" class="theorem">
-**Theorem 1**. *Taking the state-value function as the optimizing target, the objective gradient follows, {{< katex display=true >}}
+<strong>Theorem 1</strong>. Taking the state-value function as the optimizing target, the objective gradient follows, {{< katex display=true >}}
 \label{equ:pgthem}
     \nabla J(\theta) \propto \sum_s d^\pi(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s),
 {{< /katex >}}
- where {{< katex >}}d^\pi(s){{< /katex >}} is the stationary distribution of the policy {{< katex >}}\pi_{\theta}{{< /katex >}}.*
+ where {{< katex >}}d^\pi(s){{< /katex >}} is the stationary distribution of the policy {{< katex >}}\pi_{\theta}{{< /katex >}}.
 
 To sample with expectation equals or approximates the expression,
 
@@ -112,7 +112,7 @@ Let {{< katex >}}\eta(s){{< /katex >}} be the expected number of visits to {{< k
 ### PG with Baseline
 
 <div id="them:PG-baseline" class="theorem">
-**Theorem 2**. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. {{< katex display=true >}}
+<strong>Theorem 2</strong>. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. {{< katex display=true >}}
 \label{equ:reinforce-baseline}
     \begin{aligned}
         \nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a (Q^\pi (s,a) -b(s)) \nabla\pi(a|s) \\
