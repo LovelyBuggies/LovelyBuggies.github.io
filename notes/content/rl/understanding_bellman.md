@@ -184,7 +184,7 @@ Similar to stochastic gradient methods with unbiased target estimators, if we us
     &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \label{eq:semi-grad}
 \end{aligned}
 {{< /katex >}}
-where {{< katex> }}Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a'){{< /katex >}}, since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
+where {{< katex >}}Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a'){{< /katex >}}, since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
 
 The **Full Gradient of Bellman Residual** should include all gradient components, including the gradient of the target estimation, {{< katex display=true >}}
 \begin{aligned}
