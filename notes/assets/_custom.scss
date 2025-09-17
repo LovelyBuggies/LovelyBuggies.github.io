@@ -93,7 +93,7 @@
   position: relative;
   margin: 0.25rem 0;
   /* indent the item content itself so multi-line wraps align */
-  padding-left: 6ch;           /* marker width (5ch) + ~1ch gap */
+  padding-left: 5.5ch;         /* marker width (5ch) + ~0.5ch gap */
 }
 .book-page .markdown ol.references > li::before {
   counter-increment: ref-counter;
