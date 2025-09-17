@@ -59,7 +59,7 @@ The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only 
 
 {{% details "Proof of Theorem 1" %}}
 
-<strong>Proof.</strong> The gradient of {{< katex >}}V{{< /katex >}} can be written via {{< katex >}}Q{{< /katex >}} as
+<strong>Proof.</strong> The gradient of $V$ can be written via $Q$ as
 
 {{< katex display=true >}}
 \begin{aligned}
@@ -76,9 +76,9 @@ The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only 
 \end{aligned}
 {{< /katex >}}
 
-where (i) uses that the immediate reward {{< katex >}}r{{< /katex >}} depends only on the environment dynamics (not on parameters).
+where (i) uses that the immediate reward $r$ depends only on the environment dynamics (not on parameters).
 
-Let {{< katex >}}\phi(s) = \sum_a \nabla\pi(a\mid s)\, Q^\pi (s,a){{< /katex >}}, and denote by {{< katex >}}\rho^\pi(s \to x, k){{< /katex >}} the probability of reaching {{< katex >}}x{{< /katex >}} from {{< katex >}}s{{< /katex >}} in {{< katex >}}k{{< /katex >}} steps under {{< katex >}}\pi{{< /katex >}} (e.g., {{< katex >}}\rho^\pi(s \to s',1)=\sum_a \pi(a\mid s) P(s'\mid s,a){{< /katex >}}). Unrolling the recursion gives
+Let $\phi(s) = \sum_a \nabla\pi(a\mid s)\, Q^\pi (s,a)$, and denote by $\rho^\pi(s \to x, k)$ the probability of reaching $x$ from $s$ in $k$ steps under $\pi$ (e.g., $\rho^\pi(s \to s',1)=\sum_a \pi(a\mid s) P(s'\mid s,a)$). Unrolling the recursion gives
 
 {{< katex display=true >}}
 \begin{aligned}
@@ -95,7 +95,7 @@ Let {{< katex >}}\phi(s) = \sum_a \nabla\pi(a\mid s)\, Q^\pi (s,a){{< /katex >}}
 \end{aligned}
 {{< /katex >}}
 
-Let {{< katex >}}\eta(s){{< /katex >}} be the expected number of visits to {{< katex >}}s{{< /katex >}} (episodic: {{< katex >}}\sum_s \eta(s){{< /katex >}} is the expected episode length; continuing: {{< katex >}}\sum_s \eta(s)=1{{< /katex >}}). Plugging into {{< katex >}}J{{< /katex >}} yields
+Let $\eta(s)$ be the expected number of visits to $s$ (episodic: $\sum_s \eta(s)$ is the expected episode length; continuing: $\sum_s \eta(s)=1$). Plugging into $J$ yields
 
 {{< katex display=true >}}
 \begin{aligned}
@@ -159,8 +159,8 @@ Next, we compare variances. Using a quadratic-term-only approximation and indepe
 {{< /katex >}}
 
 In (i) and (iii), we keep only quadratic terms and omit cross-products; the deduction from omitting
-{{< katex >}}\prod_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s){{< /katex >}} is dominated by the compensation when using
-{{< katex >}}\prod_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s){{< /katex >}}. In (ii), we assume independence to factorize expectations. Hence, using a baseline reduces variance; choosing {{< katex >}}b(s) \approx V^\pi(s){{< /katex >}} yields near-optimal variance.
+$\prod_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)$ is dominated by the compensation when using
+$\prod_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)$. In (ii), we assume independence to factorize expectations. Hence, using a baseline reduces variance; choosing $b(s) \approx V^\pi(s)$ yields near-optimal variance.
 
 {{% /details %}}
 
