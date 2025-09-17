@@ -4,11 +4,12 @@ title: "Understanding Bellman"
 math: true
 weight: 2
 postType: notes
+linkTitle: "Understanding Bellman"
 ---
 
 {{< katex />}}
 
-# Understanding Bellman
+# "Understanding Bellman"
 {{< postbadges >}}
 
 ## Bellman Equation and Operator

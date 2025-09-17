@@ -3,11 +3,12 @@ date: 2024-12-21
 title: "Introduction to Dec-POMDP"
 math: true
 postType: notes
+linkTitle: "Introduction to Dec-POMDP"
 ---
 
 {{< katex />}}
 
-# Introduction to Dec-POMDP
+# "Introduction to Dec-POMDP"
 {{< postbadges >}}
 
 ## Dec-POMDP

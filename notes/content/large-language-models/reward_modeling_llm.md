@@ -3,11 +3,12 @@ date: 2025-03-24
 title: "Reward Modeling LLM"
 math: true
 postType: notes
+linkTitle: "Reward Modeling LLM"
 ---
 
 {{< katex />}}
 
-# Reward Modeling LLM
+# "Reward Modeling LLM"
 {{< postbadges >}}
 
 ## Reward Models in RLHF

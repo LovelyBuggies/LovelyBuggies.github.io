@@ -4,11 +4,12 @@ title: "From PG to PPO"
 math: true
 weight: 1
 postType: notes
+linkTitle: "From PG to PPO"
 ---
 
 {{< katex />}}
 
-# From PG to PPO
+# "From PG to PPO"
 {{< postbadges >}}
 
 ## Policy Gradient (PG)
