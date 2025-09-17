@@ -21,10 +21,21 @@ readingTime: 20
 For V-values (Sutton and Barto 2018),
 
 {{< katex display=true >}}
-V^\pi(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
-= \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
-V^*(s) \doteq \max_{a} \left[ Q^*(s, a) \right] \\
-= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right].
+
+\begin{equation}
+
+\begin{aligned}
+
+V^\pi(s) &\doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
+&= \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\ 
+
+V^*(s) &\doteq \max_{a} \left[ Q^*(s, a) \right] \\
+&= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right].
+
+\end{aligned}
+
+\end{equation}
+
 {{< /katex >}}
 
 For Q-values,
