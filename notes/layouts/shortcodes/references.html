@@ -19,12 +19,20 @@ Usage:
 */}}
 
 {{- $inner := .Inner -}}
+{{- /* strip anchor tags and angle-bracket autolinks to plain text */ -}}
+{{- $stripLinks := func (s) -}}
+  {{- $s1 := replaceRE "(?s)<a[^>]*>(.*?)</a>" "${1}" s -}}
+  {{- $s2 := replaceRE "<(https?://[^ >]+)>" "${1}" $s1 -}}
+  {{- $s2 -}}
+{{- end -}}
+
 {{- if in $inner "<li" -}}
-  <ol class="references">{{ $inner | safeHTML }}</ol>
+  {{- $clean := call $stripLinks $inner -}}
+  <ol class="references">{{ $clean | safeHTML }}</ol>
 {{- else -}}
   {{- $html := $inner | markdownify -}}
   {{- $html = $html | replaceRE "^\\s*<ul[^>]*>" "<ol class=\"references\">" -}}
   {{- $html = $html | replaceRE "</ul>\\s*$" "</ol>" -}}
+  {{- $html = call $stripLinks $html -}}
   {{- $html | safeHTML -}}
 {{- end -}}
-
