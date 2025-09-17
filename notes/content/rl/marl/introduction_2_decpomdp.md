@@ -51,11 +51,7 @@ In Dec-POMDP, the Bellman recursive formulation of the history V-function is,
     &\equiv R(\boldsymbol{h}, \boldsymbol{\pi})+\gamma\sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{h}, \boldsymbol{\pi}) V^{\boldsymbol{\pi}}(\boldsymbol{h}'),
 \end{aligned}
 {{< /katex >}}
-
-
-{{< hint info >}}
 The definition of the value function is flexible: it may be based on the value of a state, a belief state, an observation, a state history, an observation history, a single action (single-step policy), a full policy (action history), observation–action history, or combinations of these.
-{{< /hint >}}
 
 the Bellman recursive formulation of the **history-policy** Q-function is,
 
@@ -70,12 +66,10 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 
 ## Dec-POMDP Subclasses
 
-- MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy {{< katex >}}\mathbb{H}\to\mathbb{A}{{< /katex >}}.
-- A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) {{< katex >}}T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i'){{< /katex >}} and reward-independence (RI) {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n}){{< /katex >}}. Network-distributed POMDP (ND-POMDP) represents the factored one with TI and block-RI, i.e., {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n}){{< /katex >}}, where {{< katex >}}{\mathcal{N}(i)}{{< /katex >}} are the neighbors of {{< katex >}}i{{< /katex >}}.
+- **Centralized:** MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy {{< katex >}}\mathbb{H}\to\mathbb{A}{{< /katex >}}.
+- **Decentralized:** A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) {{< katex >}}T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i'){{< /katex >}} and reward-independence (RI) {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n}){{< /katex >}}. Network-distributed POMDP (ND-POMDP) represents the factored one with TI and block-RI, i.e., {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n}){{< /katex >}}, where {{< katex >}}{\mathcal{N}(i)}{{< /katex >}} are the neighbors of {{< katex >}}i{{< /katex >}}.
 
 The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013)
-
-<div id="tab:complexity">
 
 | **Model**              | **Complexity**  |
 |:-----------------------|:----------------|
@@ -90,7 +84,8 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 | Dec-POMDP              | NEXP-complete   |
 | ND-POMDP               | NEXP-complete   |
 
-</div>
+
+{{% details title="Theorems" open=false %}}
 
 <span id="tab:complexity" label="tab:complexity"></span>
 
@@ -114,7 +109,9 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 
 </div>
 
-{{% details title="Complexity Class" open=true %}}
+{{% /details %}}
+
+{{% details title="Complexity Class" open=false %}}
 
 Assuming {{< katex >}}c{{< /katex >}} and {{< katex >}}k{{< /katex >}} are constants, {{< katex >}}\mathcal{C}{{< /katex >}} is a complexity class, the table shows complexity terminologies.
 
