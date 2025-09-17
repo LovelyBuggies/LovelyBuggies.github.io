@@ -245,7 +245,7 @@ Note that there are some other instantiations of IPPO, but not all of them are v
 A great example is PettingZoo’s agent cycle and parallel environments.
 {{< /hint >}}
 
-### Group Relative Policy Optimization (GRPO)
+### GRPO
 
 As DeepSeek has made a splash in the LLM community, the RL method GRPO involved has received a lot of attention (Zhihong Shao 2024). GRPO is a variant of PPO, where the advantage is estimated using group-relative comparisons rather than GAE. This approach eliminates the critic model, which improves the training efficiency and stability. The DeepSeek framework consists of: (i) a frozen *reference model*, which is a stable baseline for computing rewards; (ii) a given *reward model*, responsible for evaluating generated outputs and assigning scores; (iii) a *value model*, which estimates the expected return of a given state to aid in policy optimization; and (iv) a *policy model*, which generates {{< katex >}}|\mathcal{G}|{{< /katex >}} responses and is continuously updated to improve performance based on feedback from the other components. The learning objective for GRPO is:
 
@@ -263,6 +263,7 @@ where the advantage {{< katex >}}\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}
 is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).
 
 ![GRPO](/imgs/blog/from_pg_2_ppo/grpo.png)
+<p class="figcaption"><em>Figure.</em> PPO vs. GRPO in training LLMs.</p>
 
 
 
