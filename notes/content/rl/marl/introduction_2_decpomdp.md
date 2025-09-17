@@ -4,7 +4,7 @@ title: "Introduction to Dec-POMDP"
 math: true
 postType: notes
 linkTitle: "Introduction to Dec-POMDP"
-readingTime: 10
+readingTime: 5
 ---
 
 {{< katex />}}
