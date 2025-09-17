@@ -13,7 +13,7 @@ theme = "book"
 [params]
   BookTheme = "auto"
   BookToC = true
-  BookSearch = false
+  BookSearch = true
   BookRepo = "https://github.com/LovelyBuggies/LovelyBuggies.github.io"
   BookDateFormat = "Jan 2, 2006"
   # Show all content from the root instead of the 'docs' section
