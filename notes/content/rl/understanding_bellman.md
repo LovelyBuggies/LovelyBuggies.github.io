@@ -16,7 +16,8 @@ readingTime: 20
 ## Bellman Equation and Operator
 
 <div class="definition">
-**Definition.** The Bellman Equations characterize value recursions in MDPs.
+  <strong>Definition.</strong> The Bellman Equations characterize value recursions in MDPs.
+
 
 For V-values (Sutton and Barto 2018),
 
@@ -83,7 +84,7 @@ For convenience, we use Q-value as the representative in the following parts of 
 <strong>Curse of Dimension.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
 </div>
 <div class="proposition">
-**Proposition 1** ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
+<strong>Proposition 1</strong> ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
 \begin{aligned}
         \|\mathcal{T}^\pi \circ Q - \mathcal{T}^\pi \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty,\\
         \text{and }\|\mathcal{T}^* \circ Q - \mathcal{T}^* \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty.
@@ -94,7 +95,7 @@ For convenience, we use Q-value as the representative in the following parts of 
 
 <div id="them:fixpoint" class="corollary">
 
-**Corollary 1** (Fixed-point Iteration). *For any $Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, after $k\to \infty$ iterations of Bellman transformation, $Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0$, or $Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0$, according to Banach’s Fixed Point Theorem:*
+<strong>Corollary 1</strong> (Fixed-point Iteration). *For any $Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, after $k\to \infty$ iterations of Bellman transformation, $Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0$, or $Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0$, according to Banach’s Fixed Point Theorem:*
 
 {{< katex display=true >}}
 Q^{\pi, \infty}=Q^{*, \infty}=Q^*, \\
@@ -104,7 +105,7 @@ Q^{\pi, \infty}=Q^{*, \infty}=Q^*, \\
 </div>
 
 <div id="them:fundamental" class="theorem">
-**Theorem 1** (Fundamental theorem). *Any memoryless policy that is greedy to $Q^*$ (**deterministically** maximizes) is optimal (Szepesvári 2010):*
+<strong>Theorem 1</strong> (Fundamental theorem). *Any memoryless policy that is greedy to $Q^*$ (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):*
 
 {{< katex display=true >}}
 \tilde{\pi}^{*} \doteq \mathop{\mathrm{argmax}}_a Q^* = \pi^*.
