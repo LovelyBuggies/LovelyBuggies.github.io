@@ -3,11 +3,11 @@
   <h1>{{ .Title }}</h1>
   {{- with .Content }}{{ . }}{{ end -}}
 
-  {{/* Type tags buttons */}}
-  {{ partial "docs/type-tags" . }}
-  <div class="list-sep" style="height: 12px;"></div>
-
   {{ template "section-tree" . }}
+
+  {{/* Type tags buttons under the article list */}}
+  <div class="list-sep" style="height: 16px;"></div>
+  {{ partial "docs/type-tags" . }}
   
   {{/* Home link (replaces sidebar item) */}}
   <p class="home-link"><a href="https://lovelybuggies.github.io/">Who is LovelyBuggies?</a></p>
