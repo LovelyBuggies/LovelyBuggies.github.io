@@ -1,15 +1,15 @@
 ---
 date: 2024-11-11
-title: '\(Q^*\) in Dec-POMDP'
+title: 'Optimal Q in Dec-POMDP'
 math: true
 postType: thoughts
-linkTitle: '\(Q^*\) in Dec-POMDP'
+linkTitle: 'Optimal Q in Dec-POMDP'
 readingTime: 4
 ---
 
 {{< katex />}}
 
-# \(Q^*\) in Dec-POMDP
+# Optimal Q in Dec-POMDP
 {{< postbadges >}}
 
 ## Notions
