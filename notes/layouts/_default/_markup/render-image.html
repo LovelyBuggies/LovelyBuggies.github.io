@@ -1,0 +1,14 @@
+{{- /* Custom image render hook: serve /imgs/blog/* from assets */ -}}
+{{- $dest := .Destination -}}
+{{- /* Normalize: strip leading slash for matching */ -}}
+{{- $rel := cond (hasPrefix $dest "/") (substr $dest 1) $dest -}}
+{{- if hasPrefix $rel "imgs/blog/" -}}
+  {{- with resources.Get $rel -}}
+    <img src="{{ .RelPermalink }}" alt="{{ .Text }}"{{ with $.Title }} title="{{ . }}"{{ end }} />
+  {{- else -}}
+    <img src="{{ $dest | safeURL }}" alt="{{ .Text }}"{{ with $.Title }} title="{{ . }}"{{ end }} />
+  {{- end -}}
+{{- else -}}
+  <img src="{{ $dest | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} />
+{{- end -}}
+
