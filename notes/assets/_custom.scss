@@ -47,11 +47,8 @@
 .book-menu .book-menu-content nav > ul > li > span {
   font-size: calc(1em + 2pt);
 }
-/* Leaf article links and subsection links */
-.book-menu .book-menu-content nav li > a,
-.book-menu .book-menu-content nav li > label a {
-  font-size: calc(1em - 2pt);
-}
+/* Ensure subsection links match article title size (no reduction) */
+.book-menu .book-menu-content nav li > label a { font-size: inherit; }
 
 /* Style only the "Who is LovelyBuggies?" sidebar link */
 .book-menu .book-menu-content nav a[href="https://lovelybuggies.github.io/"],
