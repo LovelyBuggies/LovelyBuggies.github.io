@@ -10,14 +10,14 @@ readingTime: 20
 
 {{< katex />}}
 
-# Understanding Bellman
+# Understanding Bellman Equations
 {{< postbadges >}}
 
 ## Bellman Equation and Operator
 
 ### Definition
 
-The Bellman Equation and optimal Bellman Equation for V-values are, (Sutton and Barto 2018).
+The Bellman Equation and optimal Bellman Equation for V-values are (Sutton and Barto 2018),
 {{< hint info >}}
 Note on determinism: The deterministic form is $V(s) = \max_{a} \{ R(s, a) + \gamma V(s')\}$, where $s'\gets T(s,a)$.
 {{< /hint >}}
@@ -54,11 +54,11 @@ The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are,
 (\mathcal{T}^*\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right]
 {{< /katex >}}
 
+For convenience, we use Q-value as the representative in the following parts of this article.
+
 #### Curse of Dimension
 
 Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
-
-*For convenience, we use Q-value as the representative in the following parts of this article.*
 
 ### Important Properties
 
