@@ -39,7 +39,6 @@ readingTime: 12
 *A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history $\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}$, an optimal solution maximizes the expected return, {{< katex display=true >}}
 \boldsymbol{\pi}^*=\mathop{\mathrm{argmax}}_{\boldsymbol{\pi}}\mathbb{E}\left[\textstyle\sum_{t=0}^{\mathcal{H}-1}R(\boldsymbol{h}, \boldsymbol{\pi}(\boldsymbol{h}))\middle|b^0\right].
 {{< /katex >}}
-*
 
 </div>
 
@@ -259,7 +258,7 @@ Assuming {{< katex >}}c{{< /katex >}} and {{< katex >}}k{{< /katex >}} are const
 <li>Nair, Ranjit, Milind Tambe, Makoto Yokoo, David Pynadath, and Stacy Marsella. 2003. “Taming Decentralized POMDPs: Towards Efficient Policy Computation for Multiagent Settings.” In <em>IJCAI</em>, 3:705–11.</li>
 <li>Papadimitriou, Christos H., and John N. Tsitsiklis. 1987. “The Complexity of Markov Decision Processes.” <em>Mathematics of Operations Research</em> 12 (3): 441–50. <https://doi.org/10.1287/moor.12.3.441>.</li>
 <li>Seuken, Sven, and Shlomo Zilberstein. 2007a. “Improved Memory-Bounded Dynamic Programming for Decentralized POMDPs,” 344–51.</li>
-<li>———. 2007b. “Memory-Bounded Dynamic Programming for DECPOMDPs.” <em>Proceedings of the 20th International Joint Conference on Artificial Intelligence (IJCAI)</em>, 2009–15.</li>
+<li> 2007b. “Memory-Bounded Dynamic Programming for DECPOMDPs.” <em>Proceedings of the 20th International Joint Conference on Artificial Intelligence (IJCAI)</em>, 2009–15.</li>
 <li>Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.</li>
 <li>Szer, Daniel, François Charpillet, and Shlomo Zilberstein. 2005. “MAA*: A Heuristic Search Algorithm for Solving Decentralized POMDPs.” In <em>Proceedings of the 21st Conference on Uncertainty in Artificial Intelligence (UAI)</em>, 576–90. AUAI Press.</li>
 <li>Wu, F., S. Zilberstein, and X. Chen. 2010. “Point-Based Policy Generation for Decentralized POMDPs.” In <em>Proceedings of the Ninth International Conference on Autonomous Agents and Multiagent Systems</em>, 1307–14.</li>
