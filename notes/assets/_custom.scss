@@ -110,7 +110,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin: 0 0 4px 0; /* match gap with following link */
+  margin: 8px 0 8px 0; /* add gap above and below tags */
 }
 .book-menu .book-menu-content .type-tags .type-tag {
   font-size: 11px;

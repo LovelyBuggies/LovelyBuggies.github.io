@@ -1,8 +1,7 @@
 ---
 title: "Browse by Type"
 weight: 9000
-bookHidden: false
+bookHidden: true
 ---
 
 Select a type to view related posts.
-
