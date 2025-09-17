@@ -13,13 +13,9 @@ linkTitle: "From Policy Gradient to PPO"
 # From Policy Gradient to PPO
 {{< postbadges >}}
 
-## Policy Gradient (PG)
+## Policy Gradient
 
-Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}}.
-
-{{< hint info >}}
-All methods following this schema are PG, whether or not they also learn an approximate value function.
-{{< /hint >}}
+Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. Policy gradient (PG) methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}}.
 
 {{< katex display=true >}}
 \label{eq:pg}
@@ -32,7 +28,7 @@ There are 2 main advantages of PG methods,
 
 - With continuous policy parameterization, the action probabilities change smoothly as a function of the learned parameter, whereas {{< katex >}}\epsilon{{< /katex >}}-greedy may change dramatically for an arbitrarily small change in the estimated action values.
 
-Since the major purpose of this article is to introduce PPO methods from PG, we omit some other important forms of PG here. Readers can find them in the Appendix.
+Since the major purpose of this article is to introduce PPO methods from PG, we omit some other forms of PG here.
 
 ### PG Theorem
 

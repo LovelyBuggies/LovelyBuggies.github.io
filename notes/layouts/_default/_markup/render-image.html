@@ -1,23 +1,54 @@
-{{- /* Custom image render hook: map /imgs/blog/* to assets under notes/assets/imgs/* (no blog level) */ -}}
+{{- /* Custom image render hook: map /imgs/* to assets, and embed PDFs */ -}}
 {{- $dest := .Destination -}}
 {{- $alt := .Text -}}
 {{- $title := .Title -}}
 {{- /* Normalize: strip leading slash for matching */ -}}
 {{- $rel := cond (hasPrefix $dest "/") (substr $dest 1) $dest -}}
+{{- $isPDF := hasSuffix (lower $rel) ".pdf" -}}
 {{- if hasPrefix $rel "imgs/blog/" -}}
   {{- /* Drop the blog/ segment for assets lookup */ -}}
   {{- $assetPath := replaceRE "^imgs/blog/" "imgs/" $rel -}}
   {{- with resources.Get $assetPath -}}
-    <img src="{{ .RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+    {{- if $isPDF -}}
+      <object data="{{ .RelPermalink }}" type="application/pdf" width="100%" height="480">
+        <a href="{{ .RelPermalink }}">{{ if $title }}{{ $title }}{{ else }}View PDF{{ end }}</a>
+      </object>
+    {{- else -}}
+      <img src="{{ .RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+    {{- end -}}
   {{- else -}}
-    <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+    {{- if $isPDF -}}
+      <object data="{{ $dest | safeURL }}" type="application/pdf" width="100%" height="480">
+        <a href="{{ $dest | safeURL }}">{{ if $title }}{{ $title }}{{ else }}View PDF{{ end }}</a>
+      </object>
+    {{- else -}}
+      <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+    {{- end -}}
   {{- end -}}
 {{- else if hasPrefix $rel "imgs/" -}}
   {{- with resources.Get $rel -}}
-    <img src="{{ .RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+    {{- if $isPDF -}}
+      <object data="{{ .RelPermalink }}" type="application/pdf" width="100%" height="480">
+        <a href="{{ .RelPermalink }}">{{ if $title }}{{ $title }}{{ else }}View PDF{{ end }}</a>
+      </object>
+    {{- else -}}
+      <img src="{{ .RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+    {{- end -}}
+  {{- else -}}
+    {{- if $isPDF -}}
+      <object data="{{ $dest | safeURL }}" type="application/pdf" width="100%" height="480">
+        <a href="{{ $dest | safeURL }}">{{ if $title }}{{ $title }}{{ else }}View PDF{{ end }}</a>
+      </object>
+    {{- else -}}
+      <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- if $isPDF -}}
+    <object data="{{ $dest | safeURL }}" type="application/pdf" width="100%" height="480">
+      <a href="{{ $dest | safeURL }}">{{ if $title }}{{ $title }}{{ else }}View PDF{{ end }}</a>
+    </object>
   {{- else -}}
     <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
   {{- end -}}
-{{- else -}}
-  <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
 {{- end -}}
