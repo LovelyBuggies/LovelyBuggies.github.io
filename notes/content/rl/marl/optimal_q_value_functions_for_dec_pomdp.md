@@ -115,7 +115,7 @@ Note that the only difference of {{< katex >}}Q^\circledast{{< /katex >}} from {
 Beyond solving the problem of Proposition <a href="#prop:problem" data-reference-type="ref" data-reference="prop:problem">1</a>, another advantage of {{< katex >}}Q^\circledast{{< /katex >}} is that it allows for the computation of optimal subsequent policy {{< katex >}}\xi^{t, *}_\psi{{< /katex >}} following any past policy {{< katex >}}\psi^{t}{{< /katex >}}. This is beneficial in online applications where agents may occasionally deviate from the optimal policy. 
 
 {{< sidenote >}}
-We have seen some advantages of defining the optimal Q-value function as $Q^\circledast$, what are the downsides to defining it this way (e.g., high computational costs)?
+<strong>Open question: </strong> We have seen some advantages of defining the optimal Q-value function as $Q^\circledast$, what are the downsides to defining it this way (e.g., high computational costs)?
 {{< /sidenote >}}
 
 ## References
