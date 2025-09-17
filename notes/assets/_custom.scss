@@ -123,6 +123,17 @@
 }
 .book-menu .book-menu-content .type-tags .type-tag:hover { opacity: 0.85; text-decoration: none; }
 
+/* Theorem and Fact blocks: styled like green hint */
+.book-page .markdown div.theorem,
+.book-page .markdown div.fact {
+  border: 1px solid #3bad3b;            /* success green */
+  border-left-width: 4px;               /* accent left border */
+  background-color: rgba(59, 173, 59, 0.10);
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+}
+
 /* Types results list spacing (title and date) */
 #types-results li small {
   margin-left: 8px;              /* space between title and date */
