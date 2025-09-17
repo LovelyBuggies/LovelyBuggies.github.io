@@ -15,7 +15,7 @@ linkTitle: "From PG to PPO"
 
 ## Policy Gradient (PG)
 
-Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$.
+Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}}.
 
 {{< hint info >}}
 All methods following this schema are PG, whether or not they also learn an approximate value function.
