@@ -161,14 +161,14 @@ When the transition model is unavailable (model-free), we can use the residuals 
 {{< /katex >}}
  Assuming that our sampling and parameter updating roughly follow the true state distribution {{< katex >}}\mu(s){{< /katex >}}, the expectation of Bellman residual will be closed to zero at the optima. This approach is often called temporal difference (TD) learning.
 
-##### TD-learning
+#### TD-learning
 
 In TD-learning with learning rate $\alpha$, the update rule for Q-values is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td-learning}
 {{< /katex >}}
  According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following TD-learning updates, {{< katex >}}Q^{\pi, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ((Jaakkola, Jordan, and Singh 1994)).
 
-##### Q-learning
+#### Q-learning
 
 In Q-learning that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}
