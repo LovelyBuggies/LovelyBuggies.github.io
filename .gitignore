@@ -4,11 +4,10 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Hugo (local build artifacts inside notes-src)
-notes-src/resources/
-notes-src/public/
-notes-src/.hugo_build.lock
-notes-src/_vendor/
+# Hugo local build artifacts under notes/
+notes/public/
+notes/resources/
+notes/.hugo_build.lock
 
 
 # Logs
@@ -28,8 +27,4 @@ node_modules/
 dist/
 build/
 
-# Hugo cache
-notes-src/resources/
-
-# Do not commit generated local build from Hugo source
-notes/public/
+# Legacy entries removed: notes-src/* (no longer used)
