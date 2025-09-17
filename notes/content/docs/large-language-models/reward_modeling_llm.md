@@ -12,7 +12,7 @@ As LLMs scale, their raw outputs (optimized primarily for next-token prediction)
 A typical alignment pipeline consists of 3 stages: supervised fine-tuning (SFT), reward modeling, and RL. After an initial SFT based on base transformer with curated human-labeled data, a reward model is constructed to predict human preferences over model-generated responses. This model is then used to guide further optimization by encouraging outputs that maximize the predicted reward. For example, `ChatGPT` employs reward models trained on ranked annotations to guide its generation toward preferred outputs (Achiam, Adler, and Agarwal 2024); `DeepSeek` and `LLaMA 2` include explicit reward modeling components in their alignment pipelines, using pairwise preferences to train reward models that inform subsequent learning (Shao, Wang, and Zhu 2024; Touvron, Martin, and Stone 2023).
 
 <figure>
-<img src="reward-modeling-llm/RLHF.png" />
+<img src="RLHF.png" />
 <figcaption>Role of the reward models in RLHF (reward model <span style="color: blue">in blue</span>).</figcaption>
 </figure>
 
