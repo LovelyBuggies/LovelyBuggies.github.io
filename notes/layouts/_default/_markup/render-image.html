@@ -12,6 +12,12 @@
   {{- else -}}
     <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
   {{- end -}}
+{{- else if hasPrefix $rel "imgs/" -}}
+  {{- with resources.Get $rel -}}
+    <img src="{{ .RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+  {{- else -}}
+    <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+  {{- end -}}
 {{- else -}}
   <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
 {{- end -}}

@@ -111,6 +111,14 @@ Q^{\pi,\,\infty} = Q^{*,\,\infty} = Q^* ,
 
 which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or } \mathcal{T}^{*}(Q^*) = Q^* .{{< /katex >}}
 
+## Figures
+
+![Figure 1](/imgs/understanding_bellman/ga.png)
+<p class="figcaption"><em>Figure 1.</em> Illustration (ga).</p>
+
+![Figure 2](/imgs/understanding_bellman/gd.png)
+<p class="figcaption"><em>Figure 2.</em> Illustration (gd).</p>
+
 <strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to {{< katex >}}Q^*{{< /katex >}} (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):
 
 
