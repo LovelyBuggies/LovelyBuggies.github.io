@@ -30,7 +30,7 @@ V^\pi(s) &\doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
 &= \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\ 
 
 V^*(s) &\doteq \max_{a} \left[ Q^*(s, a) \right] \\
-&= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right].
+&= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right].\nonumber
 
 \end{aligned}
 
@@ -41,14 +41,25 @@ V^*(s) &\doteq \max_{a} \left[ Q^*(s, a) \right] \\
 For Q-values,
 
 {{< katex display=true >}}
+
+\begin{equation}
+
+\begin{aligned}
+
 Q^\pi(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
 = R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right] \\
 Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right] \\
-= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right],
+= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right],\nonumber
+
+\end{aligned}
+
+\end{equation}
+
 {{< /katex >}}
 
 where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, {{< katex display=true >}}
 \pi^*(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
+
 {{< /katex >}}
 
 </div>
