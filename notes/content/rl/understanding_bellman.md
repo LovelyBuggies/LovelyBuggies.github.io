@@ -204,7 +204,7 @@ In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$,
 \end{aligned}
 {{< /katex >}}
 
-## Bellman Generalizations
+## Bellman Variants
 
 - Soft Bellman Equation: entropy-regularized form encouraging exploration (weight $\lambda$).
 
