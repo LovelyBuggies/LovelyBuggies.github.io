@@ -164,47 +164,6 @@ $\prod_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)$. In (ii), we assume independence to
 
 {{% /details %}}
 
-{{% details "Deterministic Policy Gradient (DPG)" %}}
-
-Deterministic policies can reduce gradient estimation variance and improve exploration efficiency in continuous action spaces (deterministic PG can be viewed as a special case of stochastic PG with $\sigma=0$ in a reparameterized policy $\pi_{\mu_{\theta},\,\sigma}$). For a deterministic policy $a=\mu_{\theta}(s)$, the PG is
-
-{{< katex display=true >}}
-\label{equ:pgthem-deterministic}
-\begin{aligned}
-\nabla_{\theta} J(\theta)
-&= \nabla_{\theta} \left( \int_s d^{\mu}(s)\, V^{\mu}(s)\, ds \right) \\
-&= \nabla_{\theta} \left( \int_s d^{\mu}(s)\, Q^{\mu}(s,a)\big\rvert_{a=\mu_{\theta}(s)} ds \right) \\
-&\stackrel{\text{(i)}}{=} \int_s d^{\mu}(s)\, \nabla_{\theta} \mu_{\theta}(s)\, \nabla_a Q^{\mu}(s,a)\big\rvert_{a=\mu_{\theta}(s)}\, ds \\
-&= \mathbb{E}_{d^{\mu}}\!\left[ \nabla_{\theta} \mu_{\theta}(s)\, \nabla_a Q^{\mu}(s,a)\big\rvert_{a=\mu_{\theta}(s)} \right] .
-\end{aligned}
-{{< /katex >}}
-
-Here (i) uses that the state visitation distribution is non‑differentiable w.r.t. $\theta$ (a small parameter change can induce non‑smooth changes in trajectories and visitation). To ensure sufficient exploration with a deterministic policy, we can
-
-- add exploration noise, $\mu'(s) = \mu_{\theta}(s) + \mathcal{N}$; or
-- learn off‑policy with a stochastic behavior policy $\beta(a\mid s)$:
-
-{{< katex display=true >}}
-\label{equ:pgthem-deterministic-offpolicy}
-\begin{aligned}
-\nabla_{\theta} J(\theta)
-&= \nabla_{\theta} \left( \int_s d^{\beta}(s)\, Q^{\mu}(s,a)\big\rvert_{a=\mu_{\theta}(s)} ds \right) \\
-&= \mathbb{E}_{d^{\beta}}\!\left[ \nabla_{\theta} \mu_{\theta}(s)\, \nabla_a Q^{\mu}(s,a)\big\rvert_{a=\mu_{\theta}(s)} \right] .
-\end{aligned}
-{{< /katex >}}
-
-{{% /details %}}
-
-{{% details "Distributed Policy Gradient" %}}
-
-Modern PG implementations commonly exploit distributed workers (machines or processes) to generate rollouts and compute gradients efficiently (see, e.g., Brenner 2023). The same idea extends to AC, PPO, and deterministic PG.
-
-- Centralized vs. Decentralized: Workers may share a central parameter server or update their own weights and aggregate with AllReduce. Beyond simple rollout collection, workers can be further decoupled into agents with their own parameters, linking closely to multi‑agent PG.
-
-- Synchronous vs. Asynchronous: In centralized setups, synchronous updates aggregate gradients from all workers (sum/average) for consistent global updates but incur synchronization overheads. Asynchronous updates let workers push updates independently (higher throughput) at the cost of stale gradients and potentially slower convergence (cf. A2C vs. A3C).
-
-{{% /details %}}
-
 ### Off-Policy PG
 
 Off-policy sampling reuses any past episodes, which has a higher efficiency and brings more exploration. To make PG off-policy, we adjust it with an importance weight {{< katex >}}\frac{\pi(a|s)}{\beta(a|s)}{{< /katex >}} to correct the mismatch between behavior and target policies.
@@ -218,6 +177,48 @@ Off-policy sampling reuses any past episodes, which has a higher efficiency and 
 = \mathbb{E}_{d^\beta}\!\left[\sum_a \beta(a|s) \, \frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \frac{\nabla \pi(a|s)}{\pi(a|s)}\right] \\
 = \mathbb{E}_{\beta}\!\left[\frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \nabla\ln \pi(a|s)\right] \, .
 {{< /katex >}}
+
+{{% details "Deterministic PG" %}}
+
+Sometimes we hope the policy function to be deterministic to reduce the gradient estimation variance and improve the exploration efficiency for continuous action space (the deterministic PG is a special case of the stochastic PG, with $\sigma=0$ in the re-parameterization $\pi_{\mu_{\theta}, \sigma}$) (i.e., a decision $a=\mu_{\theta}(s)$). PG for a deterministic policy in continuous action space is,
+
+{{< katex display=true >}}
+\label{equ:pgthem-deterministic}
+\begin{aligned}
+\nabla_{\theta} J(\theta) &=\nabla_{\theta} \left(\int_s d^\mu(s) V^\mu(s) ds\right)\\
+&=\nabla_{\theta} \left(\int_s d^\mu(s) Q^\mu(s,a)\big\rvert_{a=\mu_{\theta}(s)}ds\right)\\
+&\stackrel{\text{(i)}}{=}\int_s d^\mu(s) \nabla_{\theta} \mu_{\theta}(s) \nabla_a Q^\mu(s,a)\big\rvert_{a=\mu_{\theta}(s)} ds \\
+&=\mathbb{E}_{d^\mu} [ \,\nabla_{\theta} \mu_{\theta}(s) \nabla_a Q^\mu(s,a)\big\rvert_{a=\mu_{\theta}(s)}],
+\end{aligned}
+{{< /katex >}}
+
+The derivation (i) the state distribution is non-differentiable w.r.t. $\theta$ (i.e., derivation (i)) (A small change in $\theta$ can cause a substantial change in the trajectory, and the state visitation distribution can exhibit non-smooth behavior as a function of $\theta$). To guarantee enough exploration of determinant PG, We can either add noise into the policy 
+
+{{< katex display=true >}}
+\mu'(s) = \mu_{\theta}(s) + \mathcal{N},
+{{< /katex >}}
+
+or learn it off-policy-ly by following a different stochastic behavior $\beta(a\mid s)$ policy to collect samples,
+
+{{< katex display=true >}}
+\label{equ:pgthem-deterministic-offpolicy}
+\begin{aligned}  
+\nabla_{\theta} J(\theta) &=\nabla_{\theta} \left(\int_s d^\beta(s) Q^\mu(s,a)\big\rvert_{a=\mu_{\theta}(s)}ds\right)\\
+&=\mathbb{E}_{d^\beta} [ \,\nabla_{\theta} \mu_{\theta}(s) \nabla_a Q^\mu(s,a)\big\rvert_{a=\mu_{\theta}(s)}],
+\end{aligned}
+{{< /katex >}}
+
+{{% /details %}}
+
+{{% details "Distributed PG" %}}
+
+Due to the efficiency of the GPU-cluster in training, some workers (machines or processes) are employed in a distributed manner to generate rollouts and compute policy gradients in PG methods (Brenner 2023). The distributed advancement can also be extended to any PG extension, like Actor-Critic (AC), PPO, and deterministic PG methods.
+
+<p><strong>Centralized v.s. Decentralized</strong> These workers can either share a central parameter server or update their own weights in a decentralized manner, where aggregation techniques such as AllReduce may be utilized. Rather than merely collecting rollouts and calculating the gradient according to its replay buffer, the workers can be further decentralized into <em>agents</em> with their parameters, which is closely related to PG in multi-agent setting.</p>
+
+<p><strong>Synchronous v.s. Asynchronous</strong> In the centralized paradigm, weight updates can be conducted synchronously, where gradients from all workers are aggregated (typically through summation or averaging) before updating the model parameters. This ensures a globally consistent update but may introduce inefficiencies due to synchronization delays. Alternatively, asynchronous updating allows each worker to update the global parameters independently, without waiting for all gradients to be collected. This method can improve computational throughput but may lead to stale gradients and slower convergence. The difference between these 2 approaches is exemplified in Advantage Actor-Critic (A2C) and Asynchronous Advantage Actor-Critic (A3C).</p>
+
+{{% /details %}}
 
 where {{< katex >}}d^\beta(s){{< /katex >}} is the stationary distribution of the behavior policy {{< katex >}}\beta{{< /katex >}}, and {{< katex >}}Q^\pi{{< /katex >}} is the Q-function estimated regard to the target policy {{< katex >}}\pi{{< /katex >}}. Because of hard computation in reality (i), we ignore the approximation term {{< katex >}}\nabla Q^\pi(s,a){{< /katex >}}.
 
