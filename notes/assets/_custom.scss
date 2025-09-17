@@ -52,14 +52,15 @@
 }
 
 /* Scale down post content (not sidebars) to 80% uniformly */
+/* Scale down post content (not sidebars) to 88.8% uniformly */
 .book-page .markdown {
-  font-size: 0.8rem;
+  font-size: 0.888rem;
 }
 
-/* Override heading sizes inside posts to maintain ~80% scale of theme defaults */
-.book-page .markdown h1 { font-size: 1.6rem; }   /* 2.0rem * 0.8 */
-.book-page .markdown h2 { font-size: 1.2rem; }   /* 1.5rem * 0.8 */
-.book-page .markdown h3 { font-size: 1.0rem; }   /* 1.25rem * 0.8 */
-.book-page .markdown h4 { font-size: 0.9rem; }   /* 1.125rem * 0.8 */
-.book-page .markdown h5 { font-size: 0.8rem; }   /* 1.0rem * 0.8 */
-.book-page .markdown h6 { font-size: 0.7rem; }   /* 0.875rem * 0.8 */
+/* Override heading sizes inside posts to maintain ~88.8% scale of theme defaults */
+.book-page .markdown h1 { font-size: 1.776rem; }  /* 2.0rem  * 0.888 */
+.book-page .markdown h2 { font-size: 1.332rem; }  /* 1.5rem  * 0.888 */
+.book-page .markdown h3 { font-size: 1.11rem; }   /* 1.25rem * 0.888 */
+.book-page .markdown h4 { font-size: 1.0rem; }    /* 1.125rem* 0.888 ~= 1.0 */
+.book-page .markdown h5 { font-size: 0.888rem; }  /* 1.0rem  * 0.888 */
+.book-page .markdown h6 { font-size: 0.777rem; }  /* 0.875rem* 0.888 */
