@@ -1,3 +1,3 @@
 <blockquote class="book-hint {{ default "default" (.Get 0) }}">
-  {{ .Page.RenderString (dict "display" "block" "content" .Inner) }}
+  {{ .Page.RenderString .Inner }}
 </blockquote>
