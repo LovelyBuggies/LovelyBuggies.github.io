@@ -16,34 +16,33 @@ readingTime: 20
 ## Bellman Equation and Operator
 
 <div class="definition">
+**Definition.** The Bellman Equations characterize value recursions in MDPs.
 
-**Definition.** *The Bellman Equations characterize value recursions in MDPs.*
-
-*For V-values (Sutton and Barto 2018),*
+For V-values (Sutton and Barto 2018),
 
 {{< katex display=true >}}
 V^\pi(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
 = \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 V^*(s) \doteq \max_{a} \left[ Q^*(s, a) \right] \\
-= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right]
+= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right].
 {{< /katex >}}
 
-*and for Q-values,*
+For Q-values,
 
 {{< katex display=true >}}
 Q^\pi(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
 = R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right] \\
 Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right] \\
-= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right]
+= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right],
 {{< /katex >}}
 
-*where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions.* {{< katex display=true >}}
-\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
+where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, {{< katex display=true >}}
+\pi^*(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
 {{< /katex >}}
 
 </div>
 
-*Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction.* A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
+Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
 {{< katex display=true >}}
 (\mathcal{T}^\pi\circ V^\pi)(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 (\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
@@ -62,14 +61,12 @@ For convenience, we use Q-value as the representative in the following parts of 
 <strong>Curse of Dimension.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
 </div>
 <div class="proposition">
-
-**Proposition 1** ($\gamma$-contraction). *Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
+**Proposition 1** ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
 \begin{aligned}
         \|\mathcal{T}^\pi \circ Q - \mathcal{T}^\pi \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty,\\
         \text{and }\|\mathcal{T}^* \circ Q - \mathcal{T}^* \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty.
     \end{aligned}
 {{< /katex >}}
-*
 
 </div>
 
@@ -85,7 +82,6 @@ Q^{\pi, \infty}=Q^{*, \infty}=Q^*, \\
 </div>
 
 <div id="them:fundamental" class="theorem">
-
 **Theorem 1** (Fundamental theorem). *Any memoryless policy that is greedy to $Q^*$ (**deterministically** maximizes) is optimal (Szepesvári 2010):*
 
 {{< katex display=true >}}
