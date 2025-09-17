@@ -66,7 +66,7 @@ Q^*(\vec{\theta}^t, \psi^{t+1}) = \left\{
 
 </div>
 
-Here, $\pi^*(\vec{\theta}^{t+1})\equiv \psi^{t+2, *}$ because of the consistent optimality of policy.
+Here, {{< katex >}}\pi^*(\vec{\theta}^{t+1})\equiv \psi^{t+2, *}{{< /katex >}} because of the consistent optimality of policy.
 
 <div id="prop:problem" class="proposition">
 
@@ -82,15 +82,15 @@ To calculate the Pareto optima of Bayesian game at $t$, {{< katex display=true >
 \textcolor{red}{\delta^{t, *}}
     = \mathop{\mathrm{argmax}}_{\delta^t}\sum_{\vec{\theta}^t \in \vec{\Theta}^t_{\psi^{t, *}}} P(\vec{\theta}^t|\psi^{t, *}) \textcolor{red}{Q^*}(\vec{\theta}^t, (\psi^{t, *}, \delta^t)),
 {{< /katex >}}
- note that calculating $\delta^{t,*}$ depends on $\psi^{t, *} = \delta^{[0, t), *}$ and $Q^*(\vec{\theta}^t, \cdot)$.
+ note that calculating {{< katex >}}\delta^{t,*}{{< /katex >}} depends on {{< katex >}}\psi^{t, *} = \delta^{[0, t), *}{{< /katex >}} and {{< katex >}}Q^*(\vec{\theta}^t, \cdot){{< /katex >}}.
 
 According to Definition. <a href="#defn:normative-Q" data-reference-type="ref" data-reference="defn:normative-Q">1</a>, the optimal Bellman equation can be written as, {{< katex display=true >}}
 \textcolor{red}{Q^*}(\vec{\theta}^t, \psi^{t+1}) = R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \max_{\delta^{t+1}}Q^*(\vec{\theta}^{t+1}, (\textcolor{red}{\psi^{t+1, *}}, \delta^{t+1})),
 {{< /katex >}}
- when $0\leqslant t < h-1$. This indicates that $Q^*(\vec{\theta}^t, \cdot)$ depends on $\psi^{t+1, *}$. Consequently, calculating $\delta^{t,*}$ inherently depends on $\delta^{[0, t], *}$ (includes itself), making it self-dependent and impractical to solve. ◻
+ when {{< katex >}}0\leqslant t < h-1{{< /katex >}}. This indicates that {{< katex >}}Q^*(\vec{\theta}^t, \cdot){{< /katex >}} depends on {{< katex >}}\psi^{t+1, *}{{< /katex >}}. Consequently, calculating {{< katex >}}\delta^{t,*}{{< /katex >}} inherently depends on {{< katex >}}\delta^{[0, t], *}{{< /katex >}} (includes itself), making it self-dependent and impractical to solve. ◻
 
 {{< hint info >}}
-Note: The dependency of $P(o^{t+1}\mid\vec{\theta}^t, \psi^{t+1})$ is not problematic and can be handled analogously to how the stochasticity $P(s^{t+1}\mid s^t, a)$ is treated via double learning (Sutton and Barto 2018, Sec. 6.7).
+Note: The dependency of {{< katex >}}P(o^{t+1}\mid\vec{\theta}^t, \psi^{t+1}){{< /katex >}} is not problematic and can be handled analogously to how the stochasticity {{< katex >}}P(s^{t+1}\mid s^t, a){{< /katex >}} is treated via double learning (Sutton and Barto 2018, Sec. 6.7).
 {{< /hint >}}
 
 {{< hint info >}}
@@ -113,17 +113,17 @@ Q^\circledast(\vec{\theta}^t, \psi^{t+1}) = \left\{
         \end{aligned}
         \right .\label{eq:SR-Q}
 {{< /katex >}}
- where $\psi^{t+2, \circledast}=(\psi^{t+1}, \delta^{t+1, \circledast}_{\psi}), \forall \ \psi^{t+1} \in \Psi^{t+1}$.*
+ where {{< katex >}}\psi^{t+2, \circledast}=(\psi^{t+1}, \delta^{t+1, \circledast}_{\psi}), \forall \ \psi^{t+1} \in \Psi^{t+1}{{< /katex >}}.*
 
 </div>
 
-Note that the only difference of $Q^\circledast$ from $Q^*$ is $\psi^{t+2, \circledast}$, consequently expanding $Q^*$’s candidates of history from $\vec{\theta}^t \in \vec{\Theta}^t_{\psi^{t, *}}$ to $\vec{\theta}^t \in \vec{\Theta}^t_{\Psi^{t}}$ and policy from $\psi^{t+1}\in(\psi^{t, *},\Delta^t)$ to $\psi^{t+1}\in(\Psi^t,\Delta^t)$.
+Note that the only difference of {{< katex >}}Q^\circledast{{< /katex >}} from {{< katex >}}Q^*{{< /katex >}} is {{< katex >}}\psi^{t+2, \circledast}{{< /katex >}}, consequently expanding {{< katex >}}Q^*{{< /katex >}}’s candidates of history from {{< katex >}}\vec{\theta}^t \in \vec{\Theta}^t_{\psi^{t, *}}{{< /katex >}} to {{< katex >}}\vec{\theta}^t \in \vec{\Theta}^t_{\Psi^{t}}{{< /katex >}} and policy from {{< katex >}}\psi^{t+1}\in(\psi^{t, *},\Delta^t){{< /katex >}} to {{< katex >}}\psi^{t+1}\in(\Psi^t,\Delta^t){{< /katex >}}.
 
-Beyond solving the problem of Proposition <a href="#prop:problem" data-reference-type="ref" data-reference="prop:problem">1</a>, another advantage of $Q^\circledast$ is that it allows for the computation of optimal subsequent policy $\xi^{t, *}_\psi$ following any past policy $\psi^{t}$. This is beneficial in online applications where agents may occasionally deviate from the optimal policy.
+Beyond solving the problem of Proposition <a href="#prop:problem" data-reference-type="ref" data-reference="prop:problem">1</a>, another advantage of {{< katex >}}Q^\circledast{{< /katex >}} is that it allows for the computation of optimal subsequent policy {{< katex >}}\xi^{t, *}_\psi{{< /katex >}} following any past policy {{< katex >}}\psi^{t}{{< /katex >}}. This is beneficial in online applications where agents may occasionally deviate from the optimal policy.
 
 ## Open Questions
 
-- We have seen some advantages of defining the optimal Q-value function as $Q^\circledast$, what are the downsides to defining it this way (e.g., high computational costs)?
+- We have seen some advantages of defining the optimal Q-value function as {{< katex >}}Q^\circledast{{< /katex >}}, what are the downsides to defining it this way (e.g., high computational costs)?
 
 
 

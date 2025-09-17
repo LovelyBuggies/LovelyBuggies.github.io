@@ -74,11 +74,11 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 
 ##### Centralized Control
 
-MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy $\mathbb{H}\to\mathbb{A}$.
+MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy {{< katex >}}\mathbb{H}\to\mathbb{A}{{< /katex >}}.
 
 ##### Independent Variables
 
-A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) $T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i')$ and reward-independence (RI) $R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n})$. Network-distributed POMDP (ND-POMDP) represents the factored one with TI and block-RI, i.e., $R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n})$, where ${\mathcal{N}(i)}$ are the neighbors of $i$.
+A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) {{< katex >}}T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i'){{< /katex >}} and reward-independence (RI) {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n}){{< /katex >}}. Network-distributed POMDP (ND-POMDP) represents the factored one with TI and block-RI, i.e., {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n}){{< /katex >}}, where {{< katex >}}{\mathcal{N}(i)}{{< /katex >}} are the neighbors of {{< katex >}}i{{< /katex >}}.
 
 ##### Complexity
 
@@ -123,7 +123,7 @@ The worst-case complexity of finite-horizon problems is: (by Amato et al., 2013)
 
 <div class="theorem">
 
-**Theorem 4**. *A finite $\text{Dec-POMDP}_{n\geqslant2}$ is NEXP-complete, and a finite $\text{Dec-MDP}_{n\geqslant3}$ is also NEXP-complete (Bernstein et al. 2002).*
+**Theorem 4**. *A finite {{< katex >}}\text{Dec-POMDP}_{n\geqslant2}{{< /katex >}} is NEXP-complete, and a finite {{< katex >}}\text{Dec-MDP}_{n\geqslant3}{{< /katex >}} is also NEXP-complete (Bernstein et al. 2002).*
 
 </div>
 
@@ -173,15 +173,15 @@ V^{t+1}(b^t) = \max_{a \in \mathcal{A}} \left\{ \sum_{s \in \mathcal{S}} b^t(s)
 
 <div class="algorithm">
 
-**Input:** Depth-$t$ policy trees $Q_i^t$ and value vectors $V_i^t$ for each $i$
+**Input:** Depth-{{< katex >}}t{{< /katex >}} policy trees {{< katex >}}Q_i^t{{< /katex >}} and value vectors {{< katex >}}V_i^t{{< /katex >}} for each {{< katex >}}i{{< /katex >}}
 
 <div class="algorithmic">
 
-Perform exhaustive backups to get $Q_i^{t+1}$, and compute $V_i^{t+1}$ accordingly for each $i$ Find a policy tree $q_j \in Q_i^{t+1}$ that satisfies $\exists \ v_k \in \{V_i^{t+1} \setminus v_j\},b^{t+1} v_k \geq b^{t+1} v_j, \forall \ b^{t+1}$ $Q_i^{t+1} \gets \{Q_i^{t+1} \setminus q_j\}$, and $V_i^{t+1} \gets \{V_i^{t+1} \setminus v_j\}$ accordingly
+Perform exhaustive backups to get {{< katex >}}Q_i^{t+1}{{< /katex >}}, and compute {{< katex >}}V_i^{t+1}{{< /katex >}} accordingly for each {{< katex >}}i{{< /katex >}} Find a policy tree {{< katex >}}q_j \in Q_i^{t+1}{{< /katex >}} that satisfies {{< katex >}}\exists \ v_k \in \{V_i^{t+1} \setminus v_j\},b^{t+1} v_k \geq b^{t+1} v_j, \forall \ b^{t+1}{{< /katex >}} {{< katex >}}Q_i^{t+1} \gets \{Q_i^{t+1} \setminus q_j\}{{< /katex >}}, and {{< katex >}}V_i^{t+1} \gets \{V_i^{t+1} \setminus v_j\}{{< /katex >}} accordingly
 
 </div>
 
-**Output:** Depth-$t+1$ policy trees $Q_i^{t+1}$ and value vectors $V_i^{t+1}$ for each $i$
+**Output:** Depth-{{< katex >}}t+1{{< /katex >}} policy trees {{< katex >}}Q_i^{t+1}{{< /katex >}} and value vectors {{< katex >}}V_i^{t+1}{{< /katex >}} for each {{< katex >}}i{{< /katex >}}
 
 </div>
 
@@ -191,16 +191,16 @@ The policy tree can also be built using heuristic search like MAA\* (Szer, Charp
 
 <div class="algorithm">
 
-**Initialize:** Joint policy tree root $\Pi\gets\times_i \mathbb{A}_i$  
-**Input:** Depth-$t$ joint policy tree $\Pi$
+**Initialize:** Joint policy tree root {{< katex >}}\Pi\gets\times_i \mathbb{A}_i{{< /katex >}}  
+**Input:** Depth-{{< katex >}}t{{< /katex >}} joint policy tree {{< katex >}}\Pi{{< /katex >}}
 
 <div class="algorithmic">
 
-Select $a^*=\mathop{\mathrm{argmax}}_{a\in \Pi}F^\mathcal{H}(b^0, a)$ (heuristic and value) Expand $a^*$ to $a^\circledast$, and $\Pi \gets \{\Pi \cup  a^\circledast\}$ $\Pi \gets \{\Pi \setminus a\}$ $\Pi \gets \{\Pi \setminus a^*\}$
+Select {{< katex >}}a^*=\mathop{\mathrm{argmax}}_{a\in \Pi}F^\mathcal{H}(b^0, a){{< /katex >}} (heuristic and value) Expand {{< katex >}}a^*{{< /katex >}} to {{< katex >}}a^\circledast{{< /katex >}}, and {{< katex >}}\Pi \gets \{\Pi \cup  a^\circledast\}{{< /katex >}} {{< katex >}}\Pi \gets \{\Pi \setminus a\}{{< /katex >}} {{< katex >}}\Pi \gets \{\Pi \setminus a^*\}{{< /katex >}}
 
 </div>
 
-**Input:** Updated joint policy set $\Pi$.
+**Input:** Updated joint policy set {{< katex >}}\Pi{{< /katex >}}.
 
 </div>
 
@@ -218,7 +218,7 @@ The joint equilibrium search for policies (JESP) Nair et al., 2003 uses alternat
 
 ## Complexity Classes
 
-Assuming $c$ and $k$ are constants, $\mathcal{C}$ is a complexity class, the table shows complexity terminologies.
+Assuming {{< katex >}}c{{< /katex >}} and {{< katex >}}k{{< /katex >}} are constants, {{< katex >}}\mathcal{C}{{< /katex >}} is a complexity class, the table shows complexity terminologies.
 
 <span id="tab:complexitydefinition" label="tab:complexitydefinition"></span>
 
@@ -226,13 +226,13 @@ Assuming $c$ and $k$ are constants, $\mathcal{C}$ is a complexity class, the tab
 
 |                        |                                                                                                  |
 |:-----------------------|:-------------------------------------------------------------------------------------------------|
-| P                      | the set of problems solvable in polynomial time, e.g., $O(n^k)$                                  |
+| P                      | the set of problems solvable in polynomial time, e.g., {{< katex >}}O(n^k){{< /katex >}}                                  |
 | NP                     | the set of problems solvable nondeterministically in polynomial time                             |
-| EXP                    | the set of problems solvable in exponential time, e.g., $O(c^{n^k})$                             |
+| EXP                    | the set of problems solvable in exponential time, e.g., {{< katex >}}O(c^{n^k}){{< /katex >}}                             |
 | NEXP                   | the set of problems solvable nondeterministically in exponential time                            |
-| PSPACE                 | the set of problems solvable in polynomial space (P and NP $\subset$ PSPACE), e.g., $O(c^{n^k})$ |
-| $\mathcal{C}$-hard     | a problem that all problems in $\mathcal{C}$ are reducible to within polynomial time             |
-| $\mathcal{C}$-complete | a problem that is contained in $\mathcal{C}$ and $\mathcal{C}$-hard                              |
+| PSPACE                 | the set of problems solvable in polynomial space (P and NP {{< katex >}}\subset{{< /katex >}} PSPACE), e.g., {{< katex >}}O(c^{n^k}){{< /katex >}} |
+| {{< katex >}}\mathcal{C}{{< /katex >}}-hard     | a problem that all problems in {{< katex >}}\mathcal{C}{{< /katex >}} are reducible to within polynomial time             |
+| {{< katex >}}\mathcal{C}{{< /katex >}}-complete | a problem that is contained in {{< katex >}}\mathcal{C}{{< /katex >}} and {{< katex >}}\mathcal{C}{{< /katex >}}-hard                              |
 
 </div>
 

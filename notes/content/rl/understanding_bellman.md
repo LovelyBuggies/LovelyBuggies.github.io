@@ -77,7 +77,7 @@ A succinct representation is to define the Bellman Equation as a unary mathemati
 (\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
 {{< /katex >}}
 
-The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are,
+The Bellman and optimal Bellman Operators {{< katex >}}\mathcal{T}^\pi{{< /katex >}} for Q-values are,
 
 {{< katex display=true >}}
 (\mathcal{T}^\pi\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \mathbb{E}_{a' \sim \pi(a'|s')} Q^\pi(s', a') \right] \\
@@ -99,7 +99,7 @@ For convenience, we use Q-value as the representative in the following parts of 
 {{< /katex >}}
 </div>
 <div id="them:fixpoint" class="corollary">
-<strong>Corollary 1</strong> (Fixed-point Iteration). For any $Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, after $k\to \infty$ iterations of Bellman transformation, $Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0$, or $Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0$, according to Banach’s Fixed Point Theorem:
+<strong>Corollary 1</strong> (Fixed-point Iteration). For any {{< katex >}}Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}, after {{< katex >}}k\to \infty{{< /katex >}} iterations of Bellman transformation, {{< katex >}}Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0{{< /katex >}}, or {{< katex >}}Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0{{< /katex >}}, according to Banach’s Fixed Point Theorem:
 
 
 {{< katex display=true >}}
@@ -112,7 +112,7 @@ Q^{\pi,\,\infty} &= Q^{*,\,\infty} = Q^* ,\\
 </div>
 
 <div id="them:fundamental" class="theorem">
-<strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to $Q^*$ (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):
+<strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to {{< katex >}}Q^*{{< /katex >}} (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):
 
 
 {{< katex display=true >}}
@@ -123,7 +123,7 @@ Q^{\pi,\,\infty} &= Q^{*,\,\infty} = Q^* ,\\
 
 <div class="proposition">
 
-**Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values $Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$:*
+**Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values {{< katex >}}Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}:*
 
 {{< katex display=true >}}
 \left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) \\
@@ -136,15 +136,15 @@ Q^{\pi,\,\infty} &= Q^{*,\,\infty} = Q^* ,\\
 
 ### Dynamic Programming
 
-According to the Fundamental Theorem, we can find $\pi^*$ efficiently once having access to $Q^*$, without the need to find the policy whose Q-function **dominates** the others’ brute-force-ly. To avoid the Bellman Curse of Dimensionality, we can apply Dynamic Programming (DP) methods to solve MDPs by keeping track of Q-values during calculations, thanks to Bellman recursions.
+According to the Fundamental Theorem, we can find {{< katex >}}\pi^*{{< /katex >}} efficiently once having access to {{< katex >}}Q^*{{< /katex >}}, without the need to find the policy whose Q-function **dominates** the others’ brute-force-ly. To avoid the Bellman Curse of Dimensionality, we can apply Dynamic Programming (DP) methods to solve MDPs by keeping track of Q-values during calculations, thanks to Bellman recursions.
 
 #### Value Iteration
 
-Value iteration (so-called backward induction) involves iteratively applying $\mathcal{T}^*$ to arbitrarily initialized values $Q^0$ until convergence. According to Corollary <a href="#them:fixpoint" data-reference-type="ref" data-reference="them:fixpoint">1</a> and Theorem <a href="#them:fundamental" data-reference-type="ref" data-reference="them:fundamental">1</a>, value iteration converges to $Q^*$ as $k \to \infty$, then an optimal policy $\pi^*$ can be derived by greedifying $Q^*$.
+Value iteration (so-called backward induction) involves iteratively applying {{< katex >}}\mathcal{T}^*{{< /katex >}} to arbitrarily initialized values {{< katex >}}Q^0{{< /katex >}} until convergence. According to Corollary <a href="#them:fixpoint" data-reference-type="ref" data-reference="them:fixpoint">1</a> and Theorem <a href="#them:fundamental" data-reference-type="ref" data-reference="them:fundamental">1</a>, value iteration converges to {{< katex >}}Q^*{{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}}, then an optimal policy {{< katex >}}\pi^*{{< /katex >}} can be derived by greedifying {{< katex >}}Q^*{{< /katex >}}.
 
 #### Policy Iteration
 
-Policy iteration starts with an arbitrary policy $\pi^0$ and values $Q^0$. In each iterative step $k$, $Q^{\pi, k}$ is calculated by applying Bellman Operator $\mathcal{T}^{\pi, k}$ that follows current policy ${\pi^k}$ to $Q^{\pi, {k-1}}$ from the last iteration, and then $\pi^{k+1}$ is derived from greedifying $Q^{\pi, k}$. This process is repeated until convergence, and policy iteration can produce optimal policy after sufficient iterations.
+Policy iteration starts with an arbitrary policy {{< katex >}}\pi^0{{< /katex >}} and values {{< katex >}}Q^0{{< /katex >}}. In each iterative step {{< katex >}}k{{< /katex >}}, {{< katex >}}Q^{\pi, k}{{< /katex >}} is calculated by applying Bellman Operator {{< katex >}}\mathcal{T}^{\pi, k}{{< /katex >}} that follows current policy {{< katex >}}{\pi^k}{{< /katex >}} to {{< katex >}}Q^{\pi, {k-1}}{{< /katex >}} from the last iteration, and then {{< katex >}}\pi^{k+1}{{< /katex >}} is derived from greedifying {{< katex >}}Q^{\pi, k}{{< /katex >}}. This process is repeated until convergence, and policy iteration can produce optimal policy after sufficient iterations.
 
 ## Bellman Residual for Learning
 
@@ -156,21 +156,21 @@ When the transition model is unavailable (model-free), we can use the residuals 
     (\mathcal{B}^*\circ Q) (s,a) &\doteq  r + \gamma \max_{a'} Q(s', a') - Q(s, a).
 \end{aligned}
 {{< /katex >}}
- Assuming that our sampling and parameter updating roughly follow the true state distribution $\mu(s)$, the expectation of Bellman residual will be closed to zero at the optima. This approach is often called temporal difference (TD) learning.
+ Assuming that our sampling and parameter updating roughly follow the true state distribution {{< katex >}}\mu(s){{< /katex >}}, the expectation of Bellman residual will be closed to zero at the optima. This approach is often called temporal difference (TD) learning.
 
 ##### TD-learning
 
 In TD-learning with learning rate $\alpha$, the update rule for Q-values is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td-learning}
 {{< /katex >}}
- According to Stochastic Approximation Theorem, let $k$ be the visitation times of state-action pair, and learning rates $0 \leqslant \alpha^k < 1$ satisfies $\forall (s, a)$, $\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty$. Following TD-learning updates, $Q^{\pi, k}(s, a)$ converges to $Q^*(s, a)$ as $k \to \infty$ ((Jaakkola, Jordan, and Singh 1994)).
+ According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following TD-learning updates, {{< katex >}}Q^{\pi, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ((Jaakkola, Jordan, and Singh 1994)).
 
 ##### Q-learning
 
 In Q-learning that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}
 {{< /katex >}}
- According to Stochastic Approximation Theorem, let $k$ be the visitation times of state-action pair, and learning rates $0 \leqslant \alpha^k < 1$ satisfies $\forall (s, a)$, $\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty$. Following Q-learning updates, $Q^{*, k}(s, a)$ converges to $Q^*(s, a)$ as $k \to \infty$ ((Watkins and Dayan 1992)). The deep version of Q-learning algorithm, Deep Q-Network (DQN), is shown in Appendix.
+ According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following Q-learning updates, {{< katex >}}Q^{*, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ((Watkins and Dayan 1992)). The deep version of Q-learning algorithm, Deep Q-Network (DQN), is shown in Appendix.
 
 However, the nice property of convergence only holds in the tabular case and cannot be extended to a function approximation as discussed later.
 
@@ -179,7 +179,7 @@ However, the nice property of convergence only holds in the tabular case and can
 To introduce generalization to the value function, we represent the approximated Q-value in a parameterized functional form. Our goal is to minimize the mean squared value error, {{< katex display=true >}}
 \mathcal{L}(\theta) = \frac{1}{2}\sum_{s \in \mathcal{S}} \mu(s) \Big[ Q^\text{target} - Q_\theta(s, a) \Big]^2,
 {{< /katex >}}
- where $Q^\text{target}$ is the ground truth and $Q_\theta$ is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
+ where {{< katex >}}Q^\text{target}{{< /katex >}} is the ground truth and {{< katex >}}Q_\theta{{< /katex >}} is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
 
 ##### Semi gradient for Bellman Residual
 
@@ -189,7 +189,7 @@ Similar to stochastic gradient methods with unbiased target estimators, if we us
     &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \text{ where } Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a')\label{eq:semi-grad}
 \end{aligned}
 {{< /katex >}}
- Since we neglects a part of the gradient of $Q^\text{target}$, it is called semi gradient for Bellman residual ($\theta$ in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
+ Since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called semi gradient for Bellman residual ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
 
 ##### Full Gradient for Bellman Residual
 

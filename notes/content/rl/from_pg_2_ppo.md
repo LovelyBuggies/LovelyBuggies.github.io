@@ -28,18 +28,18 @@ All methods following this schema are PG, whether or not they also learn an appr
 
 There are 2 main advantages of PG methods,
 
-- Approximating policy can approach a deterministic policy, whereas $\epsilon$-greedy always has probability of selecting a random action;
+- Approximating policy can approach a deterministic policy, whereas {{< katex >}}\epsilon{{< /katex >}}-greedy always has probability of selecting a random action;
 
-- With continuous policy parameterization, the action probabilities change smoothly as a function of the learned parameter, whereas $\epsilon$-greedy may change dramatically for an arbitrarily small change in the estimated action values.
+- With continuous policy parameterization, the action probabilities change smoothly as a function of the learned parameter, whereas {{< katex >}}\epsilon{{< /katex >}}-greedy may change dramatically for an arbitrarily small change in the estimated action values.
 
 Since the major purpose of this article is to introduce PPO methods from PG, we omit some other important forms of PG here. Readers can find them in the Appendix.
 
 ### PG Theorem
 
-An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="ref" data-reference="eq:pg">[eq:pg]</a> is to replace $J(\theta)$ with $V^{\pi_{\theta}} (s_0)$. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
+An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="ref" data-reference="eq:pg">[eq:pg]</a> is to replace {{< katex >}}J(\theta){{< /katex >}} with {{< katex >}}V^{\pi_{\theta}} (s_0){{< /katex >}}. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
 
 {{< hint info >}}
-Notation: we omit $\theta$ in subscripts/superscripts and gradients, assuming $\pi$ depends on $\theta$ and all gradients are w.r.t. $\theta$; i.e., $V^{\pi}\equiv V^{\pi_{\theta}}$, $Q^{\pi}\equiv Q^{\pi_{\theta}}$ and $\nabla\equiv\nabla_{\theta}$.
+Notation: we omit {{< katex >}}\theta{{< /katex >}} in subscripts/superscripts and gradients, assuming {{< katex >}}\pi{{< /katex >}} depends on {{< katex >}}\theta{{< /katex >}} and all gradients are w.r.t. {{< katex >}}\theta{{< /katex >}}; i.e., {{< katex >}}V^{\pi}\equiv V^{\pi_{\theta}}{{< /katex >}}, {{< katex >}}Q^{\pi}\equiv Q^{\pi_{\theta}}{{< /katex >}} and {{< katex >}}\nabla\equiv\nabla_{\theta}{{< /katex >}}.
 {{< /hint >}}
 
 <div id="them:PG" class="theorem">
@@ -48,7 +48,7 @@ Notation: we omit $\theta$ in subscripts/superscripts and gradients, assuming $\
 \label{equ:pgthem}
     \nabla J(\theta) \propto \sum_s d^\pi(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s),
 {{< /katex >}}
- where $d^\pi(s)$ is the stationary distribution of the policy $\pi_{\theta}$.*
+ where {{< katex >}}d^\pi(s){{< /katex >}} is the stationary distribution of the policy {{< katex >}}\pi_{\theta}{{< /katex >}}.*
 
 </div>
 
@@ -63,7 +63,7 @@ To sample with expectation equals or approximates the expression Equ. <a href="
 = \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \nabla\ln\pi(a|s) \right] \, .
 {{< /katex >}}
 
-The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy parameterization appears, which can be omitted $L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]$ since it will be automatically recovered when differentiating.
+The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only place the policy parameterization appears, which can be omitted {{< katex >}}L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]{{< /katex >}} since it will be automatically recovered when differentiating.
 
 ### PG with Baseline
 
@@ -80,11 +80,11 @@ The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy paramete
 
 </div>
 
-According to the Theorem <a href="#them:PG-baseline" data-reference-type="ref" data-reference="them:PG-baseline">2</a>, the expected return $Q(s,a)$ in Theorem <a href="#them:PG" data-reference-type="ref" data-reference="them:PG">1</a> can be replaced by $G$ (expected return of the full or following trajectory by Monte Carlo), $A$ (advantage by Generalized Advantage Estimation or state-value prediction), and $\delta$ (TD-residual by critic prediction).
+According to the Theorem <a href="#them:PG-baseline" data-reference-type="ref" data-reference="them:PG-baseline">2</a>, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem <a href="#them:PG" data-reference-type="ref" data-reference="them:PG">1</a> can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by Generalized Advantage Estimation or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
 
 ### Off-Policy PG
 
-Off-policy sampling reuses any past episodes, which has a higher efficiency and brings more exploration. To make PG off-policy, we adjust it with an importance weight $\frac{\pi(a|s)}{\beta(a|s)}$ to correct the mismatch between behavior and target policies.
+Off-policy sampling reuses any past episodes, which has a higher efficiency and brings more exploration. To make PG off-policy, we adjust it with an importance weight {{< katex >}}\frac{\pi(a|s)}{\beta(a|s)}{{< /katex >}} to correct the mismatch between behavior and target policies.
 
 {{< katex display=true >}}
 \label{equ:pgthem-off-policy}
@@ -96,7 +96,7 @@ Off-policy sampling reuses any past episodes, which has a higher efficiency and 
 = \mathbb{E}_{\beta}\!\left[\frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \nabla\ln \pi(a|s)\right] \, .
 {{< /katex >}}
 
-where $d^\beta(s)$ is the stationary distribution of the behavior policy $\beta$, and $Q^\pi$ is the Q-function estimated regard to the target policy $\pi$. Because of hard computation in reality (i), we ignore the approximation term $\nabla Q^\pi(s,a)$.
+where {{< katex >}}d^\beta(s){{< /katex >}} is the stationary distribution of the behavior policy {{< katex >}}\beta{{< /katex >}}, and {{< katex >}}Q^\pi{{< /katex >}} is the Q-function estimated regard to the target policy {{< katex >}}\pi{{< /katex >}}. Because of hard computation in reality (i), we ignore the approximation term {{< katex >}}\nabla Q^\pi(s,a){{< /katex >}}.
 
 ## Proximal Policy Optimization (PPO)
 
@@ -104,14 +104,14 @@ In this section, we introduce standard PPO and it variants in different domains.
 
 ### Clip-PPO
 
-Schulman et al., 2017 proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate $\hat{A}^{\pi_{\theta_{\text{old}}}}$ to reduce the variance of policy gradient methods and maintain low bias Schulman et al., 2015.
+Schulman et al., 2017 proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate {{< katex >}}\hat{A}^{\pi_{\theta_{\text{old}}}}{{< /katex >}} to reduce the variance of policy gradient methods and maintain low bias Schulman et al., 2015.
 
 {{< katex display=true >}}
 \label{equ:Clip-PPO}
 J^{\text{CLIP}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}\!\left(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon\right) \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right]
 {{< /katex >}}
 
-where $\hat{A}^\text{GAE}_t = \sum_{l=0}^{\infty} (\gamma \lambda)^l \delta_{t+l}$, $\delta$ is the TD error, and $\lambda$ is a hyperparameter controlling the trade-off between bias and variance. Note that the clipping could also occur in the value network to stabilize the training process.
+where {{< katex >}}\hat{A}^\text{GAE}_t = \sum_{l=0}^{\infty} (\gamma \lambda)^l \delta_{t+l}{{< /katex >}}, {{< katex >}}\delta{{< /katex >}} is the TD error, and {{< katex >}}\lambda{{< /katex >}} is a hyperparameter controlling the trade-off between bias and variance. Note that the clipping could also occur in the value network to stabilize the training process.
 
 The objective function can be augmented with an entropy term to encourage exploration:
 
@@ -124,7 +124,7 @@ J^{\text{CLIP+}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ J^{\tex
 
 <div class="algorithmic">
 
-**Initialize**: policy parameter $\theta$ for actor network $\pi_{\theta}$, parameter $w$ for critic network $V_{w}$, replay memory $\mathcal{D}$ Generate an episode following policy $\pi_{\theta_{\text{old}}}$ and store it into $\mathcal{D}$ Estimate reward-to-go $\hat{R}$ and $\hat{A}^{\pi_{\theta_{\text{old}}}}$ using GAE Compute $J^{\text{CLIP+}}(\theta)$ for all samples according to Equ. <a href="#equ:PPO" data-reference-type="ref" data-reference="equ:PPO">[equ:PPO]</a> $w \leftarrow w + \alpha_w \frac{1}{N}\sum_i\nabla_w (V_w(s_i)-\hat{R}(s_i, a_i))^2$ $\theta \leftarrow \theta + \alpha_\theta \frac{1}{N}\sum_i \nabla_\theta J^{\text{CLIP+H}}(\theta)$ $\theta_{\text{old}} \leftarrow \theta$
+**Initialize**: policy parameter {{< katex >}}\theta{{< /katex >}} for actor network {{< katex >}}\pi_{\theta}{{< /katex >}}, parameter {{< katex >}}w{{< /katex >}} for critic network {{< katex >}}V_{w}{{< /katex >}}, replay memory {{< katex >}}\mathcal{D}{{< /katex >}} Generate an episode following policy {{< katex >}}\pi_{\theta_{\text{old}}}{{< /katex >}} and store it into {{< katex >}}\mathcal{D}{{< /katex >}} Estimate reward-to-go {{< katex >}}\hat{R}{{< /katex >}} and {{< katex >}}\hat{A}^{\pi_{\theta_{\text{old}}}}{{< /katex >}} using GAE Compute {{< katex >}}J^{\text{CLIP+}}(\theta){{< /katex >}} for all samples according to Equ. <a href="#equ:PPO" data-reference-type="ref" data-reference="equ:PPO">[equ:PPO]</a> {{< katex >}}w \leftarrow w + \alpha_w \frac{1}{N}\sum_i\nabla_w (V_w(s_i)-\hat{R}(s_i, a_i))^2{{< /katex >}} {{< katex >}}\theta \leftarrow \theta + \alpha_\theta \frac{1}{N}\sum_i \nabla_\theta J^{\text{CLIP+H}}(\theta){{< /katex >}} {{< katex >}}\theta_{\text{old}} \leftarrow \theta{{< /katex >}}
 
 </div>
 
@@ -139,13 +139,13 @@ Another formulation of PPO to improve training stability, so-called Trust Region
 J^{\text{KL}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) - c\, \mathcal{D}_\text{KL}(\pi_{\theta_{\text{old}}} \| \pi_{\theta}) \right] \, .
 {{< /katex >}}
 
-where $\mathcal{D}_\text{KL}(\pi_{\theta_{\text{old}}} \| \pi_{\theta}) = \sum_{a} \pi_{\theta_{\text{old}}}(a | s) \log \frac{\pi_{\theta_{\text{old}}}(a | s)}{\pi_{\theta}(a| s)}$.
+where {{< katex >}}\mathcal{D}_\text{KL}(\pi_{\theta_{\text{old}}} \| \pi_{\theta}) = \sum_{a} \pi_{\theta_{\text{old}}}(a | s) \log \frac{\pi_{\theta_{\text{old}}}(a | s)}{\pi_{\theta}(a| s)}{{< /katex >}}.
 
 Sometimes, the KL-penalty can be combined with policy clipping to achieve better performance in practice.
 
 #### Adaptive-KL-PPO
 
-(Schulman et al. 2017) also mentioned Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive $\left( \mathcal{D}_\text{KL} \gg \mathcal{D}_\text{threshold} \right)$, $c$ is increased to penalize large updates; else if the update is too conservative $\left( \mathcal{D}_\text{KL} \ll \mathcal{D}_\text{threshold} \right)$, $c$ is decreased to allow larger updates.
+(Schulman et al. 2017) also mentioned Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive {{< katex >}}\left( \mathcal{D}_\text{KL} \gg \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is increased to penalize large updates; else if the update is too conservative {{< katex >}}\left( \mathcal{D}_\text{KL} \ll \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is decreased to allow larger updates.
 
 ### Multi-Agent PPO
 
@@ -165,14 +165,14 @@ A great example is PettingZoo’s agent cycle and parallel environments.
 
 ### Group Relative Policy Optimization (GRPO)
 
-As DeepSeek has made a splash in the LLM community, the RL method GRPO involved has received a lot of attention (Zhihong Shao 2024). GRPO is a variant of PPO, where the advantage is estimated using group-relative comparisons rather than GAE. This approach eliminates the critic model, which improves the training efficiency and stability. The DeepSeek framework consists of: (i) a frozen *reference model*, which is a stable baseline for computing rewards; (ii) a given *reward model*, responsible for evaluating generated outputs and assigning scores; (iii) a *value model*, which estimates the expected return of a given state to aid in policy optimization; and (iv) a *policy model*, which generates $|\mathcal{G}|$ responses and is continuously updated to improve performance based on feedback from the other components. The learning objective for GRPO is:
+As DeepSeek has made a splash in the LLM community, the RL method GRPO involved has received a lot of attention (Zhihong Shao 2024). GRPO is a variant of PPO, where the advantage is estimated using group-relative comparisons rather than GAE. This approach eliminates the critic model, which improves the training efficiency and stability. The DeepSeek framework consists of: (i) a frozen *reference model*, which is a stable baseline for computing rewards; (ii) a given *reward model*, responsible for evaluating generated outputs and assigning scores; (iii) a *value model*, which estimates the expected return of a given state to aid in policy optimization; and (iv) a *policy model*, which generates {{< katex >}}|\mathcal{G}|{{< /katex >}} responses and is continuously updated to improve performance based on feedback from the other components. The learning objective for GRPO is:
 
 {{< katex display=true >}}
 \small
 J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} \left[ \min \left( \frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})} \hat{A}^\mathcal{G}, \text{clip}\!\left(\frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})}, 1 - \epsilon, 1 + \epsilon\right) \hat{A}^{\mathcal{G}}\right) - c\,\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta})\right]
 {{< /katex >}}
 
-where the advantage $\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}{\text{std}(r)}$ is estimated by grouped actions produced at the same state. Also,
+where the advantage {{< katex >}}\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}{\text{std}(r)}{{< /katex >}} is estimated by grouped actions produced at the same state. Also,
 
 {{< katex display=true >}}
 \mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta}) = \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_{i})} - \ln \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_i)} - 1
