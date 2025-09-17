@@ -57,7 +57,7 @@ To sample with expectation equals or approximates the expression,
 
 The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only place the policy parameterization appears, which can be omitted {{< katex >}}L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]{{< /katex >}} since it will be automatically recovered when differentiating.
 
-{{% details "Proof of Theorem 1" [open] %}}
+{{% details "Proof of Theorem 1" open %}}
 
 <strong>Proof.</strong> The gradient of {{< katex >}}V{{< /katex >}} can be written via {{< katex >}}Q{{< /katex >}} as
 
