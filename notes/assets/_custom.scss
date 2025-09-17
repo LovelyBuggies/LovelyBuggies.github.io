@@ -10,3 +10,15 @@
   border-color: var(--gray-200);
   background-color: var(--gray-100);
 }
+
+// Reduce default image display size in posts
+// Applies to standalone images inside paragraphs and figures
+.markdown p > img,
+.markdown figure > img {
+  display: block;
+  margin: 0.5rem auto;
+  // Cap width and scale down a bit from full content width
+  max-width: 720px;
+  width: 85%;
+  height: auto;
+}
