@@ -4,7 +4,7 @@ title: 'Optimal Q in Dec-POMDP'
 math: true
 postType: thoughts
 linkTitle: 'Optimal Q in Dec-POMDP'
-readingTime: 15
+readingTime: 45
 ---
 
 {{< katex />}}
