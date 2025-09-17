@@ -1,5 +1,5 @@
 ---
-date: 2025-09-15
+date: 2024-12-21
 title: "Introduction 2 DecPOMDP"
 math: true
 ---
