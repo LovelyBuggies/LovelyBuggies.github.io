@@ -184,9 +184,9 @@ The **Full Gradient of Bellman Residual** should include all gradient components
 {{< /katex >}}
  If the approximation system is general enough and the value functions are continuous, the full Bellman residual gradient is guaranteed to converge to the optima. However, this is at the sacrifice of learning speed, as illustrated by the hall problem.
 
-##### Hybrid Gradient for Bellman Residual
+In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure 2 represents the case where the semi gradient may diverge. (Baird 1995) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed. 
 
-In contrast to Figure <a href="#subfig:sg-increase" data-reference-type="ref" data-reference="subfig:sg-increase">1</a> where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure <a href="#subfig:sg-decrease" data-reference-type="ref" data-reference="subfig:sg-decrease">3</a> represents the case where the semi gradient may diverge. (Baird 1995) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed. {{< katex display=true >}}
+{{< katex display=true >}}
 \begin{aligned}
     \Delta_\text{B} \theta &= (1 - \omega)  \cdot \Delta_\text{semi}\theta + \omega \cdot \Delta_\text{full}\theta, \\
     &=-\alpha \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big] \Big[\omega \gamma \nabla_\theta Q_\theta(s', a') - \nabla_\theta Q_\theta(s, a) \Big],\\
