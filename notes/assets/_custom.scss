@@ -84,10 +84,11 @@
 
 /* References list numbering as [1], [2], ... without affecting other lists */
 .book-page .markdown ol.references {
-  list-style: none;          /* remove default 1. 2. */
+  list-style: none;           /* remove default 1. 2. */
   counter-reset: ref-counter; /* start counter at 0 */
   margin-left: 0;
-  padding-left: 1.75rem;     /* space for the [n] marker */
+  /* Ensure content starts well after the [n] marker (handles up to [99]) */
+  padding-left: 6ch;
 }
 .book-page .markdown ol.references > li {
   position: relative;
@@ -95,8 +96,11 @@
 }
 .book-page .markdown ol.references > li::before {
   counter-increment: ref-counter;
-  content: "[" counter(ref-counter) "] ";
+  /* Two spaces after the bracketed number */
+  content: "[" counter(ref-counter) "]  ";
   position: absolute;
   left: 0;
+  /* Reserve horizontal space for the marker + 2 spaces */
+  width: 5ch;
   color: inherit;
 }
