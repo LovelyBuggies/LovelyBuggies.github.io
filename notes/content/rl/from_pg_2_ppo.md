@@ -65,11 +65,11 @@ To sample with expectation equals or approximates the expression,
 &= \sum_a\!\left[ 
   \nabla\pi(a\mid s)\, Q^\pi (s,a) 
   + \pi(a\mid s)\, \nabla Q^\pi (s,a) \right] \\
-&= \sum_a\!\left[ 
-  \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+  &= \sum_a\!\left[ 
+    \nabla\pi(a\mid s)\, Q^\pi (s,a) 
   + \pi(a\mid s)\, \nabla \sum_{s'} P(s'\mid s,a)\, (r + V^\pi(s')) \right] \\
-&\stackrel{\text{(i)}}{=} \sum_a\!\left[ 
-  \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+  &\stackrel{\text{(i)}}{=} \sum_a\!\left[ 
+    \nabla\pi(a\mid s)\, Q^\pi (s,a) 
   + \pi(a\mid s) \sum_{s'} P(s'\mid s,a)\, \nabla V^\pi(s') \right] ,
 \end{aligned}
 {{< /katex >}}
@@ -112,19 +112,17 @@ The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only 
 ### PG with Baseline
 
 <div id="them:PG-baseline" class="theorem">
-
-**Theorem 2**. *PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. {{< katex display=true >}}
+**Theorem 2**. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. {{< katex display=true >}}
 \label{equ:reinforce-baseline}
     \begin{aligned}
         \nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a (Q^\pi (s,a) -b(s)) \nabla\pi(a|s) \\
         &= \mathbb{E}_{\pi} \left[(Q^\pi(s,a) -b(s)) \nabla\ln\pi(a|s)\right].
     \end{aligned}
 {{< /katex >}}
-*
 
 </div>
 
-According to the Theorem <a href="#them:PG-baseline" data-reference-type="ref" data-reference="them:PG-baseline">2</a>, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem <a href="#them:PG" data-reference-type="ref" data-reference="them:PG">1</a> can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by Generalized Advantage Estimation or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
+According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem 1 can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by Generalized Advantage Estimation or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
 
 ### Off-Policy PG
 
