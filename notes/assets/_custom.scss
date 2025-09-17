@@ -184,6 +184,9 @@
 .book-page .markdown ul li.section > a {
   font-weight: 700;
 }
+.book-page .markdown ul li.section > span {
+  font-weight: 700; /* bolden unclickable section titles */
+}
 .book-page .markdown ul li.page > a {
   font-weight: 400;
 }
