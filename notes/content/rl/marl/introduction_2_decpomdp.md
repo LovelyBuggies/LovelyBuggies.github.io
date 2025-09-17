@@ -85,18 +85,18 @@ The worst-case complexity of finite-horizon problems is: (by Amato et al., 2013)
 
 <div id="tab:complexity">
 
-| **Model**              |     | **Complexity**  |
-|:-----------------------|:----|:----------------|
-| MDP                    |     | P-complete      |
-| MMDP (Cen-MMDP)        |     | P-complete      |
-| Dec-MDP                |     | NEXP-complete   |
-| Dec-MDP with TI no RI  |     | NP-complete     |
-| Dec-MDP with RI no TI  |     | NEXP-complete   |
-| Dec-MDP with TI and RI |     | P-complete      |
-| POMDP                  |     | PSPACE-complete |
-| MPOMDP (Cen-MPOMDP)    |     | PSPACE-complete |
-| Dec-POMDP              |     | NEXP-complete   |
-| ND-POMDP               |     | NEXP-complete   |
+| **Model**              | **Complexity**  |
+|:-----------------------|:----------------|
+| MDP                    | P-complete      |
+| MMDP (Cen-MMDP)        | P-complete      |
+| Dec-MDP                | NEXP-complete   |
+| Dec-MDP with TI no RI  | NP-complete     |
+| Dec-MDP with RI no TI  | NEXP-complete   |
+| Dec-MDP with TI and RI | P-complete      |
+| POMDP                  | PSPACE-complete |
+| MPOMDP (Cen-MPOMDP)    | PSPACE-complete |
+| Dec-POMDP              | NEXP-complete   |
+| ND-POMDP               | NEXP-complete   |
 
 </div>
 
@@ -106,116 +106,23 @@ The worst-case complexity of finite-horizon problems is: (by Amato et al., 2013)
 
 **Theorem 1**. *An MDP is P-complete in finite and infinite horizons (Papadimitriou and Tsitsiklis 1987).*
 
-</div>
-
-<div class="theorem">
 
 **Theorem 2**. *A finite POMDP is PSPACE-complete (Papadimitriou and Tsitsiklis 1987).*
 
-</div>
-
-<div class="theorem">
 
 **Theorem 3**. *The complexity of an infinite POMDP is undecidable (Madani, Hanks, and Condon 1999), leading to the undecidability of the infinite Dec-POMDP complexity.*
 
-</div>
-
-<div class="theorem">
-
 **Theorem 4**. *A finite {{< katex >}}\text{Dec-POMDP}_{n\geqslant2}{{< /katex >}} is NEXP-complete, and a finite {{< katex >}}\text{Dec-MDP}_{n\geqslant3}{{< /katex >}} is also NEXP-complete (Bernstein et al. 2002).*
-
-</div>
-
-<div class="fact">
 
 **Fact 1**. *A Dec-MDP with TI and RI can be solved independently, resulting in P-complete.*
 
-</div>
-
-<div class="theorem">
-
 **Theorem 5**. *A Dec-MDP with TI and joint reward is NP-complete, a Dec-MDP with RI but no TI is NEXP-complete (Becker et al. 2004)*
-
-</div>
-
-<div class="fact">
 
 **Fact 2**. *An ND-POMDP has the same worst-case complexity as a Dec-POMDP (Nair et al. 2005).*
 
 </div>
 
-## Planning Methods
-
-### Policy Structure
-
-Calculating a shared belief state in Dec-POMDP is hard, because the policy can not be recovered from the value function. The policies are normally maintained in a policy tree or FSC. Policies can be extracted by starting at the root (or initial node) and continuing to the subtree (or next node) based on observations, and can be evaluated by summing the rewards weighted by transition probability.
-
-{{< hint info >}}
-Policy can also be represented by other forms, like approximating functions (Sutton and Barto 2018), neural networks, diffusion models (Chi et al. 2024), etc.
-{{< /hint >}}
-
-![Policy Tree](/imgs/blog/introduction_2_decpomdp/pt.png)
-
-![Finite State Controller](/imgs/blog/introduction_2_decpomdp/fsc.png)
-
-### Optimal Approaches
-
-##### Bottom-up
-
-DP uses joint belief to find optimal solutions with policy pruning (Hansen, Bernstein, and Zilberstein 2004).
-
-{{< katex display=true >}}
-V^{t+1}(b^t) = \max_{a \in \mathcal{A}} \left\{ \sum_{s \in \mathcal{S}} b^t(s) 
-\left[ R(s, a) + \sum_{o \in \mathcal{O}} \mathcal{P}(o \mid s, a) V^t(b^{t+1}) \right] \right\}.
-{{< /katex >}}
-
-
-<div class="algorithm">
-
-**Input:** Depth-{{< katex >}}t{{< /katex >}} policy trees {{< katex >}}Q_i^t{{< /katex >}} and value vectors {{< katex >}}V_i^t{{< /katex >}} for each {{< katex >}}i{{< /katex >}}
-
-<div class="algorithmic">
-
-Perform exhaustive backups to get {{< katex >}}Q_i^{t+1}{{< /katex >}}, and compute {{< katex >}}V_i^{t+1}{{< /katex >}} accordingly for each {{< katex >}}i{{< /katex >}} Find a policy tree {{< katex >}}q_j \in Q_i^{t+1}{{< /katex >}} that satisfies {{< katex >}}\exists \ v_k \in \{V_i^{t+1} \setminus v_j\},b^{t+1} v_k \geq b^{t+1} v_j, \forall \ b^{t+1}{{< /katex >}} {{< katex >}}Q_i^{t+1} \gets \{Q_i^{t+1} \setminus q_j\}{{< /katex >}}, and {{< katex >}}V_i^{t+1} \gets \{V_i^{t+1} \setminus v_j\}{{< /katex >}} accordingly
-
-</div>
-
-**Output:** Depth-{{< katex >}}t+1{{< /katex >}} policy trees {{< katex >}}Q_i^{t+1}{{< /katex >}} and value vectors {{< katex >}}V_i^{t+1}{{< /katex >}} for each {{< katex >}}i{{< /katex >}}
-
-</div>
-
-##### Top-down
-
-The policy tree can also be built using heuristic search like MAA\* (Szer, Charpillet, and Zilberstein 2005).
-
-<div class="algorithm">
-
-**Initialize:** Joint policy tree root {{< katex >}}\Pi\gets\times_i \mathbb{A}_i{{< /katex >}}  
-**Input:** Depth-{{< katex >}}t{{< /katex >}} joint policy tree {{< katex >}}\Pi{{< /katex >}}
-
-<div class="algorithmic">
-
-Select {{< katex >}}a^*=\mathop{\mathrm{argmax}}_{a\in \Pi}F^\mathcal{H}(b^0, a){{< /katex >}} (heuristic and value) Expand {{< katex >}}a^*{{< /katex >}} to {{< katex >}}a^\circledast{{< /katex >}}, and {{< katex >}}\Pi \gets \{\Pi \cup  a^\circledast\}{{< /katex >}} {{< katex >}}\Pi \gets \{\Pi \setminus a\}{{< /katex >}} {{< katex >}}\Pi \gets \{\Pi \setminus a^*\}{{< /katex >}}
-
-</div>
-
-**Input:** Updated joint policy set {{< katex >}}\Pi{{< /katex >}}.
-
-</div>
-
-### Approximation Approaches
-
-The algorithms below improve scalability to larger problems over optimal methods, but do not possess any bounds on solution quality.
-
-##### MBDP
-
-Memory-bounded dynamic programming (MBDP) techniques mitigate the scalability problem of DP (which generates and evaluates all joint policy trees before pruning) by keeping a fixed number of policy trees for each agent at each step (Seuken and Zilberstein 2007b). Several approaches have improved on MBDP by limiting (Seuken and Zilberstein 2007a) or compressing (Carlin and Zilberstein 2008) observations, replacing exhaustive backup with branch-and-bound search in the space of joint policy trees (Dibangoye, Mouaddib, and Chaib-draa 2009) as well as constraint optimization (Kumar and Zilberstein 2010) and linear programming (Wu, Zilberstein, and Chen 2010) to increase the efficiency of selecting the best trees at each step.
-
-##### JESP
-
-The joint equilibrium search for policies (JESP) Nair et al., 2003 uses alternating best response. Initial policies are generated for all agents, and then all but one is held fixed. The remaining agent can then calculate the best response (local optimum) to the fixed policies. The policy of this agent becomes fixed and the next agent calculates the best response. These best-response calculations to fixed other agent policies continue until no agent changes its policy.
-
-## Complexity Classes
+{{% details title="Complexity Class" open=true %}}
 
 Assuming {{< katex >}}c{{< /katex >}} and {{< katex >}}k{{< /katex >}} are constants, {{< katex >}}\mathcal{C}{{< /katex >}} is a complexity class, the table shows complexity terminologies.
 
@@ -234,6 +141,7 @@ Assuming {{< katex >}}c{{< /katex >}} and {{< katex >}}k{{< /katex >}} are const
 | {{< katex >}}\mathcal{C}{{< /katex >}}-complete | a problem that is contained in {{< katex >}}\mathcal{C}{{< /katex >}} and {{< katex >}}\mathcal{C}{{< /katex >}}-hard                              |
 
 </div>
+{{% /details %}}
 
 
 
