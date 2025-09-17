@@ -13,6 +13,8 @@ readingTime: 15
 # Understanding Bellman Equations
 {{< postbadges >}}
 
+> The clichés about the Bellman equation and its variants.
+
 ## Bellman Equations
 
 Bellman equations establish recusive relations between states and succeeding states, which can be applied as updating rules for value prediction.
