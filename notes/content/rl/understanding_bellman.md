@@ -13,12 +13,12 @@ readingTime: 20
 # Understanding Bellman Equations
 {{< postbadges >}}
 
-## Bellman Equation and Operator
+## Bellman Equations
+
+Bellman equations establish recusive relations between states and succeeding states, which can be applied as updating rules for value prediction.
 
 <div class="definition">
   <strong>Definition.</strong> The Bellman Equations characterize value recursions in MDPs.
-
-
 For V-values (Sutton and Barto 2018),
 
 {{< katex display=true >}}
@@ -65,7 +65,13 @@ where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\p
 
 </div>
 
-Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
+<div class="definition" id="curse-of-dimension">
+<strong>Curse of Dimension.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
+</div>
+
+## Bellman Operators
+
+A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
 {{< katex display=true >}}
 (\mathcal{T}^\pi\circ V^\pi)(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 (\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
@@ -80,9 +86,6 @@ The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are,
 
 For convenience, we use Q-value as the representative in the following parts of this article.
 
-<div class="definition" id="curse-of-dimension">
-<strong>Curse of Dimension.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
-</div>
 <div class="proposition">
 <strong>Proposition 1</strong> ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
 \begin{aligned}
