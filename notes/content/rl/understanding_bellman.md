@@ -15,8 +15,6 @@ readingTime: 20
 
 ## Bellman Equation and Operator
 
-### Definition
-
 <div class="definition">
 
 **Definition.** *The Bellman Equations characterize value recursions in MDPs.*
@@ -63,9 +61,6 @@ For convenience, we use Q-value as the representative in the following parts of 
 <div class="definition" id="curse-of-dimension">
 <strong>Curse of Dimension.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
 </div>
-
-### Important Properties
-
 <div class="proposition">
 
 **Proposition 1** ($\gamma$-contraction). *Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
