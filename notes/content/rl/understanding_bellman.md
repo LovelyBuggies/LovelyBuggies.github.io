@@ -111,14 +111,6 @@ Q^{\pi,\,\infty} = Q^{*,\,\infty} = Q^* ,
 
 which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or } \mathcal{T}^{*}(Q^*) = Q^* .{{< /katex >}}
 
-## Figures
-
-![Figure 1](/imgs/understanding_bellman/ga.png)
-<p class="figcaption"><em>Figure 1.</em> Illustration (ga).</p>
-
-![Figure 2](/imgs/understanding_bellman/gd.png)
-<p class="figcaption"><em>Figure 2.</em> Illustration (gd).</p>
-
 <strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to {{< katex >}}Q^*{{< /katex >}} (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):
 
 
@@ -201,6 +193,14 @@ In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$,
     &\text{s.t.,} \ \Delta_\text{B}\theta \cdot \Delta_\text{full}\theta\geqslant 0 \Leftrightarrow \omega \geqslant \frac{\Delta_\text{semi}\theta \cdot \Delta_\text{full}\theta}{\Delta_\text{semi}\theta \cdot \Delta_\text{full}\theta - \Delta_\text{full}\theta \cdot \Delta_\text{full}\theta}.
 \end{aligned}
 {{< /katex >}}
+
+{{% columns [ratio="1:1"] [class="..."] %}}
+![Figure 1](/imgs/understanding_bellman/ga.png)
+<p class="figcaption"><em>Figure 1.</em> Gradient ascent by semi-gradient.</p>
+
+![Figure 2](/imgs/understanding_bellman/gd.png)
+<p class="figcaption"><em>Figure 2.</em> Gradient descent by semi-gradient.</p>
+{{% /columns %}}
 
 ## References
 
