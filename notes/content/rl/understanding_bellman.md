@@ -204,6 +204,63 @@ In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$,
 \end{aligned}
 {{< /katex >}}
 
+## Bellman Generalizations
+
+### Soft Bellman Equation
+The Soft Bellman Equation incorporates an entropy regularization term, encouraging exploration by penalizing overly deterministic policies. It is useful where balancing exploration and exploitation is critical, such as environments with sparse rewards or high uncertainty.
+
+{{< katex display=true >}}
+Q(s, a) = R(s,a) + \gamma 
+\mathbb{E}_{\substack{a'\sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a)}} 
+\Big[\, Q(s', a') - \lambda \, \log \pi(a'\mid s') \,\Big].
+{{< /katex >}}
+
+Here $\lambda$ controls the weight of the entropy term $\mathcal{H}(\pi(\cdot\mid s'))$.
+
+### Continuous-Time Bellman Equation
+The Hamilton–Jacobi–Bellman (HJB) equation is the continuous-time analogue of the Bellman equation and is used in problems with continuous state and action spaces. Given system dynamics $f(s,a)$,
+
+{{< katex display=true >}}
+\frac{\partial Q(s,a)}{\partial t} + \max_{a} \Big[\, R(s,a) + \nabla_s Q(s,a)^\top f(s,a) \,\Big] = 0.
+{{< /katex >}}
+
+### Distributional Bellman Equation
+The Distributional Bellman Equation models the return as a distribution $\mathcal{Q}$, which is useful in risk-sensitive scenarios that require quantifying variability of returns,
+
+{{< katex display=true >}}
+\mathcal{Q}(s, a) \stackrel{\text{D}}{=} R(s,a) + \gamma \, \mathcal{Q}(s', a').
+{{< /katex >}}
+
+Here $\mathcal{Q}$ denotes the distribution of returns, and $\stackrel{\text{D}}{=}$ denotes equality in distribution.
+
+### Multi-Agent Bellman Equation
+The Multi-Agent (MA) Bellman Equation generalizes Bellman operators to cooperative multi-agent settings, where multiple agents coordinate to achieve a common goal.
+
+- Joint Bellman Equation: models the group as a single entity with joint action $\mathbf{a}=(a_1,\dots,a_N)$,
+
+{{< katex display=true >}}
+Q(s, \mathbf{a}) = R(s, \mathbf{a}) + \gamma 
+\mathbb{E}_{\substack{\mathbf{a}' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, \mathbf{a})}} 
+\Big[\, Q(s', \mathbf{a}') \,\Big].
+{{< /katex >}}
+
+- Individual Bellman Equation: computes per-agent $Q_i$ assuming decentralized execution (shared reward $R(s,\mathbf{a})$),
+
+{{< katex display=true >}}
+Q_i(s, a_i) = R(s, \mathbf{a}) + \gamma 
+\mathbb{E}_{\substack{a_i' \sim \pi_i(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a_i)}} 
+\Big[\, Q_i(s', a_i') \,\Big].
+{{< /katex >}}
+
+### Multi-Task Bellman Equation
+The Generalized Bellman Equation extends the Bellman recursion to include additional objectives or constraints—useful in multi-task learning, constrained RL, or hierarchical RL with auxiliary signals $\phi(s,a)$ (or constraints $\phi(s,a)\gets \lambda c(s,a)$) alongside the primary objective,
+
+{{< katex display=true >}}
+Q(s, a) = R(s,a) + \phi(s,a) + \gamma 
+\mathbb{E}_{\substack{a' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a)}} 
+\Big[\, Q(s', a') \,\Big].
+{{< /katex >}}
+
 ## References
 
 {{< references >}}
