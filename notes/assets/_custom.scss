@@ -44,10 +44,11 @@
 /* Style only the "Who is LovelyBuggies?" sidebar link */
 .book-menu .book-menu-content nav a[href="https://lovelybuggies.github.io/"],
 .book-menu .book-menu-content nav a[href="/notes/who_is_lovelybuggies/"] {
-  color: #666;           /* slightly darker */
+  color: #666;            /* slightly darker */
   font-style: italic;
-  font-size: 0.9em;      /* smaller than other post titles */
-  margin-top: 3rem;      /* larger space above this link */
+  font-size: 11px;        /* match type-tag font-size */
+  line-height: 18px;      /* match type-tag line-height */
+  margin-top: 0;          /* align spacing with tags above */
 }
 
 // Brand: make title bold and black only for the brand
@@ -109,7 +110,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin: 6px 0 10px 0;
+  margin: 0 0 4px 0; /* match gap with following link */
 }
 .book-menu .book-menu-content .type-tags .type-tag {
   font-size: 11px;

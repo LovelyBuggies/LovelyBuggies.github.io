@@ -1,7 +1,6 @@
 <nav>
 {{ partial "docs/brand" . }}
 {{ partial "docs/search" . }}
-{{ partial "docs/type-tags" . }}
 {{ if hugo.IsMultilingual }}
   {{ partial "docs/languages" . }}
 {{ end }}
@@ -20,4 +19,3 @@
 {{ with $script.Content }}
   <script>{{ . | safeJS }}</script>
 {{ end }}
-
