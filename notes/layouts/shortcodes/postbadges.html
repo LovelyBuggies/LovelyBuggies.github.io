@@ -6,7 +6,7 @@
 {{- $rt := $page.ReadingTime -}}
 {{- $rtAdj := cond (lt $rt 1) 1 $rt -}}
 {{- $reading := printf "%d min" $rtAdj -}}
-{{- $author := or .Site.Params.AuthorName .Site.Params.Author "Shuo Liu" -}}
+{{- $author := or .Site.Params.AuthorName .Site.Params.Author "Shuo" -}}
 
 <span class="book-badge danger"><span class="book-badge-title">Author</span><span class="book-badge-value">{{ $author }}</span></span>
 <span class="book-badge warning"><span class="book-badge-title">Date</span><span class="book-badge-value">{{ $dateFmt }}</span></span>
