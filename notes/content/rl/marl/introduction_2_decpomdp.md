@@ -15,28 +15,27 @@ readingTime: 5
 ## Dec-POMDP
 
 <div class="definition">
+**Definition 1**. A Dec-POMDP is a tuple {{< katex >}}\langle \mathbb{I}, \mathcal{S}, \{\mathbb{A}_i\}, T, R, \{\mathbb{O}_i\}, O, \mathcal{H}, \gamma\rangle{{< /katex >}}:
 
-**Definition 1**. *A Dec-POMDP is a tuple {{< katex >}}\langle \mathbb{I}, \mathcal{S}, \{\mathbb{A}_i\}, T, R, \{\mathbb{O}_i\}, O, \mathcal{H}, \gamma\rangle{{< /katex >}}:*
+- {{< katex >}}\mathbb{I}{{< /katex >}} is a finite sets of agents, {{< katex >}}|\mathbb{I}|=n{{< /katex >}};
 
-- *{{< katex >}}\mathbb{I}{{< /katex >}} is a finite sets of agents, {{< katex >}}|\mathbb{I}|=n{{< /katex >}};*
+- {{< katex >}}\mathcal{S}{{< /katex >}} is a set of states with designated initial state distribution {{< katex >}}b^0{{< /katex >}};
 
-- *{{< katex >}}\mathcal{S}{{< /katex >}} is a set of states with designated initial state distribution {{< katex >}}b^0{{< /katex >}};*
+- {{< katex >}}\mathbb{A}_i{{< /katex >}} is a set of actions for agent {{< katex >}}i{{< /katex >}} with {{< katex >}}\mathbb{A}\doteq \times_i \mathbb{A}_i{{< /katex >}} the set of joint actions;
 
-- *{{< katex >}}\mathbb{A}_i{{< /katex >}} is a set of actions for agent {{< katex >}}i{{< /katex >}} with {{< katex >}}\mathbb{A}\doteq \times_i \mathbb{A}_i{{< /katex >}} the set of joint actions;*
+- {{< katex >}}T{{< /katex >}} is the state transition probability function, {{< katex >}}T{{< /katex >}}: {{< katex >}}\mathcal{S} \times \mathbb{A} \times \mathcal{S} \rightarrow [0, 1]{{< /katex >}}, that specifies the probability of transitioning from state {{< katex >}}s \in \mathcal{S}{{< /katex >}} to {{< katex >}}s' \in \mathcal{S}{{< /katex >}} when the actions {{< katex >}}\boldsymbol{a} \in \mathbb{A}{{< /katex >}} are taken by agents (i.e., {{< katex >}}T(s, \boldsymbol{a}, s')=P(s'|s, \textbf{a}){{< /katex >}});
 
-- *{{< katex >}}T{{< /katex >}} is the state transition probability function, {{< katex >}}T{{< /katex >}}: {{< katex >}}\mathcal{S} \times \mathbb{A} \times \mathcal{S} \rightarrow [0, 1]{{< /katex >}}, that specifies the probability of transitioning from state {{< katex >}}s \in \mathcal{S}{{< /katex >}} to {{< katex >}}s' \in \mathcal{S}{{< /katex >}} when the actions {{< katex >}}\boldsymbol{a} \in \mathbb{A}{{< /katex >}} are taken by agents (i.e., {{< katex >}}T(s, \boldsymbol{a}, s')=P(s'|s, \textbf{a}){{< /katex >}});*
+- {{< katex >}}R{{< /katex >}} is the joint reward function, where {{< katex >}}R{{< /katex >}}: {{< katex >}}\mathcal{S} \times \mathbb{A} \rightarrow \mathbb{R}{{< /katex >}};
 
-- *{{< katex >}}R{{< /katex >}} is the joint reward function, where {{< katex >}}R{{< /katex >}}: {{< katex >}}\mathcal{S} \times \mathbb{A} \rightarrow \mathbb{R}{{< /katex >}};*
+- {{< katex >}}\mathbb{O}_i{{< /katex >}} is a set of observations for each agent {{< katex >}}i{{< /katex >}}, with {{< katex >}}\mathbb{O}\doteq\times_i \mathbb{O}_i{{< /katex >}} the set of joint observations;
 
-- *{{< katex >}}\mathbb{O}_i{{< /katex >}} is a set of observations for each agent {{< katex >}}i{{< /katex >}}, with {{< katex >}}\mathbb{O}\doteq\times_i \mathbb{O}_i{{< /katex >}} the set of joint observations;*
+- {{< katex >}}O{{< /katex >}} is an observation probability function, {{< katex >}}O{{< /katex >}}: {{< katex >}}\mathbb{A} \times \mathcal{S} \times \mathbb{O}{{< /katex >}}, that specifies the probability of seeing observation {{< katex >}}\boldsymbol{o}' \in \mathbb{O}{{< /katex >}} given the actions {{< katex >}}\boldsymbol{a} \in \mathbb{A}{{< /katex >}} are taken and state {{< katex >}}s' \in \mathcal{S}{{< /katex >}} is observed (i.e., {{< katex >}}O(\boldsymbol{a}, s', \boldsymbol{o}')=P(\boldsymbol{o}'|\textbf{a},s'){{< /katex >}});
 
-- *{{< katex >}}O{{< /katex >}} is an observation probability function, {{< katex >}}O{{< /katex >}}: {{< katex >}}\mathbb{A} \times \mathcal{S} \times \mathbb{O}{{< /katex >}}, that specifies the probability of seeing observation {{< katex >}}\boldsymbol{o}' \in \mathbb{O}{{< /katex >}} given the actions {{< katex >}}\boldsymbol{a} \in \mathbb{A}{{< /katex >}} are taken and state {{< katex >}}s' \in \mathcal{S}{{< /katex >}} is observed (i.e., {{< katex >}}O(\boldsymbol{a}, s', \boldsymbol{o}')=P(\boldsymbol{o}'|\textbf{a},s'){{< /katex >}});*
+- {{< katex >}}\mathcal{H}{{< /katex >}} is the horizon (the number of steps until termination);
 
-- *{{< katex >}}\mathcal{H}{{< /katex >}} is the horizon (the number of steps until termination);*
+- {{< katex >}}\gamma{{< /katex >}} is the discount factor for the return.
 
-- *{{< katex >}}\gamma{{< /katex >}} is the discount factor for the return.*
-
-*A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history $\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}$, an optimal solution maximizes the expected return, {{< katex display=true >}}
+A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history $\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}$, an optimal solution maximizes the expected return, {{< katex display=true >}}
 \boldsymbol{\pi}^*=\mathop{\mathrm{argmax}}_{\boldsymbol{\pi}}\mathbb{E}\left[\textstyle\sum_{t=0}^{\mathcal{H}-1}R(\boldsymbol{h}, \boldsymbol{\pi}(\boldsymbol{h}))\middle|b^0\right].
 {{< /katex >}}
 
