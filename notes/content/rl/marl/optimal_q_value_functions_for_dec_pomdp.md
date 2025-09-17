@@ -31,7 +31,7 @@ readingTime: 4
 - $\delta^{t,\circledast}_\psi$: optimal decision at $t$ given non‑optimal $\psi^{t-1}$.
 - $\Delta^t$: decision rule space at $t$.
 - $\psi^{t} = \delta^{[0,t)}$: past joint policy until $t$.
-- $\psi^{t,*} = \delta^{[0,t),*}$: optimal past joint policy until $t$.
+- $\psi^{t,\*} = \delta^{[0,t),\*}$: optimal past joint policy until $t$.
 - $\psi^{t,\circledast}$: past joint policy with non‑optimal $\psi^{t-1}$ and optimal $\delta^{t-1,\circledast}_\psi$.
 - $\Psi^{t}$: past joint policy space at $t$.
 - $\xi^{t} = \delta^{[t,h)}$: subsequent joint policy from $t$.
