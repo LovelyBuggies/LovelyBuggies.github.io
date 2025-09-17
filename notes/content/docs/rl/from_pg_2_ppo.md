@@ -143,7 +143,7 @@ J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} 
 - \ln \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_i)} - 1$ is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).
 
 <figure id="fig:grpo">
-<p><img src="grpo.png" alt="image" /> <span id="fig:grpo" label="fig:grpo"></span></p>
+<p><img src="from-pg-2-ppo/grpo.png" alt="image" /> <span id="fig:grpo" label="fig:grpo"></span></p>
 </figure>
 
 
