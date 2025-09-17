@@ -2,7 +2,7 @@ date: 2025-03-10
 title: "From PG 2 PPO"
 math: true
 weight: 11
-type: notes
+postType: notes
 ---
 
 {{< katex />}}

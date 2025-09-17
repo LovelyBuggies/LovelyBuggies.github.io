@@ -8,7 +8,7 @@
 {{- $reading := printf "%d min" $rtAdj -}}
 {{- $author := or .Site.Params.AuthorName .Site.Params.Author "Shuo Liu" -}}
 
-{{- $type := lower (default "" $page.Params.type) -}}
+{{- $type := lower (or ($page.Param "postType") ($page.Param "type") "") -}}
 {{- if $type }}
   {{- $typeValue := cond (eq $type "thoughts") "Thoughts" "Notes" -}}
   {{- $typeStyle := cond (eq $type "thoughts") "important" "default" -}}
