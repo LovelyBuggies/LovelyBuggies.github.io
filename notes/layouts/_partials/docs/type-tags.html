@@ -1,0 +1,27 @@
+{{/* Sidebar Type Tags: shows unique post types as buttons */}}
+{{- $seen := dict -}}
+{{- $types := slice -}}
+{{- range .Site.RegularPages -}}
+  {{- $t := lower (or (.Param "postType") (.Param "type")) -}}
+  {{- if $t -}}
+    {{- if not (in (keys $seen) $t) -}}
+      {{- $seen = merge $seen (dict $t true) -}}
+      {{- $types = $types | append $t -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $label := func (dict "t" "") -}}
+{{- /* helper: map param -> label */ -}}
+{{- $label = (func (m) (cond (eq (index m "t") "notes") "Overview" (cond (eq (index m "t") "thoughts") "Thoughts" (title (index m "t"))))) -}}
+
+{{ if gt (len $types) 0 }}
+<div class="type-tags">
+  {{- range sort $types -}}
+    {{- $slug := . -}}
+    {{- $name := call $label (dict "t" .) -}}
+    <a class="book-btn type-tag" href="{{ "/types/" | relURL }}?t={{ $slug }}">{{ $name }}</a>
+  {{- end -}}
+</div>
+{{ end }}
+

@@ -1,0 +1,19 @@
+[
+{{- $pages := where .Site.RegularPages "Kind" "page" -}}
+{{- $pages = where $pages "Content" "!=" "" -}}
+{{- $first := true -}}
+{{- range $pages -}}
+  {{- $t := lower (or (.Param "postType") (.Param "type")) -}}
+  {{- if $t -}}
+    {{- if not $first }},{{ end -}}
+    {{- $first = false -}}
+    {
+      "title": {{ .Title | jsonify }},
+      "href": "{{ .RelPermalink }}",
+      "date": "{{ .Date.Format "2006-01-02" }}",
+      "type": {{ $t | jsonify }}
+    }
+  {{- end -}}
+{{- end -}}
+]
+
