@@ -20,26 +20,16 @@ A typical alignment pipeline consists of 3 stages: supervised fine-tuning (SFT),
 
 ![RLHF](/imgs/blog/reward_modeling_llm/RLHF.png)
 
-<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-openai2024gpt4technicalreport" class="csl-entry">
 
-Achiam, Josh, Steven Adler, and Sandhini Agarwal. 2024. “GPT-4 Technical Report.” <https://arxiv.org/abs/2303.08774>.
+## References
 
-</div>
+<ol>
+<li>Achiam, Josh, Steven Adler, and Sandhini Agarwal. 2024. “GPT-4 Technical Report.” <https://arxiv.org/abs/2303.08774>.</li>
+<li>Shao, Zhihong, Peiyi Wang, and Qihao Zhu. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <https://arxiv.org/abs/2402.03300>.</li>
+<li>Touvron, Hugo, Louis Martin, and Kevin Stone. 2023. “Llama 2: Open Foundation and Fine-Tuned Chat Models.” <https://arxiv.org/abs/2307.09288>.</li>
+</ol>
 
-<div id="ref-shao2024deepseekmathpushinglimitsmathematical" class="csl-entry">
 
-Shao, Zhihong, Peiyi Wang, and Qihao Zhu. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <https://arxiv.org/abs/2402.03300>.
-
-</div>
-
-<div id="ref-llama" class="csl-entry">
-
-Touvron, Hugo, Louis Martin, and Kevin Stone. 2023. “Llama 2: Open Foundation and Fine-Tuned Chat Models.” <https://arxiv.org/abs/2307.09288>.
-
-</div>
-
-</div>
 <!-- moved to root content -->
 <!-- moved back under large-language-models/ -->

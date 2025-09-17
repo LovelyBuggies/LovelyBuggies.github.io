@@ -125,21 +125,16 @@ Beyond solving the problem of Proposition <a href="#prop:problem" data-reference
 
 - We have seen some advantages of defining the optimal Q-value function as $Q^\circledast$, what are the downsides to defining it this way (e.g., high computational costs)?
 
-<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-Oliehoek08JAIR" class="csl-entry">
 
-Oliehoek, Frans A., Matthijs T. J. Spaan, and Nikos Vlassis. 2008. “Optimal and Approximate Q-Value Functions for Decentralized POMDPs.” *Journal of Artificial Intelligence Research* 32: 289–353.
+## References
 
-</div>
+<ol>
+<li>Oliehoek, Frans A., Matthijs T. J. Spaan, and Nikos Vlassis. 2008. “Optimal and Approximate Q-Value Functions for Decentralized POMDPs.” <em>Journal of Artificial Intelligence Research</em> 32: 289–353.</li>
+<li>Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.</li>
+</ol>
 
-<div id="ref-sutton2018reinforcement" class="csl-entry">
 
-Sutton, Richard S., and Andrew G. Barto. 2018. *Reinforcement Learning: An Introduction*. 2nd ed. MIT Press.
-
-</div>
-
-</div>
 
 <!-- footnotes converted to hints above -->
 <!-- migrated from leaf-bundle to single-file naming -->
