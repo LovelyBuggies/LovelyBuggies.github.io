@@ -21,34 +21,34 @@ The Bellman Equation and optimal Bellman Equation for V-values are, (Sutton and 
 Note on determinism: The deterministic form is $V(s) = \max_{a} \{ R(s, a) + \gamma V(s')\}$, where $s'\gets T(s,a)$.
 {{< /hint >}}
 
-$$
+{{< katex display=true >}}
 V^\pi(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
 = \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 V^*(s) \doteq \max_{a} \left[ Q^*(s, a) \right] \\
 = \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right]
-$$
+{{< /katex >}}
 
 and the Bellman Equation and optimal Bellman Equation for Q-values are,
 
-$$
+{{< katex display=true >}}
 Q^\pi(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
 = R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right] \\
 Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right] \\
 = R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right]
-$$
+{{< /katex >}}
 
 where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. $$\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).$$ Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
-$$
+{{< katex display=true >}}
 (\mathcal{T}^\pi\circ V^\pi)(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 (\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
-$$
+{{< /katex >}}
 
 The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are,
 
-$$
+{{< katex display=true >}}
 (\mathcal{T}^\pi\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \mathbb{E}_{a' \sim \pi(a'|s')} Q^\pi(s', a') \right] \\
 (\mathcal{T}^*\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right]
-$$
+{{< /katex >}}
 
 #### Curse of Dimension
 
@@ -71,10 +71,10 @@ Why do we mostly use MDP (where the future evolution is independent of its histo
 
 **Corollary 1** (Fixed-point Iteration). *For any $Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, after $k\to \infty$ iterations of Bellman transformation, $Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0$, or $Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0$, according to Banach’s Fixed Point Theorem:*
 
-$$
+{{< katex display=true >}}
 Q^{\pi, \infty}=Q^{*, \infty}=Q^*, \\
 \text{which \textbf{uniquely} satisfies } \mathcal{T}^\pi \circ Q^*  = Q^*, \text{ or } \mathcal{T}^* \circ Q^*  = Q^*.
-$$
+{{< /katex >}}
 
 </div>
 
@@ -82,9 +82,9 @@ $$
 
 **Theorem 1** (Fundamental theorem). *Any memoryless policy that is greedy to $Q^*$ (**deterministically** maximizes) is optimal (Szepesvári 2010):*
 
-$$
+{{< katex display=true >}}
 \tilde{\pi}^{*} \doteq \mathop{\mathrm{argmax}}_a Q^* = \pi^*.
-$$
+{{< /katex >}}
 
 </div>
 
@@ -92,10 +92,10 @@ $$
 
 **Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values $Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$:*
 
-$$
+{{< katex display=true >}}
 \left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) \\
 \left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right )
-$$
+{{< /katex >}}
 
 </div>
 

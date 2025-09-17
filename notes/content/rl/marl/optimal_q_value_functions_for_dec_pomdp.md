@@ -13,33 +13,41 @@ linkTitle: "Optimal Q Value Functions for Dec-POMDP"
 
 ## Notions
 
-|                                             |                                                                                                            |
-|:--------------------------------------------|:-----------------------------------------------------------------------------------------------------------|
-| $s^t$                                       | the state at $t$ with problem horizon $h$                                                                  |
-| $o^t$                                       | the joint observation of agents $o^t=\langle o_1^t, \dots, o_n^t \rangle$ at $t$                           |
-| $\mathcal{O}$                               | the joint observation space                                                                                |
-| $\vec{\theta}^t$                            | the joint observation-action history until $t$, $\vec{\theta}^t=(o^0, a^0, \dots, o^t)$                    |
-| $\vec{\Theta}^t$                            | the joint history space at $t$                                                                             |
-| $\vec{\Theta}^t_\pi$                        | the set of $\vec{\theta}^t$ consistent with policy $\pi$                                                   |
-|                                             |                                                                                                            |
-| $\delta^{t}$                                | the decision rule (a temporal structure of policy) at $t$                                                  |
-| $\delta^{t,*}$                              | the optimal decision rule at $t$ following $\psi^{t-1, *}$                                                 |
-| $\delta^{t,\circledast}_\psi$               | the optimal decision rule at $t$ following $\psi^{t-1}$                                                    |
-| $\Delta^t$                                  | the decision rule space at $t$                                                                             |
-| $\psi^{t}$                                  | the past joint policy until $t$, $\psi^{t} = \delta^{[0, t)}$                                              |
-| $\psi^{t, *}$                               | the optimal past joint policy until $t$, $\psi^{t, *} = \delta^{[0, t), *}$                                |
-| $\psi^{t, \circledast}$                     | the past joint policy until $t$ with non-optimal $\psi^{t-1}$ and optimal $\delta^{t-1, \circledast}_\psi$ |
-| $\Psi^{t}$                                  | the past joint policy space at $t$                                                                         |
-| $\xi^t$                                     | the subsequent joint policy from $t$, $\xi^{t} = \delta^{[t, h)}$                                          |
-| $\xi^{t, *}$                                | the optimal subsequent joint policy from $t$, $\xi^{t} = \delta^{[t, h), *}$                               |
-| $\xi^{t, \circledast}_\psi$                 | the optimal subsequent joint policy from $t$ following non-optimal $\psi^t$                                |
-| $\pi$                                       | the joint pure policy $\pi=\delta^{[0, h)}$                                                                |
-| $\pi^*$                                     | the joint optimal pure policy $\pi^*=\delta^{[0, h), *}$                                                   |
-|                                             |                                                                                                            |
-| $R(\vec{\theta}^t, \psi^{t+1})$             | the immediate reward function following $\psi^{t+1}$                                                       |
-| $Q(\vec{\theta}^t, \psi^{t+1})$             | the history-policy value function following $\psi^{t+1}$                                                   |
-| $Q^*(\vec{\theta}^t, \psi^{t+1})$           | the optimal history-policy value function following $\psi^{t+1}$                                           |
-| $Q^\circledast(\vec{\theta}^t, \psi^{t+1})$ | the sequentially rational optimal history-policy value function following $\psi^{t+1}$                     |
+{{< tabs >}}
+
+{{% tab "States & Observations" %}}
+- $s^t$: state at time $t$ with horizon $h$.
+- $o^t$: joint observation $o^t = \langle o_1^t, \dots, o_n^t \rangle$ at $t$.
+- $\mathcal{O}$: joint observation space.
+- $\vec{\theta}^t$: joint observation–action history until $t$, $\vec{\theta}^t=(o^0, a^0, \dots, o^t)$.
+- $\vec{\Theta}^t$: joint history space at $t$.
+- $\vec{\Theta}^t_\pi$: set of $\vec{\theta}^t$ consistent with policy $\pi$.
+{{% /tab %}}
+
+{{% tab "Policy & History" %}}
+- $\delta^{t}$: decision rule (temporal policy component) at $t$.
+- $\delta^{t,*}$: optimal decision rule at $t$ given $\psi^{t-1,*}$.
+- $\delta^{t,\circledast}_\psi$: optimal decision at $t$ given non‑optimal $\psi^{t-1}$.
+- $\Delta^t$: decision rule space at $t$.
+- $\psi^{t} = \delta^{[0,t)}$: past joint policy until $t$.
+- $\psi^{t,*} = \delta^{[0,t),*}$: optimal past joint policy until $t$.
+- $\psi^{t,\circledast}$: past joint policy with non‑optimal $\psi^{t-1}$ and optimal $\delta^{t-1,\circledast}_\psi$.
+- $\Psi^{t}$: past joint policy space at $t$.
+- $\xi^{t} = \delta^{[t,h)}$: subsequent joint policy from $t$.
+- $\xi^{t,*} = \delta^{[t,h),*}$: optimal subsequent joint policy from $t$.
+- $\xi^{t,\circledast}_\psi$: optimal subsequent policy from $t$ given non‑optimal $\psi^t$.
+- $\pi = \delta^{[0,h)}$: joint pure policy.
+- $\pi^* = \delta^{[0,h),*}$: joint optimal pure policy.
+{{% /tab %}}
+
+{{% tab "Rewards & Q" %}}
+- $R(\vec{\theta}^t, \psi^{t+1})$: immediate reward under $\psi^{t+1}$.
+- $Q(\vec{\theta}^t, \psi^{t+1})$: history–policy value under $\psi^{t+1}$.
+- $Q^*(\vec{\theta}^t, \psi^{t+1})$: optimal history–policy value under $\psi^{t+1}$.
+- $Q^{\circledast}(\vec{\theta}^t, \psi^{t+1})$: sequentially rational optimal history–policy value under $\psi^{t+1}$.
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Normative Optimal Q-Value Function
 
