@@ -202,16 +202,6 @@ The objective function can be augmented with an entropy term to encourage explor
 J^{\text{CLIP+}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ J^{\text{CLIP}}(\theta) - c \sum_{a} \pi_{\theta}(a|s) \log \pi_{\theta}(a|s) \right]
 {{< /katex >}}
 
-<div class="algorithm">
-
-<div class="algorithmic">
-
-**Initialize**: policy parameter {{< katex >}}\theta{{< /katex >}} for actor network {{< katex >}}\pi_{\theta}{{< /katex >}}, parameter {{< katex >}}w{{< /katex >}} for critic network {{< katex >}}V_{w}{{< /katex >}}, replay memory {{< katex >}}\mathcal{D}{{< /katex >}} Generate an episode following policy {{< katex >}}\pi_{\theta_{\text{old}}}{{< /katex >}} and store it into {{< katex >}}\mathcal{D}{{< /katex >}} Estimate reward-to-go {{< katex >}}\hat{R}{{< /katex >}} and {{< katex >}}\hat{A}^{\pi_{\theta_{\text{old}}}}{{< /katex >}} using GAE Compute {{< katex >}}J^{\text{CLIP+}}(\theta){{< /katex >}} for all samples according to Equ. <a href="#equ:PPO" data-reference-type="ref" data-reference="equ:PPO">[equ:PPO]</a> {{< katex >}}w \leftarrow w + \alpha_w \frac{1}{N}\sum_i\nabla_w (V_w(s_i)-\hat{R}(s_i, a_i))^2{{< /katex >}} {{< katex >}}\theta \leftarrow \theta + \alpha_\theta \frac{1}{N}\sum_i \nabla_\theta J^{\text{CLIP+H}}(\theta){{< /katex >}} {{< katex >}}\theta_{\text{old}} \leftarrow \theta{{< /katex >}}
-
-</div>
-
-</div>
-
 ### KL-PPO
 
 Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration Schulman et al., 2017.
@@ -259,6 +249,18 @@ where the advantage {{< katex >}}\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}
 is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).
 
 ![GRPO](/imgs/blog/from_pg_2_ppo/grpo.png)
+
+
+## References
+
+{{< references >}}
+<li>Schulman, John, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. 2017. “Proximal Policy Optimization Algorithms.” <em>arXiv</em> 1707.06347. <a href="https://arxiv.org/abs/1707.06347">https://arxiv.org/abs/1707.06347</a>.</li>
+<li>Brenner, Max. 2023. “Illustrated Comparison of Different Distributed Versions of PPO.” <em>Medium</em>, February 28. <a href="https://medium.com">https://medium.com</a>.</li>
+<li>Schulman, John, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. 2015. “High-Dimensional Continuous Control Using Generalized Advantage Estimation.” <em>arXiv</em> 1506.02438. <a href="https://arxiv.org/abs/1506.02438">https://arxiv.org/abs/1506.02438</a>.</li>
+<li>Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <em>arXiv</em> 2402.03300. <a href="https://arxiv.org/abs/2402.03300">https://arxiv.org/abs/2402.03300</a>.</li>
+<li>Schroeder de Witt, Christian, Tarun Gupta, Denys Makoviichuk, Viktor Makoviychuk, Philip H. S. Torr, Mingfei Sun, and Shimon Whiteson. 2020. “Is Independent Learning All You Need in the StarCraft Multi-Agent Challenge?” <em>arXiv</em> 2011.09533. <a href="https://arxiv.org/abs/2011.09533">https://arxiv.org/abs/2011.09533</a>.</li>
+<li>Yu, Chao, Akash Velu, Eugene Vinitsky, Jiaxuan Gao, Yu Wang, Alexandre Bayen, and Yi Wu. 2022. “The Surprising Effectiveness of PPO in Cooperative, Multi-Agent Games.” <em>arXiv</em> 2103.01955. <a href="https://arxiv.org/abs/2103.01955">https://arxiv.org/abs/2103.01955</a>.</li>
+{{< /references >}}
 
 
 
