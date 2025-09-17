@@ -147,3 +147,4 @@ J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} 
 
 
 <!-- footnotes converted to hints above -->
+<!-- moved to root content -->

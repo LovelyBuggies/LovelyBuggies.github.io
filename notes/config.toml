@@ -16,7 +16,8 @@ theme = "book"
   BookSearch = false
   BookRepo = "https://github.com/LovelyBuggies/LovelyBuggies.github.io"
   BookDateFormat = "Jan 2, 2006"
-  BookSection = "docs"
+  # Show all content from the root instead of the 'docs' section
+  BookSection = "/"
   # Use custom favicon for the site
   BookFavicon = "img/icon/nameicon.svg"
   # Show page last modified time (needs enableGitInfo)
