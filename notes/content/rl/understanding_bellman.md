@@ -157,7 +157,7 @@ Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td
 In **Q-learning** that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}
 {{< /katex >}}
- According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following Q-learning updates, {{< katex >}}Q^{*, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} (Watkins and Dayan 1992). The deep version of Q-learning algorithm, Deep Q-Network (DQN), is shown in Appendix.
+According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following Q-learning updates, {{< katex >}}Q^{*, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} (Watkins and Dayan 1992).
 
 However, the nice property of convergence only holds in the tabular case and cannot be extended to a function approximation as discussed later.
 
@@ -168,19 +168,15 @@ To introduce generalization to the value function, we represent the approximated
 {{< /katex >}}
  where {{< katex >}}Q^\text{target}{{< /katex >}} is the ground truth and {{< katex >}}Q_\theta{{< /katex >}} is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
 
-##### Semi gradient for Bellman Residual
-
 Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is, {{< katex display=true >}}
 \begin{aligned}
     \Delta_\text{semi} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[Q^\text{target} - Q_\theta(s, a) \Big]^2 \\ 
     &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \text{ where } Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a')\label{eq:semi-grad}
 \end{aligned}
 {{< /katex >}}
- Since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called semi gradient for Bellman residual ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
+Since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
 
-##### Full Gradient for Bellman Residual
-
-The full Bellman residual gradient should include all gradient components, including the gradient of the target estimation, {{< katex display=true >}}
+The **Full Gradient of Bellman Residual** should include all gradient components, including the gradient of the target estimation, {{< katex display=true >}}
 \begin{aligned}
     \Delta_\text{full} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big]^2 \\
     & = -\alpha \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big] \Big[ \gamma\nabla_\theta Q_\theta(s', a') - \nabla_\theta Q_\theta(s, a) \Big].
