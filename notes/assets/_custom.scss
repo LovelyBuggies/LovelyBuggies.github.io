@@ -188,10 +188,10 @@
 
 /* Override: make the specific 'Curse of Dimension' box gray */
 .book-page .markdown #curse-of-dimension {
-  /* Slightly darker gray box + lighter text */
-  border-color: var(--gray-500);
-  background-color: var(--gray-200);
-  color: #666;
+  /* Match Book theme default hint gray */
+  border-color: #64748b;                 /* same as $hint-colors.default */
+  background-color: rgba(100, 116, 139, 0.1);
+  color: #666;                           /* keep lighter text as requested */
 }
 
 /* Types results list spacing (title and date) */
