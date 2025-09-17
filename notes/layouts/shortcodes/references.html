@@ -19,20 +19,17 @@ Usage:
 */}}
 
 {{- $inner := .Inner -}}
-{{- /* strip anchor tags and angle-bracket autolinks to plain text */ -}}
-{{- $stripLinks := func (s) -}}
-  {{- $s1 := replaceRE "(?s)<a[^>]*>(.*?)</a>" "${1}" s -}}
-  {{- $s2 := replaceRE "<(https?://[^ >]+)>" "${1}" $s1 -}}
-  {{- $s2 -}}
-{{- end -}}
-
 {{- if in $inner "<li" -}}
-  {{- $clean := call $stripLinks $inner -}}
+  {{- /* If raw <li> items provided, strip links then wrap */ -}}
+  {{- $clean := replaceRE "(?s)<a[^>]*>(.*?)</a>" "${1}" $inner -}}
+  {{- $clean = replaceRE "<(https?://[^ >]+)>" "${1}" $clean -}}
   <ol class="references">{{ $clean | safeHTML }}</ol>
 {{- else -}}
+  {{- /* If markdown bullets provided, convert to HTML then strip links */ -}}
   {{- $html := $inner | markdownify -}}
   {{- $html = $html | replaceRE "^\\s*<ul[^>]*>" "<ol class=\"references\">" -}}
   {{- $html = $html | replaceRE "</ul>\\s*$" "</ol>" -}}
-  {{- $html = call $stripLinks $html -}}
+  {{- $html = replaceRE "(?s)<a[^>]*>(.*?)</a>" "${1}" $html -}}
+  {{- $html = replaceRE "<(https?://[^ >]+)>" "${1}" $html -}}
   {{- $html | safeHTML -}}
 {{- end -}}
