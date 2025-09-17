@@ -21,6 +21,7 @@ Bellman equations establish recusive relations between states and succeeding sta
   <strong>Definition.</strong> The Bellman equations for V-values are (Sutton and Barto 2018),
 
 
+
 {{< katex display=true >}}
 
 \begin{equation}
@@ -97,9 +98,8 @@ For convenience, we use Q-value as the representative in the following parts of 
         \text{and }\|\mathcal{T}^* \circ Q - \mathcal{T}^* \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty.
     \end{aligned}
 {{< /katex >}}
-</div>
-<div id="them:fixpoint" class="corollary">
-<strong>Corollary 1</strong> (Fixed-point Iteration). For any {{< katex >}}Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}, after {{< katex >}}k\to \infty{{< /katex >}} iterations of Bellman transformation, {{< katex >}}Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0{{< /katex >}}, or {{< katex >}}Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0{{< /katex >}}, according to Banach’s Fixed Point Theorem:
+
+<strong>Corollary 1</strong> (Fixed-point Iteration). For any {{< katex >}}Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}, after {{< katex >}}k\to \infty{{< /katex >}} iterations of Bellman transformation, {{< katex >}}Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0{{< /katex >}}, or {{< katex >}}Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0{{< /katex >}}, according to <a href="https://en.wikipedia.org/wiki/Banach_fixed-point_theorem">Banach’s Fixed Point Theorem</a>:
 
 
 {{< katex display=true >}}
@@ -112,19 +112,12 @@ which uniquely satisfies,
 \mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or } \mathcal{T}^{*}(Q^*) = Q^* .
 {{< /katex >}}
 
-</div>
-
-<div id="them:fundamental" class="theorem">
 <strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to {{< katex >}}Q^*{{< /katex >}} (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):
 
 
 {{< katex display=true >}}
 \tilde{\pi}^{*} \doteq \mathop{\mathrm{argmax}}_a Q^* = \pi^*.
 {{< /katex >}}
-
-</div>
-
-<div class="proposition">
 
 **Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values {{< katex >}}Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}:*
 
