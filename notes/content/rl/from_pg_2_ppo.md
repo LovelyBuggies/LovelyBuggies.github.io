@@ -6,7 +6,9 @@ weight: 11
 
 {{< katex />}}
 
-# Policy Gradient (PG)
+# From PG 2 PPO
+
+## Policy Gradient (PG)
 
 Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. PG methods seek to maximize a performance measure $J(\theta)$ with the policy’s parameter $\theta$, where the updates approximate gradient ascent in $J$.
 
@@ -23,7 +25,7 @@ $$\label{eq:pg}
 
 Since the major purpose of this article is to introduce PPO methods from PG, we omit some other important forms of PG here. Readers can find them in the Appendix.
 
-## PG Theorem
+### PG Theorem
 
 An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="ref" data-reference="eq:pg">[eq:pg]</a> is to replace $J(\theta)$ with $V^{\pi_{\theta}} (s_0)$. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
 
@@ -51,7 +53,7 @@ To sample with expectation equals or approximates the expression Equ. <a href="
 
 The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy parameterization appears, which can be omitted $L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]$ since it will be automatically recovered when differentiating.
 
-## PG with Baseline
+### PG with Baseline
 
 <div id="them:PG-baseline" class="theorem">
 
@@ -65,7 +67,7 @@ The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy paramete
 
 According to the Theorem <a href="#them:PG-baseline" data-reference-type="ref" data-reference="them:PG-baseline">2</a>, the expected return $Q(s,a)$ in Theorem <a href="#them:PG" data-reference-type="ref" data-reference="them:PG">1</a> can be replaced by $G$ (expected return of the full or following trajectory by Monte Carlo), $A$ (advantage by Generalized Advantage Estimation or state-value prediction), and $\delta$ (TD-residual by critic prediction).
 
-## Off-Policy PG
+### Off-Policy PG
 
 Off-policy sampling reuses any past episodes, which has a higher efficiency and brings more exploration. To make PG off-policy, we adjust it with an importance weight $\frac{\pi(a|s)}{\beta(a|s)}$ to correct the mismatch between behavior and target policies.
 
@@ -81,11 +83,11 @@ Off-policy sampling reuses any past episodes, which has a higher efficiency and 
 
 where $d^\beta(s)$ is the stationary distribution of the behavior policy $\beta$, and $Q^\pi$ is the Q-function estimated regard to the target policy $\pi$. Because of hard computation in reality (i), we ignore the approximation term $\nabla Q^\pi(s,a)$.
 
-# Proximal Policy Optimization (PPO)
+## Proximal Policy Optimization (PPO)
 
 In this section, we introduce standard PPO and it variants in different domains.
 
-## Clip-PPO
+### Clip-PPO
 
 Schulman et al., 2017 proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate $\hat{A}^{\pi_{\theta_{\text{old}}}}$ to reduce the variance of policy gradient methods and maintain low bias Schulman et al., 2015, $$\label{equ:Clip-PPO}
 J^{\text{CLIP}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right],$$ where $\hat{A}^\text{GAE}_t = \sum_{l=0}^{\infty} (\gamma \lambda)^l \delta_{t+l}$, $\delta$ is the TD error, and $\lambda$ is a hyperparameter controlling the trade-off between bias and variance. Note that the clipping could also occur in the value network to stabilize the training process.
@@ -103,7 +105,7 @@ The objective function can be augmented with an entropy term to encourage explor
 
 </div>
 
-## KL-PPO
+### KL-PPO
 
 Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration Schulman et al., 2017.
 
@@ -120,7 +122,7 @@ Sometimes, the KL-penalty can be combined with policy clipping to achieve better
 
 (Schulman et al. 2017) also mentioned Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive $\left( \mathcal{D}_\text{KL} \gg \mathcal{D}_\text{threshold} \right)$, $c$ is increased to penalize large updates; else if the update is too conservative $\left( \mathcal{D}_\text{KL} \ll \mathcal{D}_\text{threshold} \right)$, $c$ is decreased to allow larger updates.
 
-## Multi-Agent PPO
+### Multi-Agent PPO
 
 In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). In IPPO, each agent has its own actor and critic and learns independently according to a joint reward Schroeder de Witt et al., 2020. Like IPPO, MAPPO employs weight sharing between agents’ critics, and the advantage in MAPPO is estimated through joint GAE Yu et al., 2022.
 
@@ -136,7 +138,7 @@ Note that there are some other instantiations of IPPO, but not all of them are v
 A great example is PettingZoo’s agent cycle and parallel environments.
 {{< /hint >}}
 
-## Group Relative Policy Optimization (GRPO)
+### Group Relative Policy Optimization (GRPO)
 
 As DeepSeek has made a splash in the LLM community, the RL method GRPO involved has received a lot of attention (Zhihong Shao 2024). GRPO is a variant of PPO, where the advantage is estimated using group-relative comparisons rather than GAE. This approach eliminates the critic model, which improves the training efficiency and stability. The DeepSeek framework consists of: (i) a frozen *reference model*, which is a stable baseline for computing rewards; (ii) a given *reward model*, responsible for evaluating generated outputs and assigning scores; (iii) a *value model*, which estimates the expected return of a given state to aid in policy optimization; and (iv) a *policy model*, which generates $|\mathcal{G}|$ responses and is continuously updated to improve performance based on feedback from the other components. The learning objective for GRPO is, $$\small
 J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} \left[ \min \left( \frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})} \hat{A}^\mathcal{G}, \text{clip}(\frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\mathcal{G}}\right)-c\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta})\right],$$ where the advantage $\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}{\text{std}(r)}$ is estimated by grouped actions produced at the same state. $\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta})=\frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_{i})} 

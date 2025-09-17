@@ -6,9 +6,11 @@ weight: 12
 
 {{< katex />}}
 
-# Bellman Equation and Operator
+# Understanding Bellman
 
-## Definition
+## Bellman Equation and Operator
+
+### Definition
 
 The Bellman Equation and optimal Bellman Equation for V-values are, (Sutton and Barto 2018).
 {{< hint info >}}
@@ -50,7 +52,7 @@ Why do we mostly use MDP (where the future evolution is independent of its histo
 
 *For convenience, we use Q-value as the representative in the following parts of this article.*
 
-## Important Properties
+### Important Properties
 
 <div class="proposition">
 
@@ -93,9 +95,9 @@ $$
 
 </div>
 
-# Bellman Backup for Planning
+## Bellman Backup for Planning
 
-## Dynamic Programming
+### Dynamic Programming
 
 According to the Fundamental Theorem, we can find $\pi^*$ efficiently once having access to $Q^*$, without the need to find the policy whose Q-function **dominates** the others’ brute-force-ly. To avoid the Bellman Curse of Dimensionality, we can apply Dynamic Programming (DP) methods to solve MDPs by keeping track of Q-values during calculations, thanks to Bellman recursions.
 
@@ -107,7 +109,7 @@ Value iteration (so-called backward induction) involves iteratively applying $\m
 
 Policy iteration starts with an arbitrary policy $\pi^0$ and values $Q^0$. In each iterative step $k$, $Q^{\pi, k}$ is calculated by applying Bellman Operator $\mathcal{T}^{\pi, k}$ that follows current policy ${\pi^k}$ to $Q^{\pi, {k-1}}$ from the last iteration, and then $\pi^{k+1}$ is derived from greedifying $Q^{\pi, k}$. This process is repeated until convergence, and policy iteration can produce optimal policy after sufficient iterations.
 
-# Bellman Residual for Learning
+## Bellman Residual for Learning
 
 ## TD-Learning with Look-up Table
 

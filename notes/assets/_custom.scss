@@ -45,3 +45,8 @@
   /* Make brand 2pt smaller than default */
   font-size: calc(1em - 2pt);
 }
+
+/* Also reduce the page header title size by 2pt */
+.book-header h3 {
+  font-size: calc(1em - 2pt);
+}

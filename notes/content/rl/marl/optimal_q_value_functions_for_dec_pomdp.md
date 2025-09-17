@@ -5,7 +5,9 @@ math: true
 
 {{< katex />}}
 
-# Notions
+# Optimal Q Value Functions for Dec POMDP
+
+## Notions
 
 |                                             |                                                                                                            |
 |:--------------------------------------------|:-----------------------------------------------------------------------------------------------------------|
@@ -35,7 +37,7 @@ math: true
 | $Q^*(\vec{\theta}^t, \psi^{t+1})$           | the optimal history-policy value function following $\psi^{t+1}$                                           |
 | $Q^\circledast(\vec{\theta}^t, \psi^{t+1})$ | the sequentially rational optimal history-policy value function following $\psi^{t+1}$                     |
 
-# Normative Optimal Q-Value Function
+## Normative Optimal Q-Value Function
 
 <div id="defn:normative-Q" class="definition">
 
@@ -75,7 +77,7 @@ Single-agent (PO)MDP, where belief states are available, does not have this issu
 
 </div>
 
-# Sequentially Rational Optimal Q-Value Function
+## Sequentially Rational Optimal Q-Value Function
 
 To make optimal Q-value in Dec-POMDP computable, (Oliehoek, Spaan, and Vlassis 2008) defined another form of Q-value function and eliminated the dependency on past optimality.
 
@@ -94,7 +96,7 @@ Note that the only difference of $Q^\circledast$ from $Q^*$ is $\psi^{t+2, \circ
 
 Beyond solving the problem of Proposition <a href="#prop:problem" data-reference-type="ref" data-reference="prop:problem">1</a>, another advantage of $Q^\circledast$ is that it allows for the computation of optimal subsequent policy $\xi^{t, *}_\psi$ following any past policy $\psi^{t}$. This is beneficial in online applications where agents may occasionally deviate from the optimal policy.
 
-# Open Questions
+## Open Questions
 
 - We have seen some advantages of defining the optimal Q-value function as $Q^\circledast$, what are the downsides to defining it this way (e.g., high computational costs)?
 

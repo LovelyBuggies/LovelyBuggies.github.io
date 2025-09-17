@@ -5,7 +5,9 @@ math: true
 
 {{< katex />}}
 
-# Dec-POMDP
+# Introduction 2 DecPOMDP
+
+## Dec-POMDP
 
 <div class="definition">
 
@@ -54,17 +56,17 @@ $$\label{eq:decpomdp-q}
     &\equiv R(\boldsymbol{h}, \boldsymbol{\pi})+\gamma\sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{h}, \boldsymbol{\pi}) Q^{\boldsymbol{\pi}}(\boldsymbol{h}', \boldsymbol{\pi}) .
 \end{aligned}$$
 
-# Subclasses
+## Subclasses
 
-#### Centralized Control
+##### Centralized Control
 
 MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy $\mathbb{H}\to\mathbb{A}$.
 
-#### Independent Variables
+##### Independent Variables
 
 A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) $T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i')$ and reward-independence (RI) $R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n})$. Network-distributed POMDP (ND-POMDP) represents the factored one with TI and block-RI, i.e., $R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n})$, where ${\mathcal{N}(i)}$ are the neighbors of $i$.
 
-#### Complexity
+##### Complexity
 
 The worst-case complexity of finite-horizon problems is: (by Amato et al., 2013)
 
@@ -129,9 +131,9 @@ The worst-case complexity of finite-horizon problems is: (by Amato et al., 2013)
 
 </div>
 
-# Planning Methods
+## Planning Methods
 
-## Policy Structure
+### Policy Structure
 
 Calculating a shared belief state in Dec-POMDP is hard, because the policy can not be recovered from the value function. The policies are normally maintained in a policy tree or FSC. Policies can be extracted by starting at the root (or initial node) and continuing to the subtree (or next node) based on observations, and can be evaluated by summing the rewards weighted by transition probability.
 
@@ -143,9 +145,9 @@ Policy can also be represented by other forms, like approximating functions (Sut
 
 ![Finite State Controller](/imgs/blog/introduction_2_decpomdp/fsc.png)
 
-## Optimal Approaches
+### Optimal Approaches
 
-#### Bottom-up
+##### Bottom-up
 
 DP uses joint belief to find optimal solutions with policy pruning (Hansen, Bernstein, and Zilberstein 2004).
 
@@ -166,7 +168,7 @@ Perform exhaustive backups to get $Q_i^{t+1}$, and compute $V_i^{t+1}$ according
 
 </div>
 
-#### Top-down
+##### Top-down
 
 The policy tree can also be built using heuristic search like MAA\* (Szer, Charpillet, and Zilberstein 2005).
 
@@ -185,19 +187,19 @@ Select $a^*=\mathop{\mathrm{argmax}}_{a\in \Pi}F^\mathcal{H}(b^0, a)$ (heuristic
 
 </div>
 
-## Approximation Approaches
+### Approximation Approaches
 
 The algorithms below improve scalability to larger problems over optimal methods, but do not possess any bounds on solution quality.
 
-#### MBDP
+##### MBDP
 
 Memory-bounded dynamic programming (MBDP) techniques mitigate the scalability problem of DP (which generates and evaluates all joint policy trees before pruning) by keeping a fixed number of policy trees for each agent at each step (Seuken and Zilberstein 2007b). Several approaches have improved on MBDP by limiting (Seuken and Zilberstein 2007a) or compressing (Carlin and Zilberstein 2008) observations, replacing exhaustive backup with branch-and-bound search in the space of joint policy trees (Dibangoye, Mouaddib, and Chaib-draa 2009) as well as constraint optimization (Kumar and Zilberstein 2010) and linear programming (Wu, Zilberstein, and Chen 2010) to increase the efficiency of selecting the best trees at each step.
 
-#### JESP
+##### JESP
 
 The joint equilibrium search for policies (JESP) Nair et al., 2003 uses alternating best response. Initial policies are generated for all agents, and then all but one is held fixed. The remaining agent can then calculate the best response (local optimum) to the fixed policies. The policy of this agent becomes fixed and the next agent calculates the best response. These best-response calculations to fixed other agent policies continue until no agent changes its policy.
 
-# Complexity Classes
+## Complexity Classes
 
 Assuming $c$ and $k$ are constants, $\mathcal{C}$ is a complexity class, the table shows complexity terminologies.
 
