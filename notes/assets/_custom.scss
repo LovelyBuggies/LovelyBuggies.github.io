@@ -9,6 +9,9 @@
   // Keep neutral light gray styling (override theme colored variants)
   border-color: var(--gray-200);
   background-color: var(--gray-100);
+  // Tighter inner and outer spacing
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0;
 }
 
 // Reduce default image display size in posts
@@ -169,8 +172,8 @@
   border-left-width: 4px;               /* accent left border */
   background-color: rgba(59, 173, 59, 0.10);
   border-radius: 4px;
-  padding: 0.75rem 1rem;
-  margin: 0.75rem 0;
+  padding: 0.5rem 0.75rem;              /* tighter inner spacing */
+  margin: 0.5rem 0;                     /* tighter outer spacing */
 }
 
 /* Definition blocks: styled like blue/info hint */
@@ -179,8 +182,8 @@
   border-left-width: 4px;               /* accent left border */
   background-color: rgba(68, 134, 221, 0.10);
   border-radius: 4px;
-  padding: 0.75rem 1rem;
-  margin: 0.75rem 0;
+  padding: 0.5rem 0.75rem;              /* tighter inner spacing */
+  margin: 0.5rem 0;                     /* tighter outer spacing */
 }
 
 /* Types results list spacing (title and date) */
