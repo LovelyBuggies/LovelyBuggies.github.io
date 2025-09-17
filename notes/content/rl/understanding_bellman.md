@@ -103,10 +103,13 @@ For convenience, we use Q-value as the representative in the following parts of 
 
 
 {{< katex display=true >}}
-\begin{aligned}
-Q^{\pi,\,\infty} &= Q^{*,\,\infty} = Q^* ,\\
-\text{which uniquely satisfies} & \mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or } \mathcal{T}^{*}(Q^*) = Q^* .
-\end{aligned}
+Q^{\pi,\,\infty} &= Q^{*,\,\infty} = Q^* ,
+{{< /katex >}}
+
+which uniquely satisfies, 
+
+{{< katex display=true >}}
+\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or } \mathcal{T}^{*}(Q^*) = Q^* .
 {{< /katex >}}
 
 </div>
