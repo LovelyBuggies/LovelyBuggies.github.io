@@ -50,3 +50,16 @@
 .book-header h3 {
   font-size: calc(1em - 2pt);
 }
+
+/* Scale down post content (not sidebars) to 80% uniformly */
+.book-page .markdown {
+  font-size: 0.8rem;
+}
+
+/* Override heading sizes inside posts to maintain ~80% scale of theme defaults */
+.book-page .markdown h1 { font-size: 1.6rem; }   /* 2.0rem * 0.8 */
+.book-page .markdown h2 { font-size: 1.2rem; }   /* 1.5rem * 0.8 */
+.book-page .markdown h3 { font-size: 1.0rem; }   /* 1.25rem * 0.8 */
+.book-page .markdown h4 { font-size: 0.9rem; }   /* 1.125rem * 0.8 */
+.book-page .markdown h5 { font-size: 0.8rem; }   /* 1.0rem * 0.8 */
+.book-page .markdown h6 { font-size: 0.7rem; }   /* 0.875rem * 0.8 */
