@@ -148,7 +148,7 @@ Policy iteration starts with an arbitrary policy $\pi^0$ and values $Q^0$. In ea
 
 ## Bellman Residual for Learning
 
-### TD-Learning with Look-up Table
+### Look-up Table
 
 When the transition model is unavailable (model-free), we can use the residuals (RHS minus LHS) of the Bellman Equations as learning objective, {{< katex display=true >}}
 \begin{aligned}
@@ -174,7 +174,7 @@ Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-le
 
 However, the nice property of convergence only holds in the tabular case and cannot be extended to a function approximation as discussed later.
 
-### TD-learning with Function Approximation
+### Function Approximation
 
 To introduce generalization to the value function, we represent the approximated Q-value in a parameterized functional form. Our goal is to minimize the mean squared value error, {{< katex display=true >}}
 \mathcal{L}(\theta) = \frac{1}{2}\sum_{s \in \mathcal{S}} \mu(s) \Big[ Q^\text{target} - Q_\theta(s, a) \Big]^2,
