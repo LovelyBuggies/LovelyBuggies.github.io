@@ -37,7 +37,10 @@ Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')
 = R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right]
 {{< /katex >}}
 
-where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. $$\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).$$ Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
+where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. {{< katex display=true >}}
+\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
+{{< /katex >}}
+ Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
 {{< katex display=true >}}
 (\mathcal{T}^\pi\circ V^\pi)(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 (\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
@@ -60,10 +63,13 @@ Why do we mostly use MDP (where the future evolution is independent of its histo
 
 <div class="proposition">
 
-**Proposition 1** ($\gamma$-contraction). *Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, $$\begin{aligned}
+**Proposition 1** ($\gamma$-contraction). *Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
+\begin{aligned}
         \|\mathcal{T}^\pi \circ Q - \mathcal{T}^\pi \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty,\\
         \text{and }\|\mathcal{T}^* \circ Q - \mathcal{T}^* \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty.
-    \end{aligned}$$*
+    \end{aligned}
+{{< /katex >}}
+*
 
 </div>
 
@@ -117,46 +123,67 @@ Policy iteration starts with an arbitrary policy $\pi^0$ and values $Q^0$. In ea
 
 ### TD-Learning with Look-up Table
 
-When the transition model is unavailable (model-free), we can use the residuals (RHS minus LHS) of the Bellman Equations as learning objective, $$\begin{aligned}
+When the transition model is unavailable (model-free), we can use the residuals (RHS minus LHS) of the Bellman Equations as learning objective, {{< katex display=true >}}
+\begin{aligned}
     (\mathcal{B}^\pi\circ Q) (s,a) &\doteq  r + \gamma Q(s', \pi(s')) - Q(s, a),\\
     (\mathcal{B}^*\circ Q) (s,a) &\doteq  r + \gamma \max_{a'} Q(s', a') - Q(s, a).
-\end{aligned}$$ Assuming that our sampling and parameter updating roughly follow the true state distribution $\mu(s)$, the expectation of Bellman residual will be closed to zero at the optima. This approach is often called temporal difference (TD) learning.
+\end{aligned}
+{{< /katex >}}
+ Assuming that our sampling and parameter updating roughly follow the true state distribution $\mu(s)$, the expectation of Bellman residual will be closed to zero at the optima. This approach is often called temporal difference (TD) learning.
 
 ##### TD-learning
 
-In TD-learning with learning rate $\alpha$, the update rule for Q-values is, $$Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td-learning}$$ According to Stochastic Approximation Theorem, let $k$ be the visitation times of state-action pair, and learning rates $0 \leqslant \alpha^k < 1$ satisfies $\forall (s, a)$, $\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty$. Following TD-learning updates, $Q^{\pi, k}(s, a)$ converges to $Q^*(s, a)$ as $k \to \infty$ ((Jaakkola, Jordan, and Singh 1994)).
+In TD-learning with learning rate $\alpha$, the update rule for Q-values is, {{< katex display=true >}}
+Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td-learning}
+{{< /katex >}}
+ According to Stochastic Approximation Theorem, let $k$ be the visitation times of state-action pair, and learning rates $0 \leqslant \alpha^k < 1$ satisfies $\forall (s, a)$, $\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty$. Following TD-learning updates, $Q^{\pi, k}(s, a)$ converges to $Q^*(s, a)$ as $k \to \infty$ ((Jaakkola, Jordan, and Singh 1994)).
 
 ##### Q-learning
 
-In Q-learning that relies on optimal Bellman Equation, the Q-value update is, $$Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}$$ According to Stochastic Approximation Theorem, let $k$ be the visitation times of state-action pair, and learning rates $0 \leqslant \alpha^k < 1$ satisfies $\forall (s, a)$, $\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty$. Following Q-learning updates, $Q^{*, k}(s, a)$ converges to $Q^*(s, a)$ as $k \to \infty$ ((Watkins and Dayan 1992)). The deep version of Q-learning algorithm, Deep Q-Network (DQN), is shown in Appendix.
+In Q-learning that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
+Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}
+{{< /katex >}}
+ According to Stochastic Approximation Theorem, let $k$ be the visitation times of state-action pair, and learning rates $0 \leqslant \alpha^k < 1$ satisfies $\forall (s, a)$, $\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty$. Following Q-learning updates, $Q^{*, k}(s, a)$ converges to $Q^*(s, a)$ as $k \to \infty$ ((Watkins and Dayan 1992)). The deep version of Q-learning algorithm, Deep Q-Network (DQN), is shown in Appendix.
 
 However, the nice property of convergence only holds in the tabular case and cannot be extended to a function approximation as discussed later.
 
 ### TD-learning with Function Approximation
 
-To introduce generalization to the value function, we represent the approximated Q-value in a parameterized functional form. Our goal is to minimize the mean squared value error, $$\mathcal{L}(\theta) = \frac{1}{2}\sum_{s \in \mathcal{S}} \mu(s) \Big[ Q^\text{target} - Q_\theta(s, a) \Big]^2,$$ where $Q^\text{target}$ is the ground truth and $Q_\theta$ is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
+To introduce generalization to the value function, we represent the approximated Q-value in a parameterized functional form. Our goal is to minimize the mean squared value error, {{< katex display=true >}}
+\mathcal{L}(\theta) = \frac{1}{2}\sum_{s \in \mathcal{S}} \mu(s) \Big[ Q^\text{target} - Q_\theta(s, a) \Big]^2,
+{{< /katex >}}
+ where $Q^\text{target}$ is the ground truth and $Q_\theta$ is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
 
 ##### Semi gradient for Bellman Residual
 
-Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is, $$\begin{aligned}
+Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is, {{< katex display=true >}}
+\begin{aligned}
     \Delta_\text{semi} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[Q^\text{target} - Q_\theta(s, a) \Big]^2 \\ 
     &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \text{ where } Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a')\label{eq:semi-grad}
-\end{aligned}$$ Since we neglects a part of the gradient of $Q^\text{target}$, it is called semi gradient for Bellman residual ($\theta$ in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
+\end{aligned}
+{{< /katex >}}
+ Since we neglects a part of the gradient of $Q^\text{target}$, it is called semi gradient for Bellman residual ($\theta$ in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
 
 ##### Full Gradient for Bellman Residual
 
-The full Bellman residual gradient should include all gradient components, including the gradient of the target estimation, $$\begin{aligned}
+The full Bellman residual gradient should include all gradient components, including the gradient of the target estimation, {{< katex display=true >}}
+\begin{aligned}
     \Delta_\text{full} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big]^2 \\
     & = -\alpha \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big] \Big[ \gamma\nabla_\theta Q_\theta(s', a') - \nabla_\theta Q_\theta(s, a) \Big].
-\end{aligned}$$ If the approximation system is general enough and the value functions are continuous, the full Bellman residual gradient is guaranteed to converge to the optima. However, this is at the sacrifice of learning speed, as illustrated by the hall problem.
+\end{aligned}
+{{< /katex >}}
+ If the approximation system is general enough and the value functions are continuous, the full Bellman residual gradient is guaranteed to converge to the optima. However, this is at the sacrifice of learning speed, as illustrated by the hall problem.
 
 ##### Hybrid Gradient for Bellman Residual
 
-In contrast to Figure <a href="#subfig:sg-increase" data-reference-type="ref" data-reference="subfig:sg-increase">1</a> where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure <a href="#subfig:sg-decrease" data-reference-type="ref" data-reference="subfig:sg-decrease">3</a> represents the case where the semi gradient may diverge. (Baird 1995) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed. $$\begin{aligned}
+In contrast to Figure <a href="#subfig:sg-increase" data-reference-type="ref" data-reference="subfig:sg-increase">1</a> where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure <a href="#subfig:sg-decrease" data-reference-type="ref" data-reference="subfig:sg-decrease">3</a> represents the case where the semi gradient may diverge. (Baird 1995) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed. {{< katex display=true >}}
+\begin{aligned}
     \Delta_\text{B} \theta &= (1 - \omega)  \cdot \Delta_\text{semi}\theta + \omega \cdot \Delta_\text{full}\theta, \\
     &=-\alpha \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big] \Big[\omega \gamma \nabla_\theta Q_\theta(s', a') - \nabla_\theta Q_\theta(s, a) \Big],\\
     &\text{s.t.,} \ \Delta_\text{B}\theta \cdot \Delta_\text{full}\theta\geqslant 0 \Leftrightarrow \omega \geqslant \frac{\Delta_\text{semi}\theta \cdot \Delta_\text{full}\theta}{\Delta_\text{semi}\theta \cdot \Delta_\text{full}\theta - \Delta_\text{full}\theta \cdot \Delta_\text{full}\theta}.
-\end{aligned}$$
+\end{aligned}
+{{< /katex >}}
+
 
 <figure id="subfig:sg-decrease">
 <figure id="subfig:sg-increase">

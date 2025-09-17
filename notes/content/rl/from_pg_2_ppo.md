@@ -43,8 +43,11 @@ Notation: we omit $\theta$ in subscripts/superscripts and gradients, assuming $\
 
 <div id="them:PG" class="theorem">
 
-**Theorem 1**. *Taking the state-value function as the optimizing target, the objective gradient follows, $$\label{equ:pgthem}
-    \nabla J(\theta) \propto \sum_s d^\pi(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s),$$ where $d^\pi(s)$ is the stationary distribution of the policy $\pi_{\theta}$.*
+**Theorem 1**. *Taking the state-value function as the optimizing target, the objective gradient follows, {{< katex display=true >}}
+\label{equ:pgthem}
+    \nabla J(\theta) \propto \sum_s d^\pi(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s),
+{{< /katex >}}
+ where $d^\pi(s)$ is the stationary distribution of the policy $\pi_{\theta}$.*
 
 </div>
 
@@ -65,11 +68,14 @@ The eligibility vector $\nabla\ln\pi(a|s)$ is the only place the policy paramete
 
 <div id="them:PG-baseline" class="theorem">
 
-**Theorem 2**. *PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. $$\label{equ:reinforce-baseline}
+**Theorem 2**. *PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. {{< katex display=true >}}
+\label{equ:reinforce-baseline}
     \begin{aligned}
         \nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a (Q^\pi (s,a) -b(s)) \nabla\pi(a|s) \\
         &= \mathbb{E}_{\pi} \left[(Q^\pi(s,a) -b(s)) \nabla\ln\pi(a|s)\right].
-    \end{aligned}$$*
+    \end{aligned}
+{{< /katex >}}
+*
 
 </div>
 

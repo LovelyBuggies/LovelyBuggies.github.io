@@ -35,17 +35,23 @@ linkTitle: "Introduction to Dec-POMDP"
 
 - *$\gamma$ is the discount factor for the return.*
 
-*A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history $\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}$, an optimal solution maximizes the expected return, $$\boldsymbol{\pi}^*=\mathop{\mathrm{argmax}}_{\boldsymbol{\pi}}\mathbb{E}\left[\textstyle\sum_{t=0}^{\mathcal{H}-1}R(\boldsymbol{h}, \boldsymbol{\pi}(\boldsymbol{h}))\middle|b^0\right].$$*
+*A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history $\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}$, an optimal solution maximizes the expected return, {{< katex display=true >}}
+\boldsymbol{\pi}^*=\mathop{\mathrm{argmax}}_{\boldsymbol{\pi}}\mathbb{E}\left[\textstyle\sum_{t=0}^{\mathcal{H}-1}R(\boldsymbol{h}, \boldsymbol{\pi}(\boldsymbol{h}))\middle|b^0\right].
+{{< /katex >}}
+*
 
 </div>
 
 In Dec-POMDP, the Bellman recursive formulation of the history V-function is,
 
-$$\label{eq:decpomdp-V}
+{{< katex display=true >}}
+\label{eq:decpomdp-V}
 \begin{aligned}
     V^{\boldsymbol{\pi}}(\boldsymbol{h}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\left[R(s, \boldsymbol{\pi}(\boldsymbol{h}))+\gamma \sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h})) \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') V^{\boldsymbol{\pi}}(\boldsymbol{h}') \right]\\
     &\equiv R(\boldsymbol{h}, \boldsymbol{\pi})+\gamma\sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{h}, \boldsymbol{\pi}) V^{\boldsymbol{\pi}}(\boldsymbol{h}'),
-\end{aligned}$$
+\end{aligned}
+{{< /katex >}}
+
 
 {{< hint info >}}
 The definition of the value function is flexible: it may be based on the value of a state, a belief state, an observation, a state history, an observation history, a single action (single-step policy), a full policy (action history), observation–action history, or combinations of these.
@@ -53,12 +59,15 @@ The definition of the value function is flexible: it may be based on the value o
 
 the Bellman recursive formulation of the **history-policy** Q-function is,
 
-$$\label{eq:decpomdp-q}
+{{< katex display=true >}}
+\label{eq:decpomdp-q}
 \small
 \begin{aligned}
     Q^{\boldsymbol{\pi}}(\boldsymbol{h}, \boldsymbol{\pi}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\left[R(s, \boldsymbol{\pi}(\boldsymbol{h}))+\gamma\sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h})) \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') Q^{\boldsymbol{\pi}}(\boldsymbol{h}', \boldsymbol{\pi}(\boldsymbol{h}')) \right]\\
     &\equiv R(\boldsymbol{h}, \boldsymbol{\pi})+\gamma\sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{h}, \boldsymbol{\pi}) Q^{\boldsymbol{\pi}}(\boldsymbol{h}', \boldsymbol{\pi}) .
-\end{aligned}$$
+\end{aligned}
+{{< /katex >}}
+
 
 ## Subclasses
 
@@ -155,8 +164,11 @@ Policy can also be represented by other forms, like approximating functions (Sut
 
 DP uses joint belief to find optimal solutions with policy pruning (Hansen, Bernstein, and Zilberstein 2004).
 
-$$V^{t+1}(b^t) = \max_{a \in \mathcal{A}} \left\{ \sum_{s \in \mathcal{S}} b^t(s) 
-\left[ R(s, a) + \sum_{o \in \mathcal{O}} \mathcal{P}(o \mid s, a) V^t(b^{t+1}) \right] \right\}.$$
+{{< katex display=true >}}
+V^{t+1}(b^t) = \max_{a \in \mathcal{A}} \left\{ \sum_{s \in \mathcal{S}} b^t(s) 
+\left[ R(s, a) + \sum_{o \in \mathcal{O}} \mathcal{P}(o \mid s, a) V^t(b^{t+1}) \right] \right\}.
+{{< /katex >}}
+
 
 <div class="algorithm">
 
