@@ -27,7 +27,7 @@ readingTime: 4
 
 {{% tab "Policy & History" %}}
 - $\delta^{t}$: decision rule (temporal policy component) at $t$.
-- $\delta^{t,*}$: optimal decision rule at $t$ given $\psi^{t-1,*}$.
+- $\delta^{t,\*}$: optimal decision rule at $t$ given $\psi^{t-1,*}$.
 - $\delta^{t,\circledast}_\psi$: optimal decision at $t$ given non‑optimal $\psi^{t-1}$.
 - $\Delta^t$: decision rule space at $t$.
 - $\psi^{t} = \delta^{[0,t)}$: past joint policy until $t$.
@@ -35,10 +35,10 @@ readingTime: 4
 - $\psi^{t,\circledast}$: past joint policy with non‑optimal $\psi^{t-1}$ and optimal $\delta^{t-1,\circledast}_\psi$.
 - $\Psi^{t}$: past joint policy space at $t$.
 - $\xi^{t} = \delta^{[t,h)}$: subsequent joint policy from $t$.
-- $\xi^{t,*} = \delta^{[t,h),*}$: optimal subsequent joint policy from $t$.
+- $\xi^{t,\*} = \delta^{[t,h),*}$: optimal subsequent joint policy from $t$.
 - $\xi^{t,\circledast}_\psi$: optimal subsequent policy from $t$ given non‑optimal $\psi^t$.
 - $\pi = \delta^{[0,h)}$: joint pure policy.
-- $\pi^* = \delta^{[0,h),*}$: joint optimal pure policy.
+- $\pi^\* = \delta^{[0,h),*}$: joint optimal pure policy.
 {{% /tab %}}
 
 {{% tab "Rewards & Q" %}}
