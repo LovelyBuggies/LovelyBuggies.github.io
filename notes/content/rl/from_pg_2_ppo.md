@@ -130,14 +130,14 @@ According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >
 
 {{< katex display=true >}}
 \begin{aligned}
-\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]
-&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+&\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]\\
+= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
  - \mathbb{E}_{d^\pi}\!\left[\sum_a b(s)\, \nabla\ln\pi(a\mid s)\right] \\
-&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
  - \mathbb{E}_{d^\pi}\!\left[b(s)\, \nabla \sum_a \pi(a\mid s)\right] \\
-&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
  - \mathbb{E}_{d^\pi}\!\left[b(s)\, \nabla 1\right] \\
-&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
+= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
 \end{aligned}
 {{< /katex >}}
 
