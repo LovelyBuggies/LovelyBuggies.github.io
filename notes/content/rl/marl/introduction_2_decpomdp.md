@@ -95,7 +95,7 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 
 **Theorem 3**. The complexity of an infinite POMDP is undecidable (Madani, Hanks, and Condon 1999), leading to the undecidability of the infinite Dec-POMDP complexity.
 
-**Theorem 4**. A finite Dec-POMDP$_{n\geqslant2}$ is NEXP-complete, and a finite Dec-MDP$_{n\geqslant3}$ is also NEXP-complete (Bernstein et al. 2002).
+**Theorem 4**. A finite Dec-POMDP ($n\geqslant2$) is NEXP-complete, and a finite Dec-MDP ($_n\geqslant3$) is also NEXP-complete (Bernstein et al. 2002).
 
 **Fact 1**. A Dec-MDP with TI and RI can be solved independently, resulting in P-complete.
 
