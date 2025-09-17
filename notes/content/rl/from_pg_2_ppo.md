@@ -57,7 +57,7 @@ To sample with expectation equals or approximates the expression,
 
 The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only place the policy parameterization appears, which can be omitted {{< katex >}}L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]{{< /katex >}} since it will be automatically recovered when differentiating.
 
-{{% details "Proof of Theorem 1" open %}}
+{{% details "Proof of Theorem 1" %}}
 
 <strong>Proof.</strong> The gradient of {{< katex >}}V{{< /katex >}} can be written via {{< katex >}}Q{{< /katex >}} as
 
@@ -124,7 +124,7 @@ Let {{< katex >}}\eta(s){{< /katex >}} be the expected number of visits to {{< k
 
 According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem 1 can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by Generalized Advantage Estimation or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
 
-{{% details "Proof of Theorem 2 (baseline)" open %}}
+{{% details "Proof of Theorem 2 (baseline)" %}}
 
 <strong>Proof.</strong> We first show the baseline keeps the estimator unbiased:
 
