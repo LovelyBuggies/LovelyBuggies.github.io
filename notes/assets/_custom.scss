@@ -114,8 +114,9 @@
 }
 .book-page .markdown ol.references > li::before {
   counter-increment: ref-counter;
-  content: "[" counter(ref-counter) "]"; /* no trailing space for zero gap */
-  position: static;             /* inline with text to eliminate gap */
+  /* add a very small thin space after marker */
+  content: "[" counter(ref-counter) "]\2009";
+  position: static;             /* inline with text to eliminate large gaps */
   color: inherit;
 }
 
