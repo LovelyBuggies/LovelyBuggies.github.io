@@ -1,7 +1,6 @@
 <nav>
 {{ partial "docs/brand" . }}
 {{ partial "docs/search" . }}
-{{ partial "docs/type-tags" . }}
 {{ if hugo.IsMultilingual }}
   {{ partial "docs/languages" . }}
 {{ end }}
@@ -10,6 +9,9 @@
 {{ partial "docs/menu-hugo" .Site.Menus.before }}
 
 {{ partial "docs/menu-filetree" . }}
+
+{{/* Place type tags under the article titles (file tree) */}}
+{{ partial "docs/type-tags" . }}
 
 {{ partial "docs/menu-hugo" .Site.Menus.after }}
 {{ partial "docs/inject/menu-after" . }}
