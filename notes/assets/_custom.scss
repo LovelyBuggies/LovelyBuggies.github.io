@@ -160,9 +160,10 @@
   font-style: italic;
 }
 
-/* Theorem / Proposition / Fact blocks: styled like green hint */
+/* Theorem / Proposition / Corollary / Fact blocks: styled like green hint */
 .book-page .markdown div.theorem,
 .book-page .markdown div.proposition,
+.book-page .markdown div.corollary,
 .book-page .markdown div.fact {
   border: 1px solid #3bad3b;            /* success green */
   border-left-width: 4px;               /* accent left border */
@@ -172,11 +173,11 @@
   margin: 0.75rem 0;
 }
 
-/* Definition blocks: styled like red/danger hint */
+/* Definition blocks: styled like blue/info hint */
 .book-page .markdown div.definition {
-  border: 1px solid #d84747;            /* danger red */
+  border: 1px solid #4486dd;            /* info blue */
   border-left-width: 4px;               /* accent left border */
-  background-color: rgba(216, 71, 71, 0.10);
+  background-color: rgba(68, 134, 221, 0.10);
   border-radius: 4px;
   padding: 0.75rem 1rem;
   margin: 0.75rem 0;
