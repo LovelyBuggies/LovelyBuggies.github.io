@@ -8,8 +8,8 @@ Quick start
 - CI deploy (optional): set Pages Source to “GitHub Actions” and push to `main`; the workflow builds and deploys.
 
 Add a new blog post
-1) Create a folder under `notes/content/docs/`, e.g. `notes/content/docs/my-post/`.
-2) Inside it, add an `index.md` (or `_index.md`) with front matter, e.g.:
+1) Create a single file under `notes/content/docs/<section>/` named from the title with underscores, e.g. `notes/content/docs/rl/my_new_post.md`.
+2) Add front matter, e.g.:
 
 ```
 ---
@@ -25,7 +25,7 @@ Your content in Markdown here.
 
 - Ordering in sidebar: lower `weight` appears higher.
 - Recent listing: any page with a `date` appears on “Recent Posts”.
-- Assets: place images/files next to your markdown and link relatively, e.g. `![fig](figure.png)`.
+- Assets: place images/files next to your markdown and link relatively, e.g. `![fig](my_new_post_fig1.png)`.
 - Math: use `$...$` (inline) and `$$...$$` (block). Add `math: true` to the page front matter.
 
 Deployment options
@@ -33,6 +33,7 @@ Deployment options
 - GitHub Actions: Settings → Pages → Source = “GitHub Actions”. Actions workflow builds and deploys `main`.
 
 Notes
+- Section `_index.md` files are kept only to name and order sidebar groups and are not rendered.
 - The Blog uses the Hugo Book theme located at `notes/themes/book` (git submodule).
 - Site config is in `notes/config.toml`.
 
