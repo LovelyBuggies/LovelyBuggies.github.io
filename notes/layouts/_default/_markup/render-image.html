@@ -1,15 +1,17 @@
 {{- /* Custom image render hook: map /imgs/blog/* to assets under notes/assets/imgs/* (no blog level) */ -}}
 {{- $dest := .Destination -}}
+{{- $alt := .Text -}}
+{{- $title := .Title -}}
 {{- /* Normalize: strip leading slash for matching */ -}}
 {{- $rel := cond (hasPrefix $dest "/") (substr $dest 1) $dest -}}
 {{- if hasPrefix $rel "imgs/blog/" -}}
   {{- /* Drop the blog/ segment for assets lookup */ -}}
   {{- $assetPath := replaceRE "^imgs/blog/" "imgs/" $rel -}}
   {{- with resources.Get $assetPath -}}
-    <img src="{{ .RelPermalink }}" alt="{{ .Text }}"{{ with $.Title }} title="{{ . }}"{{ end }} />
+    <img src="{{ .RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
   {{- else -}}
-    <img src="{{ $dest | safeURL }}" alt="{{ .Text }}"{{ with $.Title }} title="{{ . }}"{{ end }} />
+    <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
   {{- end -}}
 {{- else -}}
-  <img src="{{ $dest | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} />
+  <img src="{{ $dest | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
 {{- end -}}
