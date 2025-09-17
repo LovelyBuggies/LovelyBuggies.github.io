@@ -28,8 +28,6 @@ There are 2 main advantages of PG methods,
 
 - With continuous policy parameterization, the action probabilities change smoothly as a function of the learned parameter, whereas {{< katex >}}\epsilon{{< /katex >}}-greedy may change dramatically for an arbitrarily small change in the estimated action values.
 
-Since the major intent of this article is to introduce PPO methods from PG, we omit some other forms of PG here.
-
 ### PG Theorem
 
 An intuitive way to calculate policy gradient is to replace {{< katex >}}J(\theta){{< /katex >}} with {{< katex >}}V^{\pi_{\theta}} (s_0){{< /katex >}}. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
@@ -177,6 +175,8 @@ Off-policy sampling reuses any past episodes, which has a higher efficiency and 
 = \mathbb{E}_{d^\beta}\!\left[\sum_a \beta(a|s) \, \frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \frac{\nabla \pi(a|s)}{\pi(a|s)}\right] \\
 = \mathbb{E}_{\beta}\!\left[\frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \nabla\ln \pi(a|s)\right] \, .
 {{< /katex >}}
+
+### Other PG Variants
 
 {{% details "Deterministic PG" %}}
 
