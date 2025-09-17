@@ -1,0 +1,29 @@
+name: Guard: No Artifacts
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+
+      - name: Block build artifacts and redundant paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Checking for blocked paths in tracked files..."
+          # List tracked files and look for blocked patterns
+          blocked='^(dist/|notes/public/|notes/resources/|notes/static/|notes/.hugo_build.lock$|notes-src/|.*\.DS_Store$)'
+          if git ls-files | grep -E "$blocked" -n; then
+            echo "Error: Blocked files detected above. Remove them before merging." >&2
+            exit 1
+          fi
+          echo "No blocked files found."
