@@ -1,9 +1,9 @@
 ---
 date: 2024-11-11
-title: "\(Q^*\) in Dec-POMDP"
+title: '\(Q^*\) in Dec-POMDP'
 math: true
 postType: thoughts
-linkTitle: "\(Q^*\) in Dec-POMDP"
+linkTitle: '\(Q^*\) in Dec-POMDP'
 readingTime: 4
 ---
 
