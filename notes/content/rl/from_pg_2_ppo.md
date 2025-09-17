@@ -234,7 +234,7 @@ Schulman et al., 2017 proposed the standard PPO that uses a clipped surrogate ob
 
 {{< katex display=true >}}
 \label{equ:Clip-PPO}
-J^{\text{CLIP}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}\!\left(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon\right) \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right]
+J^{\text{CLIP}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}\!\left(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_{\text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon\right) \hat{A}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right].
 {{< /katex >}}
 
 where {{< katex >}}\hat{A}^\text{GAE}_t = \sum_{l=0}^{\infty} (\gamma \lambda)^l \delta_{t+l}{{< /katex >}}, {{< katex >}}\delta{{< /katex >}} is the TD error, and {{< katex >}}\lambda{{< /katex >}} is a hyperparameter controlling the trade-off between bias and variance. Note that the clipping could also occur in the value network to stabilize the training process.
@@ -243,7 +243,7 @@ The objective function can be augmented with an entropy term to encourage explor
 
 {{< katex display=true >}}
 \label{equ:PPO}
-J^{\text{CLIP+}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ J^{\text{CLIP}}(\theta) - c \sum_{a} \pi_{\theta}(a|s) \log \pi_{\theta}(a|s) \right]
+J^{\text{CLIP+}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ J^{\text{CLIP}}(\theta) - c \sum_{a} \pi_{\theta}(a|s) \log \pi_{\theta}(a|s) \right].
 {{< /katex >}}
 
 ### KL-PPO
@@ -281,13 +281,13 @@ As DeepSeek has made a splash in the LLM community, the RL method GRPO involved 
 
 {{< katex display=true >}}
 \small
-J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} \left[ \min \left( \frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})} \hat{A}^\mathcal{G}, \text{clip}\!\left(\frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})}, 1 - \epsilon, 1 + \epsilon\right) \hat{A}^{\mathcal{G}}\right) - c\,\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta})\right]
+J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} \left[ \min \left( \frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})} \hat{A}^\mathcal{G}, \text{clip}\!\left(\frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})}, 1 - \epsilon, 1 + \epsilon\right) \hat{A}^{\mathcal{G}}\right) - c\,\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta})\right],
 {{< /katex >}}
 
 where the advantage {{< katex >}}\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}{\text{std}(r)}{{< /katex >}} is estimated by grouped actions produced at the same state. Also,
 
 {{< katex display=true >}}
-\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta}) = \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_{i})} - \ln \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_i)} - 1
+\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta}) = \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_{i})} - \ln \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_i)} - 1,
 {{< /katex >}}
 
 is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).
