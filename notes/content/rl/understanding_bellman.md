@@ -167,7 +167,7 @@ To introduce generalization to the value function, we represent the approximated
 \mathcal{L}(\theta) = \frac{1}{2}\sum_{s \in \mathcal{S}} \mu(s) \Big[ Q^\text{target} - Q_\theta(s, a) \Big]^2,
 {{< /katex >}}
  where {{< katex >}}Q^\text{target}{{< /katex >}} is the ground truth and {{< katex >}}Q_\theta{{< /katex >}} is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
- 
+
 {{% columns ratio="1:1" class="figs" %}}
 ![Figure 1](/imgs/understanding_bellman/ga.png)
 <p class="figcaption"><em>Figure 1.</em> Gradient ascent by semi-gradient.</p>
@@ -181,10 +181,10 @@ To introduce generalization to the value function, we represent the approximated
 Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is, {{< katex display=true >}}
 \begin{aligned}
     \Delta_\text{semi} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[Q^\text{target} - Q_\theta(s, a) \Big]^2 \\ 
-    &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \text{ where } Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a')\label{eq:semi-grad}
+    &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \label{eq:semi-grad}
 \end{aligned}
 {{< /katex >}}
-Since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
+where {{< katex> }}Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a'){{< /katex >}}, since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
 
 The **Full Gradient of Bellman Residual** should include all gradient components, including the gradient of the target estimation, {{< katex display=true >}}
 \begin{aligned}
