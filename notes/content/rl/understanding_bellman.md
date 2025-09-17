@@ -103,7 +103,7 @@ For convenience, we use Q-value as the representative in the following parts of 
 
 
 {{< katex display=true >}}
-Q^{\pi,\,\infty} &= Q^{*,\,\infty} = Q^* ,
+Q^{\pi,\,\infty} = Q^{*,\,\infty} = Q^* ,
 {{< /katex >}}
 
 which uniquely satisfies, 
