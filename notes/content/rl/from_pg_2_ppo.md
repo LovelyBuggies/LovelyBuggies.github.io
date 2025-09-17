@@ -178,6 +178,8 @@ Off-policy sampling reuses any past episodes, which has a higher efficiency and 
 
 ### Other PG Variants
 
+Since the intent of this post is to introduce how PPO comes from PG, we do not focus on other PG variants. Readers can refer to them in the hidden boxes.
+
 {{% details "Deterministic PG" %}}
 
 Sometimes we hope the policy function to be deterministic to reduce the gradient estimation variance and improve the exploration efficiency for continuous action space (the deterministic PG is a special case of the stochastic PG, with $\sigma=0$ in the re-parameterization $\pi_{\mu_{\theta}, \sigma}$) (i.e., a decision $a=\mu_{\theta}(s)$). PG for a deterministic policy in continuous action space is,
