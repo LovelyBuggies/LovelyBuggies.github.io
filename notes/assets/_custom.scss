@@ -37,3 +37,9 @@
 .book-menu .book-menu-content nav a:hover {
   opacity: 0.85;
 }
+
+// Brand: make title bold and black only for the brand
+.book-menu .book-menu-content h2.book-brand a span {
+  color: #000;
+  font-weight: 700;
+}
