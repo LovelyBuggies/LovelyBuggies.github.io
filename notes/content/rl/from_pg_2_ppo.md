@@ -142,7 +142,7 @@ As DeepSeek has made a splash in the LLM community, the RL method GRPO involved 
 J^\text{GRPO}(\theta) = \mathbb{E}_{\pi_{\theta_\text{old}}, i \in \mathcal{G}} \left[ \min \left( \frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})} \hat{A}^\mathcal{G}, \text{clip}(\frac{\pi_{\theta}(a_{i} | s, \vec{a}_{i})}{\pi_{\theta_\text{old}}(a_{i} | s, \vec{a}_{i})}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\mathcal{G}}\right)-c\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta})\right],$$ where the advantage $\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}{\text{std}(r)}$ is estimated by grouped actions produced at the same state. $\mathcal{D}_\text{KL}(\pi_\text{ref} \| \pi_{\theta})=\frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_{i})} 
 - \ln \frac{\pi_{\text{ref}}(a_{i} \mid s, \vec{a}_{i})}{\pi_{\theta}(a_{i} \mid s, \vec{a}_i)} - 1$ is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).
 
-![GRPO](grpo.png)
+![GRPO](/imgs/blog/from_pg_2_ppo/grpo.png)
 
 
 

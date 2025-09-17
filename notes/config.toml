@@ -19,7 +19,8 @@ theme = "book"
   # Show all content from the root instead of the 'docs' section
   BookSection = "/"
   # Use custom favicon for the site
-  BookFavicon = "img/icon/nameicon.svg"
+  # Use homepage favicon served from site root
+  BookFavicon = "/imgs/icon/nameicon.svg"
   # Show page last modified time (needs enableGitInfo)
   ShowLastMod = true
   # Enable KaTeX for math rendering across the site
