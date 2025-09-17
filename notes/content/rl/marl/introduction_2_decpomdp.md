@@ -1,7 +1,7 @@
----
 date: 2024-12-21
 title: "Introduction 2 DecPOMDP"
 math: true
+type: notes
 ---
 
 {{< katex />}}

@@ -1,7 +1,7 @@
----
 date: 2025-03-24
 title: "Reward Modeling LLM"
 math: true
+type: notes
 ---
 
 {{< katex />}}

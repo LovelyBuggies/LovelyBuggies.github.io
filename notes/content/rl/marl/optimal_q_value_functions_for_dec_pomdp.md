@@ -1,7 +1,7 @@
----
 date: 2024-11-11
 title: "Optimal Q Value Functions for Dec POMDP"
 math: true
+type: thoughts
 ---
 
 {{< katex />}}

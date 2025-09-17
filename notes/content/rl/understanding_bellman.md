@@ -1,8 +1,8 @@
----
 date: 2025-01-05
 title: "Understanding Bellman"
 math: true
 weight: 12
+type: notes
 ---
 
 {{< katex />}}

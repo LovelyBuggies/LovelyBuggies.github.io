@@ -8,6 +8,12 @@
 {{- $reading := printf "%d min" $rtAdj -}}
 {{- $author := or .Site.Params.AuthorName .Site.Params.Author "Shuo Liu" -}}
 
+{{- $type := lower (default "" $page.Params.type) -}}
+{{- if $type }}
+  {{- $typeValue := cond (eq $type "thoughts") "Thoughts" "Notes" -}}
+  {{- $typeStyle := cond (eq $type "thoughts") "important" "default" -}}
+  <span class="book-badge {{ $typeStyle }}"><span class="book-badge-title">Type</span><span class="book-badge-value">{{ $typeValue }}</span></span>
+{{- end }}
 <span class="book-badge danger"><span class="book-badge-title">Author</span><span class="book-badge-value">{{ $author }}</span></span>
 <span class="book-badge warning"><span class="book-badge-title">Date</span><span class="book-badge-value">{{ $dateFmt }}</span></span>
 <span class="book-badge info"><span class="book-badge-title">Reading</span><span class="book-badge-value">{{ $reading }}</span></span>
