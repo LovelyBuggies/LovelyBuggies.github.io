@@ -122,3 +122,9 @@
   background: var(--gray-100);
 }
 .book-menu .book-menu-content .type-tags .type-tag:hover { opacity: 0.85; text-decoration: none; }
+
+/* Types results list spacing (title and date) */
+#types-results li small {
+  margin-left: 8px;              /* space between title and date */
+  color: var(--gray-600);
+}
