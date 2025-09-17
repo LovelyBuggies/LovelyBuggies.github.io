@@ -60,7 +60,7 @@ Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')
 </div>
 
 $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, and {{< katex display=true >}}
-\tilde{\pi(s)} \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
+\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
 
 {{< /katex >}}
 

@@ -108,17 +108,14 @@
   padding-left: 0;             /* no extra padding on the list itself */
 }
 .book-page .markdown ol.references > li {
-  position: relative;
+  position: static;
   margin: 0.25rem 0;
-  /* indent the item content itself so multi-line wraps align */
-  padding-left: 5.03ch;        /* marker width (5ch) + ~0.03ch gap (about 1/3 of prior) */
+  padding-left: 0;              /* no extra gap before text */
 }
 .book-page .markdown ol.references > li::before {
   counter-increment: ref-counter;
-  content: "[" counter(ref-counter) "]"; /* marker only; spacing comes from li padding */
-  position: absolute;
-  left: 0;
-  width: 5ch;                  /* reserve width for up to two digits */
+  content: "[" counter(ref-counter) "]"; /* no trailing space for zero gap */
+  position: static;             /* inline with text to eliminate gap */
   color: inherit;
 }
 
