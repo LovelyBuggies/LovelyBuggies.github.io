@@ -7,6 +7,7 @@ weight: 12
 {{< katex />}}
 
 # Understanding Bellman
+{{< postbadges >}}
 
 ## Bellman Equation and Operator
 

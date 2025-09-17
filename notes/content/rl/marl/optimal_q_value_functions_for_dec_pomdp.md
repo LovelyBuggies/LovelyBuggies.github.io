@@ -6,6 +6,7 @@ math: true
 {{< katex />}}
 
 # Optimal Q Value Functions for Dec POMDP
+{{< postbadges >}}
 
 ## Notions
 

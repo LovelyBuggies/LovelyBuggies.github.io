@@ -6,6 +6,7 @@ math: true
 {{< katex />}}
 
 # Introduction 2 DecPOMDP
+{{< postbadges >}}
 
 ## Dec-POMDP
 

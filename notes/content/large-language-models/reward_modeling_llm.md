@@ -6,6 +6,7 @@ math: true
 {{< katex />}}
 
 # Reward Modeling LLM
+{{< postbadges >}}
 
 ## Reward Models in RLHF
 

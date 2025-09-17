@@ -7,6 +7,7 @@ weight: 11
 {{< katex />}}
 
 # From PG 2 PPO
+{{< postbadges >}}
 
 ## Policy Gradient (PG)
 

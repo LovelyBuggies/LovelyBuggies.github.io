@@ -25,6 +25,7 @@ theme = "book"
   ShowLastMod = true
   # Enable KaTeX for math rendering across the site
   BookMath = true
+  AuthorName = "Shuo Liu"
 
 [markup]
   [markup.smartypants]
