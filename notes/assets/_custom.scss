@@ -41,6 +41,11 @@
   opacity: 0.85;
 }
 
+/* Sidebar: make article (leaf) titles 2pt smaller than sections */
+.book-menu .book-menu-content nav li > a {
+  font-size: calc(1em - 2pt);
+}
+
 /* Style only the "Who is LovelyBuggies?" sidebar link */
 .book-menu .book-menu-content nav a[href="https://lovelybuggies.github.io/"],
 .book-menu .book-menu-content nav a[href="/notes/who_is_lovelybuggies/"] {
