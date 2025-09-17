@@ -41,9 +41,16 @@
   opacity: 0.85;
 }
 
-/* Sidebar: keep article (leaf) titles default size; set subsection links to match */
+/* Sidebar sizes: make top-level section titles +2pt; subsections and articles -2pt */
+/* Top-level section titles (non-clickable span or collapsible label) */
+.book-menu .book-menu-content nav > ul > li > label,
+.book-menu .book-menu-content nav > ul > li > span {
+  font-size: calc(1em + 2pt);
+}
+/* Leaf article links and subsection links */
+.book-menu .book-menu-content nav li > a,
 .book-menu .book-menu-content nav li > label a {
-  font-size: inherit; /* same as leaf article links */
+  font-size: calc(1em - 2pt);
 }
 
 /* Style only the "Who is LovelyBuggies?" sidebar link */
