@@ -19,7 +19,9 @@ readingTime: 20
 
 <div class="definition">
 
-The Bellman Equation and optimal Bellman Equation for V-values are (Sutton and Barto 2018),
+**Definition.** *The Bellman Equations characterize value recursions in MDPs.*
+
+*For V-values (Sutton and Barto 2018),*
 
 {{< katex display=true >}}
 V^\pi(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
@@ -28,7 +30,7 @@ V^*(s) \doteq \max_{a} \left[ Q^*(s, a) \right] \\
 = \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right]
 {{< /katex >}}
 
-and the Bellman Equation and optimal Bellman Equation for Q-values are,
+*and for Q-values,*
 
 {{< katex display=true >}}
 Q^\pi(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
@@ -37,13 +39,13 @@ Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')
 = R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right]
 {{< /katex >}}
 
-where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions. {{< katex display=true >}}
+*where $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions.* {{< katex display=true >}}
 \tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
 {{< /katex >}}
 
 </div>
 
-Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction. A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
+*Bellman Equations establish relations between states and succeeding states, which can be applied as updating rules for value prediction.* A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
 {{< katex display=true >}}
 (\mathcal{T}^\pi\circ V^\pi)(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 (\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
