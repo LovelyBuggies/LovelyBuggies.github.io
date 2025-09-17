@@ -29,6 +29,9 @@
 .book-menu .book-menu-content nav li > span {
   font-weight: 700;
 }
+.book-menu .book-menu-content nav li > span {
+  color: #000; /* ensure non-clickable section titles are black */
+}
 
 .book-menu .book-menu-content nav a {
   color: #224b8d;
