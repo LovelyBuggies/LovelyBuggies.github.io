@@ -17,6 +17,8 @@ readingTime: 20
 
 ### Definition
 
+<div class="definition">
+
 The Bellman Equation and optimal Bellman Equation for V-values are (Sutton and Barto 2018),
 
 {{< katex display=true >}}
@@ -50,6 +52,8 @@ The Bellman and optimal Bellman Operators $\mathcal{T}^\pi$ for Q-values are,
 (\mathcal{T}^\pi\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \mathbb{E}_{a' \sim \pi(a'|s')} Q^\pi(s', a') \right] \\
 (\mathcal{T}^*\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right]
 {{< /katex >}}
+
+</div>
 
 For convenience, we use Q-value as the representative in the following parts of this article.
 
