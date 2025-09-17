@@ -16,7 +16,7 @@
   {{- range sort $types -}}
     {{- $slug := . -}}
     {{- $name := cond (eq $slug "notes") "Overview" (cond (eq $slug "thoughts") "Thoughts" (title $slug)) -}}
-    <a class="book-btn type-tag" href="{{ "/types/" | relURL }}?t={{ $slug }}">{{ $name }}</a>
+    <a class="book-btn type-tag" href="{{ "types/" | relURL }}?t={{ $slug }}">{{ $name }}</a>
   {{- end -}}
 </div>
 {{ end }}

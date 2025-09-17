@@ -36,6 +36,10 @@
       </a>
     </label>
   {{ else if .Page.Params.BookHref }}
+    {{/* Inject Type tags just above the 'Who is LovelyBuggies?' link */}}
+    {{ if eq .Page.File.BaseFileName "who_is_lovelybuggies" }}
+      {{ partial "docs/type-tags" $.CurrentPage }}
+    {{ end }}
     {{/* Override: open external bookHref in same tab (no target=_blank) */}}
     <a href="{{ .Page.Params.BookHref }}" class="{{ if $current }}active{{ end }}">
       {{- partial "docs/title" .Page -}}
@@ -48,4 +52,3 @@
     <span>{{- partial "docs/title" .Page -}}</span>
   {{ end }}
 {{ end }}
-

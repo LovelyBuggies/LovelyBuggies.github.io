@@ -108,16 +108,16 @@
 .book-menu .book-menu-content .type-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin: 8px 0 12px 0;
+  gap: 4px;
+  margin: 6px 0 10px 0;
 }
 .book-menu .book-menu-content .type-tags .type-tag {
-  font-size: 12px;
-  line-height: 22px;
-  padding: 0 8px;
-  border: 1px solid var(--color-link);
+  font-size: 11px;
+  line-height: 18px;
+  padding: 0 6px;
+  border: 1px solid var(--gray-400);
   border-radius: 4px;
-  color: var(--color-link);
-  background: rgba(0,0,0,0.03);
+  color: var(--gray-700);
+  background: var(--gray-100);
 }
 .book-menu .book-menu-content .type-tags .type-tag:hover { opacity: 0.85; text-decoration: none; }
