@@ -186,6 +186,12 @@
   margin: 0.25rem 0;                     /* even tighter outer spacing */
 }
 
+/* Override: make the specific 'Curse of Dimension' box gray */
+.book-page .markdown #curse-of-dimension {
+  border-color: var(--gray-400);
+  background-color: var(--gray-100);
+}
+
 /* Types results list spacing (title and date) */
 #types-results li small {
   margin-left: 8px;              /* space between title and date */
