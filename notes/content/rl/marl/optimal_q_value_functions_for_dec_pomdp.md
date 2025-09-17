@@ -96,7 +96,7 @@ To make optimal Q-value in Dec-POMDP computable, (Oliehoek, Spaan, and Vlassis 2
 
 <div class="definition">
 
-<strong>Definition 2</strong>. The sequentially rational optimal Q-value function $Q^\circledast$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal subsequent joint policy $\xi^{t, \circledast}_\psi$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\Psi^t}, \forall \psi^{t+1}\in\Psi^{t+1}$, is defined as, 
+<strong>Definition 2</strong>. The sequentially rational optimal Q-value function $Q^\circledast$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal subsequent joint policy {{< katex >}}\xi^{t, \circledast}_{\psi}{{< /katex >}}, {{< katex >}}\forall\, \vec{\theta}^t\in \vec{\Theta}^t_{\Psi^{t}}\,,\ \forall\, \psi^{t+1}\in\Psi^{t+1}{{< /katex >}}, is defined as, 
 {{< katex display=true >}}
 Q^\circledast(\vec{\theta}^t, \psi^{t+1}) = \left\{
         \begin{aligned}
