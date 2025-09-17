@@ -60,7 +60,7 @@ Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')
 </div>
 
 $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, and {{< katex display=true >}}
-\pi^*(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
+\tilde{\pi(s)} \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
 
 {{< /katex >}}
 
@@ -100,18 +100,20 @@ For convenience, we use Q-value as the representative in the following parts of 
 </div>
 
 <div id="them:fixpoint" class="corollary">
-
 <strong>Corollary 1</strong> (Fixed-point Iteration). *For any $Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, after $k\to \infty$ iterations of Bellman transformation, $Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0$, or $Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0$, according to Banach’s Fixed Point Theorem:*
 
 {{< katex display=true >}}
-Q^{\pi, \infty}=Q^{*, \infty}=Q^*, \\
-\text{which \textbf{uniquely} satisfies } \mathcal{T}^\pi \circ Q^*  = Q^*, \text{ or } \mathcal{T}^* \circ Q^*  = Q^*.
+\begin{aligned}
+Q^{\pi,\,\infty} &= Q^{*,\,\infty} = Q^* \\
+\text{which uniquely satisfies}\quad & \mathcal{T}^{\pi}(Q^*) = Q^*, \quad \text{or } \mathcal{T}^{*}(Q^*) = Q^* .
+\end{aligned}
 {{< /katex >}}
 
 </div>
 
 <div id="them:fundamental" class="theorem">
-<strong>Theorem 1</strong> (Fundamental theorem). *Any memoryless policy that is greedy to $Q^*$ (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):*
+<strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to $Q^*$ (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):
+
 
 {{< katex display=true >}}
 \tilde{\pi}^{*} \doteq \mathop{\mathrm{argmax}}_a Q^* = \pi^*.
