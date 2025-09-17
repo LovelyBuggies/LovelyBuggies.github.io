@@ -23,7 +23,7 @@
   {{- $pages := where .Pages "Params.bookHidden" "ne" true -}}
   {{- if gt (len $pages) 0 -}}
   <ul>
-    {{- range $pages -}}
+    {{- range $pages.ByWeight -}}
       {{- if eq .File.BaseFileName "who_is_lovelybuggies" -}}
         {{- /* skip this special page from list */ -}}
       {{- else if .IsSection -}}
