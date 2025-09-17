@@ -167,6 +167,14 @@ To introduce generalization to the value function, we represent the approximated
 \mathcal{L}(\theta) = \frac{1}{2}\sum_{s \in \mathcal{S}} \mu(s) \Big[ Q^\text{target} - Q_\theta(s, a) \Big]^2,
 {{< /katex >}}
  where {{< katex >}}Q^\text{target}{{< /katex >}} is the ground truth and {{< katex >}}Q_\theta{{< /katex >}} is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
+ 
+ {{% columns [ratio="1:1"] [class="..."] %}}
+![Figure 1](/imgs/understanding_bellman/ga.png)
+<p class="figcaption"><em>Figure 1.</em> Gradient ascent by semi-gradient.</p>
+
+![Figure 2](/imgs/understanding_bellman/gd.png)
+<p class="figcaption"><em>Figure 2.</em> Gradient descent by semi-gradient.</p>
+{{% /columns %}}
 
 Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is, {{< katex display=true >}}
 \begin{aligned}
@@ -193,14 +201,6 @@ In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$,
     &\text{s.t.,} \ \Delta_\text{B}\theta \cdot \Delta_\text{full}\theta\geqslant 0 \Leftrightarrow \omega \geqslant \frac{\Delta_\text{semi}\theta \cdot \Delta_\text{full}\theta}{\Delta_\text{semi}\theta \cdot \Delta_\text{full}\theta - \Delta_\text{full}\theta \cdot \Delta_\text{full}\theta}.
 \end{aligned}
 {{< /katex >}}
-
-{{% columns [ratio="1:1"] [class="..."] %}}
-![Figure 1](/imgs/understanding_bellman/ga.png)
-<p class="figcaption"><em>Figure 1.</em> Gradient ascent by semi-gradient.</p>
-
-![Figure 2](/imgs/understanding_bellman/gd.png)
-<p class="figcaption"><em>Figure 2.</em> Gradient descent by semi-gradient.</p>
-{{% /columns %}}
 
 ## References
 
