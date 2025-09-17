@@ -41,10 +41,9 @@
   opacity: 0.85;
 }
 
-/* Sidebar: make article titles and subsection links 2pt smaller */
-.book-menu .book-menu-content nav li > a,
+/* Sidebar: keep article (leaf) titles default size; set subsection links to match */
 .book-menu .book-menu-content nav li > label a {
-  font-size: calc(1em - 2pt);
+  font-size: inherit; /* same as leaf article links */
 }
 
 /* Style only the "Who is LovelyBuggies?" sidebar link */
