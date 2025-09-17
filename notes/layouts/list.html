@@ -13,17 +13,19 @@
   {{- if gt (len $pages) 0 -}}
   <ul>
     {{- range $pages -}}
-      {{- if .IsSection -}}
-        <li>
+      {{- if eq .File.BaseFileName "who_is_lovelybuggies" -}}
+        {{- /* skip this special page from list */ -}}
+      {{- else if .IsSection -}}
+        <li class="section">
           <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
           {{ template "section-tree" . }}
         </li>
       {{- else if and .IsPage .Content -}}
-        <li>
+        <li class="page">
           <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
         </li>
       {{- else if .IsPage -}}
-        <li>
+        <li class="page">
           <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
         </li>
       {{- end -}}
@@ -31,4 +33,3 @@
   </ul>
   {{- end -}}
 {{ end }}
-

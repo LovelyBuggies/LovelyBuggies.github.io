@@ -140,3 +140,11 @@
   font-style: italic;            /* show dates in italic */
   color: var(--gray-600);
 }
+
+/* List pages: bold section titles, normal article links */
+.book-page .markdown ul li.section > a {
+  font-weight: 700;
+}
+.book-page .markdown ul li.page > a {
+  font-weight: 400;
+}
