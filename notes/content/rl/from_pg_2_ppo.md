@@ -145,16 +145,16 @@ Next, we compare variances. Using a quadratic-term-only approximation and indepe
 
 {{< katex display=true >}}
 \begin{aligned}
-\mathbb{V}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]
-&\gtrapprox \sum_a \mathbb{E}_{d^\pi}\!\left[\big((Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\big)^2\right]
+&\mathbb{V}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right] \\
+\gtrapprox &\sum_a \mathbb{E}_{d^\pi}\!\left[\big((Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\big)^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-&\approx \sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a) - b(s))^2\right]\, \mathbb{E}_{d^\pi}\!\left[(\nabla\ln\pi(a\mid s))^2\right]
+\approx &\sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a) - b(s))^2\right]\, \mathbb{E}_{d^\pi}\!\left[(\nabla\ln\pi(a\mid s))^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-&< \sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a)\, \nabla\ln\pi(a\mid s))^2\right]
+< &\sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a)\, \nabla\ln\pi(a\mid s))^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-&\lessapprox \mathbb{E}_{d^\pi}\!\left[\left(\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right)^2\right]
+\lessapprox &\mathbb{E}_{d^\pi}\!\left[\left(\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right)^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-&= \mathbb{V}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
+= &\mathbb{V}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
 \end{aligned}
 {{< /katex >}}
 
