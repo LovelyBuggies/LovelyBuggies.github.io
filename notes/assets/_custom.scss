@@ -110,7 +110,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin: 28px 0 24px 0; /* more space above titles and below who link */
+  margin: 28px 0 0 0; /* keep space above titles; no gap before 'Who is LovelyBuggies?' */
 }
 .book-menu .book-menu-content .type-tags .type-tag {
   font-size: 11px;
