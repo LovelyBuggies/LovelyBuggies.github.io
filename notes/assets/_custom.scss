@@ -14,6 +14,11 @@
   margin: 0.25rem 0;
 }
 
+/* Make gray (default) hint boxes italic site-wide */
+.book-page .markdown blockquote.book-hint.default {
+  font-style: italic;
+}
+
 // Reduce default image display size in posts
 // Applies to standalone images inside paragraphs and figures
 .markdown p > img,
@@ -192,6 +197,7 @@
   border-color: #64748b;                 /* same as $hint-colors.default */
   background-color: rgba(100, 116, 139, 0.1);
   color: #666;                           /* keep lighter text as requested */
+  font-style: italic;                    /* unify with gray hint style */
 }
 
 /* Types results list spacing (title and date) */
