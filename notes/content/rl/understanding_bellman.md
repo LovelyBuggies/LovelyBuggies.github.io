@@ -229,19 +229,19 @@ Q(s, a) = R(s,a) + \gamma
 - Multi-Agent Bellman Equations: cooperative multi-agent generalizations.
   - Joint form (joint action $\mathbf{a}$):
 
-{{< katex display=true >}}
-Q(s, \mathbf{a}) = R(s, \mathbf{a}) + \gamma 
-\mathbb{E}_{\substack{\mathbf{a}' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, \mathbf{a})}} 
-\Big[\, Q(s', \mathbf{a}') \,\Big].
-{{< /katex >}}
+    {{< katex display=true >}}
+    Q(s, \mathbf{a}) = R(s, \mathbf{a}) + \gamma 
+    \mathbb{E}_{\substack{\mathbf{a}' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, \mathbf{a})}} 
+    \Big[\, Q(s', \mathbf{a}') \,\Big].
+    {{< /katex >}}
 
   - Individual form (per-agent $Q_i$ with shared reward):
 
-{{< katex display=true >}}
-Q_i(s, a_i) = R(s, \mathbf{a}) + \gamma 
-\mathbb{E}_{\substack{a_i' \sim \pi_i(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a_i)}} 
-\Big[\, Q_i(s', a_i') \,\Big].
-{{< /katex >}}
+    {{< katex display=true >}}
+    Q_i(s, a_i) = R(s, \mathbf{a}) + \gamma 
+    \mathbb{E}_{\substack{a_i' \sim \pi_i(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a_i)}} 
+    \Big[\, Q_i(s', a_i') \,\Big].
+    {{< /katex >}}
 
 - Multi-Task Bellman Equation: adds auxiliary objectives/constraints $\phi(s,a)$.
 
