@@ -111,33 +111,6 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 
 {{% /details %}}
 
-{{% details title="Complexity Class" open=false %}}
-
-Assuming {{< katex >}}c{{< /katex >}} and {{< katex >}}k{{< /katex >}} are constants, {{< katex >}}\mathcal{C}{{< /katex >}} is a complexity class, the table shows complexity terminologies.
-
-<span id="tab:complexitydefinition" label="tab:complexitydefinition"></span>
-
-<div id="tab:complexitydefinition">
-
-|                        |                                                                                                  |
-|:-----------------------|:-------------------------------------------------------------------------------------------------|
-| P                      | the set of problems solvable in polynomial time, e.g., {{< katex >}}O(n^k){{< /katex >}}                                  |
-| NP                     | the set of problems solvable nondeterministically in polynomial time                             |
-| EXP                    | the set of problems solvable in exponential time, e.g., {{< katex >}}O(c^{n^k}){{< /katex >}}                             |
-| NEXP                   | the set of problems solvable nondeterministically in exponential time                            |
-| PSPACE                 | the set of problems solvable in polynomial space (P and NP {{< katex >}}\subset{{< /katex >}} PSPACE), e.g., {{< katex >}}O(c^{n^k}){{< /katex >}} |
-| {{< katex >}}\mathcal{C}{{< /katex >}}-hard     | a problem that all problems in {{< katex >}}\mathcal{C}{{< /katex >}} are reducible to within polynomial time             |
-| {{< katex >}}\mathcal{C}{{< /katex >}}-complete | a problem that is contained in {{< katex >}}\mathcal{C}{{< /katex >}} and {{< katex >}}\mathcal{C}{{< /katex >}}-hard                              |
-
-</div>
-{{% /details %}}
-
-
-
-
-<!-- footnotes converted to hints above -->
-
-
 
 ## References
 
