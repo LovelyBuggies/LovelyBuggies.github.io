@@ -41,8 +41,9 @@
   opacity: 0.85;
 }
 
-/* Sidebar: make article (leaf) titles 2pt smaller than sections */
-.book-menu .book-menu-content nav li > a {
+/* Sidebar: make article titles and subsection links 2pt smaller */
+.book-menu .book-menu-content nav li > a,
+.book-menu .book-menu-content nav li > label a {
   font-size: calc(1em - 2pt);
 }
 
