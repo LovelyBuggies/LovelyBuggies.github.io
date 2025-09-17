@@ -9,7 +9,7 @@ readingTime: 12
 
 {{< katex />}}
 
-# Introduction to Dec-POMDP
+# An Introduction to Dec-POMDP
 {{< postbadges >}}
 
 ## Dec-POMDP
