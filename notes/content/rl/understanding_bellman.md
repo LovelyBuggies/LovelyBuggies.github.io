@@ -12,9 +12,9 @@ readingTime: 22
 
 # Understanding Bellman Equations
 
-> Clichés about the Bellman equations -- told in a new way :)
-
 {{< postbadges >}}
+
+This post is about the clichés of the Bellman equations, but retold in a new way :)
 
 ## Bellman Equations
 
@@ -88,7 +88,7 @@ The Bellman and optimal Bellman Operators {{< katex >}}\mathcal{T}^\pi{{< /katex
 (\mathcal{T}^*\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right]
 {{< /katex >}}
 
-For convenience, we use Q-value as the representative in the following parts of this article.
+For convenience, we use Q-value as the representative in the following parts of this post.
 
 
 
