@@ -124,6 +124,46 @@ Let {{< katex >}}\eta(s){{< /katex >}} be the expected number of visits to {{< k
 
 According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem 1 can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by Generalized Advantage Estimation or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
 
+{{% details "Proof of Theorem 2 (baseline)" open %}}
+
+<strong>Proof.</strong> We first show the baseline keeps the estimator unbiased:
+
+{{< katex display=true >}}
+\begin{aligned}
+\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+ - \mathbb{E}_{d^\pi}\!\left[\sum_a b(s)\, \nabla\ln\pi(a\mid s)\right] \\
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+ - \mathbb{E}_{d^\pi}\!\left[b(s)\, \nabla \sum_a \pi(a\mid s)\right] \\
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+ - \mathbb{E}_{d^\pi}\!\left[b(s)\, \nabla 1\right] \\
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
+\end{aligned}
+{{< /katex >}}
+
+Next, we compare variances. Using a quadratic-term-only approximation and independence assumptions for factorization, we have
+
+{{< katex display=true >}}
+\begin{aligned}
+\mathbb{V}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]
+&\gtrapprox \sum_a \mathbb{E}_{d^\pi}\!\left[\big((Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\big)^2\right]
+ - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
+&\approx \sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a) - b(s))^2\right]\, \mathbb{E}_{d^\pi}\!\left[(\nabla\ln\pi(a\mid s))^2\right]
+ - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
+&< \sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a)\, \nabla\ln\pi(a\mid s))^2\right]
+ - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
+&\lessapprox \mathbb{E}_{d^\pi}\!\left[\left(\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right)^2\right]
+ - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
+&= \mathbb{V}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
+\end{aligned}
+{{< /katex >}}
+
+In (i) and (iii), we keep only quadratic terms and omit cross-products; the deduction from omitting
+{{< katex >}}\prod_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s){{< /katex >}} is dominated by the compensation when using
+{{< katex >}}\prod_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s){{< /katex >}}. In (ii), we assume independence to factorize expectations. Hence, using a baseline reduces variance; choosing {{< katex >}}b(s) \approx V^\pi(s){{< /katex >}} yields near-optimal variance.
+
+{{% /details %}}
+
 ### Off-Policy PG
 
 Off-policy sampling reuses any past episodes, which has a higher efficiency and brings more exploration. To make PG off-policy, we adjust it with an importance weight {{< katex >}}\frac{\pi(a|s)}{\beta(a|s)}{{< /katex >}} to correct the mismatch between behavior and target policies.
