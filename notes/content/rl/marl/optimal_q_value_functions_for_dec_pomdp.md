@@ -17,35 +17,35 @@ readingTime: 4
 {{< tabs >}}
 
 {{% tab "States & Observations" %}}
-- {{{< katex >}}}s^t{{{< /katex >}}}: state at time {{{< katex >}}}t{{{< /katex >}}} with horizon {{{< katex >}}}h{{{< /katex >}}}.
-- {{{< katex >}}}o^t{{{< /katex >}}}: joint observation {{{< katex >}}}o^t = \langle o_1^t, \dots, o_n^t \rangle{{{< /katex >}}} at {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\mathcal{O}{{{< /katex >}}}: joint observation space.
-- {{{< katex >}}}\vec{\theta}^t{{{< /katex >}}}: joint observation–action history until {{{< katex >}}}t{{{< /katex >}}}, {{{< katex >}}}\vec{\theta}^t=(o^0, a^0, \dots, o^t){{{< /katex >}}}.
-- {{{< katex >}}}\vec{\Theta}^t{{{< /katex >}}}: joint history space at {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\vec{\Theta}^t_\pi{{{< /katex >}}}: set of {{{< katex >}}}\vec{\theta}^t{{{< /katex >}}} consistent with policy {{{< katex >}}}\pi{{{< /katex >}}}.
+- $s^t$: state at time $t$ with horizon $h$.
+- $o^t$: joint observation $o^t = \langle o_1^t, \dots, o_n^t \rangle$ at $t$.
+- $\mathcal{O}$: joint observation space.
+- $\vec{\theta}^t$: joint observation–action history until $t$, $\vec{\theta}^t=(o^0, a^0, \dots, o^t)$.
+- $\vec{\Theta}^t$: joint history space at $t$.
+- $\vec{\Theta}^t_\pi$: set of $\vec{\theta}^t$ consistent with policy $\pi$.
 {{% /tab %}}
 
 {{% tab "Policy & History" %}}
-- {{{< katex >}}}\delta^{t}{{{< /katex >}}}: decision rule (temporal policy component) at {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\delta^{t,*}{{{< /katex >}}}: optimal decision rule at {{{< katex >}}}t{{{< /katex >}}} given {{{< katex >}}}\psi^{t-1,*}{{{< /katex >}}}.
-- {{{< katex >}}}\delta^{t,\circledast}_\psi{{{< /katex >}}}: optimal decision at {{{< katex >}}}t{{{< /katex >}}} given non‑optimal {{{< katex >}}}\psi^{t-1}{{{< /katex >}}}.
-- {{{< katex >}}}\Delta^t{{{< /katex >}}}: decision rule space at {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\psi^{t} = \delta^{[0,t)}{{{< /katex >}}}: past joint policy until {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\psi^{t,*} = \delta^{[0,t),*}{{{< /katex >}}}: optimal past joint policy until {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\psi^{t,\circledast}{{{< /katex >}}}: past joint policy with non‑optimal {{{< katex >}}}\psi^{t-1}{{{< /katex >}}} and optimal {{{< katex >}}}\delta^{t-1,\circledast}_\psi{{{< /katex >}}}.
-- {{{< katex >}}}\Psi^{t}{{{< /katex >}}}: past joint policy space at {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\xi^{t} = \delta^{[t,h)}{{{< /katex >}}}: subsequent joint policy from {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\xi^{t,*} = \delta^{[t,h),*}{{{< /katex >}}}: optimal subsequent joint policy from {{{< katex >}}}t{{{< /katex >}}}.
-- {{{< katex >}}}\xi^{t,\circledast}_\psi{{{< /katex >}}}: optimal subsequent policy from {{{< katex >}}}t{{{< /katex >}}} given non‑optimal {{{< katex >}}}\psi^t{{{< /katex >}}}.
-- {{{< katex >}}}\pi = \delta^{[0,h)}{{{< /katex >}}}: joint pure policy.
-- {{{< katex >}}}\pi^* = \delta^{[0,h),*}{{{< /katex >}}}: joint optimal pure policy.
+- $\delta^{t}$: decision rule (temporal policy component) at $t$.
+- $\delta^{t,*}$: optimal decision rule at $t$ given $\psi^{t-1,*}$.
+- $\delta^{t,\circledast}_\psi$: optimal decision at $t$ given non‑optimal $\psi^{t-1}$.
+- $\Delta^t$: decision rule space at $t$.
+- $\psi^{t} = \delta^{[0,t)}$: past joint policy until $t$.
+- $\psi^{t,*} = \delta^{[0,t),*}$: optimal past joint policy until $t$.
+- $\psi^{t,\circledast}$: past joint policy with non‑optimal $\psi^{t-1}$ and optimal $\delta^{t-1,\circledast}_\psi$.
+- $\Psi^{t}$: past joint policy space at $t$.
+- $\xi^{t} = \delta^{[t,h)}$: subsequent joint policy from $t$.
+- $\xi^{t,*} = \delta^{[t,h),*}$: optimal subsequent joint policy from $t$.
+- $\xi^{t,\circledast}_\psi$: optimal subsequent policy from $t$ given non‑optimal $\psi^t$.
+- $\pi = \delta^{[0,h)}$: joint pure policy.
+- $\pi^* = \delta^{[0,h),*}$: joint optimal pure policy.
 {{% /tab %}}
 
 {{% tab "Rewards & Q" %}}
-- {{{< katex >}}}R(\vec{\theta}^t, \psi^{t+1}){{{< /katex >}}}: immediate reward under {{{< katex >}}}\psi^{t+1}{{{< /katex >}}}.
-- {{{< katex >}}}Q(\vec{\theta}^t, \psi^{t+1}){{{< /katex >}}}: history–policy value under {{{< katex >}}}\psi^{t+1}{{{< /katex >}}}.
-- {{{< katex >}}}Q^*(\vec{\theta}^t, \psi^{t+1}){{{< /katex >}}}: optimal history–policy value under {{{< katex >}}}\psi^{t+1}{{{< /katex >}}}.
-- {{{< katex >}}}Q^{\circledast}(\vec{\theta}^t, \psi^{t+1}){{{< /katex >}}}: sequentially rational optimal history–policy value under {{{< katex >}}}\psi^{t+1}{{{< /katex >}}}.
+- $R(\vec{\theta}^t, \psi^{t+1})$: immediate reward under $\psi^{t+1}$.
+- $Q(\vec{\theta}^t, \psi^{t+1})$: history–policy value under $\psi^{t+1}$.
+- $Q^*(\vec{\theta}^t, \psi^{t+1})$: optimal history–policy value under $\psi^{t+1}$.
+- $Q^{\circledast}(\vec{\theta}^t, \psi^{t+1})$: sequentially rational optimal history–policy value under $\psi^{t+1}$.
 {{% /tab %}}
 
 {{< /tabs >}}

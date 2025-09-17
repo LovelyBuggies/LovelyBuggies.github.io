@@ -89,22 +89,19 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 <span id="tab:complexity" label="tab:complexity"></span>
 
 <div class="theorem">
+**Theorem 1**. An MDP is P-complete in finite and infinite horizons (Papadimitriou and Tsitsiklis 1987).
 
-**Theorem 1**. *An MDP is P-complete in finite and infinite horizons (Papadimitriou and Tsitsiklis 1987).*
+**Theorem 2**. A finite POMDP is PSPACE-complete (Papadimitriou and Tsitsiklis 1987).
 
+**Theorem 3**. The complexity of an infinite POMDP is undecidable (Madani, Hanks, and Condon 1999), leading to the undecidability of the infinite Dec-POMDP complexity.
 
-**Theorem 2**. *A finite POMDP is PSPACE-complete (Papadimitriou and Tsitsiklis 1987).*
+**Theorem 4**. A finite Dec-POMDP$_{n\geqslant2}$ is NEXP-complete, and a finite Dec-MDP$_{n\geqslant3}$ is also NEXP-complete (Bernstein et al. 2002).
 
+**Fact 1**. A Dec-MDP with TI and RI can be solved independently, resulting in P-complete.
 
-**Theorem 3**. *The complexity of an infinite POMDP is undecidable (Madani, Hanks, and Condon 1999), leading to the undecidability of the infinite Dec-POMDP complexity.*
+**Theorem 5**. A Dec-MDP with TI and joint reward is NP-complete, a Dec-MDP with RI but no TI is NEXP-complete (Becker et al. 2004).
 
-**Theorem 4**. *A finite {{< katex >}}\text{Dec-POMDP}_{n\geqslant2}{{< /katex >}} is NEXP-complete, and a finite {{< katex >}}\text{Dec-MDP}_{n\geqslant3}{{< /katex >}} is also NEXP-complete (Bernstein et al. 2002).*
-
-**Fact 1**. *A Dec-MDP with TI and RI can be solved independently, resulting in P-complete.*
-
-**Theorem 5**. *A Dec-MDP with TI and joint reward is NP-complete, a Dec-MDP with RI but no TI is NEXP-complete (Becker et al. 2004)*
-
-**Fact 2**. *An ND-POMDP has the same worst-case complexity as a Dec-POMDP (Nair et al. 2005).*
+**Fact 2**. An ND-POMDP has the same worst-case complexity as a Dec-POMDP (Nair et al. 2005).
 
 </div>
 
