@@ -32,11 +32,8 @@ Since the major purpose of this article is to introduce PPO methods from PG, we 
 
 ### PG Theorem
 
-An intuitive way to calculate Equation <a href="#eq:pg" data-reference-type="ref" data-reference="eq:pg">[eq:pg]</a> is to replace {{< katex >}}J(\theta){{< /katex >}} with {{< katex >}}V^{\pi_{\theta}} (s_0){{< /katex >}}. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
-
-{{< hint info >}}
-Notation: we omit \(\theta\) in subscripts/superscripts and gradients, assuming \(\pi\) depends on \(\theta\) and all gradients are w.r.t. \(\theta\); i.e., \(V^{\pi}\equiv V^{\pi_{\theta}}\), \(Q^{\pi}\equiv Q^{\pi_{\theta}}\) and \(\nabla\equiv\nabla_{\theta}\).
-{{< /hint >}}
+An intuitive way to calculate policy gradient is to replace {{< katex >}}J(\theta){{< /katex >}} with {{< katex >}}V^{\pi_{\theta}} (s_0){{< /katex >}}. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
+We omit \(\theta\) in subscripts/superscripts and gradients, assuming \(\pi\) depends on \(\theta\) and all gradients are w.r.t. \(\theta\); i.e., \(V^{\pi}\equiv V^{\pi_{\theta}}\), \(Q^{\pi}\equiv Q^{\pi_{\theta}}\) and \(\nabla\equiv\nabla_{\theta}\).
 
 <div id="them:PG" class="theorem">
 
