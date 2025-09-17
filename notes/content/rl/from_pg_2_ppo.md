@@ -124,7 +124,7 @@ Let $\eta(s)$ be the expected number of visits to $s$ (episodic: $\sum_s \eta(s)
 
 According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem 1 can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by Generalized Advantage Estimation or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
 
-{{% details "Proof of Theorem 2 (baseline)" %}}
+{{% details "Proof of Theorem 2" %}}
 
 <strong>Proof.</strong> We first show the baseline keeps the estimator unbiased:
 
