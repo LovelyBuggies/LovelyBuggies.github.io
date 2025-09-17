@@ -36,16 +36,13 @@ An intuitive way to calculate policy gradient is to replace {{< katex >}}J(\thet
 We omit {{< katex >}}\theta{{< /katex >}} in subscripts/superscripts and gradients, assuming {{< katex >}}\pi{{< /katex >}} depends on {{< katex >}}\theta{{< /katex >}} and all gradients are w.r.t. {{< katex >}}\theta{{< /katex >}}; i.e., {{< katex >}}V^{\pi} \equiv V^{\pi_{\theta}}{{< /katex >}}, {{< katex >}}Q^{\pi} \equiv Q^{\pi_{\theta}}{{< /katex >}} and {{< katex >}}\nabla \equiv \nabla_{\theta}{{< /katex >}}.
 
 <div id="them:PG" class="theorem">
-
 **Theorem 1**. *Taking the state-value function as the optimizing target, the objective gradient follows, {{< katex display=true >}}
 \label{equ:pgthem}
     \nabla J(\theta) \propto \sum_s d^\pi(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s),
 {{< /katex >}}
  where {{< katex >}}d^\pi(s){{< /katex >}} is the stationary distribution of the policy {{< katex >}}\pi_{\theta}{{< /katex >}}.*
 
-</div>
-
-To sample with expectation equals or approximates the expression Equ. <a href="#equ:pgthem" data-reference-type="ref" data-reference="equ:pgthem">[equ:pgthem]</a>,
+To sample with expectation equals or approximates the expression,
 
 {{< katex display=true >}}
 \label{equ:pgtheorem-sample}
@@ -55,6 +52,60 @@ To sample with expectation equals or approximates the expression Equ. <a href="
 = \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
 = \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \nabla\ln\pi(a|s) \right] \, .
 {{< /katex >}}
+
+</div>
+
+<div class="proof">
+
+<strong>Proof.</strong> The gradient of {{< katex >}}V{{< /katex >}} can be written via {{< katex >}}Q{{< /katex >}} as
+
+{{< katex display=true >}}
+\begin{aligned}
+\nabla V^{\pi}(s) &= \nabla\!\left[ \sum_a \pi(a\mid s)\, Q^\pi (s,a)\right] \\
+&= \sum_a\!\left[ 
+  \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+  + \pi(a\mid s)\, \nabla Q^\pi (s,a) \right] \\
+&= \sum_a\!\left[ 
+  \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+  + \pi(a\mid s)\, \nabla \sum_{s'} P(s'\mid s,a)\, (r + V^\pi(s')) \right] \\
+&\stackrel{\text{(i)}}{=} \sum_a\!\left[ 
+  \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+  + \pi(a\mid s) \sum_{s'} P(s'\mid s,a)\, \nabla V^\pi(s') \right] ,
+\end{aligned}
+{{< /katex >}}
+
+where (i) uses that the immediate reward {{< katex >}}r{{< /katex >}} depends only on the environment dynamics (not on parameters).
+
+Let {{< katex >}}\phi(s) = \sum_a \nabla\pi(a\mid s)\, Q^\pi (s,a){{< /katex >}}, and denote by {{< katex >}}\rho^\pi(s \to x, k){{< /katex >}} the probability of reaching {{< katex >}}x{{< /katex >}} from {{< katex >}}s{{< /katex >}} in {{< katex >}}k{{< /katex >}} steps under {{< katex >}}\pi{{< /katex >}} (e.g., {{< katex >}}\rho^\pi(s \to s',1)=\sum_a \pi(a\mid s) P(s'\mid s,a){{< /katex >}}). Unrolling the recursion gives
+
+{{< katex display=true >}}
+\begin{aligned}
+\nabla V^{\pi}(s) 
+&= \phi(s) + \sum_a \pi(a\mid s) \sum_{s'} P(s'\mid s,a)\, \nabla V^\pi(s') \\
+&= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\, \nabla V^\pi(s') \\
+&= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\!\left[ \phi(s') + \sum_{s''} \rho^\pi(s' \to s'',1)\, \nabla V^\pi(s'') \right] \\
+&= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\, \phi(s') + \sum_{s''} \rho^\pi(s \to s'',2)\, \nabla V^\pi(s'') \\
+&= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\, \phi(s') 
+  + \sum_{s''} \rho^\pi(s \to s'',2)\, \phi(s'')
+  + \sum_{s'''} \rho^\pi(s \to s''',3)\, \nabla V^\pi(s''') \\
+&\quad \vdots \\
+&= \sum_{k=0}^{\infty} \sum_x \rho^\pi(s \to x, k)\, \phi(x)\, .
+\end{aligned}
+{{< /katex >}}
+
+Let {{< katex >}}\eta(s){{< /katex >}} be the expected number of visits to {{< katex >}}s{{< /katex >}} (episodic: {{< katex >}}\sum_s \eta(s){{< /katex >}} is the expected episode length; continuing: {{< katex >}}\sum_s \eta(s)=1{{< /katex >}}). Plugging into {{< katex >}}J{{< /katex >}} yields
+
+{{< katex display=true >}}
+\begin{aligned}
+\nabla J(\theta) &= \nabla V^\pi(s_0) \\
+&= \sum_s \Bigl( \sum_{k=0}^{\infty} \rho^\pi(s_0 \to s, k) \Bigr) \sum_a \nabla\pi(a\mid s)\, Q^\pi(s,a) \\
+&= \sum_s \eta(s) \sum_a \nabla\pi(a\mid s)\, Q^\pi(s,a) \\
+&\stackrel{\text{norm}}{=} \Bigl(\sum_s \eta(s)\Bigr) \Bigl( \sum_s \frac{\eta(s)}{\sum_s \eta(s)} \Bigr) \sum_a \nabla\pi(a\mid s)\, Q^\pi(s,a) \\
+&\propto \sum_s d^\pi(s) \sum_a \nabla\pi(a\mid s)\, Q^\pi(s,a)\, .
+\end{aligned}
+{{< /katex >}}
+
+</div>
 
 The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only place the policy parameterization appears, which can be omitted {{< katex >}}L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]{{< /katex >}} since it will be automatically recovered when differentiating.
 
