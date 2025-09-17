@@ -54,15 +54,14 @@ readingTime: 4
 
 <div id="defn:normative-Q" class="definition">
 
-**Definition 1**. *The optimal Q-value function $Q^*$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{*}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, *}}, \forall \psi^{t+1}\in(\psi^{t, *},\Delta^t)$, is defined as, {{< katex display=true >}}
-Q^*(\vec{\theta}^t, \psi^{t+1}) = \left\{
+<strong>Definition 1</strong>. The optimal Q-value function $Q^\*$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{\*}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, \*}}, \forall \psi^{t+1}\in(\psi^{t,\*},\Delta^t)$, is defined as, {{< katex display=true >}}
+Q^\*(\vec{\theta}^t, \psi^{t+1}) = \left\{
         \begin{aligned}
         &R(\vec{\theta}^t, \psi^{t+1}), &t=h-1 \\ 
         &R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) Q^*(\vec{\theta}^{t+1}, \pi^*(\vec{\theta}^{t+1})). &0\leqslant t < h-1 \\
         \end{aligned}
         \right .\label{eq:normative-Q}
 {{< /katex >}}
-*
 
 </div>
 
