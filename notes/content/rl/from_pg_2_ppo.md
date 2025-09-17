@@ -55,7 +55,9 @@ To sample with expectation equals or approximates the expression,
 
 </div>
 
-<div class="proof">
+The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only place the policy parameterization appears, which can be omitted {{< katex >}}L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]{{< /katex >}} since it will be automatically recovered when differentiating.
+
+{{% details "Proof of Theorem 1" [open] %}}
 
 <strong>Proof.</strong> The gradient of {{< katex >}}V{{< /katex >}} can be written via {{< katex >}}Q{{< /katex >}} as
 
@@ -65,10 +67,10 @@ To sample with expectation equals or approximates the expression,
 &= \sum_a\!\left[ 
   \nabla\pi(a\mid s)\, Q^\pi (s,a) 
   + \pi(a\mid s)\, \nabla Q^\pi (s,a) \right] \\
-  &= \sum_a\!\left[ 
+    &= \sum_a\!\left[ 
     \nabla\pi(a\mid s)\, Q^\pi (s,a) 
   + \pi(a\mid s)\, \nabla \sum_{s'} P(s'\mid s,a)\, (r + V^\pi(s')) \right] \\
-  &\stackrel{\text{(i)}}{=} \sum_a\!\left[ 
+    &\stackrel{\text{(i)}}{=} \sum_a\!\left[ 
     \nabla\pi(a\mid s)\, Q^\pi (s,a) 
   + \pi(a\mid s) \sum_{s'} P(s'\mid s,a)\, \nabla V^\pi(s') \right] ,
 \end{aligned}
@@ -105,9 +107,7 @@ Let {{< katex >}}\eta(s){{< /katex >}} be the expected number of visits to {{< k
 \end{aligned}
 {{< /katex >}}
 
-</div>
-
-The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only place the policy parameterization appears, which can be omitted {{< katex >}}L(\theta)=\mathbb{E}_{\pi}[Q^\pi(s,a)]{{< /katex >}} since it will be automatically recovered when differentiating.
+{{% /details %}}
 
 ### PG with Baseline
 
