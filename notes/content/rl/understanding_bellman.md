@@ -214,21 +214,6 @@ In contrast to Figure <a href="#subfig:sg-increase" data-reference-type="ref" d
 \end{aligned}
 {{< /katex >}}
 
-
-<figure id="subfig:sg-decrease">
-<figure id="subfig:sg-increase">
-
-<figcaption>Gradient ascent by semi-gradient.</figcaption>
-</figure>
-<figure id="subfig:sg-decrease">
-
-<figcaption>Gradient descent by semi-gradient.</figcaption>
-</figure>
-<figcaption>Epoch-wise gradient vectors for Bellman residual gradients.</figcaption>
-</figure>
-
-
-
 ## References
 
 {{< references >}}
