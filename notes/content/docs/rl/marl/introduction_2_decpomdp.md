@@ -141,12 +141,12 @@ Policy can also be represented by other forms, like approximating functions (Sut
 
 {{< columns >}}
 <figure>
-  <img src="pt.png" alt="Policy Tree" style="width:100%; height:auto;" />
+  <img src="pt.png" alt="Policy Tree" />
   <figcaption>Policy Tree (PT)</figcaption>
 </figure>
 <--->
 <figure>
-  <img src="fsc.png" alt="Finite State Controller" style="width:100%; height:auto;" />
+  <img src="fsc.png" alt="Finite State Controller" />
   <figcaption>Finite State Controller (FSC)</figcaption>
 </figure>
 {{< /columns >}}
