@@ -84,23 +84,22 @@
 
 /* References list numbering as [1], [2], ... without affecting other lists */
 .book-page .markdown ol.references {
-  list-style: none;           /* remove default 1. 2. */
-  counter-reset: ref-counter; /* start counter at 0 */
+  list-style: none;            /* remove default 1. 2. */
+  counter-reset: ref-counter;  /* start counter at 0 */
   margin-left: 0;
-  /* Ensure content starts well after the [n] marker (handles up to [99]) */
-  padding-left: 6ch;
+  padding-left: 0;             /* no extra padding on the list itself */
 }
 .book-page .markdown ol.references > li {
   position: relative;
   margin: 0.25rem 0;
+  /* indent the item content itself so multi-line wraps align */
+  padding-left: 6ch;           /* marker width (5ch) + ~1ch gap */
 }
 .book-page .markdown ol.references > li::before {
   counter-increment: ref-counter;
-  /* Two spaces after the bracketed number */
-  content: "[" counter(ref-counter) "]  ";
+  content: "[" counter(ref-counter) "]"; /* marker only; spacing comes from li padding */
   position: absolute;
   left: 0;
-  /* Reserve horizontal space for the marker + 2 spaces */
-  width: 5ch;
+  width: 5ch;                  /* reserve width for up to two digits */
   color: inherit;
 }
