@@ -14,6 +14,15 @@
   margin: 0.25rem 0;
 }
 
+/* Sidenote hint: same gray style, exactly 2pt smaller than surrounding text */
+.book-page .markdown blockquote.book-hint.sidenote {
+  /* 2pt smaller than the current context font-size */
+  font-size: calc(1em - 2pt);
+  font-style: italic;
+  border-color: var(--gray-200);
+  background-color: var(--gray-100);
+}
+
 /* Make gray (default) hint boxes italic site-wide */
 .book-page .markdown blockquote.book-hint.default {
   font-style: italic;

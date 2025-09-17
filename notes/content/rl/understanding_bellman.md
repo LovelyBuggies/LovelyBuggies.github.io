@@ -5,7 +5,7 @@ math: true
 weight: -100
 postType: notes
 linkTitle: "Understanding Bellman"
-readingTime: 20
+readingTime: 15
 ---
 
 {{< katex />}}
@@ -130,7 +130,7 @@ which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or 
 
 According to the Fundamental Theorem, we can find {{< katex >}}\pi^*{{< /katex >}} efficiently once having access to {{< katex >}}Q^*{{< /katex >}}, without the need to find the policy whose Q-function **dominates** the others’ brute-force-ly. To avoid the Bellman Curse of Dimensionality, we can apply Dynamic Programming (DP) methods to solve MDPs by keeping track of Q-values during calculations, thanks to Bellman recursions.
 
-**Value iteration** (so-called backward induction) involves iteratively applying {{< katex >}}\mathcal{T}^*{{< /katex >}} to arbitrarily initialized values {{< katex >}}Q^0{{< /katex >}} until convergence. According to Corollary <a href="#them:fixpoint" data-reference-type="ref" data-reference="them:fixpoint">1</a> and Theorem <a href="#them:fundamental" data-reference-type="ref" data-reference="them:fundamental">1</a>, value iteration converges to {{< katex >}}Q^*{{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}}, then an optimal policy {{< katex >}}\pi^*{{< /katex >}} can be derived by greedifying {{< katex >}}Q^*{{< /katex >}}.
+**Value iteration** (so-called backward induction) involves iteratively applying {{< katex >}}\mathcal{T}^*{{< /katex >}} to arbitrarily initialized values {{< katex >}}Q^0{{< /katex >}} until convergence. According to Corollary 1 and Theorem 1, value iteration converges to {{< katex >}}Q^*{{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}}, then an optimal policy {{< katex >}}\pi^*{{< /katex >}} can be derived by greedifying {{< katex >}}Q^*{{< /katex >}}.
 
 **Policy iteration** starts with an arbitrary policy {{< katex >}}\pi^0{{< /katex >}} and values {{< katex >}}Q^0{{< /katex >}}. In each iterative step {{< katex >}}k{{< /katex >}}, {{< katex >}}Q^{\pi, k}{{< /katex >}} is calculated by applying Bellman Operator {{< katex >}}\mathcal{T}^{\pi, k}{{< /katex >}} that follows current policy {{< katex >}}{\pi^k}{{< /katex >}} to {{< katex >}}Q^{\pi, {k-1}}{{< /katex >}} from the last iteration, and then {{< katex >}}\pi^{k+1}{{< /katex >}} is derived from greedifying {{< katex >}}Q^{\pi, k}{{< /katex >}}. This process is repeated until convergence, and policy iteration can produce optimal policy after sufficient iterations.
 
