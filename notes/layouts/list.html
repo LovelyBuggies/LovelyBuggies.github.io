@@ -23,7 +23,9 @@
   {{- $pages := where .Pages "Params.bookHidden" "ne" true -}}
   {{- if gt (len $pages) 0 -}}
   <ul>
-    {{- range $pages.ByWeight -}}
+    {{- $onlyPages := where $pages "Kind" "page" -}}
+    {{- $onlySections := where $pages "Kind" "section" -}}
+    {{- range $onlyPages.ByWeight -}}
       {{- if eq .File.BaseFileName "who_is_lovelybuggies" -}}
         {{- /* skip this special page from list */ -}}
       {{- else if .IsSection -}}
@@ -44,6 +46,16 @@
           <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
         </li>
       {{- end -}}
+    {{- end -}}
+    {{- range $onlySections.ByWeight -}}
+      <li class="section">
+        {{- if .Content -}}
+          <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
+        {{- else -}}
+          <span>{{ partial "docs/title" . }}</span>
+        {{- end -}}
+        {{ template "section-tree" . }}
+      </li>
     {{- end -}}
   </ul>
   {{- end -}}

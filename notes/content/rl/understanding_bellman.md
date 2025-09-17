@@ -2,7 +2,7 @@
 date: 2025-01-05
 title: "Understanding Bellman"
 math: true
-weight: 0
+weight: -100
 postType: notes
 linkTitle: "Understanding Bellman"
 readingTime: 20

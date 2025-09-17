@@ -9,19 +9,22 @@
 
 {{ define "book-section-children" }}{{/* (dict "Section" .Section "CurrentPage" .CurrentPage) */}}
   {{- $children := where .Section.Pages "Params.bookHidden" "ne" true -}}
+  {{- $pages := where $children "Kind" "page" -}}
+  {{- $sections := where $children "Kind" "section" -}}
   <ul>
-    {{ range $children.ByWeight }}
-      {{ if .IsSection }}
-        <li {{- if .Params.BookFlatSection }} class="book-section-flat" {{ end -}}>
-          {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
-          {{ template "book-section-children" (dict "Section" . "CurrentPage" $.CurrentPage) }}
-        </li>
-      {{ else if and .IsPage .Content }}
-        <li>
-          {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
-        </li>
-      {{ end }}
-    {{ end }}
+    {{/* Pages first (by weight) */}}
+    {{- range $pages.ByWeight -}}
+      <li>
+        {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
+      </li>
+    {{- end -}}
+    {{/* Then sections (by weight) */}}
+    {{- range $sections.ByWeight -}}
+      <li {{- if .Params.BookFlatSection }} class="book-section-flat" {{ end -}}>
+        {{ template "book-page-link" (dict "Page" . "CurrentPage" $.CurrentPage) }}
+        {{ template "book-section-children" (dict "Section" . "CurrentPage" $.CurrentPage) }}
+      </li>
+    {{- end -}}
   </ul>
 {{ end }}
 
