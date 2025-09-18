@@ -1,12 +1,15 @@
 {{/* Project override: robust prev/next. Skip non-page kinds (home, list, taxonomy). */}}
 {{ if .IsPage }}
-  {{- $prev := nil -}}
-  {{- $next := nil -}}
+  {{- $prev := false -}}
+  {{- $next := false -}}
   {{- $dir := "" -}}
   {{- with .File }}{{ $dir = .Dir }}{{ end -}}
 
   {{- /* Prefer siblings in the same directory when available */ -}}
-  {{- $siblings := where .Site.RegularPages "File.Dir" $dir -}}
+  {{- $siblings := slice -}}
+  {{- if $dir -}}
+    {{- $siblings = where .Site.RegularPages "File.Dir" $dir -}}
+  {{- end -}}
   {{- if gt (len $siblings) 0 -}}
     {{- $siblings = sort $siblings "Weight" "Title" -}}
     {{- $idx := -1 -}}
