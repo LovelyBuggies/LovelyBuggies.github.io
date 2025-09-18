@@ -9,7 +9,7 @@ readingTime: 45
 
 {{< katex />}}
 
-# Optimal Q in Dec-POMDP
+# Optimal Q Functions in Dec-POMDP
 {{< postbadges >}}
 
 This article discuss the definition of optimal Q-function in Dec-POMDP.
