@@ -2,39 +2,18 @@
 {{ if .IsPage }}
   {{- $prev := false -}}
   {{- $next := false -}}
-  {{- $dir := "" -}}
-  {{- with .File }}{{ $dir = .Dir }}{{ end -}}
-
-  {{- /* Prefer siblings in the same directory when available */ -}}
-  {{- $siblings := slice -}}
-  {{- if $dir -}}
-    {{- $siblings = where .Site.RegularPages "File.Dir" $dir -}}
+  {{- /* Use top-level section neighbors by date (older = prev, newer = next) */ -}}
+  {{- $section := .Section -}}
+  {{- $pages := where .Site.RegularPages "Section" $section -}}
+  {{- /* Order by weight then date then title for stability */ -}}
+  {{- $pages = sort $pages "Weight" "Date" "Title" -}}
+  {{- $idx := -1 -}}
+  {{- range $i, $p := $pages -}}
+    {{- if eq $p.RelPermalink $.RelPermalink -}}{{ $idx = $i }}{{- end -}}
   {{- end -}}
-  {{- if gt (len $siblings) 0 -}}
-    {{- $siblings = sort $siblings "Weight" "Title" -}}
-    {{- $idx := -1 -}}
-    {{- range $i, $p := $siblings -}}
-      {{- if eq $p.RelPermalink $.RelPermalink -}}{{ $idx = $i }}{{- end -}}
-    {{- end -}}
-    {{- if ge $idx 0 -}}
-      {{- if gt $idx 0 -}}{{ $prev = index $siblings (sub $idx 1) }}{{- end -}}
-      {{- if lt (add $idx 1) (len $siblings) -}}{{ $next = index $siblings (add $idx 1) }}{{- end -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- /* Fallback to section neighbors if needed */ -}}
-  {{- if and (not $prev) (not $next) -}}
-    {{- with .CurrentSection -}}
-      {{- $secPages := sort .RegularPages "Weight" "Title" -}}
-      {{- $idx := -1 -}}
-      {{- range $i, $p := $secPages -}}
-        {{- if eq $p.RelPermalink $.RelPermalink -}}{{ $idx = $i }}{{- end -}}
-      {{- end -}}
-      {{- if ge $idx 0 -}}
-        {{- if gt $idx 0 -}}{{ $prev = index $secPages (sub $idx 1) }}{{- end -}}
-        {{- if lt (add $idx 1) (len $secPages) -}}{{ $next = index $secPages (add $idx 1) }}{{- end -}}
-      {{- end -}}
-    {{- end -}}
+  {{- if ge $idx 0 -}}
+    {{- if gt $idx 0 -}}{{ $prev = index $pages (sub $idx 1) }}{{- end -}}
+    {{- if lt (add $idx 1) (len $pages) -}}{{ $next = index $pages (add $idx 1) }}{{- end -}}
   {{- end -}}
 
   {{ if or $prev $next }}
