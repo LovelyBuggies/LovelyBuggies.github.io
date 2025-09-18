@@ -266,8 +266,12 @@
 .book-page .markdown .post-badges .book-badge { margin: 0; }
 
 /* Prev/Next bar: keep icons aligned and add tiny gaps */
-.book-page .markdown .flex.align-center {
-  gap: 6px;
+.book-page .markdown .flex.align-center { gap: 6px; }
+
+/* Footer prev/next: center at the bottom, not pushed to the right */
+.book-page .book-footer > .flex.justify-between {
+  justify-content: center;
+  gap: 12px;
 }
 
 /* Larger image for PG→PPO post (shortcode with custom class) */
