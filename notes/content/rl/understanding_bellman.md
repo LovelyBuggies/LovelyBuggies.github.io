@@ -122,7 +122,7 @@ which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or 
 
 {{< katex display=true >}}
 \left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) \\
-\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right )
+\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right )\, .
 {{< /katex >}}
 
 </div>
