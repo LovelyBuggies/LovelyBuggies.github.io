@@ -156,6 +156,29 @@ vertically: multi-turn provide intermediate reward signals
 
 not multi-turn rewards
 
+## Cite This Post
+
+{{< tabs >}}
+
+{{% tab "Plain" %}}
+Cited as:
+
+Liu, Shuo. (March 2025). Reward Modeling. lovelybuggies.github.io. https://lovelybuggies.github.io/notes/lm/rewarding-languages/
+{{% /tab %}}
+
+{{% tab "BibTeX" %}}
+@article{liu2025rewardmodeling,
+  title   = {Reward Modeling},
+  author  = {Liu, Shuo},
+  journal = {lovelybuggies.github.io},
+  year    = {2025},
+  month   = {March},
+  url     = {https://lovelybuggies.github.io/notes/lm/rewarding-languages/}
+}
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## References
 
 {{< references >}}
