@@ -67,6 +67,12 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 \end{aligned}
 {{< /katex >}}
 
+{{< sidenote id="curse-of-dimension" >}}
+
+<strong> Fun fact:</strong> You might find a paragraph that’s over 66.6% similar to this one in most of <a href="https://www.ccs.neu.edu/home/camato/publications.html">our group’s papers</a> :3
+
+{{< /sidenote >}}
+
 ## Special Classes of Dec-POMDP 
 
 - **Centralized:** MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy {{< katex >}}\mathbb{H}\to\mathbb{A}{{< /katex >}}.
@@ -88,7 +94,7 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 | ND-POMDP               | NEXP-complete   |
 
 
-{{% details title="Theorems" open=false %}}
+{{% details title="Related Theorems" open=false %}}
 
 <span id="tab:complexity" label="tab:complexity"></span>
 
