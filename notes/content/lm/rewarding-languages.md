@@ -21,7 +21,9 @@ RL is everywhere these days when people talk about LLMs. However, the challenge 
 
 This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)). But, basically,
 
-**Why do humans need language?**
+{{< hint danger >}}
+<strong>Why do humans need language?</strong>
+{{< /hint >}}
 
 Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states, they are normally noisy observations.
 
@@ -43,7 +45,9 @@ As LMs scale, their raw outputs (optimized primarily for next-token prediction) 
 
 This leads to the core topic of this post: 
 
-**How do we reward the task completion in human languages?**
+{{< hint danger >}}
+<strong>How do we reward the task completion in human languages?</strong>
+{{< /hint >}}
 
 ## "Good"as  Justified by Human
 
