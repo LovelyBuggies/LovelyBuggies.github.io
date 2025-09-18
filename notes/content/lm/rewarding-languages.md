@@ -68,7 +68,7 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 
 </div>
 
-BT is anti-symmetric: the preference between two responses depends only on the difference in their reward values. It satisfies $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$, and the log-odds of preference is anti-symmetric: $\log \left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons, making BT suitable for preference modeling (initially used to rank sports teams and players, e.g., [http://en.wikipedia.org/wiki/Elo_rating_system](http://en.wikipedia.org/wiki/Elo_rating_system)).
+BT is anti-symmetric: the preference between two responses depends only on the difference in their reward values. It satisfies $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$, and the log-odds of preference is anti-symmetric: $\log \left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons, making BT suitable for preference modeling (initially used to rank sports teams and players, e.g., [Elo rating](http://en.wikipedia.org/wiki/Elo_rating_system)).
 
 #### Reward Modeling with Pairwise Preferences (BT Model)
 
