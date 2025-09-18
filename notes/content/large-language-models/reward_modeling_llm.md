@@ -1,22 +1,20 @@
 ---
 date: 2025-03-24
-title: "Rewards from Human Feedback"
+title: "LLM Rewards"
 math: true
-postType: review
-linkTitle: "Rewards from Human Feedback"
-readingTime: 12
+postType: thought
+linkTitle: "LLM Rewards"
+readingTime: 50
 ---
 
 {{< katex />}}
 
-# Rewards from Human Feedback
+# All You Want to Know about LLM Rewards
 {{< postbadges >}}
 
-## Reward Models in RLHF
+RL is everywhere these days when people talk about LLMs. But a tricky part is **what exactly counts as a “good” reward model for training LLMs**? This post walks through the existing practices of reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
 
-<div class="definition">
-<strong>Abstract</strong>. Constructing rewards is crucial yet challenging to achieve RL objectives. This post explores how to guide LLM optimization via a proper RLHF reward model.
-</div>
+## Training LLMs with RL
 
 As LLMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To enable RL fine-tuning from human feedbacks (RLHF), reward models are introduced as trainable proxies for human preference. Once trained, it can generalize preference signals to unseen inputs, making alignment more scalable by reducing reliance on slow and costly human annotations. It also allows flexible fine-tuning toward different objectives, such as helpfulness, truthfulness, or safety.
 
@@ -24,12 +22,14 @@ A typical alignment pipeline consists of 3 stages: supervised fine-tuning (SFT),
 
 ![RLHF](/imgs/blog/reward_modeling_llm/RLHF.png)
 
+## "Good" Terms of Human Preference
 
-## Anti-Symmetric Preference Modeling
+
+### Anti-Symmetric Preference Modeling
 
 In this section, we introduce the mainstream methods that model rewards of LLM responses through preference comparison.
 
-### BT Model and Its Ranking Extension
+#### BT Model and Its Ranking Extension
 
 The original Bradley–Terry (BT) model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is
 
@@ -47,7 +47,7 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 
 BT is anti-symmetric: the preference between two responses depends only on the difference in their reward values. It satisfies $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$, and the log-odds of preference is anti-symmetric: $\log \!\left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons, making BT suitable for preference modeling (initially used to rank sports teams and players, e.g., Elo rating).
 
-### Reward Modeling with Pairwise Preferences (BT Model)
+#### Reward Modeling with Pairwise Preferences (BT Model)
 
 Inferring a reward model using the BT framework can be formulated as parameter estimation: recover latent reward values for candidate responses based on observed pairwise comparisons.
 
@@ -88,7 +88,7 @@ Given $M$ annotated comparisons $\mathcal{C}=\{(i_m,j_m)\}_{m=1}^M$, the likelih
 
 The optimal reward model is obtained by maximizing the log-likelihood (MLE), $\; r^* = \arg\max_r \log \mathcal{L}(r)$, identifiable up to an additive constant and consistent under the assumptions above.
 
-### Reward Modeling with Ranked Preferences (PL Model)
+#### Reward Modeling with Ranked Preferences (PL Model)
 
 While BT uses pairwise preferences, real systems can collect ranked lists. For a ranking $(y_{i_1} \succ y_{i_2} \succ \ldots \succ y_{i_N})$ for prompt $x$, the PL probability is
 
@@ -106,11 +106,11 @@ Given $M$ rankings $\mathcal{C} = \{(y_{i_1^m}, \ldots, y_{i_{N_m}^m})\}_{m=1}^M
 
 and the MLE $\; r^* = \arg\max_r \log \mathcal{L}(r)$. Preference modeling with PL is also anti-symmetric: swapping two responses in a ranking inverts the relative score difference in the likelihood.
 
-## Symmetric Reward Modeling
+### Symmetric Reward Modeling
 
 As cliché as it sounds, modeling rewards through symmetric signals is feasible. Symmetric models predict the reward for each prompt–response pair independently, without referencing alternatives.
 
-### Regression-based Reward Model
+#### Regression-based Reward Model
 
 Given scalar human ratings $\{(x_n, y_n, s_n)\}_{n=1}^N$ with $s_n\in\mathbb{R}$, train $r(x,y)$ by minimizing
 
@@ -120,7 +120,7 @@ Given scalar human ratings $\{(x_n, y_n, s_n)\}_{n=1}^N$ with $s_n\in\mathbb{R}$
 
 Such data appears in datasets like Anthropic HH, OpenAssistant, and MT-Bench (numeric quality scores per response).
 
-### Classification-based Reward Model
+#### Classification-based Reward Model
 
 Alternatively, train a binary classifier using labels $s_n\in\{0,1\}$ for acceptability, with sigmoid $\sigma$ and cross-entropy loss
 
@@ -128,25 +128,24 @@ Alternatively, train a binary classifier using labels $s_n\in\{0,1\}$ for accept
 \mathcal{L}_{\text{cls}} = - \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
 {{< /katex >}}
 
-## Other Reward Modeling Techniques
+### Other Reward Modeling Techniques
 
-### Inverse Reinforcement Learning
+#### Inverse Reinforcement Learning
 
 IRL aims to recover a reward function explaining expert behavior in an MDP. Let $(\mathcal{X}, \mathcal{Y}, T, \gamma)$ be the MDP and expert trajectories $\{\tau_i\}$ where $\tau_i=(x_0,y_0,x_1,y_1,\dots)$. Infer $r: \mathcal{X}\times\mathcal{Y}\to\mathbb{R}$ such that the induced optimal policy matches observed behavior. However, for LLM alignment this mismatches due to: (i) unstructured, high-dimensional language; (ii) feedback as relative preferences rather than optimal sequences; (iii) heavy compute (re-solving RL repeatedly) impractical at LLM scale.
 
-### Bayesian Reward Learning
+#### Bayesian Reward Learning
 
 Maintain a posterior over reward parameters $p(\theta\mid D) \propto p(D\mid\theta) p(\theta)$ to represent uncertainty and enable posterior-aware policies. In high-dimensional reward spaces, exact/accurate inference is expensive and often impractical for large LLMs.
 
-## Takeaways in Reward Design {#app:reward_hacking}
 
-Effective reward design is critical for robust, aligned behavior.
+## "Good" as Verified
 
-- Potential-based Reward Shaping: speed up learning with $F(s,a,s')=\gamma\,\Phi(s')-\Phi(s)$ to preserve optimal policies and avoid reward hacking.
-- Sparse vs. Dense Rewards: sparse rewards reduce hacking risk but hinder exploration; dense rewards aid exploration but can invite exploitation (Weng, 2024).\footnote{Ambiguous or underspecified designs create vulnerabilities that agents can exploit.}
-- Human-in-the-loop Reward Design: incorporate judgments to capture nuanced objectives and iteratively mitigate reward hacking.
-- Intrinsic vs. Extrinsic Rewards: combine intrinsic signals (curiosity/novelty) with extrinsic objectives for robustness.
+too sparese
 
+## Problems of Current Reward Models
+
+single turn not return, 
 
 ## References
 
