@@ -33,9 +33,9 @@ When people try to solve tasks in languages, how to express them and evaluate th
 
 In fact, existing human languages are very limited in expressiveness. Although we have a rich vocabulary for describing vision signals, that for sound, touch, or scen is sparse. Just like my dilemma when describing perfumes or a haircut (supposed that I have a clear objective in my mind), my vocabulary is too few and vague to accurately express my intented outcome. For the tasks that are not able to be accurately represented by language, how can we expect them to be evaluated?
 
-{{ <sidenote> }}
+{{< sidenote >}}
 This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on human's existing languages, they can only achieve human-like level of intelligence (*though it’s fun to know how much storage would be use to memorize our current knowledge base*). Think about how AlphaGo defeated Sedol Lee -- it didn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and even entire new languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to make breakthroughs. 
-{{ </sidenote> }}
+{{< /sidenote >}}
 
 ## Fine-Tuning Language Models with RL
 
