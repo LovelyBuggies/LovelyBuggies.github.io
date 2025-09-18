@@ -21,9 +21,7 @@ RL is everywhere these days when people talk about LLMs. However, the challenge 
 
 This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)). But, basically,
 
-{{< hint danger >}}
-<strong>Why do humans need language?</strong>
-{{< /hint >}}
+<span class="text-danger"><strong>Why do humans need language?</strong></span>
 
 Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states, they are normally noisy observations.
 
@@ -41,13 +39,11 @@ This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxm
 
 As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To adapt them to specific domains, a secondary fine-tuning phase is typically applied. A standard alignment pipeline involves 3 stages: supervised fine-tuning (SFT), reward modeling (RM), and RL fine-tuning. After initial SFT on a base transformer with curated human-labeled data, a reward model is built, either from explicit rules or human preference data. While only serves as an approximation of ultimate evaluation, the reward model plays a crucial role in guiding optimization and thus extremely important.
 
-![RLHF](/imgs/blog/reward_modeling_llm/RLHF.png)
+{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-75" >}}
 
 This leads to the core topic of this post: 
 
-{{< hint danger >}}
-<strong>How do we reward the task completion in human languages?</strong>
-{{< /hint >}}
+<span class="text-danger"><strong>How do we reward the task completion in human languages?</strong></span>
 
 ## "Good"as  Justified by Human
 
