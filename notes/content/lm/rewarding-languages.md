@@ -23,9 +23,7 @@ This title might be overgeneralizing the usage of language into just 4 aspects (
 
 **Why do we humans use language?**
 
-Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. 
-
-A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states, they are normally noisy observations.
+Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states, they are normally noisy observations.
 
 ### Solving Tasks in Languages
 
@@ -34,19 +32,20 @@ When people try to solve tasks in languages, how to express them and evaluate th
 In fact, existing human languages are very limited in expressiveness. Although we have a rich vocabulary for describing vision signals, that for sound, touch, or scen is sparse. Just like my dilemma when describing perfumes or a haircut (supposed that I have a clear objective in my mind), my vocabulary is too few and vague to accurately express my intented outcome. For the tasks that are not able to be accurately represented by language, how can we expect them to be evaluated?
 
 {{< sidenote >}}
-This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on human's existing languages, they can only achieve human-like level of intelligence (*though it’s fun to know how much storage would be use to memorize our current knowledge base*). Think about how AlphaGo defeated Sedol Lee -- it didn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and even entire new languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to make breakthroughs. 
+This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on human's existing languages, they can only achieve human-like level of intelligence (<em>though it’s fun to know how much storage would be use to memorize our current knowledge base</em>). Think about how AlphaGo defeated Sedol Lee -- it didn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and even entire new languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to make breakthroughs. 
 {{< /sidenote >}}
 
-## Fine-Tuning Language Models with RL
+## RL Fine-Tuning
 
-As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To enable RL fine-tuning from human feedbacks (RLHF), reward models are introduced as trainable proxies for human preference. Once trained, it can generalize preference signals to unseen inputs, making alignment more scalable by reducing reliance on slow and costly human annotations. It also allows flexible fine-tuning toward different objectives, such as helpfulness, truthfulness, or safety.
-
-A typical alignment pipeline consists of 3 stages: supervised fine-tuning (SFT), reward modeling, and RL. After an initial SFT based on base transformer with curated human-labeled data, a reward model is constructed to predict human preferences over model-generated responses. This model is then used to guide further optimization by encouraging outputs that maximize the predicted reward. For example, `ChatGPT` employs reward models trained on ranked annotations to guide its generation toward preferred outputs (Achiam, Adler, and Agarwal 2024); `DeepSeek` and `LLaMA 2` include explicit reward modeling components in their alignment pipelines, using pairwise preferences to train reward models that inform subsequent learning (Shao, Wang, and Zhu 2024; Touvron, Martin, and Stone 2023).
+As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To adapt them to specific domains, a secondary fine-tuning phase is typically applied. A standard alignment pipeline involves 3 stages: supervised fine-tuning (SFT), reward modeling (RM), and RL fine-tuning. After initial SFT on a base transformer with curated human-labeled data, a reward model is built, either from explicit rules or human preference data. While only serves as an approximation of ultimate evaluation, the reward model plays a crucial role in guiding optimization and thus extremely important.
 
 ![RLHF](/imgs/blog/reward_modeling_llm/RLHF.png)
 
-## "Good" Justified by Human
+This leads to the core topic of this post: 
 
+**How do we reward the task completion in human languages?**
+
+## "Good"as  Justified by Human
 
 ### Anti-Symmetric Preference Modeling
 
@@ -162,7 +161,7 @@ IRL aims to recover a reward function explaining expert behavior in an MDP. Let 
 Maintain a posterior over reward parameters $p(\theta\mid D) \propto p(D\mid\theta) p(\theta)$ to represent uncertainty and enable posterior-aware policies. In high-dimensional reward spaces, exact/accurate inference is expensive and often impractical for large LLMs.
 
 
-## "Good" as Verified
+## "Good" as Verified by Analyzer
 
 too sparese
 
