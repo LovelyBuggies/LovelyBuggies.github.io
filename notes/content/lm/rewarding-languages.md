@@ -21,11 +21,11 @@ RL is everywhere these days when people talk about LLMs. However, the challenge 
 
 This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)). But, basically,
 
-**Why do we humans use language?**
+**Why do humans need language?**
 
 Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states, they are normally noisy observations.
 
-### Solving Tasks in Languages
+### Solving Tasks in Language
 
 When people try to solve tasks in languages, how to express them and evaluate the outcome are the crucial questions. Some tasks, along with their completions, can be clearly conveyed using niche languages. Supposed we are asking a friend to bring us an iPhone 17 from Apple Store. For this task, we can clearly express our intent and verify the result by observing it. But some other tasks don’t have clear and objective evaluation criteria, like deciding whether a paper (aka a research task) is "good" often lacks consensus (reflected in complaints about conference reviewing :3).
 
