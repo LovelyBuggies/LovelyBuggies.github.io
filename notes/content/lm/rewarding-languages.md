@@ -19,21 +19,23 @@ RL is everywhere these days when people talk about LLMs. However, the challenge 
 
 ### Why We Read/Listen/Speak/Write?
 
-This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)), but basically I want to trace back to a fundamental question:
+This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)). But, basically,
 
 **Why do we humans use language?**
 
 Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. 
 
-A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages rarely compress the world into pure states, thus they are observations (fragments of the universe described, or symbolized, rather than the universe itself).
+A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states, they are normally noisy observations.
 
 ### Solving Tasks in Languages
 
-After building the languages, human are trying to solve tasks using those. The core two parts of solving tasks are, how to express the tasks, and how to evaluate the tasks. in general, the tasks can be divided into 3 types. 
+When people try to solve tasks in languages, how to express them and evaluate the outcome are the crucial questions. Some tasks, along with their completions, can be clearly conveyed using niche languages. Supposed we are asking a friend to bring us an iPhone 17 from Apple Store. For this task, we can clearly express our intent and verify the result by observing it. But some other tasks don’t have clear and objective evaluation criteria, like deciding whether a paper (aka a research task) is "good" often lacks consensus (reflected in complaints about conference reviewing :3).
 
-- Some tasks and their completions can be convey and expressed by a kind of niched language. Like robot move can be implemented by codes. This kind of tasks are easily verifiable as yo can directly seen the effect.
-- Some tasks definition and completions are subjective and hard to evaluate, such as there is no clear criteria about whether a paper is good (as people always complain about AI conference’s chaotic reviews).
-- But some tasks can’t be expressed, as the expressiveness of our current language has an upper limit. People have invented a lot of words for vision, but words for other sensing are very limited, like acoustic, scent … Just like I‘m completely lost when I entered a perfume shop, the only words than I can express is like I like woody and smoky ones, but I do can tell whether one selected is good or not. As we know, those are thousands kinds of perfume that fall in this category but are very diff. hint: probably this is one clue to explain why LLM is not the future of AI, though using NL to train LLM might be good to help them to achieve a similar level intelligence as human (but it’s good to know how much storage should be use to memorize the current human knowledge base). Think about how AlphaGo beats …, it doesn’t use language at all, the chess small world can be expressed accurately and compactly numerically. But we don’t need to worry about that yet, human are creating new vocabulary and languages (e.g., codes) :D
+In fact, existing human languages are very limited in expressiveness. Although we have a rich vocabulary for describing vision signals, that for sound, touch, or scen is sparse. Just like my dilemma when describing perfumes or a haircut (supposed that I have a clear objective in my mind), my vocabulary is too few and vague to accurately express my intented outcome. For the tasks that are not able to be accurately represented by language, how can we expect them to be evaluated?
+
+{{ <sidenote> }}
+This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on human's existing languages, they can only achieve human-like level of intelligence (*though it’s fun to know how much storage would be use to memorize our current knowledge base*). Think about how AlphaGo defeated Sedol Lee -- it didn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and even entire new languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to make breakthroughs. 
+{{ </sidenote> }}
 
 ## Fine-Tuning Language Models with RL
 
