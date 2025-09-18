@@ -271,15 +271,14 @@
 /* Article prev/next container spacing */
 /* (prev/next feature removed) */
 
-/* Custom badge style: black scheme for License */
-.book-page .markdown .book-badge.black { border: 1px solid #000; }
+/* Custom badge style: gray scheme for License (no border) */
 .book-page .markdown .book-badge.black span.book-badge-title {
-  background-color: #f0f0f0; /* lighter key */
-  color: #000;
+  background-color: #f3f4f6; /* light gray key */
+  color: #111;               /* near-black text */
 }
 .book-page .markdown .book-badge.black span.book-badge-value {
-  background-color: #000;     /* dark value */
-  color: #fff;
+  background-color: #9ca3af; /* medium gray value */
+  color: #111;               /* dark text for readability */
 }
 
 /* Larger image for PG→PPO post (shortcode with custom class) */
