@@ -21,7 +21,7 @@ This post is about the clichés of the Bellman equations, but retold in a new wa
 Bellman equations establish recusive relations between states and succeeding states, which can be applied as updating rules for value prediction.
 
 <div class="definition">
-  <strong>Definition.</strong> The Bellman equations for V-values are (Sutton and Barto 2018),
+  <strong>Definition 1.</strong> The Bellman equations for V-values are (Sutton and Barto 2018),
 
 
 

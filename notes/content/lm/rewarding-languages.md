@@ -52,8 +52,7 @@ This leads to my motivation of writing this post:
 Reward models can be trainable proxies for human preference (anti-symmetric). This kinds of reward models are usually built based on Bradley–Terry (BT) model and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
 <div class="definition">
-
-The original BT model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is
+<strong>Definition 1:</strong> The original BT model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is
 
 {{< katex display=true >}}
 \Pr(i \succ j) = \frac{u_i}{u_i + u_j}
@@ -69,7 +68,7 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 
 </div>
 
-BT is anti-symmetric: the preference between two responses depends only on the difference in their reward values. It satisfies $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$, and the log-odds of preference is anti-symmetric: $\log \!\left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons, making BT suitable for preference modeling (initially used to rank sports teams and players, e.g., [http://en.wikipedia.org/wiki/Elo_rating_system](http://en.wikipedia.org/wiki/Elo_rating_system)).
+BT is anti-symmetric: the preference between two responses depends only on the difference in their reward values. It satisfies $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$, and the log-odds of preference is anti-symmetric: $\log \left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons, making BT suitable for preference modeling (initially used to rank sports teams and players, e.g., [http://en.wikipedia.org/wiki/Elo_rating_system](http://en.wikipedia.org/wiki/Elo_rating_system)).
 
 #### Reward Modeling with Pairwise Preferences (BT Model)
 
