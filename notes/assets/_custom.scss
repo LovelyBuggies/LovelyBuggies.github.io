@@ -260,3 +260,10 @@
   margin: 6px 0 10px;  /* subtle top/bottom breathing room */
 }
 .book-page .markdown .post-badges .book-badge { margin: 0; }
+
+/* Larger image for PG→PPO post (shortcode with custom class) */
+.book-page .markdown .book-image img.wide-grpo {
+  width: 92%;
+  max-width: 1000px;
+  height: auto;
+}
