@@ -17,7 +17,7 @@ PPO (Schulman et al. 2017) is a shining jewel in the world of RL. In this post, 
 
 ## Policy Gradient
 
-Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. Policy gradient (PG) methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}}.
+Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. Policy gradient (PG) methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}},
 
 {{< katex display=true >}}
 \label{eq:pg}
@@ -112,13 +112,15 @@ Let $\eta(s)$ be the expected number of visits to $s$ (episodic: $\sum_s \eta(s)
 ### PG with Baseline
 
 <div id="them:PG-baseline" class="theorem">
-<strong>Theorem 2</strong>. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, and this will reduce the variance while keeping it unbiased. {{< katex display=true >}}
+<strong>Theorem 2</strong>. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, {{< katex display=true >}}
 \label{equ:reinforce-baseline}
     \begin{aligned}
         \nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a (Q^\pi (s,a) -b(s)) \nabla\pi(a|s) \\
         &= \mathbb{E}_{\pi} \left[(Q^\pi(s,a) -b(s)) \nabla\ln\pi(a|s)\right].
     \end{aligned}
 {{< /katex >}}
+This will reduce the variance while keeping it unbiased
+
 
 </div>
 
@@ -141,26 +143,26 @@ According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >
 \end{aligned}
 {{< /katex >}}
 
-Next, we compare variances. Using a quadratic-term-only approximation and independence assumptions for factorization, we have
+Using a quadratic-term-only approximation and independence assumptions for factorization, the variance of PG with baseline is,
 
 {{< katex display=true >}}
 \begin{aligned}
 &\mathbb{V}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right] \\
-\gtrapprox &\sum_a \mathbb{E}_{d^\pi}\!\left[\big((Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\big)^2\right]
+\stackrelrel{(i)}{\gtrapprox} &\sum_a \mathbb{E}_{d^\pi}\!\left[\big((Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\big)^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-\approx &\sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a) - b(s))^2\right]\, \mathbb{E}_{d^\pi}\!\left[(\nabla\ln\pi(a\mid s))^2\right]
+\stackrel{(ii)}{\approx} &\sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a) - b(s))^2\right]\, \mathbb{E}_{d^\pi}\!\left[(\nabla\ln\pi(a\mid s))^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
 < &\sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a)\, \nabla\ln\pi(a\mid s))^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-\lessapprox &\mathbb{E}_{d^\pi}\!\left[\left(\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right)^2\right]
+\stackrel{(iii)}{\lessapprox} &\mathbb{E}_{d^\pi}\!\left[\left(\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right)^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
 = &\mathbb{V}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
 \end{aligned}
 {{< /katex >}}
 
-In (i) and (iii), we keep only quadratic terms and omit cross-products; the deduction from omitting
-$\prod_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)$ is dominated by the compensation when using
-$\prod_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)$. In (ii), we assume independence to factorize expectations. Hence, using a baseline reduces variance; choosing $b(s) \approx V^\pi(s)$ yields near-optimal variance.
+In approximations (i) and (iii), we keep only quadratic terms and omit cross-products. But this won’t affect the property of the inequality because the deduction loss caused by
+$\prod_a (Q^\pi(s,a) - b(s)) \nabla\ln\pi(a\mid s)$ is less than the increase we compensate for
+$\prod_a Q^\pi(s,a) \nabla\ln\pi(a\mid s)$. In (ii), we assume the independence among the values involved in the expectation for factorization.. Hence, using a baseline reduces variance; choosing $b(s) \approx V^\pi(s)$ yields near-optimal variance.
 
 {{% /details %}}
 

@@ -121,7 +121,7 @@ which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or 
 **Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values {{< katex >}}Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}:*
 
 {{< katex display=true >}}
-\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) \\
+\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) ,\\
 \left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right )\, .
 {{< /katex >}}
 
@@ -194,7 +194,7 @@ The **Full Gradient of Bellman Residual** should include all gradient components
 {{< /katex >}}
  If the approximation system is general enough and the value functions are continuous, the full Bellman residual gradient is guaranteed to converge to the optima. However, this is at the sacrifice of learning speed, as illustrated by the hall problem.
 
-In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure 2 represents the case where the semi gradient may diverge. (Baird 1995) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed. 
+In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure 2 represents the case where the semi gradient may diverge. (Baird 1995) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed, 
 
 {{< katex display=true >}}
 \begin{aligned}
@@ -204,7 +204,7 @@ In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$,
 \end{aligned}
 {{< /katex >}}
 
-## Bellman Variants
+## Bellman Generalizations
 
 - Soft Bellman Equation: entropy-regularized form encouraging exploration (weight $\lambda$).
 
