@@ -324,3 +324,16 @@
   max-width: 1000px;
   height: auto;
 }
+
+/* Utility: 75% width image via image shortcode */
+.book-page .markdown .book-image img.w-75 {
+  display: block;
+  margin: 0 auto;
+  max-width: 75%;
+  height: auto;
+}
+
+/* Utility: red text for inline emphasis (matches theme danger color) */
+.book-page .markdown .text-danger {
+  color: #d84747;
+}
