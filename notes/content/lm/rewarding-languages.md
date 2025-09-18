@@ -166,10 +166,13 @@ not multi-turn rewards
 {{< tabs >}}
 
 {{% tab "Plain" %}}
-```text
-Liu, Shuo. (September 2025). All You Want to Know about LLM Rewards.
-LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languages/
-```
+<pre class="cite-plain">
+  <span class="cite-author">Liu, Shuo.</span>
+  <span class="cite-date">(September 2025).</span>
+  <span class="cite-title">All You Want to Know about LLM Rewards.</span>
+  <span class="cite-site">LovelyBuggies's Blog.</span>
+  <span class="cite-url">https://lovelybuggies.github.io/notes/lm/rewarding-languages/</span>
+</pre>
 {{% /tab %}}
 
 {{% tab "BibTeX" %}}

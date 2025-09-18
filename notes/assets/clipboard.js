@@ -40,11 +40,15 @@
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('pre > code').forEach(function (code) {
       const pre = code.parentElement;
-      // Avoid duplicate buttons if any re-render occurs
       if (!pre.querySelector('.code-copy-button')) {
         makeButton(pre, code);
       }
     });
+    // Also add copy buttons to plain citation blocks
+    document.querySelectorAll('pre.cite-plain').forEach(function (pre) {
+      if (!pre.querySelector('.code-copy-button')) {
+        makeButton(pre, pre);
+      }
+    });
   });
 })();
-
