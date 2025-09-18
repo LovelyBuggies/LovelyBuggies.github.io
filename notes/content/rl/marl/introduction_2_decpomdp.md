@@ -5,6 +5,7 @@ math: true
 postType: review
 linkTitle: "Intro to Dec-POMDP"
 readingTime: 5
+weight: 2
 ---
 
 {{< katex />}}

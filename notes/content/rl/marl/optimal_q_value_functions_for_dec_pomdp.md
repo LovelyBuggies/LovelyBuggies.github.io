@@ -5,6 +5,7 @@ math: true
 postType: thought
 linkTitle: 'Optimal Q in Dec-POMDP'
 readingTime: 45
+weight: 3
 ---
 
 {{< katex />}}
