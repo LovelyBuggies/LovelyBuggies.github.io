@@ -4,7 +4,7 @@ title: "From Policy Gradient to PPO"
 math: true
 weight: 1
 postType: review
-readingTime: 30
+readingTime: 15
 linkTitle: "From Policy Gradient to PPO"
 ---
 
