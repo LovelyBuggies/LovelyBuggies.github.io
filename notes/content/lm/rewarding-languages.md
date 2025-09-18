@@ -19,7 +19,13 @@ RL is everywhere these days when people talk about LLMs. However, the challenge 
 
 ### Why We Read/Listen/Speak/Write?
 
-This title might not be comprehensive, other ways to utilize lang see lilian’s why do we think. People use language as an abstract/compact media with syntax as framework and vocabulary as atomic representation to express the world (either accessible or unaccessible). including nl, code, math (very compact). But still not compact enough as state, they are still observations.
+This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)), but basically I want to trace back to a fundamental question:
+
+**Why do we humans use language?**
+
+Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. 
+
+A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages rarely compress the world into pure states, thus they are observations (fragments of the universe described, or symbolized, rather than the universe itself).
 
 ### Solving Tasks in Languages
 
