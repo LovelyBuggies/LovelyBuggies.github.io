@@ -224,3 +224,20 @@
 .book-page .markdown ul li.page > a {
   font-weight: 400;
 }
+
+/* Type badge colors: distinct styles for Review vs Thought */
+.book-badge.type-badge {
+  border-width: 1px;
+}
+.book-badge.type-badge.review {
+  /* blue-ish for Review */
+  background-color: rgba(37, 99, 235, 0.10); /* #2563eb */
+  border-color: #2563eb;
+  color: #1e40af; /* darker text */
+}
+.book-badge.type-badge.thought {
+  /* purple-ish for Thought */
+  background-color: rgba(124, 58, 237, 0.10); /* #7c3aed */
+  border-color: #7c3aed;
+  color: #5b21b6;
+}

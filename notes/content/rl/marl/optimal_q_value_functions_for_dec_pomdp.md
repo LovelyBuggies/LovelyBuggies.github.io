@@ -70,7 +70,7 @@ Q^*(\vec{\theta}^t, \psi^{t+1}) = \left\{
 Here, {{< katex >}}\pi^*(\vec{\theta}^{t+1})\equiv \psi^{t+2, *}{{< /katex >}} because of the consistent optimality of policy.
 
 <div id="prop:problem" class="proposition">
-<strong>Proposition 1</strong>. In Dec-POMDP, deriving an optimal policy from the normative optimal history-policy value function defined above is impractical (clarified in Sec. 4.3.3, (Oliehoek, Spaan, and Vlassis 2008)).
+<strong>Proposition 1</strong>. In Dec-POMDP, deriving an optimal policy from the normative optimal history-policy value function defined above is impractical (clarified in Sec. 4.3.3, (Oliehoek, Spaan, and Vlassis 2008).
 
 </div>
 

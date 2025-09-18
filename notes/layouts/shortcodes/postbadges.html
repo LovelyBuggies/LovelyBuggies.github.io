@@ -16,4 +16,5 @@
 {{- $t := lower (or ($page.Param "postType") ($page.Param "type")) -}}
 {{- $t = cond (eq $t "thoughts") "thought" $t -}}
 {{- $tLabel := cond (eq $t "thought") "Thought" (cond (eq $t "review") "Review" "Review") -}}
-<span class="book-badge info"><span class="book-badge-title">Type</span><span class="book-badge-value">{{ $tLabel }}</span></span>
+{{- $typeClass := cond (eq $t "thought") "thought" "review" -}}
+<span class="book-badge info type-badge {{ $typeClass }}"><span class="book-badge-title">Type</span><span class="book-badge-value">{{ $tLabel }}</span></span>
