@@ -3,7 +3,7 @@ date: 2025-03-24
 title: "Reward Modeling"
 math: true
 postType: thought
-linkTitle: "Reward Modeling"
+linkTitle: "Rewarding Languages"
 readingTime: 50
 ---
 

@@ -4,7 +4,7 @@ title: "Understand Bellman Equations"
 math: true
 weight: 1
 postType: review
-linkTitle: "Understand Bellman Equations"
+linkTitle: "Understanding Bellman"
 readingTime: 35
 ---
 
