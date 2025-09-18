@@ -18,7 +18,7 @@ This article discuss the definition of optimal Q-function in Dec-POMDP.
 
 {{< tabs >}}
 
-{{% tab "States & Observations" %}}
+{{% tab "State & Observation" %}}
 - $s^t$: state at time $t$ with horizon $h$.
 - $o^t$: joint observation $o^t = \langle o_1^t, \dots, o_n^t \rangle$ at $t$.
 - $\mathcal{O}$: joint observation space.
