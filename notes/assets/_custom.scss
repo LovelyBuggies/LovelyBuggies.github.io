@@ -269,7 +269,14 @@
 .book-page .markdown .flex.align-center { gap: 6px; }
 
 /* Article prev/next container spacing */
-.book-page .markdown .article-prev-next { margin-top: 16px; }
+.book-page .markdown .article-prev-next {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;  /* left/right alignment within content column */
+  align-items: center;
+  width: 100%;
+  clear: both;                    /* avoid float/aside interference */
+}
 
 /* Larger image for PG→PPO post (shortcode with custom class) */
 .book-page .markdown .book-image img.wide-grpo {
