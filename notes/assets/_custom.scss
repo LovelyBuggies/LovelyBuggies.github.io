@@ -250,3 +250,13 @@
   background-color: #7c3aed !important;
   color: #ffffff !important;
 }
+
+/* Post badges layout: uniform spacing between all badges */
+.book-page .markdown .post-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;            /* equal spacing between badges */
+  align-items: center;
+  margin: 6px 0 10px;  /* subtle top/bottom breathing room */
+}
+.book-page .markdown .post-badges .book-badge { margin: 0; }
