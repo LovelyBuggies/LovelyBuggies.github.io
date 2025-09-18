@@ -143,9 +143,17 @@ Maintain a posterior over reward parameters $p(\theta\mid D) \propto p(D\mid\the
 
 too sparese
 
+## Finer-Granular Rewards
+
+reward is too sparse
+
+horizontally: reward shaping, but that's still one turn
+
+vertically: multi-turn provide intermediate reward signals
+
 ## Problems of Current Reward Models
 
-single turn not return, 
+not multi-turn rewards
 
 ## References
 
