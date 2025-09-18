@@ -39,9 +39,9 @@ This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxm
 
 As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To adapt them to specific domains, a secondary fine-tuning phase is typically applied. A standard alignment pipeline involves 3 stages: supervised fine-tuning (SFT), reward modeling (RM), and RL fine-tuning. After initial SFT on a base transformer with curated human-labeled data, a reward model is built, either from explicit rules or human preference data. While it only serves as an approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus extremely important.
 
-{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
+{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-70" >}}
 
-This leads to the core topic of this post: 
+This leads to my motivation of writing this post: 
 
 <span class="text-danger"><strong>How do we reward task completion in human languages?</strong></span>
 
@@ -49,11 +49,11 @@ This leads to the core topic of this post:
 
 ### Anti-Symmetric Preference Modeling
 
-In this section, we introduce the mainstream methods that model rewards of LLM responses through preference comparison.
+Reward models can be trainable proxies for human preference (anti-symmetric). This kinds of reward models are usually built based on Bradley–Terry (BT) model and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
-#### BT Model and Its Ranking Extension
+<div class="definition">
 
-The original Bradley–Terry (BT) model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is
+The original BT model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is
 
 {{< katex display=true >}}
 \Pr(i \succ j) = \frac{u_i}{u_i + u_j}
@@ -67,7 +67,9 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 = \prod_{k=1}^{N} \frac{\exp(r(i_k))}{\sum_{j=k}^{N} \exp(r(i_j))}\, .\label{eq:pl}
 {{< /katex >}}
 
-BT is anti-symmetric: the preference between two responses depends only on the difference in their reward values. It satisfies $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$, and the log-odds of preference is anti-symmetric: $\log \!\left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons, making BT suitable for preference modeling (initially used to rank sports teams and players, e.g., Elo rating).
+</div>
+
+BT is anti-symmetric: the preference between two responses depends only on the difference in their reward values. It satisfies $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$, and the log-odds of preference is anti-symmetric: $\log \!\left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons, making BT suitable for preference modeling (initially used to rank sports teams and players, e.g., [http://en.wikipedia.org/wiki/Elo_rating_system](http://en.wikipedia.org/wiki/Elo_rating_system)).
 
 #### Reward Modeling with Pairwise Preferences (BT Model)
 
