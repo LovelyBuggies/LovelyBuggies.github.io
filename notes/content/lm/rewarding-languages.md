@@ -162,6 +162,7 @@ not multi-turn rewards
 
 ## Citation
 
+<div class="cite-block">
 {{< tabs >}}
 
 {{% tab "Plain" %}}
@@ -185,6 +186,7 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 {{% /tab %}}
 
 {{< /tabs >}}
+</div>
 
 ## References
 
