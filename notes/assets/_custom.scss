@@ -271,6 +271,17 @@
 /* Article prev/next container spacing */
 /* (prev/next feature removed) */
 
+/* Custom badge style: black scheme for License */
+.book-page .markdown .book-badge.black { border: 1px solid #000; }
+.book-page .markdown .book-badge.black span.book-badge-title {
+  background-color: #f0f0f0; /* lighter key */
+  color: #000;
+}
+.book-page .markdown .book-badge.black span.book-badge-value {
+  background-color: #000;     /* dark value */
+  color: #fff;
+}
+
 /* Larger image for PG→PPO post (shortcode with custom class) */
 .book-page .markdown .book-image img.wide-grpo {
   width: 92%;

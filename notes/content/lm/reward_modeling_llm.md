@@ -11,6 +11,7 @@ readingTime: 50
 
 # All You Want to Know about LLM Rewards
 {{< postbadges >}}
+{{< badge style="black" title="Liscense" value="CC By-NC" >}}
 
 RL is everywhere these days when people talk about LLMs. But a tricky part is **what exactly counts as a “good” reward model for training LLMs**? This post walks through the existing practices of reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
 
