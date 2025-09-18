@@ -316,13 +316,7 @@
 .book-page .markdown .cite-block code.language-bibtex .p,
 .book-page .markdown .cite-block code.language-bibtex .o { color: #6b7280; }                    /* punctuation/operators */
 
-/* Colored spans for Plain citation */
-.book-page .markdown .cite-plain { background: #f8fafc; border: 1px solid var(--gray-200); border-radius: 6px; padding: 12px; white-space: pre-wrap; }
-.book-page .markdown .cite-plain .cite-author { color: #2563eb; font-weight: 600; }
-.book-page .markdown .cite-plain .cite-date { color: #7c3aed; }
-.book-page .markdown .cite-plain .cite-title { color: #16a34a; }
-.book-page .markdown .cite-plain .cite-site { color: #111827; }
-.book-page .markdown .cite-plain .cite-url { color: #0ea5e9; text-decoration: underline; }
+/* (plain citation uses default code styling) */
 
 /* Larger image for PG→PPO post (shortcode with custom class) */
 .book-page .markdown .book-image img.wide-grpo {

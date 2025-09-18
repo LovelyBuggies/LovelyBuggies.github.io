@@ -44,11 +44,6 @@
         makeButton(pre, code);
       }
     });
-    // Also add copy buttons to plain citation blocks
-    document.querySelectorAll('pre.cite-plain').forEach(function (pre) {
-      if (!pre.querySelector('.code-copy-button')) {
-        makeButton(pre, pre);
-      }
-    });
+    // (plain citation uses fenced code, handled above)
   });
 })();
