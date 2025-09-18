@@ -13,11 +13,15 @@ readingTime: 50
 {{< postbadges >}}
 {{< badge style="black" title="Liscense" value="CC By-NC" >}}
 
-RL is everywhere these days when people talk about LLMs. But a tricky part is **what exactly counts as a “good” reward model for training LLMs**? This post walks through the existing practices of reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
+RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model  for evaluating task completions in languages, (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
+
+## Language as Media
+
+characteristic of languages
 
 ## Training LLMs with RL
 
-As LLMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To enable RL fine-tuning from human feedbacks (RLHF), reward models are introduced as trainable proxies for human preference. Once trained, it can generalize preference signals to unseen inputs, making alignment more scalable by reducing reliance on slow and costly human annotations. It also allows flexible fine-tuning toward different objectives, such as helpfulness, truthfulness, or safety.
+As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To enable RL fine-tuning from human feedbacks (RLHF), reward models are introduced as trainable proxies for human preference. Once trained, it can generalize preference signals to unseen inputs, making alignment more scalable by reducing reliance on slow and costly human annotations. It also allows flexible fine-tuning toward different objectives, such as helpfulness, truthfulness, or safety.
 
 A typical alignment pipeline consists of 3 stages: supervised fine-tuning (SFT), reward modeling, and RL. After an initial SFT based on base transformer with curated human-labeled data, a reward model is constructed to predict human preferences over model-generated responses. This model is then used to guide further optimization by encouraging outputs that maximize the predicted reward. For example, `ChatGPT` employs reward models trained on ranked annotations to guide its generation toward preferred outputs (Achiam, Adler, and Agarwal 2024); `DeepSeek` and `LLaMA 2` include explicit reward modeling components in their alignment pipelines, using pairwise preferences to train reward models that inform subsequent learning (Shao, Wang, and Zhu 2024; Touvron, Martin, and Stone 2023).
 
