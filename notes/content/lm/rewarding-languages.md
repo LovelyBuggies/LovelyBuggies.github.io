@@ -15,11 +15,21 @@ readingTime: 50
 
 RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model  for evaluating task completions in languages, (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
 
-## Language as Media
+## Human Languages
 
-characteristic of languages
+### Why We Read/Listen/Speak/Write?
 
-## Training LLMs with RL
+This title might not be comprehensive, other ways to utilize lang see lilian’s why do we think. People use language as an abstract/compact media with syntax as framework and vocabulary as atomic representation to express the world (either accessible or unaccessible). including nl, code, math (very compact). But still not compact enough as state, they are still observations.
+
+### Solving Tasks in Languages
+
+After building the languages, human are trying to solve tasks using those. The core two parts of solving tasks are, how to express the tasks, and how to evaluate the tasks. in general, the tasks can be divided into 3 types. 
+
+- Some tasks and their completions can be convey and expressed by a kind of niched language. Like robot move can be implemented by codes. This kind of tasks are easily verifiable as yo can directly seen the effect.
+- Some tasks definition and completions are subjective and hard to evaluate, such as there is no clear criteria about whether a paper is good (as people always complain about AI conference’s chaotic reviews).
+- But some tasks can’t be expressed, as the expressiveness of our current language has an upper limit. People have invented a lot of words for vision, but words for other sensing are very limited, like acoustic, scent … Just like I‘m completely lost when I entered a perfume shop, the only words than I can express is like I like woody and smoky ones, but I do can tell whether one selected is good or not. As we know, those are thousands kinds of perfume that fall in this category but are very diff. hint: probably this is one clue to explain why LLM is not the future of AI, though using NL to train LLM might be good to help them to achieve a similar level intelligence as human (but it’s good to know how much storage should be use to memorize the current human knowledge base). Think about how AlphaGo beats …, it doesn’t use language at all, the chess small world can be expressed accurately and compactly numerically. But we don’t need to worry about that yet, human are creating new vocabulary and languages (e.g., codes) :D
+
+## Fine-Tuning Language Models with RL
 
 As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To enable RL fine-tuning from human feedbacks (RLHF), reward models are introduced as trainable proxies for human preference. Once trained, it can generalize preference signals to unseen inputs, making alignment more scalable by reducing reliance on slow and costly human annotations. It also allows flexible fine-tuning toward different objectives, such as helpfulness, truthfulness, or safety.
 
