@@ -302,12 +302,12 @@ is a positive unbiased estimator, which measures the difference between the poli
 ## References
 
 {{< references >}}
-<li>Schulman, John, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. 2017. “Proximal Policy Optimization Algorithms.” <em>arXiv</em> 1707.06347. <a href="https://arxiv.org/abs/1707.06347">https://arxiv.org/abs/1707.06347</a>.</li>
-<li>Brenner, Max. 2023. “Illustrated Comparison of Different Distributed Versions of PPO.” <em>Medium</em>, February 28. <a href="https://medium.com">https://medium.com</a>.</li>
-<li>Schulman, John, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. 2015. “High-Dimensional Continuous Control Using Generalized Advantage Estimation.” <em>arXiv</em> 1506.02438. <a href="https://arxiv.org/abs/1506.02438">https://arxiv.org/abs/1506.02438</a>.</li>
-<li>Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <em>arXiv</em> 2402.03300. <a href="https://arxiv.org/abs/2402.03300">https://arxiv.org/abs/2402.03300</a>.</li>
-<li>Schroeder de Witt, Christian, Tarun Gupta, Denys Makoviichuk, Viktor Makoviychuk, Philip H. S. Torr, Mingfei Sun, and Shimon Whiteson. 2020. “Is Independent Learning All You Need in the StarCraft Multi-Agent Challenge?” <em>arXiv</em> 2011.09533. <a href="https://arxiv.org/abs/2011.09533">https://arxiv.org/abs/2011.09533</a>.</li>
-<li>Yu, Chao, Akash Velu, Eugene Vinitsky, Jiaxuan Gao, Yu Wang, Alexandre Bayen, and Yi Wu. 2022. “The Surprising Effectiveness of PPO in Cooperative, Multi-Agent Games.” <em>arXiv</em> 2103.01955. <a href="https://arxiv.org/abs/2103.01955">https://arxiv.org/abs/2103.01955</a>.</li>
+<li>Schulman, John, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. 2017. “Proximal Policy Optimization Algorithms.” <em>arXiv</em> 1707.06347. </li>
+<li>Brenner, Max. 2023. “Illustrated Comparison of Different Distributed Versions of PPO.” <em>Medium</em>, February 28.</li>
+<li>Schulman, John, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. 2015. “High-Dimensional Continuous Control Using Generalized Advantage Estimation.” <em>arXiv</em> 1506.02438.</li>
+<li>Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <em>arXiv</em> 2402.03300.</li>
+<li>Schroeder de Witt, Christian, Tarun Gupta, Denys Makoviichuk, Viktor Makoviychuk, Philip H. S. Torr, Mingfei Sun, and Shimon Whiteson. 2020. “Is Independent Learning All You Need in the StarCraft Multi-Agent Challenge?” <em>arXiv</em> 2011.09533.</li>
+<li>Yu, Chao, Akash Velu, Eugene Vinitsky, Jiaxuan Gao, Yu Wang, Alexandre Bayen, and Yi Wu. 2022. “The Surprising Effectiveness of PPO in Cooperative, Multi-Agent Games.” <em>arXiv</em> 2103.01955. </li>
 {{< /references >}}
 
 
