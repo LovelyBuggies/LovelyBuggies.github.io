@@ -4,6 +4,7 @@ title: "From Policy Gradient to PPO"
 math: true
 weight: 4
 postType: review
+navNext: "/notes/rl/marl/introduction_2_decpomdp/"
 readingTime: 15
 linkTitle: "From Policy Gradient to PPO"
 ---
