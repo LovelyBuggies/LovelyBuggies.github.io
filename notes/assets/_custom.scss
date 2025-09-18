@@ -298,7 +298,8 @@
   opacity: 0.9;
 }
 .book-page .markdown .code-copy-button:hover { opacity: 1; }
-.book-page .markdown .code-copy-button.copied { background: #3bad3b; color: #fff; }
+/* Keep copied state text change without color change */
+.book-page .markdown .code-copy-button.copied { background: var(--gray-200); color: var(--body-font-color); }
 
 /* Larger image for PG→PPO post (shortcode with custom class) */
 .book-page .markdown .book-image img.wide-grpo {
