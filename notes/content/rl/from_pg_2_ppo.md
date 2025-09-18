@@ -294,7 +294,7 @@ where the advantage {{< katex >}}\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}
 
 is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).
 
-{{< image src="/imgs/blog/from_pg_2_ppo/grpo.png" alt="GRPO" class="wide-grpo" >}}
+{{< image src="imgs/from_pg_2_ppo/grpo.png" alt="GRPO" class="wide-grpo" >}}
 
 
 ## References
