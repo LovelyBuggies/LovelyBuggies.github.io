@@ -23,7 +23,7 @@ A typical alignment pipeline consists of 3 stages: supervised fine-tuning (SFT),
 
 ![RLHF](/imgs/blog/reward_modeling_llm/RLHF.png)
 
-## "Good" in Terms of Human Preference
+## "Good" Justified by Human
 
 
 ### Anti-Symmetric Preference Modeling
