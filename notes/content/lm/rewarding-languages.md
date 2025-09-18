@@ -1,6 +1,6 @@
 ---
-date: 2025-03-24
-title: "Reward Modeling"
+date: 2025-09-18
+title: "All You Want to Know about LLM Rewards"
 math: true
 postType: thought
 linkTitle: "Rewarding Languages"
@@ -156,25 +156,28 @@ vertically: multi-turn provide intermediate reward signals
 
 not multi-turn rewards
 
-## Cite This Post
+## Citation
 
 {{< tabs >}}
 
 {{% tab "Plain" %}}
+```text
 Cited as:
-
-Liu, Shuo. (March 2025). Reward Modeling. lovelybuggies.github.io. https://lovelybuggies.github.io/notes/lm/rewarding-languages/
+Liu, Shuo. (September 2025). All You Want to Know about LLM Rewards. LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languages/
+```
 {{% /tab %}}
 
 {{% tab "BibTeX" %}}
+```bibtex
 @article{liu2025rewardmodeling,
-  title   = {Reward Modeling},
+  title   = {All You Want to Know about LLM Rewards},
   author  = {Liu, Shuo},
   journal = {lovelybuggies.github.io},
   year    = {2025},
-  month   = {March},
+  month   = {September},
   url     = {https://lovelybuggies.github.io/notes/lm/rewarding-languages/}
 }
+```
 {{% /tab %}}
 
 {{< /tabs >}}
