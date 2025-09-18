@@ -114,6 +114,9 @@
   content: "[" counter(ref-counter) "]\2009\2009\2009\2009";
   position: static;             /* inline with text to eliminate large gaps */
   color: inherit;
+  /* Use a distinct font for the bullet label */
+  font-family: Verdana, Geneva, sans-serif;
+  font-weight: 600;
 }
 
 /* Sidebar type tags */
