@@ -3,7 +3,7 @@ date: 2025-01-05
 title: "Understand Bellman Equations"
 math: true
 weight: -100
-postType: notes
+postType: review
 linkTitle: "Understand Bellman Equations"
 readingTime: 35
 ---

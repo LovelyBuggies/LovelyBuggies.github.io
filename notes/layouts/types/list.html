@@ -9,12 +9,12 @@
 (function(){
   const params = new URLSearchParams(location.search);
   const t = (params.get('t') || '').toLowerCase();
-  const labelFor = (slug) => slug === 'notes' || slug === 'overview' ? 'Notes' : (slug === 'thoughts' ? 'Thought' : (slug ? slug.charAt(0).toUpperCase()+slug.slice(1) : ''));
+  const labelFor = (slug) => slug === 'review' || slug === 'overview' ? 'Review' : (slug === 'thought' ? 'Thought' : (slug ? slug.charAt(0).toUpperCase()+slug.slice(1) : ''));
   document.getElementById('types-title').textContent = labelFor(t);
   const list = document.getElementById('types-results');
   fetch('{{ $typesData.RelPermalink }}').then(r=>r.json()).then(items => {
     let slug = t;
-    if (t === 'overview') slug = 'notes';
+    if (t === 'overview') slug = 'review';
     const filtered = slug ? items.filter(i => i.type === slug) : items;
     filtered.sort((a,b)=>a.title.localeCompare(b.title));
     for (const p of filtered) {

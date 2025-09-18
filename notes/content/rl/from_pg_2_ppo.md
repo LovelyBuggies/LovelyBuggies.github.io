@@ -3,7 +3,7 @@ date: 2025-03-10
 title: "From Policy Gradient to PPO"
 math: true
 weight: 1
-postType: notes
+postType: review
 readingTime: 30
 linkTitle: "From Policy Gradient to PPO"
 ---

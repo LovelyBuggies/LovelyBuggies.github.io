@@ -2,7 +2,7 @@
 date: 2024-12-21
 title: "Intro to Dec-POMDP"
 math: true
-postType: notes
+postType: review
 linkTitle: "Intro to Dec-POMDP"
 readingTime: 5
 ---

@@ -2,7 +2,7 @@
 date: 2024-11-11
 title: 'Optimal Q in Dec-POMDP'
 math: true
-postType: thoughts
+postType: thought
 linkTitle: 'Optimal Q in Dec-POMDP'
 readingTime: 45
 ---

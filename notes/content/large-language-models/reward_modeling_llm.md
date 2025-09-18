@@ -2,7 +2,7 @@
 date: 2025-03-24
 title: "Rewards from Human Feedback"
 math: true
-postType: notes
+postType: review
 linkTitle: "Rewards from Human Feedback"
 readingTime: 12
 ---
