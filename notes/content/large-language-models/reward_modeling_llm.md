@@ -1,9 +1,9 @@
 ---
 date: 2025-03-24
-title: "LLM Rewards"
+title: "Reward Modeling"
 math: true
 postType: thought
-linkTitle: "LLM Rewards"
+linkTitle: "Reward Modeling"
 readingTime: 50
 ---
 
