@@ -1,21 +1,30 @@
-{{/* Project override: prefer section-local prev/next to avoid cross-section jumps */}}
-{{ $prev := .PrevInSection }}
-{{ $next := .NextInSection }}
+{{/* Project override: prev/next within the same folder (File.Dir) to avoid cross-section jumps */}}
+{{ $dir := .File.Dir }}
+{{ $siblings := where .Site.RegularPages "File.Dir" $dir }}
+{{/* Prefer weight ordering if provided */}}
+{{ $siblings = sort $siblings "Weight" }}
+{{ $prev := nil }}
+{{ $next := nil }}
+{{ $idx := -1 }}
+{{ range $i, $p := $siblings }}
+  {{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}
+{{ end }}
+{{ if ge $idx 0 }}
+  {{ if gt $idx 0 }}{{ $prev = index $siblings (sub $idx 1) }}{{ end }}
+  {{ if lt (add $idx 1) (len $siblings) }}{{ $next = index $siblings (add $idx 1) }}{{ end }}
+{{ end }}
 
-{{/* Fallback to BookSection ordering if section has no neighbors */}}
+{{/* Fallback: if no siblings (single file folder), try section neighbors */}}
 {{ if and (not $prev) (not $next) }}
-  {{ $bookSection := default "/" .Site.Params.BookSection }}
-  {{ with .Site.GetPage $bookSection }}
-    {{ $pages := .RegularPages }}
-    {{/* try to find neighbors in site-level ordering */}}
-    {{ $idx := -1 }}
-    {{ range $i, $p := $pages }}
-      {{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}
-    {{ end }}
-    {{ if ge $idx 0 }}
-      {{ if gt $idx 0 }}{{ $prev = index $pages (sub $idx 1) }}{{ end }}
-      {{ if lt (add $idx 1) (len $pages) }}{{ $next = index $pages (add $idx 1) }}{{ end }}
-    {{ end }}
+  {{ $secPages := .CurrentSection.RegularPages }}
+  {{ $secPages = sort $secPages "Weight" }}
+  {{ $idx = -1 }}
+  {{ range $i, $p := $secPages }}
+    {{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}
+  {{ end }}
+  {{ if ge $idx 0 }}
+    {{ if gt $idx 0 }}{{ $prev = index $secPages (sub $idx 1) }}{{ end }}
+    {{ if lt (add $idx 1) (len $secPages) }}{{ $next = index $secPages (add $idx 1) }}{{ end }}
   {{ end }}
 {{ end }}
 
@@ -39,4 +48,3 @@
   </span>
 </div>
 {{ end }}
-
