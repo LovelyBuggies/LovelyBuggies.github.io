@@ -11,9 +11,9 @@ readingTime: 50
 
 # All You Want to Know about LLM Rewards
 {{< postbadges >}}
-{{< badge style="black" title="Liscense" value="CC By-NC" >}}
+{{< badge style="black" title="License" value="CC By-NC" >}}
 
-RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model  for evaluating task completions in languages, (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
+RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model for evaluating task completions in languages (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
 
 ## Human Languages
 
@@ -23,29 +23,29 @@ This title might be overgeneralizing the usage of language into just 4 aspects (
 
 <span class="text-danger"><strong>Why do humans need language?</strong></span>
 
-Language is an abstract and compact medium for express real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With the language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states, they are normally noisy observations.
+Language is an abstract and compact medium for expressing real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states; they are normally noisy observations.
 
 ### Solving Tasks in Language
 
-When people try to solve tasks in languages, how to express them and evaluate the outcome are the crucial questions. Some tasks, along with their completions, can be clearly conveyed using niche languages. Supposed we are asking a friend to bring us an iPhone 17 from Apple Store. For this task, we can clearly express our intent and verify the result by observing it. But some other tasks don’t have clear and objective evaluation criteria, like deciding whether a paper (aka a research task) is "good" often lacks consensus (reflected in complaints about conference reviewing :3).
+When people try to solve tasks in language, how to express them and evaluate the outcome are crucial questions. Some tasks, along with their completions, can be clearly conveyed using niche languages. Suppose we are asking a friend to bring us an iPhone 17 from the Apple Store. For this task, we can clearly express our intent and verify the result by observing it. But some other tasks don’t have clear and objective evaluation criteria, like deciding whether a paper (aka a research task) is "good" often lacks consensus (reflected in complaints about conference reviewing :3).
 
-In fact, existing human languages are very limited in expressiveness. Although we have a rich vocabulary for describing vision signals, that for sound, touch, or scen is sparse. Just like my dilemma when describing perfumes or a haircut (supposed that I have a clear objective in my mind), my vocabulary is too few and vague to accurately express my intented outcome. For the tasks that are not able to be accurately represented by language, how can we expect them to be evaluated?
+In fact, existing human languages are very limited in expressiveness. Although we have a rich vocabulary for describing vision signals, that for sound, touch, or scent is sparse. Just like my dilemma when describing perfumes or a haircut (suppose that I have a clear objective in my mind), my vocabulary is too few and vague to accurately express my intended outcome. For the tasks that are not able to be accurately represented by language, how can we expect them to be evaluated?
 
 {{< sidenote >}}
-This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on human's existing languages, they can only achieve human-like level of intelligence (<em>though it’s fun to know how much storage would be use to memorize our current knowledge base</em>). Think about how AlphaGo defeated Sedol Lee -- it didn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and even entire new languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to make breakthroughs. 
+This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, they can only achieve human-like intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Think about how AlphaGo defeated Sedol Lee -- it didn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and even entire new languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to make breakthroughs. 
 {{< /sidenote >}}
 
 ## RL Fine-Tuning
 
-As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To adapt them to specific domains, a secondary fine-tuning phase is typically applied. A standard alignment pipeline involves 3 stages: supervised fine-tuning (SFT), reward modeling (RM), and RL fine-tuning. After initial SFT on a base transformer with curated human-labeled data, a reward model is built, either from explicit rules or human preference data. While only serves as an approximation of ultimate evaluation, the reward model plays a crucial role in guiding optimization and thus extremely important.
+As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To adapt them to specific domains, a secondary fine-tuning phase is typically applied. A standard alignment pipeline involves 3 stages: supervised fine-tuning (SFT), reward modeling (RM), and RL fine-tuning. After initial SFT on a base transformer with curated human-labeled data, a reward model is built, either from explicit rules or human preference data. While it only serves as an approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus extremely important.
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-75" >}}
 
 This leads to the core topic of this post: 
 
-<span class="text-danger"><strong>How do we reward the task completion in human languages?</strong></span>
+<span class="text-danger"><strong>How do we reward task completion in human languages?</strong></span>
 
-## "Good"as  Justified by Human
+## "Good" as Justified by Humans
 
 ### Anti-Symmetric Preference Modeling
 
@@ -163,7 +163,7 @@ Maintain a posterior over reward parameters $p(\theta\mid D) \propto p(D\mid\the
 
 ## "Good" as Verified by Analyzer
 
-too sparese
+too sparse
 
 ## Finer-Granular Rewards
 
@@ -171,7 +171,7 @@ reward is too sparse
 
 horizontally: reward shaping, but that's still one turn
 
-vertically: multi-turn provide intermediate reward signals
+vertically: multi-turn provides intermediate reward signals
 
 ## Problems of Current Reward Models
 
