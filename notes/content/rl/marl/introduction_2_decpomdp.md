@@ -4,7 +4,7 @@ title: "Intro to Dec-POMDP"
 math: true
 postType: review
 linkTitle: "Intro to Dec-POMDP"
-readingTime: 5
+readingTime: 10
 weight: 2
 ---
 
@@ -36,7 +36,7 @@ weight: 2
 
 - {{< katex >}}\gamma{{< /katex >}} is the discount factor for the return.
 
-In Dec-POMDP, since the states are not directly observable, each agent maintains its local observation-action history, {{< katex >}}h_i^t=\{a_i^{0}, o_i^{1}, \cdots o_i^t\} {{< /katex >}}, to infer information about the state. A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history {{< katex >}}\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}{{< /katex >}}, an optimal solution maximizes the expected return, 
+In Dec-POMDP, since the states are not directly observable, each agent maintains its local observation-action history, {{< katex >}}h_i^t=\{a_i^{0}, o_i^{1}, \cdots o_i^t\} {{< /katex >}}, to infer information about the state. A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history {{< katex >}}\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}{{< /katex >}}, with an optimal solution maximizes the expected return, 
 
 {{< katex display=true >}}
 \boldsymbol{\pi}^*=\mathop{\mathrm{argmax}}_{\boldsymbol{\pi}}\mathbb{E}\left[\textstyle\sum_{t=0}^{\mathcal{H}-1}R(\boldsymbol{h}, \boldsymbol{\pi}(\boldsymbol{h}))\middle|b^0\right].
@@ -69,7 +69,7 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 
 {{< sidenote id="curse-of-dimension" >}}
 
-<strong> Fun fact:</strong> You might find a paragraph that’s over 66.6% similar to this one in most of <a href="https://www.ccs.neu.edu/home/camato/publications.html">our group’s papers</a> :3
+<strong> Fun fact:</strong> You might find a paragraph that’s over 66.67% similar to this one in most of <a href="https://www.ccs.neu.edu/home/camato/publications.html">our group’s papers</a> :3
 
 {{< /sidenote >}}
 
