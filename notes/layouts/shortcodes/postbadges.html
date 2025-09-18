@@ -12,5 +12,8 @@
 <span class="book-badge danger"><span class="book-badge-title">Author</span><span class="book-badge-value">{{ $author }}</span></span>
 <span class="book-badge warning"><span class="book-badge-title">Date</span><span class="book-badge-value">{{ $dateFmt }}</span></span>
 <span class="book-badge success"><span class="book-badge-title">Reading</span><span class="book-badge-value">{{ $reading }}</span></span>
-{{- /* Always show Type as Review for all posts */ -}}
-<span class="book-badge info"><span class="book-badge-title">Type</span><span class="book-badge-value">Review</span></span>
+{{- /* Type badge from front matter: postType or type */ -}}
+{{- $t := lower (or ($page.Param "postType") ($page.Param "type")) -}}
+{{- $t = cond (eq $t "thoughts") "thought" $t -}}
+{{- $tLabel := cond (eq $t "thought") "Thought" (cond (eq $t "review") "Review" "Review") -}}
+<span class="book-badge info"><span class="book-badge-title">Type</span><span class="book-badge-value">{{ $tLabel }}</span></span>
