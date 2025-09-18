@@ -268,7 +268,8 @@
 /* Prev/Next bar: keep icons aligned and add tiny gaps */
 .book-page .markdown .flex.align-center { gap: 6px; }
 
-/* Footer prev/next: use theme default left/right alignment (justify-between) */
+/* Article prev/next container spacing */
+.book-page .markdown .article-prev-next { margin-top: 16px; }
 
 /* Larger image for PG→PPO post (shortcode with custom class) */
 .book-page .markdown .book-image img.wide-grpo {
