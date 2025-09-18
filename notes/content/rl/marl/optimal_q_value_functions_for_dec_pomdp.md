@@ -12,6 +12,8 @@ readingTime: 45
 # Optimal Q in Dec-POMDP
 {{< postbadges >}}
 
+This article discuss the definition of optimal Q-function in Dec-POMDP.
+
 ## Notions
 
 {{< tabs >}}
