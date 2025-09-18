@@ -168,7 +168,7 @@ Liu, Shuo. (September 2025). All You Want to Know about LLM Rewards. LovelyBuggi
 
 {{% tab "BibTeX" %}}
 ```bibtex
-@article{liu2025rewardmodeling,
+@article{liu2025allyouwanttoknowaboutllmrewards,
   title   = {All You Want to Know about LLM Rewards},
   author  = {Liu, Shuo},
   journal = {lovelybuggies.github.io},
