@@ -1,10 +1,10 @@
 ---
 date: 2025-01-05
-title: "Understanding Bellman"
+title: "Understand Bellman Equations"
 math: true
 weight: -100
 postType: notes
-linkTitle: "Understanding Bellman"
+linkTitle: "Understand Bellman Equations"
 readingTime: 35
 ---
 

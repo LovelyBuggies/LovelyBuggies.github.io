@@ -13,6 +13,8 @@ linkTitle: "From Policy Gradient to PPO"
 # From Policy Gradient to PPO
 {{< postbadges >}}
 
+PPO (Schulman et al. 2017) is a shining jewel in the world of RL. In this post, we’ll dive into its backstory and recent advances.
+
 ## Policy Gradient
 
 Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. Policy gradient (PG) methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}}.

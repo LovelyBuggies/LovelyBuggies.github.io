@@ -1,9 +1,9 @@
 ---
 date: 2024-12-21
-title: "Introduction to Dec-POMDP"
+title: "Intro to Dec-POMDP"
 math: true
 postType: notes
-linkTitle: "Introduction to Dec-POMDP"
+linkTitle: "Intro to Dec-POMDP"
 readingTime: 5
 ---
 
