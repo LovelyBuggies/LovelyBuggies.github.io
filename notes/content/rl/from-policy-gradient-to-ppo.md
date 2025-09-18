@@ -263,9 +263,9 @@ where {{< katex >}}\mathcal{D}_\text{KL}(\pi_{\theta_{\text{old}}} \| \pi_{\thet
 
 Sometimes, the KL-penalty can be combined with policy clipping to achieve better performance in practice.
 
-#### Adaptive-KL-PPO
-
-(Schulman et al. 2017) also mentioned Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive {{< katex >}}\left( \mathcal{D}_\text{KL} \gg \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is increased to penalize large updates; else if the update is too conservative {{< katex >}}\left( \mathcal{D}_\text{KL} \ll \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is decreased to allow larger updates.
+{{< sidenotes >}}
+<strong>Adaptive-KL-PPO:</strong> (Schulman et al. 2017) also mentioned Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive {{< katex >}}\left( \mathcal{D}_\text{KL} \gg \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is increased to penalize large updates; else if the update is too conservative {{< katex >}}\left( \mathcal{D}_\text{KL} \ll \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is decreased to allow larger updates.
+{{< /sidenotes >}}
 
 ### Multi-Agent PPO
 
