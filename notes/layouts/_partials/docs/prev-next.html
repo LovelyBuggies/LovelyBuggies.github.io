@@ -1,0 +1,42 @@
+{{/* Project override: prefer section-local prev/next to avoid cross-section jumps */}}
+{{ $prev := .PrevInSection }}
+{{ $next := .NextInSection }}
+
+{{/* Fallback to BookSection ordering if section has no neighbors */}}
+{{ if and (not $prev) (not $next) }}
+  {{ $bookSection := default "/" .Site.Params.BookSection }}
+  {{ with .Site.GetPage $bookSection }}
+    {{ $pages := .RegularPages }}
+    {{/* try to find neighbors in site-level ordering */}}
+    {{ $idx := -1 }}
+    {{ range $i, $p := $pages }}
+      {{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}
+    {{ end }}
+    {{ if ge $idx 0 }}
+      {{ if gt $idx 0 }}{{ $prev = index $pages (sub $idx 1) }}{{ end }}
+      {{ if lt (add $idx 1) (len $pages) }}{{ $next = index $pages (add $idx 1) }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if or $prev $next }}
+<div class="flex flex-wrap justify-between">
+  <span>
+  {{ with $prev }}
+    <a href="{{ .RelPermalink }}" class="flex align-center">
+      <img src="{{ "svg/backward.svg" | relURL }}" class="book-icon" alt="Previous" title="{{ .Title }}" />
+      <span>{{ .Title }}</span>
+    </a>
+  {{ end }}
+  </span>
+  <span>
+  {{ with $next }}
+    <a href="{{ .RelPermalink }}" class="flex align-center">
+      <span>{{ .Title }}</span>
+      <img src="{{ "svg/forward.svg" | relURL }}" class="book-icon" alt="Next" title="{{ .Title }}" />
+    </a>
+  {{ end }}
+  </span>
+</div>
+{{ end }}
+

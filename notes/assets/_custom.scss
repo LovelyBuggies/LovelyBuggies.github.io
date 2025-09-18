@@ -265,6 +265,11 @@
 }
 .book-page .markdown .post-badges .book-badge { margin: 0; }
 
+/* Prev/Next bar: keep icons aligned and add tiny gaps */
+.book-page .markdown .flex.align-center {
+  gap: 6px;
+}
+
 /* Larger image for PG→PPO post (shortcode with custom class) */
 .book-page .markdown .book-image img.wide-grpo {
   width: 92%;
