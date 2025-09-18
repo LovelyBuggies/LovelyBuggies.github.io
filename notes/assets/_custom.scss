@@ -226,18 +226,26 @@
 }
 
 /* Type badge colors: distinct styles for Review vs Thought */
-.book-badge.type-badge {
-  border-width: 1px;
+.book-badge.type-badge { border-width: 1px; }
+
+/* Review (blue) */
+.book-badge.type-badge.review { border-color: #2563eb; }
+.book-badge.type-badge.review span.book-badge-title {
+  background-color: rgba(37, 99, 235, 0.10) !important; /* light fill */
+  color: #1e40af; /* dark blue text */
 }
-.book-badge.type-badge.review {
-  /* blue-ish for Review */
-  background-color: rgba(37, 99, 235, 0.10); /* #2563eb */
-  border-color: #2563eb;
-  color: #1e40af; /* darker text */
+.book-badge.type-badge.review span.book-badge-value {
+  background-color: #2563eb !important; /* solid fill */
+  color: #ffffff !important; /* white text */
 }
-.book-badge.type-badge.thought {
-  /* purple-ish for Thought */
-  background-color: rgba(124, 58, 237, 0.10); /* #7c3aed */
-  border-color: #7c3aed;
+
+/* Thought (purple) */
+.book-badge.type-badge.thought { border-color: #7c3aed; }
+.book-badge.type-badge.thought span.book-badge-title {
+  background-color: rgba(124, 58, 237, 0.10) !important;
   color: #5b21b6;
+}
+.book-badge.type-badge.thought span.book-badge-value {
+  background-color: #7c3aed !important;
+  color: #ffffff !important;
 }
