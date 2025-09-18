@@ -1,34 +1,40 @@
-{{/* Project override: prev/next within the same folder (File.Dir) to avoid cross-section jumps */}}
-{{ $dir := .File.Dir }}
-{{ $siblings := where .Site.RegularPages "File.Dir" $dir }}
-{{/* Prefer weight ordering if provided */}}
-{{ $siblings = sort $siblings "Weight" }}
-{{ $prev := nil }}
-{{ $next := nil }}
-{{ $idx := -1 }}
-{{ range $i, $p := $siblings }}
-  {{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}
-{{ end }}
-{{ if ge $idx 0 }}
-  {{ if gt $idx 0 }}{{ $prev = index $siblings (sub $idx 1) }}{{ end }}
-  {{ if lt (add $idx 1) (len $siblings) }}{{ $next = index $siblings (add $idx 1) }}{{ end }}
-{{ end }}
+{{/* Project override: robust prev/next. Skip non-page kinds (home, list, taxonomy). */}}
+{{ if .IsPage }}
+  {{- $prev := nil -}}
+  {{- $next := nil -}}
+  {{- $dir := "" -}}
+  {{- with .File }}{{ $dir = .Dir }}{{ end -}}
 
-{{/* Fallback: if no siblings (single file folder), try section neighbors */}}
-{{ if and (not $prev) (not $next) }}
-  {{ $secPages := .CurrentSection.RegularPages }}
-  {{ $secPages = sort $secPages "Weight" }}
-  {{ $idx = -1 }}
-  {{ range $i, $p := $secPages }}
-    {{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}
-  {{ end }}
-  {{ if ge $idx 0 }}
-    {{ if gt $idx 0 }}{{ $prev = index $secPages (sub $idx 1) }}{{ end }}
-    {{ if lt (add $idx 1) (len $secPages) }}{{ $next = index $secPages (add $idx 1) }}{{ end }}
-  {{ end }}
-{{ end }}
+  {{- /* Prefer siblings in the same directory when available */ -}}
+  {{- $siblings := where .Site.RegularPages "File.Dir" $dir -}}
+  {{- if gt (len $siblings) 0 -}}
+    {{- $siblings = sort $siblings "Weight" "Title" -}}
+    {{- $idx := -1 -}}
+    {{- range $i, $p := $siblings -}}
+      {{- if eq $p.RelPermalink $.RelPermalink -}}{{ $idx = $i }}{{- end -}}
+    {{- end -}}
+    {{- if ge $idx 0 -}}
+      {{- if gt $idx 0 -}}{{ $prev = index $siblings (sub $idx 1) }}{{- end -}}
+      {{- if lt (add $idx 1) (len $siblings) -}}{{ $next = index $siblings (add $idx 1) }}{{- end -}}
+    {{- end -}}
+  {{- end -}}
 
-{{ if or $prev $next }}
+  {{- /* Fallback to section neighbors if needed */ -}}
+  {{- if and (not $prev) (not $next) -}}
+    {{- with .CurrentSection -}}
+      {{- $secPages := sort .RegularPages "Weight" "Title" -}}
+      {{- $idx := -1 -}}
+      {{- range $i, $p := $secPages -}}
+        {{- if eq $p.RelPermalink $.RelPermalink -}}{{ $idx = $i }}{{- end -}}
+      {{- end -}}
+      {{- if ge $idx 0 -}}
+        {{- if gt $idx 0 -}}{{ $prev = index $secPages (sub $idx 1) }}{{- end -}}
+        {{- if lt (add $idx 1) (len $secPages) -}}{{ $next = index $secPages (add $idx 1) }}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{ if or $prev $next }}
 <div class="flex flex-wrap justify-between">
   <span>
   {{ with $prev }}
@@ -47,4 +53,5 @@
   {{ end }}
   </span>
 </div>
+  {{ end }}
 {{ end }}
