@@ -85,7 +85,14 @@ Given $M$ annotated comparisons $\mathcal{C}=\{(i_m,j_m)\}_{m=1}^M$, the likelih
 
 Then the reward model can be estimated by MLE,
 
-$$r^\* = \arg\max_r \log \mathcal{L}(r)=  \arg\max_r \sum_{m=1}^M \Big[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \Big] .$$
+{{< katex display=true >}}
+\begin{equation}
+\begin{aligned}
+\bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
+&=  \arg\max_r \sum_{m=1}^M \Big[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \Big] .
+\end{aligned}
+\end{equation}
+{{< /katex >}}
 
 #### Reward Modeling with Ranked Preferences (PL Model)
 
