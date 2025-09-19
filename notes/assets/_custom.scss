@@ -101,6 +101,23 @@
   font-weight: 700;
 }
 
+/* Typewriter caret effect for brand title in sidebar */
+.book-menu .book-menu-content h2.book-brand a span.brand-typed {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;               /* keep caret tidy */
+  border-right: 2px solid currentColor; /* caret */
+  animation: caret-blink 1s steps(1) infinite;
+}
+.book-menu .book-menu-content h2.book-brand a span.brand-typed.brand-typed-done {
+  animation: none;
+  border-right-color: transparent; /* hide caret when done */
+}
+
+@keyframes caret-blink {
+  50% { border-right-color: transparent; }
+}
+
 /* Slightly reduce display math (block $$...$$) size to 95% */
 .book-page .markdown .katex-display {
   font-size: 0.85em;

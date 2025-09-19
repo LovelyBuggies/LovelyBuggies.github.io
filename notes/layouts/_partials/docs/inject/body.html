@@ -10,3 +10,7 @@
   {{- end -}}
 {{- end -}}
 
+{{/* Sidebar brand: typewriter animation */}}
+{{- with resources.Get "typewriter.js" -}}
+  <script defer src="{{ .RelPermalink }}"></script>
+{{- end -}}
