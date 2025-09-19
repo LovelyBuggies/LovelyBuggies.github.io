@@ -11,7 +11,7 @@ readingTime: 50
 
 # All You Want to Know about LLM Rewards
 {{< postbadges >}}
-{{< badge style="black" title="License" value="CC By-NC" >}}
+{{< badge style="black" title="License" value="CC BY-NC" >}}
 
 RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model for evaluating task completions in languages (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s LLM reward models really make sense, and explores where the design should be heading.
 
@@ -39,19 +39,20 @@ This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxm
 
 Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT), reward modeling (RM), and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model is built, either based on external rules or human preference. While it only serves as a partial approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus crucial for the training.
 
-So, <span class="text-danger"><strong>how do we reward the task completion in human languages?</strong></span>
+<span class="text-danger"><strong>How do we reward the task completion in human languages?</strong></span>
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
 ## RLHF: "Good" from Humans
 
+<span class="text-danger"><strong>How to make reward models as generalizable and trainable proxies for human preference?</strong></span>
+
 ### Anti-Symmetric RM
 
-Reward models can be trainable proxies for human preference. This kinds of reward models are usually built based on Bradley–Terry (BT) model and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
+Bradley-Terry (BT) model are usually used to build reward models and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
 <div class="definition">
 <strong>Definition 1:</strong> The original BT model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is,
-
 {{< katex display=true >}}
 \Pr(i \succ j) = \frac{u_i}{u_i + u_j}
 =\frac{\exp(r(i))}{\exp(r(i)) + \exp(r(j))}\, ,\label{eq:bt}
@@ -137,7 +138,11 @@ Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}
 
 ## RLVR: "Good" as Verified
 
-LLMs have been developed to perform similar to top-tier human in some fields such as math 
+Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier humans in specialized domains like Olympic math (Balunović et al., 2025). 
+
+<span class="text-danger"><strong>Does general human preferences truly matter for developing LLMs?</strong></span>
+
+Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) aims to make LLMs more objective and less biased by utilizing verified signals to reward responses through deterministic tools, such as symbolic verifiers or rule-based systems. Since these signals are algorithmically verified rather than subjectively assessed, they provide more concrete and reliable feedback for training.
 
 
 ## Finer-Granular Rewards
@@ -188,7 +193,9 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 <li>Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., ... & Scialom, T. (2023). Llama 2: Open foundation and fine-tuned chat models. arXiv preprint arXiv:2307.09288.</li>
 <li>Sun, H., Shen, Y., & Ton, J. F. (2024). Rethinking bradley-terry models in preference-based reward modeling: Foundations, theory, and alternatives. arXiv preprint arXiv:2411.04991.</li>
 <li>Weng, L. (2024). “Reward Hacking in Reinforcement Learning.”</li>
-<li>Balunović, M., Dekoninck, J., Petrov, I., Jovanović, N., & Vechev, M. (2025). Matharena: Evaluating llms on uncontaminated math competitions. arXiv preprint arXiv:2505.23281.</li>
+<li>Balunović, M., Dekoninck, J., Petrov, I., Jovanović, N., & Vechev, M. (2025). Matharena: Evaluating llms on uncontaminated math competitions. arXiv preprint arXiv:2505.23281.</li>\
+<li>Guo, D., Yang, D., Zhang, H., Song, J., Zhang, R., Xu, R., ... & He, Y. (2025). Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948.</li>
+
 {{< /references >}}
 
 <!-- moved to root content -->
