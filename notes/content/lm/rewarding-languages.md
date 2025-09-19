@@ -151,9 +151,11 @@ To address this shortcoming, researchers also explore improvements to LLM traini
 {{< sidenote >}}
 Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. Ideally, we want an agent to infer the formatting requirements by itself through several rounds of interaction, rather than having one to satisfy black, one for autopep, etc. 
 
-<br>
+<br></br>
 
 <strong>A fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
+
+<br></br>
 
 <strong>A philosophy question:</strong> Do we want generality for AI? A superhero agent save the world or diverse agents living together :D
 
