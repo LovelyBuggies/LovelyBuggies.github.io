@@ -138,11 +138,11 @@ Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}
 
 ## RLVR: "Good" as Verified
 
-Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier humans in specialized domains like Olympic math (Balunović et al., 2025). 
+Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier humans in specialized domains like Olympic math (Balunović et al., 2025). In this case, we have to think about a question:
 
-<span class="text-danger"><strong>Does general human preferences truly matter for developing LLMs?</strong></span>
+<span class="text-danger"><strong>Does general human preferences really matter for developing better LLMs?</strong></span>
 
-Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) aims to make LLMs more objective and less biased by utilizing verified signals to reward responses through deterministic tools, such as symbolic verifiers or rule-based systems. Since these signals are algorithmically verified rather than subjectively assessed, they provide more concrete and reliable feedback for training.
+Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) is thus proposed to make LLMs more objective and less biased with verified signals by deterministic tools (verifiers or rules) to reward responses. These signals provide more concrete and reliable feedback for training.
 
 
 ## Finer-Granular Rewards
