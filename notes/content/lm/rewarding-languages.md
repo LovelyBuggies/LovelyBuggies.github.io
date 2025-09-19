@@ -13,7 +13,7 @@ readingTime: 50
 {{< postbadges >}}
 {{< badge style="black" title="License" value="CC By-NC" >}}
 
-RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model for evaluating task completions in languages (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s reward models really make sense, and explores where the design of next-generation LLM rewards might be heading.
+RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model for evaluating task completions in languages (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s LLM reward models really make sense, and explores where the design should be heading.
 
 ## Human Languages
 
@@ -29,7 +29,7 @@ Language is an abstract and compact medium for expressing real-world dynamics, w
 
 When people try to solve tasks in language, how to express them and evaluate the outcome are crucial questions. Some tasks, along with their completions, can be clearly conveyed using niche languages. Suppose we are asking a friend to bring us an iPhone 17 from the Apple Store. For this task, we can clearly express our intent and verify the result by observing it. But some other tasks don’t have clear and objective evaluation criteria, like deciding whether a paper (aka a research task) is "good" often lacks consensus (reflected in complaints about conference reviewing :3).
 
-In fact, existing human languages are very limited in expressiveness. Although we have a rich vocabulary for describing vision signals, that for sound, touch, or scent is sparse. Just like my dilemma when describing perfumes or a haircut (suppose that I have a clear objective in my mind), my vocabulary is too few and vague to accurately express my intended outcome. For the tasks that are not able to be accurately represented by language, how can we expect them to be evaluated?
+In fact, existing human languages are very limited in expressiveness. Although we have a rich vocabulary for describing vision signals, that for sound, touch, or scent is sparse. Just like my dilemma when describing a perfume or a haircut (suppose that I have a clear objective in my mind), my vocabulary for those is too few and vague to accurately express my intent. These kinds of tasks are hard to accurately represent by language, thus are hard to assign and evaluate.
 
 {{< sidenote >}}
 This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, they can only achieve human-like intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Think about how AlphaGo defeated Sedol Lee -- it didn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and even entire new languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to make breakthroughs. 
