@@ -151,6 +151,8 @@ To address this shortcoming, researchers also explore improvements to LLM traini
 {{< sidenote >}}
 Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
 
+<br>
+
 P.S. I encountered this problem myself when committing code: both black and autopep8 were installed in my pre-commit hooks, which led to formatting conflicts.
 
 {{< /sidenote >}}
