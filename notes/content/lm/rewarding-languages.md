@@ -66,9 +66,9 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 
 </div>
 
-BT is **anti-symmetric**, the preference between two responses depends only on the difference in their reward values, s.t., $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$ and $\log \left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation: recover latent reward values for candidate responses based on observed pairwise comparisons.
+BT is **anti-symmetric**, the preference between two responses depends only on the difference in their reward values. This structure ensures consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation: recover latent reward values for candidate responses based on observed pairwise comparisons.
 
-Suppose a prompt $x$ is associated with $N$ candidate responses {{< katex >}} \{y_1, \ldots, y_N\} {{< /katex >}}, and human annotators provide preference labels between some pairs. Assuming human's annotation biases are trivial, tokenization and embedding are order-preserving, and sufficiently many comparisons ($O(N \log N)$) are available under deterministic preferences, the true reward values can be inferred.
+Suppose a prompt $x$ is associated with $N$ candidate responses {{< katex >}} \{y_1, \ldots, y_N\} {{< /katex >}}, and human annotators provide preference labels between some pairs. Assuming human's annotation biases are trivial, tokenization and embedding are order-preserving, and sufficiently many comparisons $O(N \log N)$ are available under deterministic preferences, the true reward values can be inferred.
 
 Let each observed preference be a pair $(i \succ j)$ indicating that $y_i$ is preferred over $y_j$ for prompt $x$. Under BT,
 
@@ -85,7 +85,9 @@ Given $M$ annotated comparisons $\mathcal{C}=\{(i_m,j_m)\}_{m=1}^M$, the likelih
 \log \mathcal{L}(r) = \sum_{m=1}^M \Big[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \Big] \, .
 {{< /katex >}}
 
-The optimal reward model is obtained by maximizing the log-likelihood (MLE), $\; r^* = \arg\max_r \log \mathcal{L}(r)$, identifiable up to an additive constant and consistent under the assumptions above.
+The optimal reward model is obtained by MLE,
+
+$$r^\* = \arg\max_r \log \mathcal{L}(r).$$
 
 #### Reward Modeling with Ranked Preferences (PL Model)
 
