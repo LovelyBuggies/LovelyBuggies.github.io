@@ -50,7 +50,7 @@ So, <span class="text-danger"><strong>how do we reward the task completion in hu
 Reward models can be trainable proxies for human preference. This kinds of reward models are usually built based on Bradley–Terry (BT) model and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
 <div class="definition">
-<strong>Definition 1:</strong> The original BT model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is
+<strong>Definition 1:</strong> The original BT model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is,
 
 {{< katex display=true >}}
 \Pr(i \succ j) = \frac{u_i}{u_i + u_j}
@@ -70,17 +70,17 @@ BT is **anti-symmetric**, the preference between two responses depends only on t
 
 Suppose a prompt $x$ is associated with $N$ candidate responses {{< katex >}} \{y_1, \ldots, y_N\} {{< /katex >}}, and human annotators provide preference labels between some pairs. Assuming human's annotation biases are trivial, tokenization and embedding are order-preserving, and sufficiently many comparisons $O(N \log N)$ are available under deterministic preferences, the true reward values can be inferred.
 
-Let each observed preference be a pair $(i \succ j)$ indicating that $y_i$ is preferred over $y_j$ for prompt $x$. Under BT,
+Under BT,
 
 {{< katex display=true >}}
 \Pr(y_i \succ y_j \mid x)
 = \frac{\exp(r(x,y_i))}{\exp(r(x,y_i)) + \exp(r(x,y_j))}\, .
 {{< /katex >}}
 
-Given $M$ annotated comparisons $\mathcal{C}=\{(i_m,j_m)\}_{m=1}^M$, the likelihood and log-likelihood are
+Given $M$ annotated comparisons $\mathcal{C}=\{(i_m,j_m)\}_{m=1}^M$, the likelihood and log-likelihood are,
 
 {{< katex display=true >}}
-\mathcal{L}(r) = \prod_{m=1}^M \frac{\exp(r(x,y_{i_m}))}{\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))} ,
+\mathcal{L}(r) = \prod_{m=1}^M \frac{\exp(r(x,y_{i_m}))}{\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))} .
 {{< /katex >}}
 
 Then the reward model can be estimated by MLE,
@@ -89,25 +89,33 @@ Then the reward model can be estimated by MLE,
 \begin{equation}
 \begin{aligned}
 \bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
-&=  \arg\max_r \sum_{m=1}^M \Big[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \Big] .
+&=  \arg\max_r \sum_{m=1}^M \left[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \right] .
 \end{aligned}
 \end{equation}
 {{< /katex >}}
 
-#### Reward Modeling with Ranked Preferences (PL Model)
-
-While BT uses pairwise preferences, real systems can collect ranked lists. For a ranking $(y_{i_1} \succ y_{i_2} \succ \ldots \succ y_{i_N})$ for prompt $x$, the PL probability is
+Similar, for PL model,
 
 {{< katex display=true >}}
 \Pr(y_{i_1} \succ y_{i_2} \succ \ldots \succ y_{i_N} \mid x)
 = \prod_{k=1}^{N-1} \frac{\exp(r(x, y_{i_k}))}{\sum_{j=k}^{N} \exp(r(x, y_{i_j}))}\, .
 {{< /katex >}}
 
-Given $M$ rankings $\mathcal{C} = \{(y_{i_1^m}, \ldots, y_{i_{N_m}^m})\}_{m=1}^M$, the likelihood and log-likelihood are
+Given $M$ rankings $\mathcal{C} = \{(y_{i_1^m}, \ldots, y_{i_{N_m}^m})\}_{m=1}^M$, the likelihood and log-likelihood are,
 
 {{< katex display=true >}}
-\mathcal{L}(r) = \prod_{m=1}^{M} \prod_{k=1}^{N_m-1} \frac{\exp(r(x, y_{i_k^m}))}{\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))}\, ,\\
-\log \mathcal{L}(r) = \sum_{m=1}^{M} \sum_{k=1}^{N_m-1} \Big[ r(x, y_{i_k^m}) - \log\!\Big(\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))\Big) \Big] \, ,
+\mathcal{L}(r) = \prod_{m=1}^{M} \prod_{k=1}^{N_m-1} \frac{\exp(r(x, y_{i_k^m}))}{\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))}.
+{{< /katex >}}
+
+And hence the MLE is,
+
+{{< katex display=true >}}
+\begin{equation}
+\begin{aligned}
+\bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
+&= \arg\max_r \sum_{m=1}^{M} \sum_{k=1}^{N_m-1} \left[ r(x, y_{i_k^m}) - \log\!\left(\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))\right) \right].
+\end{aligned}
+\end{equation}
 {{< /katex >}}
 
 and the MLE $\; r^* = \arg\max_r \log \mathcal{L}(r)$. Preference modeling with PL is also anti-symmetric: swapping two responses in a ranking inverts the relative score difference in the likelihood.
