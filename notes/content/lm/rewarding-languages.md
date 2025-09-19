@@ -142,14 +142,14 @@ Recent advanced LLMs, such as o3-mini, have achieved performance comparable to t
 
 <span class="text-danger"><strong>Does general human preferences from mass really matter?</strong></span>
 
-Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) is thus proposed to make LLMs more objective and less biased with verified signals by deterministic tools (verifiers or rules) to reward responses. These signals provide more concrete and reliable feedback for training.
+Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) is proposed to make LLMs more objective and less biased with verified signals by deterministic tools (verifiers or rules) to reward responses. These signals provide more concrete and reliable feedback for training.
 
 A common practical challenge in applying RLVR is that verification signals are often very sparse. Although this difficulty is shared across many RL training setups, this problem is more severe since the language representation spaces are much larger. **Horizontally**, researchers attempt to design more appropriate verifiable rubrics to shape the reward, e.g., multi-dimensional rewards (Lifshitz et al., 2025). However, it remains unclear what constitutes good rubrics, and in single-turn settings the lack of tolerance for mistakes means that even atomic verifiable signals can still be too sparse. 
 
 To address this shortcoming, researchers also explore improvements to LLM training **vertically**. A straightforward example is fine-tuning in separate phases: when the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. The multi-phase training might be helpful when the environments are not always static, but the objective for each phase is still merely to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, this approach remains inefficient and ***lacks generality***, failing to fully leverage the biggest strength of RL. Instead, models may want to interact with their environment (including external agents) to find optimal solutions regarding different states (i.e., policies). While multi-turn interactions provide intermediate feedback signals, allowing agents to correct errors from previous turns and gradually develop policies that align more closely with the environment. Multi-phase and multi-turn training represents a trade-off in how general we want the model to be: the fewer phases it undergoes, the more general its behavior tends to remain.
 
 {{< sidenote >}}
-<strong>A simple case:</strong> an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. Ideally, we want an agent to explore the formatting requirements by itself through several rounds of interaction, rather than having one to satisfy black, and another one for autopep, etc. 
+<strong>A simple case:</strong> An coder is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these external agents would be obviously different. Ideally, we want an agent to explore the formatting requirements by itself through several rounds of interaction, rather than having one to satisfy black, and another one for autopep, etc. 
 
 <br></br>
 
@@ -157,7 +157,7 @@ To address this shortcoming, researchers also explore improvements to LLM traini
 
 <br></br>
 
-<strong>A philosophy question:</strong> Do we want generality for AI? A superhero agent save the world? Or diverse agents living together? :D
+<strong>A philo question:</strong> Do we really want generality for AI? A superhero agent to save the world? Or diverse agents living together? :D
 
 {{< /sidenote >}}
 
@@ -203,7 +203,7 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 <li>Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., ... & Scialom, T. (2023). Llama 2: Open foundation and fine-tuned chat models. arXiv preprint arXiv:2307.09288.</li>
 <li>Sun, H., Shen, Y., & Ton, J. F. (2024). Rethinking bradley-terry models in preference-based reward modeling: Foundations, theory, and alternatives. arXiv preprint arXiv:2411.04991.</li>
 <li>Weng, L. (2024). “Reward Hacking in Reinforcement Learning.”</li>
-<li>Balunović, M., Dekoninck, J., Petrov, I., Jovanović, N., & Vechev, M. (2025). Matharena: Evaluating llms on uncontaminated math competitions. arXiv preprint arXiv:2505.23281.</li>\
+<li>Balunović, M., Dekoninck, J., Petrov, I., Jovanović, N., & Vechev, M. (2025). Matharena: Evaluating llms on uncontaminated math competitions. arXiv preprint arXiv:2505.23281.</li>
 <li>Guo, D., Yang, D., Zhang, H., Song, J., Zhang, R., Xu, R., ... & He, Y. (2025). Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948.</li>
 <li>Lifshitz, S., McIlraith, S. A., & Du, Y. (2025). Multi-agent verification: Scaling test-time compute with multiple verifiers. arXiv preprint arXiv:2502.20379.</li>
 
