@@ -32,18 +32,16 @@ When people try to solve tasks in language, how to express them and evaluate the
 In fact, existing human languages are very limited in expressiveness. Just like my dilemma when describing a perfume or a haircut (persume that I have a static objective), my vocabulary for those is too few and vague to accurately express my intent. We probably have a rich vocabulary for optical signals, but that for sound, touch, or scent is sparse. And we don't even design many words for electrical, magnetic and thermal signals. These tasks related are hard to accurately represent by language, and thus unable to assign and evaluate.
 
 {{< sidenote >}}
-This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, they can only achieve human-like intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Look at how AlphaGo defeated Sedol Lee -- it doesn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to try to make breakthroughs. 
+This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, they can only achieve human-like level of intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Look at how AlphaGo defeated Sedol Lee -- it doesn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to try to make breakthroughs. 
 {{< /sidenote >}}
 
 ## RL Fine-Tuning
 
-As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To adapt them to specific domains, a secondary fine-tuning phase is typically applied. A standard alignment pipeline involves 3 stages: supervised fine-tuning (SFT), reward modeling (RM), and RL fine-tuning. After initial SFT on a base transformer with curated human-labeled data, a reward model is built, either from explicit rules or human preference data. While it only serves as an approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus extremely important.
-
-{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
-
-This leads to my motivation of writing this post: 
+Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT), reward modeling, and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model is built, either based on external rules or human preference. While it only serves as a partial approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus crucial for the training.
 
 <span class="text-danger"><strong>How do we reward task completion in human languages?</strong></span>
+
+{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
 ## "Good" as Justified by Humans
 
