@@ -45,7 +45,7 @@ So, <span class="text-danger"><strong>how do we reward the task completion in hu
 
 ## RLHF: "Good" as Justified by Humans
 
-### Anti-Symmetric Preference Modeling
+### Anti-Symmetric Reward Modeling
 
 Reward models can be trainable proxies for human preference. This kinds of reward models are usually built based on Bradley–Terry (BT) model and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
