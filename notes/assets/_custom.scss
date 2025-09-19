@@ -318,8 +318,8 @@
 
 /* BibTeX dark background — site-wide */
 .book-page .markdown pre:has(code.language-bibtex) {
-  background: #1e1e1e;        /* IDE-like dark gray */
-  border: 1px solid #2a2a2a;  /* subtle dark border */
+  background: #2e3440;        /* Nord dark (softer, less black) */
+  border: 1px solid #3b4252;  /* Nord border */
   border-radius: 6px;
 }
 .book-page .markdown pre:has(code.language-bibtex) code {
@@ -328,8 +328,8 @@
 
 /* Plain citation (tpl) — black background, white text inside citation blocks */
 .book-page .markdown .cite-block pre:has(code.language-tpl) {
-  background: #1e1e1e;        /* IDE-like dark gray */
-  border: 1px solid #2a2a2a;  /* subtle dark border */
+  background: #2e3440;        /* Nord dark (softer, less black) */
+  border: 1px solid #3b4252;  /* Nord border */
   border-radius: 6px;
 }
 .book-page .markdown .cite-block pre:has(code.language-tpl) code {
