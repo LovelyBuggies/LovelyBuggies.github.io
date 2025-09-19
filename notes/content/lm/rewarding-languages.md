@@ -113,7 +113,7 @@ And hence the MLE is,
 \begin{equation}
 \begin{aligned}
 \bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
-&= \arg\max_r \sum_{m=1}^{M} \sum_{k=1}^{N_m-1} \left[ r(x, y_{i_k^m}) - \log\!\left(\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))\right) \right].
+&= \arg\max_r \sum_{m=1}^{M} \sum_{k=1}^{N_m-1} \Big[ r(x, y_{i_k^m}) - \log\!\Big(\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))\Big) \Big].
 \end{aligned}
 \end{equation}
 {{< /katex >}}
