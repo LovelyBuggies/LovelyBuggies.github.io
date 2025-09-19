@@ -138,24 +138,23 @@ Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}
 
 ## RLVR: "Good" as Verified
 
-Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier humans in specialized domains like Olympic math (Balunović et al., 2025). In this case, we have to think about a question:
+Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier humans in specialized domains like Olympic math (Balunović et al., 2025). In this case,
 
-<span class="text-danger"><strong>Does general human preferences really matter for developing better LLMs?</strong></span>
+<span class="text-danger"><strong>Does general human preferences from mass really matter?</strong></span>
 
 Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) is thus proposed to make LLMs more objective and less biased with verified signals by deterministic tools (verifiers or rules) to reward responses. These signals provide more concrete and reliable feedback for training.
 
+A common practical challenge in applying RLVR is that verification signals are often very sparse. Although this difficulty is shared across many RL training setups, this problem is more severe since the language representation spaces are much larger. **Horizontally**, researchers attempt to design more appropriate verifiable rubrics to shape the reward, e.g., multi-dimensional rewards (Lifshitz et al., 2025). However, it remains unclear what constitutes good rubrics, and in single-turn settings the lack of tolerance for mistakes means that even atomic verifiable signals can still be too sparse.
 
-## Finer-Granular Rewards
+To address this shortcoming, researchers also explore improvements to LLM training **vertically**. Fine-tuning in multiple phases is an obvious example for this practice: when the raw outputs of base transformers preserve language structure but are not directly useful, models are trained in a separate phase to fit in (like offline RL). Yet the goal is not merely to optimize toward a fixed ground truth. Instead, models may want to interact with their environment including external agents to discover optimal solutions within that certain domain. Multi-turn interactions provide intermediate feedback signals, enabling agents to correct previous-turn errors as well as develop polices that fit the environment.
 
-reward is too sparse
+{{< sidenote> }}
 
-horizontally: reward shaping, but that's still one turn
+Consider **a simple case**: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". For example, the external feedback could from [black](https://black.readthedocs.io/en/stable/) or [pylint](https://www.pylint.org/) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
 
-vertically: multi-turn provides intermediate reward signals
+{{< /sidenote> }}
 
-## Problems of Current Reward Models
-
-not multi-turn rewards
+### Fixed/Bandit Reward Model
 
 ## Citation
 
@@ -195,6 +194,7 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 <li>Weng, L. (2024). “Reward Hacking in Reinforcement Learning.”</li>
 <li>Balunović, M., Dekoninck, J., Petrov, I., Jovanović, N., & Vechev, M. (2025). Matharena: Evaluating llms on uncontaminated math competitions. arXiv preprint arXiv:2505.23281.</li>\
 <li>Guo, D., Yang, D., Zhang, H., Song, J., Zhang, R., Xu, R., ... & He, Y. (2025). Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948.</li>
+<li>Lifshitz, S., McIlraith, S. A., & Du, Y. (2025). Multi-agent verification: Scaling test-time compute with multiple verifiers. arXiv preprint arXiv:2502.20379.</li>
 
 {{< /references >}}
 
