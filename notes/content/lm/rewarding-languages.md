@@ -39,7 +39,7 @@ This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxm
 
 As LMs scale, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits. To adapt them to specific domains, a secondary fine-tuning phase is typically applied. A standard alignment pipeline involves 3 stages: supervised fine-tuning (SFT), reward modeling (RM), and RL fine-tuning. After initial SFT on a base transformer with curated human-labeled data, a reward model is built, either from explicit rules or human preference data. While it only serves as an approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus extremely important.
 
-{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-70" >}}
+{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
 This leads to my motivation of writing this post: 
 
