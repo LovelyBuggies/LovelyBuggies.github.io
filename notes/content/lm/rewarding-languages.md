@@ -159,7 +159,9 @@ P.S. I encountered this problem myself when committing code: both black and auto
 
 <span class="text-danger"><strong>How to define LLM rewards in multi-turn?</strong></span>
 
-The simpliest answer is just to use the original bandit/one-turn reward model repeatedly (Shao et al. 2024). But, 
+Let's trace back what trandition RL rewards looks like first. But LLM can't.
+
+The simpliest way is just to use the original bandit/one-turn reward model repeatedly (Shao et al. 2024). However, they are problematic as...
 
 ## Citation
 
