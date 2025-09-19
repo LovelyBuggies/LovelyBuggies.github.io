@@ -151,7 +151,10 @@ To address this shortcoming, researchers also explore improvements to LLM traini
 Instead, models may want to interact with their environment (including external agents) to discover optimal solutions concerning different occasions. Multi-turn interactions provide intermediate feedback signals, allowing agents to correct errors from previous turns and gradually develop policies that align more closely with the environment.
 
 {{< sidenote > }}
-Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from [black](https://black.readthedocs.io/en/stable/), [autopep](https://github.com/hhatto/autopep8), or [pylint](https://www.pylint.org/) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
+Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., [black](https://black.readthedocs.io/en/stable/), [autopep](https://github.com/hhatto/autopep8), or [pylint](https://www.pylint.org/)) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
+
+P.S. I encountered this problem myself when committing code: both black and autopep8 were installed in my pre-commit hooks, which led to formatting conflicts.
+
 {{< /sidenote > }}
 
 <span class="text-danger"><strong>How to define LLM rewards in multi-turn?</strong></span>
