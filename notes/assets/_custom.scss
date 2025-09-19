@@ -309,12 +309,12 @@
 }
 .book-page .markdown .cite-block pre code { color: #111827; }
 
-/* BibTeX token colors (Chroma classes) — site-wide, milder palette */
-.book-page .markdown code.language-bibtex .k { color: #c4b5fd; font-weight: 500; }  /* @article (soft violet) */
-.book-page .markdown code.language-bibtex .na { color: #93c5fd; }                   /* keys (soft blue) */
-.book-page .markdown code.language-bibtex .s { color: #a7f3d0; }                    /* strings (soft mint) */
+/* BibTeX token colors (Chroma classes) — site-wide, dimmer + warmer */
+.book-page .markdown code.language-bibtex .k { color: #e8b977; font-weight: 400; }  /* @article (soft amber) */
+.book-page .markdown code.language-bibtex .na { color: #f2c79b; }                   /* keys (warm sand) */
+.book-page .markdown code.language-bibtex .s { color: #f0a9a1; }                    /* strings (soft coral) */
 .book-page .markdown code.language-bibtex .p,
-.book-page .markdown code.language-bibtex .o { color: #9ca3af; }                    /* punctuation/operators */
+.book-page .markdown code.language-bibtex .o { color: #b8ada3; }                    /* punctuation/operators (warm gray) */
 
 /* BibTeX dark background — site-wide */
 .book-page .markdown pre:has(code.language-bibtex) {
@@ -323,7 +323,7 @@
   border-radius: 6px;
 }
 .book-page .markdown pre:has(code.language-bibtex) code {
-  color: #e5e7eb;             /* light gray text on black */
+  color: #e7e5e4;             /* warm light text on black */
 }
 
 /* Plain citation (tpl) — black background, white text inside citation blocks */
