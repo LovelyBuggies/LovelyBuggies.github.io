@@ -148,11 +148,9 @@ A common practical challenge in applying RLVR is that verification signals are o
 
 To address this shortcoming, researchers also explore improvements to LLM training **vertically**. Fine-tuning in multiple phases is an obvious example for this practice: when the raw outputs of base transformers preserve language structure but are not directly useful, models are trained in a separate phase to fit in (like offline RL). Yet the goal is not merely to optimize toward a fixed ground truth. Instead, models may want to interact with their environment including external agents to discover optimal solutions within that certain domain. Multi-turn interactions provide intermediate feedback signals, enabling agents to correct previous-turn errors as well as develop polices that fit the environment.
 
-{{< sidenote> }}
-
+{{< sidenote > }}
 Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". For example, the external feedback could from [black](https://black.readthedocs.io/en/stable/) or [pylint](https://www.pylint.org/) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
-
-{{< /sidenote> }}
+{{< /sidenote > }}
 
 ### Fixed/Bandit Reward Model
 
