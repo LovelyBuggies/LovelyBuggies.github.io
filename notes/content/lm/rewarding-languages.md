@@ -131,7 +131,7 @@ Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}
 Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1{{< /katex >}}$ for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
 
 {{< katex display=true >}}
-\bar{r} = \arg\min_r - \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
+\bar{r} = - \arg\max_r \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
 {{< /katex >}}
 
 ### Other Reward Modeling Techniques
