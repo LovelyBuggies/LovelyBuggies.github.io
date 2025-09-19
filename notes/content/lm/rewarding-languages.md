@@ -68,9 +68,7 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 
 BT is **anti-symmetric**, the preference between two responses depends only on the difference in their reward values, s.t., $\Pr(y_i \succ y_j) = 1 - \Pr(y_j \succ y_i)$ and $\log \left( \frac{\Pr(y_i \succ y_j)}{\Pr(y_j \succ y_i)} \right) = r(x, y_i) - r(x, y_j)$. This structure ensures consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation: recover latent reward values for candidate responses based on observed pairwise comparisons.
 
-Suppose a prompt $x$ is associated with $N$ candidate responses $\{y_1, \ldots, y_N\}$, and human annotators provide preference labels between some pairs. Ideally, given sufficiently many comparisons under deterministic preference, the true reward values can be accurately inferred. Theoretically, $O(N \log N)$ comparisons is sufficient for modeling rewards of $N$ responses. 
-
-
+Suppose a prompt $x$ is associated with $N$ candidate responses {{< katex >}} \{y_1, \ldots, y_N\} {{< /katex >}}, and human annotators provide preference labels between some pairs. Ideally, given sufficiently many comparisons under deterministic preference, the true reward values can be accurately inferred. Theoretically, $O(N \log N)$ comparisons is sufficient for modeling rewards of $N$ responses. 
 
 In practice, however, this inference is challenged by stochastic human behavior and sparse annotation.
 
