@@ -180,7 +180,7 @@ not multi-turn rewards
 
 ## Citation
 
-<div class="cite-block bibtex-dark">
+<div class="cite-block">
 {{< tabs >}}
 
 {{% tab "Plain" %}}
