@@ -146,13 +146,17 @@ Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) is thus
 
 A common practical challenge in applying RLVR is that verification signals are often very sparse. Although this difficulty is shared across many RL training setups, this problem is more severe since the language representation spaces are much larger. **Horizontally**, researchers attempt to design more appropriate verifiable rubrics to shape the reward, e.g., multi-dimensional rewards (Lifshitz et al., 2025). However, it remains unclear what constitutes good rubrics, and in single-turn settings the lack of tolerance for mistakes means that even atomic verifiable signals can still be too sparse.
 
-To address this shortcoming, researchers also explore improvements to LLM training **vertically**. Fine-tuning in multiple phases is an obvious example for this practice: when the raw outputs of base transformers preserve language structure but are not directly useful, models are trained in a separate phase to fit in (like offline RL). Yet the goal is not merely to optimize toward a fixed ground truth. Instead, models may want to interact with their environment including external agents to discover optimal solutions within that certain domain. Multi-turn interactions provide intermediate feedback signals, enabling agents to correct previous-turn errors as well as develop polices that fit the environment.
+To address this shortcoming, researchers also explore improvements to LLM training **vertically**. A straightforward example is fine-tuning in separate phases: when the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. However, the objective is not merely to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, this approach remains inefficient and lacks generality, failing to fully leverage the strengths of RL.
+
+Instead, models may want to interact with their environment (including external agents) to discover optimal solutions concerning different occasions. Multi-turn interactions provide intermediate feedback signals, allowing agents to correct errors from previous turns and gradually develop policies that align more closely with the environment.
 
 {{< sidenote > }}
-Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". For example, the external feedback could from [black](https://black.readthedocs.io/en/stable/) or [pylint](https://www.pylint.org/) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
+Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from [black](https://black.readthedocs.io/en/stable/), [autopep](https://github.com/hhatto/autopep8), or [pylint](https://www.pylint.org/) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
 {{< /sidenote > }}
 
-### Fixed/Bandit Reward Model
+<span class="text-danger"><strong>How to define LLM rewards in multi-turn?</strong></span>
+
+The simpliest answer is just to use the original bandit/one-turn reward model repeatedly (Shao et al. 2024). But, 
 
 ## Citation
 
