@@ -254,12 +254,13 @@ Q(s, a) = R(s,a) + \phi(s,a) + \gamma
 ## References
 
 {{< references >}}
-<li>Baird, Leemon C. 1995. “Residual Algorithms: Reinforcement Learning with Function Approximation.” In <em>Machine Learning Proceedings 1995</em>, 30–37. Elsevier.</li>
-<li>Bellman, Richard. 1957. <em>Dynamic Programming</em>. Princeton, NJ: Princeton University Press.</li>
-<li>Jaakkola, Thomas, Michael I. Jordan, and Satinder P. Singh. 1994. “On the Convergence of Stochastic Iterative Dynamic Programming Algorithms.” <em>Neural Computation</em> 6 (6): 1185–1201..</li>
-<li>Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.</li>
-<li>Szepesvári, Csaba. 2010. <em>Algorithms for Reinforcement Learning</em>. Vol. 4. Synthesis Lectures on Artificial Intelligence and Machine Learning 1. Morgan & Claypool Publishers.</li>
-<li>Watkins, Christopher J. C. H., and Peter Dayan. 1992. “Q-Learning.” <em>Machine Learning</em> 8 (3–4): 279–92.</li>
+<li>Baird, L. (1995, July). Residual algorithms: Reinforcement learning with function approximation. In Proceedings of the twelfth international conference on machine learning (pp. 30-37).</li>
+<li>Bellman, R., & Kalaba, R. (1957). Dynamic programming and statistical communication theory. Proceedings of the National Academy of Sciences, 43(8), 749-751.</li>
+<li>Jaakkola, T., Jordan, M., & Singh, S. (1993). Convergence of stochastic iterative dynamic programming algorithms. Advances in neural information processing systems, 6.
+</li>
+<li>Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction (Vol. 1, No. 1, pp. 9-11). Cambridge: MIT press.</li>
+<li>Szepesvári, C. (2022). Algorithms for reinforcement learning. Springer nature.</li>
+<li>Watkins, C. J., & Dayan, P. (1992). Q-learning. Machine learning, 8(3), 279-292.</li>
 {{< /references >}}
 
 
