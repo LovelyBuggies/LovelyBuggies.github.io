@@ -89,7 +89,7 @@ Then the reward model can be estimated by MLE,
 \begin{equation}
 \begin{aligned}
 \bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
-&=  \arg\max_r \sum_{m=1}^M \left[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \right] .
+&=  \arg\max_r \sum_{m=1}^M \left[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \right] .\nonumber
 \end{aligned}
 \end{equation}
 {{< /katex >}}
@@ -113,26 +113,20 @@ Hence, by MLE, we have,
 \begin{equation}
 \begin{aligned}
 \bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
-&= \arg\max_r \sum_{m=1}^{M} \sum_{k=1}^{N_m-1} \Big[ r(x, y_{i_k^m}) - \log\!\Big(\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))\Big) \Big].
+&= \arg\max_r \sum_{m=1}^{M} \sum_{k=1}^{N_m-1} \Big[ r(x, y_{i_k^m}) - \log\!\Big(\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))\Big) \Big].\nonumber
 \end{aligned}
 \end{equation}
 {{< /katex >}}
 
 ### Symmetric Reward Modeling
 
-As cliché as it sounds, modeling rewards through symmetric signals is feasible. Symmetric models predict the reward for each prompt–response pair independently, without referencing alternatives.
+Symmetric models predict the reward for each prompt–response pair independently, without referencing alternatives. Modeling rewards through symmetric signals is feasible using fundamental machine learning techniques. 
 
-#### Regression-based Reward Model
-
-Given scalar human ratings $\{(x_n, y_n, s_n)\}_{n=1}^N$ with $s_n\in\mathbb{R}$, train $r(x,y)$ by minimizing
+Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}_{n=1}^N, s_n \in \mathbb{R}$ (e.g., Anthropic HH, OpenAssistant, and MT-Bench), 
 
 {{< katex display=true >}}
-\mathcal{L}_{\text{reg}} = \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2\, .
+\bar{r} = \arg\min_r \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2.
 {{< /katex >}}
-
-Such data appears in datasets like Anthropic HH, OpenAssistant, and MT-Bench (numeric quality scores per response).
-
-#### Classification-based Reward Model
 
 Alternatively, train a binary classifier using labels $s_n\in\{0,1\}$ for acceptability, with sigmoid $\sigma$ and cross-entropy loss
 
