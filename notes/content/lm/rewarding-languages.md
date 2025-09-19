@@ -128,21 +128,11 @@ Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}
 \bar{r} = \arg\min_r \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2.
 {{< /katex >}}
 
-Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1{{< /katex >}}$ for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
+Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1{{< /katex >}} for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
 
 {{< katex display=true >}}
 \bar{r} = - \arg\max_r \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
 {{< /katex >}}
-
-### Other Reward Modeling Techniques
-
-#### Inverse Reinforcement Learning
-
-IRL aims to recover a reward function explaining expert behavior in an MDP. Let $(\mathcal{X}, \mathcal{Y}, T, \gamma)$ be the MDP and expert trajectories $\{\tau_i\}$ where $\tau_i=(x_0,y_0,x_1,y_1,\dots)$. Infer $r: \mathcal{X}\times\mathcal{Y}\to\mathbb{R}$ such that the induced optimal policy matches observed behavior. However, for LLM alignment this mismatches due to: (i) unstructured, high-dimensional language; (ii) feedback as relative preferences rather than optimal sequences; (iii) heavy compute (re-solving RL repeatedly) impractical at LLM scale.
-
-#### Bayesian Reward Learning
-
-Maintain a posterior over reward parameters $p(\theta\mid D) \propto p(D\mid\theta) p(\theta)$ to represent uncertainty and enable posterior-aware policies. In high-dimensional reward spaces, exact/accurate inference is expensive and often impractical for large LLMs.
 
 
 ## RLVR: "Good" as Verified by Analyzers
