@@ -128,10 +128,10 @@ Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}
 \bar{r} = \arg\min_r \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2.
 {{< /katex >}}
 
-Alternatively, train a binary classifier using labels $s_n\in\{0,1\}$ for acceptability, with sigmoid $\sigma$ and cross-entropy loss
+Alternatively, train a binary classifier using labels $s_n\in\{0,1\}$ for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
 
 {{< katex display=true >}}
-\mathcal{L}_{\text{cls}} = - \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
+\bar{r} = \arg\min_r - \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
 {{< /katex >}}
 
 ### Other Reward Modeling Techniques
