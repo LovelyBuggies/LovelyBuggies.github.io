@@ -21,7 +21,7 @@ RL is everywhere these days when people talk about LLMs. However, the challenge 
 
 This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)). Regardless,
 
-<span class="text-danger"><strong>Why do humans need language?</strong></span>
+<span class="text-danger"><strong>Why do we need language?</strong></span>
 
 Language is an abstract and compact medium for expressing real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states; they are normally noisy observations.
 
@@ -39,13 +39,13 @@ This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxm
 
 Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT), reward modeling (RM), and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model is built, either based on external rules or human preference. While it only serves as a partial approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus crucial for the training.
 
-<span class="text-danger"><strong>How do we reward the task completion in human languages?</strong></span>
+<span class="text-danger"><strong>How do we reward the task completion in languages?</strong></span>
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
 ## RLHF: "Good" from Humans
 
-<span class="text-danger"><strong>How to make reward models be generalizable and trainable proxies for human preference?</strong></span>
+<span class="text-danger"><strong>How to create a reward model that aligns with human values?</strong></span>
 
 ### Anti-Symmetric RM
 
@@ -140,13 +140,13 @@ Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}
 
 Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier human experts in specialized domains like Olympic math (Balunović et al., 2025). In this case,
 
-<span class="text-danger"><strong>Does general human preferences from mass really matter?</strong></span>
+<span class="text-danger"><strong>Does general human values really matter?</strong></span>
 
 Reinforcement Learning with Verifiable Rewards (RLVR) (Guo et al., 2025) is proposed to make LLMs more objective and less biased with verified signals by deterministic tools (verifiers or rules) to reward responses. These signals provide more concrete and reliable feedback for training.
 
 A common practical challenge in applying RLVR is that verification signals are often very sparse. Although this difficulty is shared across many RL training setups, this problem is more severe since the language representation spaces are much larger. **Horizontally**, researchers attempt to design more appropriate verifiable rubrics to shape the reward, e.g., multi-dimensional rewards (Lifshitz et al., 2025). However, it remains unclear what constitutes good rubrics, and in single-turn settings the lack of tolerance for mistakes means that even atomic verifiable signals can still be too sparse. 
 
-To address this shortcoming, researchers also explore improvements to LLM training **vertically**. A straightforward example is fine-tuning in separate phases: when the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. The multi-phase training might be helpful when the environments are not always static, but the objective for each phase is still merely to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, this approach remains inefficient and ***lacks generality***, failing to fully leverage the biggest strength of RL. Instead, models may want to interact with their environment (including external agents) to find optimal solutions regarding different states (i.e., policies). While multi-turn interactions provide intermediate feedback signals, allowing agents to correct errors from previous turns and gradually develop policies that align more closely with the environment. Multi-phase and multi-turn training represents a trade-off in how general we want the model to be: the fewer phases it undergoes, the more general its behavior tends to remain.
+To address this shortcoming, researchers also explore improvements to LLM training **vertically**. A straightforward example is fine-tuning in separate phases: when the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. The multi-phase training might be helpful when the environments are not always static, but the objective for each phase is still merely to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, this approach remains inefficient and lacks generality, failing to fully leverage the biggest strength of RL. Instead, models may want to interact with their environment (including external agents) to find optimal solutions regarding different states (i.e., policies). While multi-turn interactions provide intermediate feedback signals, allowing agents to correct errors from previous turns and gradually develop policies that align more closely with the environment. Multi-phase and multi-turn training represents a trade-off in how general we want the model to be: the fewer phases it undergoes, the more general its behavior tends to remain.
 
 {{< sidenote >}}
 <strong>A simple case:</strong> An coder is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these external agents would be obviously different. Ideally, we want an agent to explore the formatting requirements by itself through several rounds of interaction, rather than having one to satisfy black, and another one for autopep, etc. 
@@ -161,7 +161,7 @@ To address this shortcoming, researchers also explore improvements to LLM traini
 
 {{< /sidenote >}}
 
-<span class="text-danger"><strong>How to define LLM rewards in multi-turn?</strong></span>
+<span class="text-danger"><strong>How to build LLM rewards in multi-turn?</strong></span>
 
 Let's trace back what trandition RL rewards looks like first. But LLM can't.
 
