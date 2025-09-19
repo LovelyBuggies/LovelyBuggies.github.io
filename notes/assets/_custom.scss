@@ -91,6 +91,16 @@
 .book-page .markdown h5 { font-size: 0.888rem; }  /* 1.0rem  * 0.888 */
 .book-page .markdown h6 { font-size: 0.777rem; }  /* 0.875rem* 0.888 */
 
+/* Ensure all section titles (headings) in posts are bold */
+.book-page .markdown h1,
+.book-page .markdown h2,
+.book-page .markdown h3,
+.book-page .markdown h4,
+.book-page .markdown h5,
+.book-page .markdown h6 {
+  font-weight: 700;
+}
+
 /* Slightly reduce display math (block $$...$$) size to 95% */
 .book-page .markdown .katex-display {
   font-size: 0.85em;
