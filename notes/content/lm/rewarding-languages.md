@@ -66,9 +66,9 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 
 </div>
 
-BT is **anti-symmetric**, the preference between two responses depends only on the difference in their reward values. This structure ensures consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation: recover latent reward values for candidate responses based on observed pairwise comparisons.
-
 Suppose a prompt $x$ is associated with $N$ candidate responses {{< katex >}} \{y_1, \ldots, y_N\} {{< /katex >}}, and human annotators provide preference labels between some pairs. Assuming human's annotation biases are trivial, tokenization and embedding are order-preserving, and sufficiently many comparisons $O(N \log N)$ are available under deterministic preferences, the true reward values can be inferred.
+
+BT is anti-symmetric, the preference between two responses depends only on the difference in their reward values to ensure consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation.
 
 Under BT,
 
@@ -94,20 +94,20 @@ Then the reward model can be estimated by MLE,
 \end{equation}
 {{< /katex >}}
 
-Similar, for PL model,
+Similar, PL is also anti-symmetric, where swapping two responses in a ranking inverts the relative score difference in the likelihood. Given $M$ rankings $\mathcal{C} = \{(y_{i_1^m}, \ldots, y_{i_{N_m}^m})\}_{m=1}^M$,
 
 {{< katex display=true >}}
 \Pr(y_{i_1} \succ y_{i_2} \succ \ldots \succ y_{i_N} \mid x)
 = \prod_{k=1}^{N-1} \frac{\exp(r(x, y_{i_k}))}{\sum_{j=k}^{N} \exp(r(x, y_{i_j}))}\, .
 {{< /katex >}}
 
-Given $M$ rankings $\mathcal{C} = \{(y_{i_1^m}, \ldots, y_{i_{N_m}^m})\}_{m=1}^M$, the likelihood and log-likelihood are,
+And the likelihood is,
 
 {{< katex display=true >}}
 \mathcal{L}(r) = \prod_{m=1}^{M} \prod_{k=1}^{N_m-1} \frac{\exp(r(x, y_{i_k^m}))}{\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))}.
 {{< /katex >}}
 
-And hence the MLE is,
+Hence, by MLE, we have,
 
 {{< katex display=true >}}
 \begin{equation}
@@ -117,8 +117,6 @@ And hence the MLE is,
 \end{aligned}
 \end{equation}
 {{< /katex >}}
-
-and the MLE $\; r^* = \arg\max_r \log \mathcal{L}(r)$. Preference modeling with PL is also anti-symmetric: swapping two responses in a ranking inverts the relative score difference in the likelihood.
 
 ### Symmetric Reward Modeling
 
