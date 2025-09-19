@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   el.classList.add('brand-typed');
 
   var i = 0;
-  var speed = 30;   // ms per character (halved)
+  var speed = 5;    // ms per character (very fast)
   var startDelay = 150; // initial delay before typing (halved)
 
   function typeNext() {
