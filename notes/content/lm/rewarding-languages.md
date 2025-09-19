@@ -80,14 +80,12 @@ Let each observed preference be a pair $(i \succ j)$ indicating that $y_i$ is pr
 Given $M$ annotated comparisons $\mathcal{C}=\{(i_m,j_m)\}_{m=1}^M$, the likelihood and log-likelihood are
 
 {{< katex display=true >}}
-\mathcal{L}(r) = \prod_{m=1}^M \frac{\exp(r(x,y_{i_m}))}{\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))}\, ,
-\\
-\log \mathcal{L}(r) = \sum_{m=1}^M \Big[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \Big] \, .
+\mathcal{L}(r) = \prod_{m=1}^M \frac{\exp(r(x,y_{i_m}))}{\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))} ,
 {{< /katex >}}
 
-The reward model can be estimated by MLE,
+Then the reward model can be estimated by MLE,
 
-$$r^\* = \arg\max_r \log \mathcal{L}(r).$$
+$$r^\* = \arg\max_r \log \mathcal{L}(r)=  \arg\max_r \sum_{m=1}^M \Big[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \Big] .$$
 
 #### Reward Modeling with Ranked Preferences (PL Model)
 
