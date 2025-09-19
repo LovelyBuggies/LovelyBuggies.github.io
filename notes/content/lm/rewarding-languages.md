@@ -157,7 +157,7 @@ Consider <strong>a simple case</strong>: an agent is tasked with writing well-fo
 
 <br></br>
 
-<strong>A philosophy question:</strong> Do we want generality for AI? A superhero agent save the world or diverse agents living together :D
+<strong>A philosophy question:</strong> Do we want generality for AI? A superhero agent save the world? Or diverse agents living together? :D
 
 {{< /sidenote >}}
 
