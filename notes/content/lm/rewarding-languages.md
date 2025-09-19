@@ -37,7 +37,7 @@ This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxm
 
 ## RL Fine-Tuning
 
-Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT), reward modeling, and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model is built, either based on external rules or human preference. While it only serves as a partial approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus crucial for the training.
+Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT), reward modeling (RM), and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model is built, either based on external rules or human preference. While it only serves as a partial approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus crucial for the training.
 
 So, <span class="text-danger"><strong>how do we reward the task completion in human languages?</strong></span>
 
@@ -45,7 +45,7 @@ So, <span class="text-danger"><strong>how do we reward the task completion in hu
 
 ## RLHF: "Good" as Justified by Humans
 
-### Anti-Symmetric Reward Modeling
+### Anti-Symmetric RM
 
 Reward models can be trainable proxies for human preference. This kinds of reward models are usually built based on Bradley–Terry (BT) model and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
@@ -118,7 +118,7 @@ Hence, by MLE, we have,
 \end{equation}
 {{< /katex >}}
 
-### Symmetric Reward Modeling
+### Symmetric RM
 
 In contrast, symmetric models predict the reward for each prompt–response pair independently. Modeling rewards using ground-truth symmetric signals is straightforward with traditional machine learning techniques. The main challenge for these methods lies in obtaining a sufficient amount of such data.
 
