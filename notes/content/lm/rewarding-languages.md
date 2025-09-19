@@ -153,7 +153,7 @@ Consider <strong>a simple case</strong>: an agent is tasked with writing well-fo
 
 <br>
 
-P.S. I encountered this problem myself when committing code: both black and autopep8 were installed in my pre-commit hooks, which led to formatting conflicts.
+**A fun fact:** I encountered this problem myself when committing code: both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts.
 
 {{< /sidenote >}}
 
