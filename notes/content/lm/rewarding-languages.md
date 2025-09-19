@@ -138,7 +138,7 @@ Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}
 
 ## RLVR: "Good" as Verified
 
-Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier humans in specialized domains like Olympic math (Balunović et al., 2025). In this case,
+Recent advanced LLMs, such as o3-mini, have achieved performance comparable to top-tier human experts in specialized domains like Olympic math (Balunović et al., 2025). In this case,
 
 <span class="text-danger"><strong>Does general human preferences from mass really matter?</strong></span>
 
