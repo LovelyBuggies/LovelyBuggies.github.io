@@ -45,7 +45,7 @@ Recently, RL is one of  an important tool to fine tuning pretrained models to ma
 
 ## RLHF: "Good" from Humans
 
-<span class="text-danger"><strong>How to make reward models as generalizable and trainable proxies for human preference?</strong></span>
+<span class="text-danger"><strong>How to make reward models be generalizable and trainable proxies for human preference?</strong></span>
 
 ### Anti-Symmetric RM
 
