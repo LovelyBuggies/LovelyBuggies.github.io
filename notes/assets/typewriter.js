@@ -11,15 +11,16 @@ document.addEventListener('DOMContentLoaded', function () {
   el.classList.add('brand-typed');
 
   var i = 0;
-  // Human-like cadence: 100–150ms per char with jitter
-  var minDelay = 100;   // ms
-  var maxDelay = 150;   // ms
-  var startDelay = 300; // initial delay before typing
+  // Human-like cadence: slower 180–280ms per char with jitter
+  var minDelay = 180;   // ms
+  var maxDelay = 280;   // ms
+  var startDelay = 400; // initial delay before typing
 
   function nextDelay(ch) {
     var d = minDelay + Math.random() * (maxDelay - minDelay);
-    if (/[\.!?,:;]/.test(ch)) d += 200; // small pause on punctuation
-    if (ch === ' ') d += 30;             // tiny pause between words
+    if (/[\.!?]/.test(ch)) d += 300;    // longer pause on end punctuation
+    else if (/[,:;]/.test(ch)) d += 180; // medium pause on minor punctuation
+    if (ch === ' ') d += 80;             // bigger pause between words
     return Math.round(d);
   }
 
