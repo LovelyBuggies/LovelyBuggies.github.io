@@ -120,7 +120,7 @@ Hence, by MLE, we have,
 
 ### Symmetric Reward Modeling
 
-Symmetric models predict the reward for each prompt–response pair independently, without referencing alternatives. Modeling rewards through symmetric signals is feasible using fundamental machine learning techniques. 
+In contrast, symmetric models predict the reward for each prompt–response pair independently. Modeling rewards using ground-truth symmetric signals is straightforward with traditional machine learning techniques. The main challenge for these methods lies in obtaining a sufficient amount of such data.
 
 Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}_{n=1}^N, s_n \in \mathbb{R}$ (e.g., Anthropic HH, OpenAssistant, and MT-Bench), 
 
