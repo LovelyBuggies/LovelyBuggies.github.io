@@ -150,7 +150,7 @@ To address this shortcoming, researchers also explore improvements to LLM traini
 
 {{< sidenote> }}
 
-Consider **a simple case**: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". For example, the external feedback could from [black](https://black.readthedocs.io/en/stable/) or [pylint](https://www.pylint.org/) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
+Consider <strong>a simple case</strong>: an agent is tasked with writing well-formatted code, but it doesn't know "what should be a good format". For example, the external feedback could from [black](https://black.readthedocs.io/en/stable/) or [pylint](https://www.pylint.org/) at each turn. After sufficient fine-tuning, the optimal policies learned under these 2 external agents would be obviously different. But ideally, we want it to infer the formatting requirements by themselves through several rounds of interaction.
 
 {{< /sidenote> }}
 
