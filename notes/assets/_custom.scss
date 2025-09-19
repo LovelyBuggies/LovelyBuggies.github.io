@@ -309,10 +309,10 @@
 }
 .book-page .markdown .cite-block pre code { color: #111827; }
 
-/* BibTeX token colors (Chroma classes) — site-wide, dimmer + warmer */
+/* BibTeX token colors (Chroma classes) — site-wide, blue keys + green values */
 .book-page .markdown code.language-bibtex .k { color: #e8b977; font-weight: 400; }  /* @article (soft amber) */
-.book-page .markdown code.language-bibtex .na { color: #93c5fd; }                   /* keys (soft blue) */
-.book-page .markdown code.language-bibtex .s { color: #f0a9a1; }                    /* strings (soft coral) */
+.book-page .markdown code.language-bibtex .na { color: #93c5fd; }                   /* field keys (soft blue) */
+.book-page .markdown code.language-bibtex .s { color: #a7f3d0; }                    /* string values (soft green) */
 .book-page .markdown code.language-bibtex .p,
 .book-page .markdown code.language-bibtex .o { color: #b8ada3; }                    /* punctuation/operators (warm gray) */
 
