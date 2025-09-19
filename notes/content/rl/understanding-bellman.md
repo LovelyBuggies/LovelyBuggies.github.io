@@ -256,10 +256,10 @@ Q(s, a) = R(s,a) + \phi(s,a) + \gamma
 {{< references >}}
 <li>Baird, Leemon C. 1995. “Residual Algorithms: Reinforcement Learning with Function Approximation.” In <em>Machine Learning Proceedings 1995</em>, 30–37. Elsevier.</li>
 <li>Bellman, Richard. 1957. <em>Dynamic Programming</em>. Princeton, NJ: Princeton University Press.</li>
-<li>Jaakkola, Thomas, Michael I. Jordan, and Satinder P. Singh. 1994. “On the Convergence of Stochastic Iterative Dynamic Programming Algorithms.” <em>Neural Computation</em> 6 (6): 1185–1201. <https://doi.org/10.1162/neco.1994.6.6.1185>.</li>
+<li>Jaakkola, Thomas, Michael I. Jordan, and Satinder P. Singh. 1994. “On the Convergence of Stochastic Iterative Dynamic Programming Algorithms.” <em>Neural Computation</em> 6 (6): 1185–1201..</li>
 <li>Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.</li>
-<li>Szepesvári, Csaba. 2010. <em>Algorithms for Reinforcement Learning</em>. Vol. 4. Synthesis Lectures on Artificial Intelligence and Machine Learning 1. Morgan & Claypool Publishers. <https://doi.org/10.2200/S00268ED1V01Y201005AIM009>.</li>
-<li>Watkins, Christopher J. C. H., and Peter Dayan. 1992. “Q-Learning.” <em>Machine Learning</em> 8 (3–4): 279–92. <https://doi.org/10.1007/BF00992698>.</li>
+<li>Szepesvári, Csaba. 2010. <em>Algorithms for Reinforcement Learning</em>. Vol. 4. Synthesis Lectures on Artificial Intelligence and Machine Learning 1. Morgan & Claypool Publishers.</li>
+<li>Watkins, Christopher J. C. H., and Peter Dayan. 1992. “Q-Learning.” <em>Machine Learning</em> 8 (3–4): 279–92.</li>
 {{< /references >}}
 
 

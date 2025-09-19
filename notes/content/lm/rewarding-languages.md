@@ -180,11 +180,11 @@ not multi-turn rewards
 
 ## Citation
 
-<div class="cite-block">
+<div class="cite-block bibtex-dark">
 {{< tabs >}}
 
 {{% tab "Plain" %}}
-```text
+```tpl
 Liu, Shuo. (September 2025). All You Want to Know about LLM Rewards.
 LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languages/
 ```
