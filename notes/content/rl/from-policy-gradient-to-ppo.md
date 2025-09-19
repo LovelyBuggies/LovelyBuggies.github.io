@@ -220,7 +220,7 @@ or learn it off-policy-ly by following a different stochastic behavior $\beta(a\
 
 {{% details "Distributed PG" %}}
 
-Due to the efficiency of the GPU-cluster in training, some workers (machines or processes) are employed in a distributed manner to generate rollouts and compute policy gradients in PG methods (Brenner 2023). The distributed advancement can also be extended to any PG extension, like Actor-Critic (AC), PPO, and deterministic PG methods.
+Due to the efficiency of the GPU-cluster in training, some workers (machines or processes) are employed in a distributed manner to generate rollouts and compute policy gradients in PG methods. The distributed advancement can also be extended to any PG extension, like Actor-Critic (AC), PPO, and deterministic PG methods.
 
 <p><strong>Centralized v.s. Decentralized</strong> These workers can either share a central parameter server or update their own weights in a decentralized manner, where aggregation techniques such as AllReduce may be utilized. Rather than merely collecting rollouts and calculating the gradient according to its replay buffer, the workers can be further decentralized into <em>agents</em> with their parameters, which is closely related to PG in multi-agent setting.</p>
 
@@ -234,7 +234,7 @@ In this section, we introduce standard PPO and it variants in different domains.
 
 ### Clip-PPO
 
-Schulman et al., 2017 proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate {{< katex >}}\hat{A}^{\pi_{\theta_{\text{old}}}}{{< /katex >}} to reduce the variance of policy gradient methods and maintain low bias Schulman et al., 2015.
+(Schulman et al., 2017) proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate {{< katex >}}\hat{A}^{\pi_{\theta_{\text{old}}}}{{< /katex >}} to reduce the variance of policy gradient methods and maintain low bias (Schulman et al., 2015).
 
 {{< katex display=true >}}
 \label{equ:Clip-PPO}
@@ -252,7 +252,7 @@ J^{\text{CLIP+}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ J^{\tex
 
 ### KL-PPO
 
-Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration Schulman et al., 2017.
+Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration (Schulman et al., 2017).
 
 {{< katex display=true >}}
 \label{alg:TRPO}
@@ -269,7 +269,7 @@ Sometimes, the KL-penalty can be combined with policy clipping to achieve better
 
 ### Multi-Agent PPO
 
-In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). In IPPO, each agent has its own actor and critic and learns independently according to a joint reward Schroeder de Witt et al., 2020. Like IPPO, MAPPO employs weight sharing between agents’ critics, and the advantage in MAPPO is estimated through joint GAE (Yu et al., 2022).
+In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). In IPPO, each agent has its own actor and critic and learns independently according to a joint reward (Witt et al., 2020). Like IPPO, MAPPO employs weight sharing between agents’ critics, and the advantage in MAPPO is estimated through joint GAE (Yu et al., 2022).
 
 {{< katex display=true >}}
 \label{equ:MAPPO}
@@ -302,12 +302,11 @@ is a positive unbiased estimator, which measures the difference between the poli
 ## References
 
 {{< references >}}
-<li>Schulman, John, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. 2017. “Proximal Policy Optimization Algorithms.” <em>arXiv</em> 1707.06347. </li>
-<li>Brenner, Max. 2023. “Illustrated Comparison of Different Distributed Versions of PPO.” <em>Medium</em>, February 28.</li>
-<li>Schulman, John, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. 2015. “High-Dimensional Continuous Control Using Generalized Advantage Estimation.” <em>arXiv</em> 1506.02438.</li>
-<li>Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <em>arXiv</em> 2402.03300.</li>
-<li>Schroeder de Witt, Christian, Tarun Gupta, Denys Makoviichuk, Viktor Makoviychuk, Philip H. S. Torr, Mingfei Sun, and Shimon Whiteson. 2020. “Is Independent Learning All You Need in the StarCraft Multi-Agent Challenge?” <em>arXiv</em> 2011.09533.</li>
-<li>Yu, Chao, Akash Velu, Eugene Vinitsky, Jiaxuan Gao, Yu Wang, Alexandre Bayen, and Yi Wu. 2022. “The Surprising Effectiveness of PPO in Cooperative, Multi-Agent Games.” <em>arXiv</em> 2103.01955. </li>
+<li>Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). Proximal policy optimization algorithms. *arXiv preprint arXiv:1707.06347*. </li>
+<li>Schulman, J., Moritz, P., Levine, S., Jordan, M., & Abbeel, P. (2015). High-dimensional continuous control using generalized advantage estimation. *arXiv preprint arXiv:1506.02438*.</li>
+<li>Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X., ... & Guo, D. (2024). Deepseekmath: Pushing the limits of mathematical reasoning in open language models. *arXiv preprint arXiv:2402.03300*.</li>
+<li>De Witt, C. S., Gupta, T., Makoviichuk, D., Makoviychuk, V., Torr, P. H., Sun, M., & Whiteson, S. (2020). Is independent learning all you need in the starcraft multi-agent challenge?. arXiv preprint arXiv:2011.09533.</li>
+<li>Yu, C., Velu, A., Vinitsky, E., Gao, J., Wang, Y., Bayen, A., & Wu, Y. (2022). The surprising effectiveness of ppo in cooperative multi-agent games. Advances in neural information processing systems, 35, 24611-24624. </li>
 {{< /references >}}
 
 
