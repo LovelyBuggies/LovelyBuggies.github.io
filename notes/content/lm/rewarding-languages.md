@@ -85,7 +85,7 @@ Given $M$ annotated comparisons $\mathcal{C}=\{(i_m,j_m)\}_{m=1}^M$, the likelih
 \log \mathcal{L}(r) = \sum_{m=1}^M \Big[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \Big] \, .
 {{< /katex >}}
 
-The optimal reward model is obtained by MLE,
+The reward model can be estimated by MLE,
 
 $$r^\* = \arg\max_r \log \mathcal{L}(r).$$
 
