@@ -121,23 +121,23 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 ## References
 
 {{< references >}}
-<li>Amato, Christopher, Girish Chowdhary, Alborz Geramifard, N. Kemal Üre, and Mykel J. Kochenderfer. 2013. “Decentralized Control of Partially Observable Markov Decision Processes.” In <em>52nd IEEE Conference on Decision and Control</em>, 2398–2405. <https://doi.org/10.1109/CDC.2013.6760239>.</li>
-<li>Becker, Raphen, Shlomo Zilberstein, Victor Lesser, and Claudia V. Goldman. 2004. “Solving Transition Independent Decentralized Markov Decision Processes.” <em>Journal of Artificial Intelligence Research</em> 22: 423–55.</li>
-<li>Bernstein, Daniel S., Robert Givan, Neil Immerman, and Shlomo Zilberstein. 2002. “The Complexity of Decentralized Control of Markov Decision Processes.” <em>Mathematics of Operations Research</em> 27 (4): 819–40.</li>
-<li>Carlin, A., and S. Zilberstein. 2008. “Value-Based Observation Compression for DEC-POMDPs.” In <em>Proceedings of the Seventh International Conference on Autonomous Agents and Multiagent Systems</em>.</li>
-<li>Chi, Cheng, Zhenjia Xu, Siyuan Feng, Eric Cousineau, Yilun Du, Benjamin Burchfiel, Russ Tedrake, and Shuran Song. 2024. “Diffusion Policy: Visuomotor Policy Learning via Action Diffusion.” <em>The International Journal of Robotics Research</em>.</li>
-<li>Dibangoye, J. S., A.-I. Mouaddib, and B. Chaib-draa. 2009. “Point-Based Incremental Pruning Heuristic for Solving Finite-Horizon DEC-POMDPs.” In <em>Proceedings of the Eighth International Conference on Autonomous Agents and Multiagent Systems</em>.</li>
-<li>Hansen, Eric A, Daniel S Bernstein, and Shlomo Zilberstein. 2004. “Dynamic Programming for Partially Observable Stochastic Games.” In <em>AAAI</em>, 4:709–15.</li>
-<li>Kumar, A., and S. Zilberstein. 2010. “Point-Based Backup for Decentralized POMDPs: Complexity and New Algorithms.” In <em>Proceedings of the Ninth International Conference on Autonomous Agents and Multiagent Systems</em>, 1315–22.</li>
-<li>Madani, Omid, Steve Hanks, and Anne Condon. 1999. “On the Undecidability of Probabilistic Planning and Infinite-Horizon Partially Observable Markov Decision Problems.” In, 541–48. AAAI ’99/IAAI ’99. Orlando, Florida, USA: American Association for Artificial Intelligence.</li>
-<li>Nair, Ranjit, Milind Tambe, Makoto Yokoo, David V. Pynadath, and Stacy Marsella. 2005. “Networked Distributed POMDPs: A Synthesis of Distributed Constraint Optimization and POMDPs.” In <em>Proceedings of the 20th National Conference on Artificial Intelligence (AAAI-05)</em>, 133–39. AAAI Press.</li>
-<li>Nair, Ranjit, Milind Tambe, Makoto Yokoo, David Pynadath, and Stacy Marsella. 2003. “Taming Decentralized POMDPs: Towards Efficient Policy Computation for Multiagent Settings.” In <em>IJCAI</em>, 3:705–11.</li>
-<li>Papadimitriou, Christos H., and John N. Tsitsiklis. 1987. “The Complexity of Markov Decision Processes.” <em>Mathematics of Operations Research</em> 12 (3): 441–50. <https://doi.org/10.1287/moor.12.3.441>.</li>
-<li>Seuken, Sven, and Shlomo Zilberstein. 2007a. “Improved Memory-Bounded Dynamic Programming for Decentralized POMDPs,” 344–51.</li>
-<li>Seuken, Sven, and Shlomo Zilberstein. 2007b. “Memory-Bounded Dynamic Programming for DECPOMDPs.” <em>Proceedings of the 20th International Joint Conference on Artificial Intelligence (IJCAI)</em>, 2009–15.</li>
-<li>Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. 2nd ed. MIT Press.</li>
-<li>Szer, Daniel, François Charpillet, and Shlomo Zilberstein. 2005. “MAA*: A Heuristic Search Algorithm for Solving Decentralized POMDPs.” In <em>Proceedings of the 21st Conference on Uncertainty in Artificial Intelligence (UAI)</em>, 576–90. AUAI Press.</li>
-<li>Wu, F., S. Zilberstein, and X. Chen. 2010. “Point-Based Policy Generation for Decentralized POMDPs.” In <em>Proceedings of the Ninth International Conference on Autonomous Agents and Multiagent Systems</em>, 1307–14.</li>
+<li>Amato, C., Chowdhary, G., Geramifard, A., Üre, N. K., & Kochenderfer, M. J. (2013, December). Decentralized control of partially observable Markov decision processes. In 52nd IEEE Conference on Decision and Control (pp. 2398-2405). IEEE.</li>
+<li>Becker, R., Zilberstein, S., Lesser, V., & Goldman, C. V. (2004). Solving transition independent decentralized Markov decision processes. Journal of Artificial Intelligence Research, 22, 423-455.</li>
+<li>Bernstein, D. S., Givan, R., Immerman, N., & Zilberstein, S. (2002). The complexity of decentralized control of Markov decision processes. Mathematics of operations research, 27(4), 819-840.</li>
+<li>Carlin, A., & Zilberstein, S. (2008, May). Value-based observation compression for DEC-POMDPs. In Proceedings of the 7th international joint conference on Autonomous agents and multiagent systems-Volume 1 (pp. 501-508).</li>
+<li>Chi, C., Xu, Z., Feng, S., Cousineau, E., Du, Y., Burchfiel, B., ... & Song, S. (2023). Diffusion policy: Visuomotor policy learning via action diffusion. The International Journal of Robotics Research, 02783649241273668.</li>
+<li>Dibangoye, J. S., Mouaddib, A. I., & Chai-draa, B. (2009, May). Point-based incremental pruning heuristic for solving finite-horizon DEC-POMDPs. In Proceedings of The 8th International Conference on Autonomous Agents and Multiagent Systems-Volume 1 (pp. 569-576).</li>
+<li>Hansen, E. A., Bernstein, D. S., & Zilberstein, S. (2004, July). Dynamic programming for partially observable stochastic games. In AAAI (Vol. 4, pp. 709-715).</li>
+<li>Kumar, A., & Zilberstein, S. (2010). Point-based backup for decentralized POMPDs: Complexity and new algorithms.</li>
+<li>Madani, O., Hanks, S., & Condon, A. (1999). On the undecidability of probabilistic planning and infinite-horizon partially observable Markov decision problems. Aaai/iaai, 10(315149.315395).</li>
+<li>Nair, R., Varakantham, P., Tambe, M., & Yokoo, M. (2005, July). Networked distributed POMDPs: A synthesis of distributed constraint optimization and POMDPs. In AAAI (Vol. 5, pp. 133-139).</li>
+<li>Nair, R., Tambe, M., Yokoo, M., Pynadath, D., & Marsella, S. (2003, August). Taming decentralized POMDPs: Towards efficient policy computation for multiagent settings. In IJCAI (Vol. 3, pp. 705-711).</li>
+<li>Papadimitriou, C. H., & Tsitsiklis, J. N. (1987). The complexity of Markov decision processes. Mathematics of operations research, 12(3), 441-450.</li>
+<li>Seuken, S., & Zilberstein, S. (2012). Improved memory-bounded dynamic programming for decentralized POMDPs. arXiv preprint arXiv:1206.5295.</li>
+<li>Seuken, S., & Zilberstein, S. (2007). Memory-Bounded Dynamic Programming for DEC-POMDPs. In IJCAI (pp. 2009-2015).</li>
+<li>Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction (Vol. 1, No. 1, pp. 9-11). Cambridge: MIT press.</li>
+<li>Szer, D., Charpillet, F., & Zilberstein, S. (2012). MAA*: A heuristic search algorithm for solving decentralized POMDPs. arXiv preprint arXiv:1207.1359.</li>
+<li>Wu, F., Zilberstein, S., & Chen, X. (2010, May). Point-based policy generation for decentralized POMDPs. In Proceedings of the 9th International Conference on Autonomous Agents and Multiagent Systems: volume 1-Volume 1 (pp. 1307-1314).</li>
 {{< /references >}}
 
 
