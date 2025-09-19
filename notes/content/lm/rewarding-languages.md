@@ -43,7 +43,7 @@ So, <span class="text-danger"><strong>how do we reward the task completion in hu
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
-## RLHF: "Good" as Justified by Humans
+## RLHF: "Good" from Humans
 
 ### Anti-Symmetric RM
 
@@ -128,16 +128,17 @@ Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}
 \bar{r} = \arg\min_r \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2.
 {{< /katex >}}
 
-Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1{{< /katex >}} for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
+Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}{{< /katex >}} for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
 
 {{< katex display=true >}}
 \bar{r} = - \arg\max_r \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
 {{< /katex >}}
 
 
-## RLVR: "Good" as Verified by Analyzers
+## RLVR: "Good" as Verified
 
-too sparse
+LLMs have been developed to perform similar to top-tier human in some fields such as math 
+
 
 ## Finer-Granular Rewards
 
@@ -182,13 +183,13 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 ## References
 
 {{< references >}}
-<li>Achiam, Josh, Steven Adler, and Sandhini Agarwal. 2024. “GPT-4 Technical Report.” <https://arxiv.org/abs/2303.08774>.</li>
-<li>Shao, Zhihong, Peiyi Wang, and Qihao Zhu. 2024. “DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.” <https://arxiv.org/abs/2402.03300>.</li>
-<li>Touvron, Hugo, Louis Martin, and Kevin Stone. 2023. “Llama 2: Open Foundation and Fine-Tuned Chat Models.” <https://arxiv.org/abs/2307.09288>.</li>
-<li>Sun, Zihan, Yixin Chen, Zexuan Feng, et al. 2025. “Rethinking Bradley–Terry Models for Preference-Based Reward Modeling.”</li>
-<li>Weng, Lilian. 2024. “Reward Hacking in Reinforcement Learning.”</li>
+<li>Achiam, J., Adler, S., Agarwal, S., Ahmad, L., Akkaya, I., Aleman, F. L., ... & Anadkat, S. (2024). Gpt-4 technical report. arXiv 2023. arXiv preprint arXiv:2303.08774.</li>
+<li>Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X., ... & Guo, D. (2024). Deepseekmath: Pushing the limits of mathematical reasoning in open language models. arXiv preprint arXiv:2402.03300. </li>
+<li>Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., ... & Scialom, T. (2023). Llama 2: Open foundation and fine-tuned chat models. arXiv preprint arXiv:2307.09288.</li>
+<li>Sun, H., Shen, Y., & Ton, J. F. (2024). Rethinking bradley-terry models in preference-based reward modeling: Foundations, theory, and alternatives. arXiv preprint arXiv:2411.04991.</li>
+<li>Weng, L. (2024). “Reward Hacking in Reinforcement Learning.”</li>
+<li>Balunović, M., Dekoninck, J., Petrov, I., Jovanović, N., & Vechev, M. (2025). Matharena: Evaluating llms on uncontaminated math competitions. arXiv preprint arXiv:2505.23281.</li>
 {{< /references >}}
-
 
 <!-- moved to root content -->
 <!-- moved back under lm/ -->
