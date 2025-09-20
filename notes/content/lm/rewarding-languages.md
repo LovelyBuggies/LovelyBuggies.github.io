@@ -43,7 +43,7 @@ Recently, RL is one of  an important tool to fine tuning pretrained models to ma
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
-## RLHF -- "Good" Justified by Humans
+## RLHF — "Good" Justified by Humans
 
 <span class="text-danger"><strong>How to create a reward model that aligns with human values?</strong></span>
 
@@ -136,9 +136,9 @@ Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}
 {{< /katex >}}
 
 
-## RLVR -- "Good" as Verified
+## RLVR — "Good" as Verified
 
-Recent advanced LLMs, such as o3-mini, have achieved performance comparable to åhuman experts in domains like Olympic math (Balunović et al., 2025). In this case,
+Recent advanced LLMs, such as o3-mini, have achieved performance comparable to human experts in domains like Olympic math (Balunović et al., 2025). In this case,
 
 <span class="text-danger"><strong>Does general human general values really matter?</strong></span>
 
