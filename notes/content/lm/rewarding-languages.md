@@ -43,7 +43,7 @@ Recently, RL is one of  an important tool to fine tuning pretrained models to ma
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
-## RLHF: "Good" from Humans
+## RLHF: "Good" Justified by Humans
 
 <span class="text-danger"><strong>How to create a reward model that aligns with human values?</strong></span>
 
