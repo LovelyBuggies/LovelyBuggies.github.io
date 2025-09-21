@@ -47,11 +47,11 @@ The reward model serves as a partial approximation of the ultimate evaluation, w
 
 As rewarding the tokens/words makes no sense semantically/syntactically in practice (and it's also computionally expensive), one may take it granted to use the prompts and responses as observations and actions (Shao et al. 2024). However, this assumption is not entirely sound. When the prompts and responses are long either from text-length perspective or dialogue-turn perspective, its obsure which parts actually contribute/hinder (i.e., credit assignment). So people are designing a bunch of tricks for reward modeling to migrate this issue as discussed later in the RLVR section.
 
-### RLHF — "Good" Justified by Humans
+### "Good" Justified by Humans
 
 <span class="text-danger"><strong>How to create a reward model that aligns with human values?</strong></span>
 
-Bradley-Terry (BT) model are usually used to build reward models and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
+Bradley-Terry (BT) model are usually used to build reward models for RLHF and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
 <div class="definition">
 <strong>Definition 1:</strong> The original BT model posits that, given a pair of options $i$ and $j$ drawn from some population, the probability of selecting $i$ is,
@@ -132,13 +132,13 @@ Hence, by MLE, we have,
 {{< /sidenote >}}
 
 
-### RLVR — "Good" as Verified
+### "Good" as Verified
 
 Recent advanced LLMs, such as o3-mini, have achieved performance comparable to human experts in domains like Olympic math (Balunović et al., 2025). In this case,
 
 <span class="text-danger"><strong>Does the general human values really matter?</strong></span>
 
-Admittedly, human attempts to construct values aim to reflect the truth, but they are never quite identical to it. Using verified signals from deterministic tools (verifiers or rules) to train LLMs can make them more objective and less biased. This practice is call RL from verifiable rewards, RLVR (Guo et al., 2025).
+Admittedly, human attempts to construct values aim to reflect the truth, but they are never quite identical to it. Using verified signals from deterministic tools (verifiers or rules) to train LLMs can make them more objective and less biased, aka RLVR.
 
 However, a common challenge in applying RLVR is that sparsity of outcome-based rewards. Given a dictionary, in theory, one could write *Hamlet*, yet in practice this is extremely difficult. Although other RL training setups share the same problem, it is more severe in LLM training since the language representation spaces are much larger (and exponentially in turn). 
 
