@@ -47,7 +47,7 @@ The reward model serves as a partial approximation of the ultimate evaluation, w
 
 As rewarding the tokens/words makes no sense semantically/syntactically in practice (and it's also computionally expensive), one may take it granted to use the prompts and responses as observations and actions (Shao et al. 2024). However, this assumption is not entirely sound. When the prompts and responses are long either from text-length perspective or dialogue-turn perspective, its obsure which parts actually contribute/hinder (i.e., credit assignment). So people are designing a bunch of tricks for reward modeling to migrate this issue as discussed later in the RLVR section.
 
-## RLHF — "Good" Justified by Humans
+### RLHF — "Good" Justified by Humans
 
 <span class="text-danger"><strong>How to create a reward model that aligns with human values?</strong></span>
 
@@ -132,7 +132,7 @@ Hence, by MLE, we have,
 {{< /sidenote >}}
 
 
-## RLVR — "Good" as Verified
+### RLVR — "Good" as Verified
 
 Recent advanced LLMs, such as o3-mini, have achieved performance comparable to human experts in domains like Olympic math (Balunović et al., 2025). In this case,
 
