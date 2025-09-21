@@ -37,11 +37,15 @@ In fact, existing human languages are very limited in expressiveness. Just like 
 
 ## RL Fine-Tuning
 
-Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT), reward modeling (RM), and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model is built, either based on external rules or human preference. While it only serves as a partial approximation of the ultimate evaluation, the reward model plays a crucial role in guiding optimization and is thus crucial for the training.
+Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT) and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model (RM) is built, either based on external rules or human preference. An example of RL fine-tuning process is shown in the figure below.
+
+{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
+
+The reward model serves as a partial approximation of the ultimate evaluation, which plays a crucial role in guiding optimization. Then,
 
 <span class="text-danger"><strong>How do we reward the task completion in languages?</strong></span>
 
-{{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
+As rewarding the tokens/words make no sense semantically and syntactically in practice (also computionally expensive), one may take it granted to use the prompts and responses as observations and actions (Shao et al. 2024). However, this assumption is not entirely sound. When the prompts and responses are long, its hard to know which parts actually contribute/hinder, aka the credit assignment in RL. So people are designing a bunch of tricks on the implemention level for reward modeling to migrate this issues as discussed later in the RLVR section.
 
 ## RLHF — "Good" Justified by Humans
 
