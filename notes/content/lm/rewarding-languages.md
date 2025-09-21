@@ -149,15 +149,15 @@ However, a common challenge in applying RLVR is that sparsity of rewards. Just a
 Some people also explore improving RM **vertically**. A straightforward technique is fine-tuning in separate phases. When the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. Multi-phase training can be useful when environments are not static, yet each phase still aims only to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, the approach remains inefficient and lacks generality. Moreover, when the number of phases becomes excessive, the training achieved in earlier phases becomes fragile and prone to degradation. On the contrary, models want to interact with their environment (with external agents) to find optimal solutions regarding different states (i.e., policies). While multi-turn interactions provide intermediate feedback signals, allowing agents to correct errors from previous turns and gradually develop policies that align more closely with the environment. Multi-phase and multi-turn training represents a trade-off in how general we want the model to be: the fewer phases it undergoes, the more general its behavior tends to remain.
 
 {{< sidenote >}}
-<strong>A simple case:</strong> An coder is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these external agents would be obviously different. Ideally, we want an agent to explore the formatting requirements by itself through several rounds of interaction, rather than having one to satisfy black, and another one for autopep, etc. 
+<strong>Example:</strong> An coder is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these external agents would be obviously different. Ideally, we want an agent to explore the formatting requirements by itself through several rounds of interaction, rather than having one to satisfy black, and another one for autopep, etc. 
 
 <br>
 
-<strong>A fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
+<strong> Fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
 
 <br>
 
-<strong>A philo question:</strong> Do we really want generality for AI? A superhero agent to save the world? Or diverse agents living together? :D
+<strong>Question:</strong> Do we really want generality for AI? A superhero agent to save the world? Or diverse agents living together? :D
 
 {{< /sidenote >}}
 
