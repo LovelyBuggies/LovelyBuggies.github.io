@@ -32,7 +32,7 @@ When people try to solve tasks in language, how to express them and evaluate the
 In fact, existing human languages are very limited in expressiveness. Just like my dilemma when describing a perfume or a haircut (supposed that I have a static objective), my vocabulary for those is too few and vague to accurately express my intent. We probably have a rich vocabulary for optical signals, but that for sound, touch, or scent is sparse. And we don't even design many words for electrical, magnetic and thermal signals. These tasks related are hard to accurately represent by language, and thus unable to assign and evaluate.
 
 {{< sidenote >}}
-This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, they can only achieve human-like level of intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Look at how AlphaGo defeated Sedol Lee -- it doesn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to try to make breakthroughs. 
+<strong>Fun fact:</strong> This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, they can only achieve human-like level of intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Look at how AlphaGo defeated Sedol Lee -- it doesn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to try to make breakthroughs. 
 {{< /sidenote >}}
 
 ## RL Fine-Tuning
@@ -150,15 +150,14 @@ Some people also explore improving RM **vertically**. A straightforward techniqu
 
 {{< sidenote >}}
 <strong>Example:</strong> An coder is tasked with writing well-formatted code, but it doesn't know "what should be a good format". The external feedback could from an static analyzer, (e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>) at each turn. After sufficient fine-tuning, the optimal policies learned under these external agents would be obviously different. Ideally, we want an agent to explore the formatting requirements by itself through several rounds of interaction, rather than having one to satisfy black, and another one for autopep, etc. 
+{{< /sidenote >}}
 
-<br>
+{{< sidenote >}}
+<strong>Open question:</strong> Do we really want generality for AI? A superhero agent to save the world? Or diverse agents living together? :D
+{{< /sidenote >}}
 
+{{< sidenote >}}
 <strong> Fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
-
-<br>
-
-<strong>Question:</strong> Do we really want generality for AI? A superhero agent to save the world? Or diverse agents living together? :D
-
 {{< /sidenote >}}
 
 <span class="text-danger"><strong>How to build LLM rewards in multi-turn?</strong></span>
@@ -210,6 +209,3 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 <li>Uesato, J., Kushman, N., Kumar, R., Song, F., Siegel, N., Wang, L., ... & Higgins, I. (2022). Solving math word problems with process-and outcome-based feedback. arXiv preprint arXiv:2211.14275.</li>
 
 {{< /references >}}
-
-<!-- moved to root content -->
-<!-- moved back under lm/ -->
