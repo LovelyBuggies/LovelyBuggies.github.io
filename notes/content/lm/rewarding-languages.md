@@ -144,11 +144,11 @@ However, a common challenge in applying RLVR is that sparsity of outcome-based r
 
 **Horizontally**, people attempt to design some appropriate verifiable rubrics to shape the reward, e.g., multi-dimensional rewards (Lifshitz et al., 2025). Besides simple weighted sums, one can also give partial rewards for good process (Uesato et al, 2022), or prioritize some fundamental rubrics in a hierarchical manner (Lai et. al, 2024). However, it remains unclear what constitutes good rubrics, what should be the relation between them, and whether the shaping shifts the optimal policies. Moreover, if in a in single-turn training settings, the rubrics may still be too sparse.
 
-Some people also explore improving RM **vertically**. One technique is to fine-tune it in separate phases. When the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. Multi-phase training can be useful when environments are not always static, yet in each phase, the training still aims only to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, the approach remains inefficient and lacks generality. Moreover, when the number of phases becomes excessive, the training achieved in earlier phases becomes fragile and prone to degradation. 
+To make RM denser **vertically**, one way is to fine-tune it in separate phases. When the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. Multi-phase training can be useful when environments are not always static, yet in each phase, the training still aims only to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, the approach remains inefficient and lacks generality. Moreover, when the number of phases becomes excessive, the training achieved in earlier phases becomes fragile and prone to degradation. Instead of having a sea of specialized models for different scenarios, we want agents to interact with their environment (and with external agents) to discover optimal solutions.
 
-## Rewards in  Multi-Turn
+## Rewards in Multi-Turn
 
-Instead of having a sea of specialized models for different scenarios, agents may prefer to interact with their environment (and with external agents) to discover optimal solutions. Multi-turn interactions provide intermediate feedback signals, which may be explicit in the next-turn prompt or implicit in the form of turn-level rewards. These enable agents to correct previous imperfectnesses through flexible (but should be static) feedback forms and gradually develop policies. Multi-phase, multi-turn training embodies a trade-off: the fewer phases the model undergoes, the more general its behavior tends to remain.
+By interacting with external tools or models (should be stationary), agents can obtain intermediate feedback signals, which may be explicit in the next-turn prompt or implicit in the form of turn-level rewards. These feedbacks enable agents to correct previous imperfectnesses and gradually develop policies. When making rewards singnal denser vertically, multi-phase, multi-turn training presents a trade-off: the fewer phases the model goes through, the more general its behavior tends to remain.
 
 {{< sidenote >}}
 <strong>Example:</strong> An coder agent is asked to write well-formatted code, but it doesn't know "what exactly should be a good format". The external feedback could from different static analyzers at each turn, e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>. After sufficient fine-tuning, the optimal policies learned under these external agents would be obviously different. Ideally, we want a general agent to explore the formatting requirements by itself through several rounds of interaction, rather than having separate ones to satisfy each. 
@@ -158,14 +158,14 @@ Instead of having a sea of specialized models for different scenarios, agents ma
 <strong> Fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
 {{< /sidenote >}}
 
-Traditional RL optimize the policy to maximize the expected return (i.e., cumulative rewards) rather than rewards. However, it's not that intuitive in LLM training scenario, where we are supposed to treat the final outcome as "return" and split some meaningful metrics as rewards. In other words,
+Traditional RL optimize the policy to maximize the expected return (i.e., cumulative rewards) rather than rewards. However, it's not that intuitive in LLM training scenario, where we are supposed to treat the final outcome as return and split some meaningful metrics as rewards. In other words,
 
 <span class="text-danger"><strong>How to build LLM rewards in multi-turn?</strong></span>
 
 The simpliest way is just to use the original bandit/one-turn reward model repeatedly (Shao et al. 2024). However, they are problematic since they want turn to continue.
 
 {{< sidenote >}}
-<strong>Example:</strong> A modern MARL environment, SMAC, shape the final outcome (i.e., win or lose) as finer-granularity reward metrics, like ....
+<strong>Example:</strong> A modern MARL environment (Samvelyan et al., 2019), SMAC, shape the final outcome (i.e., win or lose) as finer-granularity reward metrics, like ....
 {{< /sidenote >}}
 
 ## Citation
