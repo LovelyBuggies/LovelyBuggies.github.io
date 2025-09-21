@@ -51,8 +51,6 @@ As rewarding the tokens/words makes no sense semantically/syntactically in pract
 
 <span class="text-danger"><strong>How to create a reward model that aligns with human values?</strong></span>
 
-### Anti-Symmetric RM
-
 Bradley-Terry (BT) model are usually used to build reward models and can generalize preference signals to unseen inputs, scaling alignment by reducing reliance on slow and costly human annotations.
 
 <div class="definition">
@@ -73,7 +71,7 @@ where $u_i$ and $u_j$ are the respective utility or preference of options $i$ an
 
 Suppose a prompt $x$ is associated with $N$ candidate responses {{< katex >}} \{y_1, \ldots, y_N\} {{< /katex >}}, and human annotators provide preference labels between some pairs. Assuming human's annotation biases are trivial, tokenization and embedding are order-preserving, and sufficiently many comparisons $O(N \log N)$ are available under deterministic preferences, the true reward values can be inferred.
 
-BT is anti-symmetric, the preference between two responses depends only on the difference in their reward values to ensure consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation.
+BT is **anti-symmetric**, the preference between two responses depends only on the difference in their reward values to ensure consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation.
 
 {{% details "Estimating Reward Parameters in BT and PL" %}}
 
@@ -127,9 +125,11 @@ Hence, by MLE, we have,
 
 {{% /details %}}
 
-### Symmetric RM
+{{< sidenote >}}
 
-In contrast, symmetric models predict the reward for each prompt–response pair independently. Modeling rewards using ground-truth symmetric signals is straightforward with traditional machine learning techniques, like regression model or binary classifier with cross-entropy loss. The main challenge for these methods lies in obtaining a sufficient amount of such data.
+<strong>Symmetric RM:</strong> In contrast, symmetric RM predicts the reward for each prompt–response pair independently. Modeling rewards using ground-truth symmetric signals is straightforward with traditional machine learning techniques, like regression model or binary classifier with cross-entropy loss. The main challenge for these methods lies in obtaining a sufficient amount of such data.
+
+{{< /sidenote >}}
 
 
 ## RLVR — "Good" as Verified
