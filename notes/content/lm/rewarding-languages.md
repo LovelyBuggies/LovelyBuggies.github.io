@@ -146,9 +146,9 @@ However, a common challenge in applying RLVR is that sparsity of outcome-based r
 
 To make RM denser **vertically**, one way is to fine-tune it in separate phases. When the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. Multi-phase training can be useful when environments are not always static, yet in each phase, the training still aims only to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, the approach remains inefficient and lacks generality. Moreover, when the horizon is long, the training achieved in earlier phases becomes fragile and prone to degradation. Instead of having a sea of specialized models for different scenarios, we want agents to interact with their environment (and with external agents) to discover the optimal solutions.
 
-## Rewards in Multi-Turn
+## Rewarding Multi-Turn Dialogue
 
-By interacting with external tools or models (should be stationary), agents can obtain intermediate feedback signals, which may be explicit in the next-turn prompt or implicit in the form of turn-level rewards. These feedbacks enable agents to correct previous imperfectnesses and gradually develop policies. When making rewards singnal denser vertically, multi-phase, multi-turn training presents a trade-off — in general, the fewer phases the model goes through, the more general its behavior tends to remain.
+By interacting with external tools or models (should be stationary), agents can obtain intermediate feedback signals, which may be explicit in the next-turn prompt or implicit in the form of turn-level rewards. These feedbacks enable agents to enhance previous imperfectnesses and gradually develop policies. When making rewards singnal denser vertically, multi-phase, multi-turn training presents a trade-off — in general, the fewer phases the model goes through, the more general its behavior tends to remain.
 
 {{< sidenote >}}
 <strong>Example:</strong> An coder agent is asked to write well-formatted code, but it doesn't know "what exactly should be a good format". The external feedback could from different static analyzers at each turn, e.g., <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/hhatto/autopep8">autopep</a>, or <a href="https://www.pylint.org/">pylint</a>. After sufficient fine-tuning, the optimal policies learned under these external agents would be obviously different. Ideally, we want a general agent to explore the formatting requirements by itself through several rounds of interaction, rather than having separate ones to satisfy each. 
@@ -158,11 +158,31 @@ By interacting with external tools or models (should be stationary), agents can 
 <strong> Fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
 {{< /sidenote >}}
 
-Traditional RL optimize the policy to maximize the expected return (i.e., cumulative rewards) rather than rewards. However, it's not that intuitive in LLM training scenario, where we are supposed to treat the final outcome as return and split some meaningful metrics as rewards. In other words,
+### Magic of Positivity
 
-<span class="text-danger"><strong>How to build LLM rewards in multi-turn?</strong></span>
+People are careful in the sense of making the rewards for expected outcome larger than less expected ones when designing rewards. But, the positivity of rewards are usually overlooked, or defaultly set to be non-negative.
 
-The simpliest way is just to use the original bandit/one-turn reward model repeatedly (Shao et al. 2024). However, they are problematic since they want turn to continue.
+<span class="text-danger"><strong>Does the reward positivity matters?</strong></span>
+
+Yes, it matters a lot! 
+
+Suppose an agent is training in an episodic case, which either terminates by reaching horizon limit or triggers certain conditions, $\geqslant 0$ rewards encourage the agent to stay longer in the environment to explore potential benefits ("don't send me away"), since it doesn't hurt anyway; $\leqslant 0$ rewards, on the contrary, makes the agent suffer and want to escape ASAP ("let me go"). So if the termination is postive (e.g., achieve the goal, win the game),  
+
+
+
+
+
+So let's see how we should design rewards for LLM. RL optimizes the policy towards maximizing the expected return (i.e., cumulative rewards). 
+
+
+
+
+
+
+
+
+
+However, if we simply use the verifiable outcome as the reward and optimize it, it will inevitably encourage the dialog to stay longer to accumulate more times and taking the mean rewards as return doesn't concord to the definition of return. Normally, people usually split a clear outcome with meaningful metrics as rewards. For example, in StarCraft Multi-Agent Challenge, the dense shaping turn the sparse final outcome win or lose to be the damage to the enemy and shield and the final game outcome. 
 
 {{< sidenote >}}
 <strong>Example:</strong> A modern MARL environment (Samvelyan et al., 2019), SMAC, shape the final outcome (i.e., win or lose) as finer-granularity reward metrics, like ....
