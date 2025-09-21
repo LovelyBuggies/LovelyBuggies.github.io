@@ -129,19 +129,7 @@ Hence, by MLE, we have,
 
 ### Symmetric RM
 
-In contrast, symmetric models predict the reward for each prompt–response pair independently. Modeling rewards using ground-truth symmetric signals is straightforward with traditional machine learning techniques. The main challenge for these methods lies in obtaining a sufficient amount of such data.
-
-Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}_{n=1}^N, s_n \in \mathbb{R}$ (e.g., Anthropic HH, OpenAssistant, and MT-Bench), 
-
-{{< katex display=true >}}
-\hat{r} = \arg\min_r \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2.
-{{< /katex >}}
-
-Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}{{< /katex >}} for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
-
-{{< katex display=true >}}
-\hat{r} = - \arg\max_r \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
-{{< /katex >}}
+In contrast, symmetric models predict the reward for each prompt–response pair independently. Modeling rewards using ground-truth symmetric signals is straightforward with traditional machine learning techniques, like regression model or binary classifier with cross-entropy loss. The main challenge for these methods lies in obtaining a sufficient amount of such data.
 
 
 ## RLVR — "Good" as Verified
