@@ -144,7 +144,7 @@ Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}
 
 Recent advanced LLMs, such as o3-mini, have achieved performance comparable to human experts in domains like Olympic math (Balunović et al., 2025). In this case,
 
-<span class="text-danger"><strong>Does general human general values really matter?</strong></span>
+<span class="text-danger"><strong>Does the general human values really matter?</strong></span>
 
 Admittedly, human attempts to construct values aim to reflect the truth, but they are never quite identical to it. Using verified signals from deterministic tools (verifiers or rules) to train LLMs can make them more objective and less biased. This practice is call RL from verifiable rewards, RLVR (Guo et al., 2025).
 
@@ -165,6 +165,8 @@ Some people also explore improving RM **vertically**. A straightforward techniqu
 {{< sidenote >}}
 <strong> Fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
 {{< /sidenote >}}
+
+## Rewards for Multi-Turn Interations
 
 <span class="text-danger"><strong>How to build LLM rewards in multi-turn?</strong></span>
 
