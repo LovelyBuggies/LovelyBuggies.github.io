@@ -164,7 +164,7 @@ People are careful in the sense of making the rewards for expected outcome large
 
 <span class="text-danger"><strong>Does the reward positivity matters?</strong></span>
 
-Yes, it matters a lot! 
+<span><strong>Yes, it does!</strong></span>
 
 Suppose an agent is training in an episodic case, which either terminates by reaching horizon limit or triggers certain conditions, $\geqslant 0$ rewards encourage the agent to stay longer in the environment to explore potential benefits ("don't send me away"), since it doesn't hurt anyway; $\leqslant 0$ rewards, on the contrary, makes the agent suffer and want to escape ASAP ("let me go"). So if the termination is postive (e.g., achieve the goal, win the game),  
 
