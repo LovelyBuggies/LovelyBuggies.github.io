@@ -41,9 +41,9 @@ Recently, RL is one of  an important tool to fine tuning pretrained models to ma
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
-### RL Representations
+### RL Components in Language
 
-<span class="text-danger"><strong>How do we reward the task completion in languages?</strong></span>
+<span class="text-danger"><strong>How do we reward the task completion in language?</strong></span>
 
 As rewarding the tokens/words makes no sense semantically/syntactically in practice (and it's also computionally expensive), one may take it granted to use the prompts and responses as observations and actions (Shao et al. 2024). However, this assumption is not entirely sound. When the prompts and responses are long either from text-length perspective or dialogue-turn perspective, its obsure which parts actually contribute/hinder (i.e., credit assignment). So people are designing a bunch of tricks for reward modeling to migrate this issue as discussed later in the RLVR section.
 
