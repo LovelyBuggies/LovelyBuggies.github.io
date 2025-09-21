@@ -146,7 +146,7 @@ However, a common challenge in applying RLVR is that sparsity of outcome-based r
 
 Some people also explore improving RM **vertically**. One technique is to fine-tune it in separate phases. When the raw outputs of base transformers preserve language structure but are not directly useful, models can be further trained in an additional phase, akin to offline RL. Multi-phase training can be useful when environments are not always static, yet in each phase, the training still aims only to optimize toward a fixed ground truth. Even when child models are diversified hierarchically from the base and specialized for particular tasks, the approach remains inefficient and lacks generality. Moreover, when the number of phases becomes excessive, the training achieved in earlier phases becomes fragile and prone to degradation. 
 
-## Rewards for Multi-Turn Interations
+## Rewards in  Multi-Turn
 
 Instead, agents may want to interact with their environment (with external agents) to find optimal solutions. The multi-turn interactions provide intermediate feedback signals, which can either be explicit in next turn prompt or implicit from turn rewards. This allows agents to correct previous errors with flexible feedback formats and gradually develop policies that align with the environment. Multi-phase and multi-turn training represents a trade-off in how general we want the model to be: the fewer phases it undergoes, the more general and less specific its behavior tends to remain.
 
