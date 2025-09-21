@@ -37,11 +37,11 @@ In fact, existing human languages are very limited in expressiveness. Just like 
 
 ## RL Fine-Tuning
 
-Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. Normally, this phase involves supervised fine-tuning (SFT) and RL. After initial SFT injects curated human-labeled data to the base transformers, a reward model (RM) is built, either based on external rules or human preference. An example of RL fine-tuning process is shown in the figure below.
+Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. After initial SFT injects curated human-labeled data to the base transformers, a reward model (RM) is built to guide RL optimization.
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
-The reward model serves as a partial approximation of the ultimate evaluation, which plays a crucial role in guiding optimization. Then,
+### Language Representations
 
 <span class="text-danger"><strong>How do we reward the task completion in languages?</strong></span>
 
