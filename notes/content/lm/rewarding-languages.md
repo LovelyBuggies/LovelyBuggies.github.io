@@ -160,32 +160,18 @@ By interacting with external tools or models (should be stationary), agents can 
 
 ### Magic of Positivity
 
-People are careful in the sense of making the rewards for expected outcome larger than less expected ones when designing rewards. But, the positivity of rewards are usually overlooked, or defaultly set to be non-negative.
+In RL training, people are careful when making the rewards for expected outcome larger than less expected ones when designing rewards. But, the positivity of rewards are usually overlooked, or defaultly set to be non-negative.
 
 <span class="text-danger"><strong>Does the reward positivity matters?</strong></span>
 
-<span><strong>Yes, it does!</strong></span>
+<span><strong>Yes, it does!</strong></span> Suppose an agent is training in an episodic case, which either terminates by reaching horizon limit or triggers certain conditions, non-negative rewards ($\forall r, r \geqslant 0$) encourage the agent to stay longer in the environment to explore potential benefits ("don't push me away"), since it doesn't hurt anyway; non-positive rewards ($\forall r, r \leqslant 0$), on the contrary, makes the agent suffer and want to escape asap ("let me go"). 
 
-Suppose an agent is training in an episodic case, which either terminates by reaching horizon limit or triggers certain conditions, $\geqslant 0$ rewards encourage the agent to stay longer in the environment to explore potential benefits ("don't send me away"), since it doesn't hurt anyway; $\leqslant 0$ rewards, on the contrary, makes the agent suffer and want to escape ASAP ("let me go"). So if the termination is postive (e.g., achieve the goal, win the game),  
+Given non-negative rewards ($r \geqslant 0$), agents are naturally encouraged to strive longer before eventual doom. However, pursuing a positive objective may be delayed or even become risky. Of course, one can migrate this issue by shaping the termination rewards with significant bonuses or penalties, as in SMAC (Samvelyan et al., 2019) or OverCook (Gessler et al., 2025). Yet, even with such shaping, the learned policy often remains suboptimal: once a victory is secured (win the game or kill an enemy), there is no need to expose agents to additional risk simply to casue more damage.
 
-
-
-
-
-So let's see how we should design rewards for LLM. RL optimizes the policy towards maximizing the expected return (i.e., cumulative rewards). 
-
-
-
-
-
-
-
-
-
-However, if we simply use the verifiable outcome as the reward and optimize it, it will inevitably encourage the dialog to stay longer to accumulate more times and taking the mean rewards as return doesn't concord to the definition of return. Normally, people usually split a clear outcome with meaningful metrics as rewards. For example, in StarCraft Multi-Agent Challenge, the dense shaping turn the sparse final outcome win or lose to be the damage to the enemy and shield and the final game outcome. 
+Non-positive rewards ($\leqslant 0$) are less used, since designers typically wish to avoid encouraging agents to surrender prematurely. However, it only takes effect when the termination is negative. When the termination is positive, such as completing a task, non-positive rewards can be beneficial, as they push agents to solve the task quickly rather than prolonging interactions. It may be overly harsh to impose a large penalty every time the task is not completed, introducing a discount factor can be useful in this case. A useful practice, therefore, is to employ discounted negative rewards during training, since maximizing the return will encourage agents to complete the task faster.
 
 {{< sidenote >}}
-<strong>Example:</strong> A modern MARL environment (Samvelyan et al., 2019), SMAC, shape the final outcome (i.e., win or lose) as finer-granularity reward metrics, like ....
+<strong>Clarification:</strong> This doesn't say SMAC's design is incorrect, The design of this environment is tricky :D All enemy agents must reach HP = 0 for the game to count as a win, the total amount of damage required is hence fixed, so there is no room to use less damage to win the game. But what remains optimizable is how you allocate that damage. For example, if an enemy unit is weak with only 1 HP left, it’s wasteful and risky to send in a powerful but fragile attacker. A smarter choice is to let a healthy or more defensive unit finish the kill.
 {{< /sidenote >}}
 
 ## Citation
@@ -230,5 +216,6 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 <li>Lai, Y., Wang, S., Liu, S., Huang, X., & Wei, Z. (2024). ALaRM: Align language models via hierarchical rewards modeling. arXiv preprint arXiv:2403.06754.</li>
 <li>Uesato, J., Kushman, N., Kumar, R., Song, F., Siegel, N., Wang, L., ... & Higgins, I. (2022). Solving math word problems with process-and outcome-based feedback. arXiv preprint arXiv:2211.14275.</li>
 <li>Samvelyan, M., Rashid, T., De Witt, C. S., Farquhar, G., Nardelli, N., Rudner, T. G., ... & Whiteson, S. (2019). The starcraft multi-agent challenge. arXiv preprint arXiv:1902.04043.</li>
+<li>Gessler, T., Dizdarevic, T., Calinescu, A., Ellis, B., Lupu, A., & Foerster, J. N. (2025). Overcookedv2: Rethinking overcooked for zero-shot coordination. arXiv preprint arXiv:2503.17821.</li>
 
 {{< /references >}}
