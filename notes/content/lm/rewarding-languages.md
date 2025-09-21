@@ -89,7 +89,7 @@ Then the reward model can be estimated by MLE,
 {{< katex display=true >}}
 \begin{equation}
 \begin{aligned}
-\bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
+\hat{r} &= \arg\max_r \log \mathcal{L}(r) \\
 &=  \arg\max_r \sum_{m=1}^M \left[ r(x,y_{i_m}) - \log(\exp(r(x,y_{i_m})) + \exp(r(x,y_{j_m}))) \right] .\nonumber
 \end{aligned}
 \end{equation}
@@ -113,7 +113,7 @@ Hence, by MLE, we have,
 {{< katex display=true >}}
 \begin{equation}
 \begin{aligned}
-\bar{r} &= \arg\max_r \log \mathcal{L}(r) \\
+\hat{r} &= \arg\max_r \log \mathcal{L}(r) \\
 &= \arg\max_r \sum_{m=1}^{M} \sum_{k=1}^{N_m-1} \Big[ r(x, y_{i_k^m}) - \log\!\Big(\sum_{j=k}^{N_m} \exp(r(x, y_{i_j^m}))\Big) \Big].\nonumber
 \end{aligned}
 \end{equation}
@@ -126,13 +126,13 @@ In contrast, symmetric models predict the reward for each prompt–response pair
 Just like traditional regression model with scalar scorings $\{(x_n, y_n, s_n)\}_{n=1}^N, s_n \in \mathbb{R}$ (e.g., Anthropic HH, OpenAssistant, and MT-Bench), 
 
 {{< katex display=true >}}
-\bar{r} = \arg\min_r \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2.
+\hat{r} = \arg\min_r \sum_{n=1}^N \big(r(x_n, y_n) - s_n\big)^2.
 {{< /katex >}}
 
 Alternatively, train a binary classifier using labels {{< katex >}}s_n\in\{0,1\}{{< /katex >}} for acceptability, with sigmoid $\sigma$ and cross-entropy loss,
 
 {{< katex display=true >}}
-\bar{r} = - \arg\max_r \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
+\hat{r} = - \arg\max_r \sum_{n=1}^N \Big[ s_n \log \sigma(r(x_n, y_n)) + (1 - s_n) \log(1 - \sigma(r(x_n, y_n))) \Big] \, .
 {{< /katex >}}
 
 
