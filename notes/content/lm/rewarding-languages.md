@@ -75,6 +75,8 @@ Suppose a prompt $x$ is associated with $N$ candidate responses {{< katex >}} \{
 
 BT is anti-symmetric, the preference between two responses depends only on the difference in their reward values to ensure consistent and transitive pairwise comparisons. Inferring a reward model using the BT framework can be thus formulated as parameter estimation.
 
+{{% details "Estimating Rewards in BT" %}}
+
 Under BT,
 
 {{< katex display=true >}}
@@ -122,6 +124,8 @@ Hence, by MLE, we have,
 \end{aligned}
 \end{equation}
 {{< /katex >}}
+
+{{% /details %}}
 
 ### Symmetric RM
 
