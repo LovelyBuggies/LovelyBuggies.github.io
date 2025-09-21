@@ -41,7 +41,7 @@ Recently, RL is one of  an important tool to fine tuning pretrained models to ma
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
-### Language Representations
+### RL Representations
 
 <span class="text-danger"><strong>How do we reward the task completion in languages?</strong></span>
 
