@@ -158,13 +158,15 @@ Instead of having a sea of specialized models for different scenarios, agents ma
 <strong> Fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks, but I let Claude Code to follow black, which led to formatting conflicts when committing code.
 {{< /sidenote >}}
 
-One key question is,
+Traditional RL optimize the policy to maximize the expected return (i.e., cumulative rewards) rather than rewards. However, it's not that intuitive in LLM training scenario, where we are supposed to treat the final outcome as "return" and split some meaningful metrics as rewards. In other words,
 
 <span class="text-danger"><strong>How to build LLM rewards in multi-turn?</strong></span>
 
-The simpliest way is just to use the original bandit/one-turn reward model repeatedly (Shao et al. 2024). However, they are problematic as...
+The simpliest way is just to use the original bandit/one-turn reward model repeatedly (Shao et al. 2024). However, they are problematic since they want turn to continue.
 
-Let's trace back what trandition RL rewards looks like first. But LLM can't.
+{{< sidenote >}}
+<strong>Example:</strong> A modern MARL environment, SMAC, shape the final outcome (i.e., win or lose) as finer-granularity reward metrics, like ....
+{{< /sidenote >}}
 
 ## Citation
 
@@ -207,5 +209,6 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 <li>Lifshitz, S., McIlraith, S. A., & Du, Y. (2025). Multi-agent verification: Scaling test-time compute with multiple verifiers. arXiv preprint arXiv:2502.20379.</li>
 <li>Lai, Y., Wang, S., Liu, S., Huang, X., & Wei, Z. (2024). ALaRM: Align language models via hierarchical rewards modeling. arXiv preprint arXiv:2403.06754.</li>
 <li>Uesato, J., Kushman, N., Kumar, R., Song, F., Siegel, N., Wang, L., ... & Higgins, I. (2022). Solving math word problems with process-and outcome-based feedback. arXiv preprint arXiv:2211.14275.</li>
+<li>Samvelyan, M., Rashid, T., De Witt, C. S., Farquhar, G., Nardelli, N., Rudner, T. G., ... & Whiteson, S. (2019). The starcraft multi-agent challenge. arXiv preprint arXiv:1902.04043.</li>
 
 {{< /references >}}
