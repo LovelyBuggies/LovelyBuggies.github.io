@@ -45,7 +45,7 @@ The reward model serves as a partial approximation of the ultimate evaluation, w
 
 <span class="text-danger"><strong>How do we reward the task completion in languages?</strong></span>
 
-As rewarding the tokens/words make no sense semantically and syntactically in practice (also computionally expensive), one may take it granted to use the prompts and responses as observations and actions (Shao et al. 2024). However, this assumption is not entirely sound. When the prompts and responses are long, its hard to know which parts actually contribute/hinder, aka the credit assignment in RL. So people are designing a bunch of tricks on the implemention level for reward modeling to migrate this issues as discussed later in the RLVR section.
+As rewarding the tokens/words makes no sense semantically/syntactically in practice (and it's also computionally expensive), one may take it granted to use the prompts and responses as observations and actions (Shao et al. 2024). However, this assumption is not entirely sound. When the prompts and responses are long either from text-length perspective or dialogue-turn perspective, its obsure which parts actually contribute/hinder (i.e., credit assignment). So people are designing a bunch of tricks for reward modeling to migrate this issue as discussed later in the RLVR section.
 
 ## RLHF — "Good" Justified by Humans
 
