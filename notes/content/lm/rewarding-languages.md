@@ -176,7 +176,7 @@ Non-positive rewards ($r \leqslant 0$) are used less often, since designers typi
 
 ### Dogma of LLM Reward
 
-Therefore, in LLM training, a useful practice is to employ discounted negative rewards, maximizing the return will encourage agents to complete the task faster. A hybrid scheme can also be applied by combining a negative lower limit with a positive upper limit. When the agent achieves progress, we can signal encouragement — "you got something and have some potential, let's explore more". Conversely, when the agent fails to achieve anything in a turn, it is often better to think about cutting losses in time if there is such a negative terminal condition. Else, one can be the meanest trainer and always give biggest penalty to discourage the premature surrender (｀▽´)Ψ
+Therefore, in LLM training, a useful practice is to employ discounted negative rewards, maximizing the return will encourage agents to complete the task faster. A hybrid scheme can also be applied by combining a negative lower limit with a positive upper limit. When the agent achieves progress, we can signal encouragement — "you got something and have some potential, let's explore more". Conversely, when the agent fails to achieve anything in a turn, it is often better to think about cutting losses in time if there is such a negative terminal condition. Else, one can be the meanest trainer and always give biggest penalty if it surrenders (｀▽´)Ψ
 
 ## Citation
 
