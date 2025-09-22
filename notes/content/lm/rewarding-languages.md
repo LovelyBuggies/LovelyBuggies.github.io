@@ -13,39 +13,39 @@ readingTime: 50
 {{< postbadges >}}
 {{< badge style="black" title="License" value="CC BY-NC" >}}
 
-RL is everywhere these days when people talk about LLMs. However, the challenge arises in how we design an appropriate reward model for evaluating task completions in languages (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what’s working, what’s not, and why. It then takes a step back to ask whether today’s LLM reward models really make sense, and explores where the design should be heading.
+RL is everywhere these days when we talk about LLMs. However, the challenge arises in how we design an appropriate reward model for evaluating task completions in languages (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what are working in which cases and why. Then it explores where the design of future LLM rewards should be heading.
 
 ## Human Languages
 
 ### Why We Read/Listen/Speak/Write?
 
-This title might be overgeneralizing the usage of language into just 4 aspects (of course, there are many other ways we use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)). Regardless,
+The section title might be overgeneralizing the usage of language into a few aspects (there could be many other ways to use language, like [thinking](https://lilianweng.github.io/posts/2025-05-01-thinking/)). Regardless,
 
-<span class="text-danger"><strong>Why do we need language?</strong></span>
+<span class="text-danger"><strong>Why do we humans need language?</strong></span>
 
-Language is an abstract and compact medium for expressing real-world dynamics, where vocabulary gives us the atomic units of meaning and syntax provides us the framework. With language, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. A good language system strives for compactness, mapping the universe as neatly as possible. But in practice, languages can rarely compress the world into pure states; they are normally noisy observations.
+Language abstracts and compacts the real-world dynamics with vocabulary and syntax. Utilizing language to communicate, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. Ideally, a fantastic language system is complete, mapping the universe as neatly as possible. But in practice, it rarely achieves to compress the whole world and always has noises.
 
 ### Solving Tasks in Language
 
-When people try to solve tasks in language, how to express them and evaluate the outcome are crucial questions. Some tasks, along with their completions, can be clearly conveyed using niche languages, e.g.,  asking a friend to bring back my phone from gym locker. For this kind of tasks, we can clearly express our intent and the outcome can be easily verified. But some other tasks may not have clear and objective evaluation criteria — deciding whether a paper (aka a research task) is "good" often lacks consensus (reflected in complaints about conference reviewing :3).
+To solve tasks in language, how to express them and evaluate the outcome are the most crucial parts. Some tasks, as well as the completions, can be clearly conveyed using niche languages, e.g., asking a friend to bring my phone from gym locker. But some other tasks may not have clear and objective evaluation criteria, for example deciding whether a paper (aka a research task) is "good" often lacks consensus (this is reflected in complaints about nowadays conference reviewing :3).
 
-In fact, existing human languages are very limited in expressiveness. Just like I'm clumsy when describing a perfume (supposed that I have a static objective), my vocabulary for those is too few and vague to accurately express my true intent. We probably have a rich vocabulary for optical signals, but that for sound, touch, or scent is sparse, and we don't even design many words for electrical, magnetic and thermal signals. So it's very hard to accurately assign a task in those domains with limited words, no to mention evaluate it.
+In fact, existing human languages are very limited in expressiveness. Just like I don’t have many words in my mind to describe perfumes, which makes me feel at a loss when choosing one (supposed that I have a fixed target). We probably have a rich vocabulary for optical signals, but that for sound, touch, or scent is rather sparse. Also, we don't even design many words for electrical, magnetic and thermal signals. We can not expected to solve complex tasks in these domains, since we can hardly depicting them accurately.
 
 {{< sidenote >}}
-<strong>Fun fact:</strong> This limitation may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, it's likely that they will achieve human-like level of intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Look at how AlphaGo defeated Sedol Lee -- it doesn’t rely on language representations at all. But the optimistic thing is, we are still inventing new vocabularies and languages (e.g., <a href="https://go.dev/">Go</a> in 2007) to try to make breakthroughs. 
+<strong>Fun fact:</strong> The limitation of human language may hint at why <a href="https://www.youtube.com/watch?v=fsvKLxmtFmY">LLMs are not the ultimate future of AI</a>. Based on humans' existing languages, it's likely that they will eventually achieve a human-like level of intelligence (<em>though it’s fun to know how much storage would be used to memorize our current knowledge base</em>). Look at how AlphaGo defeated Sedol Lee -- it doesn’t actually rely on language, the relatively small chess board is represented in symbols. But don’t be pessimistic about human development! We are still inventing new vocabularies and languages with the technology development (e.g., <a href="https://go.dev/">Go</a> in 2007). The volcabulary is even richer (e.g., loanwords) than 100 years ago with the globalization.
 {{< /sidenote >}}
 
 ## RL Fine-Tuning
 
-Recently, RL is one of  an important tool to fine tuning pretrained models to make them practical. As transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary training phase to be specialized to certain domains. After initial SFT injects curated human-labeled data to the base transformers, a reward model (RM) is built to guide RL optimization.
+RL is one of  an important tool to train pretrained models in practice — as transformers scale to LMs, their raw outputs (optimized primarily for next-token prediction) often diverge from expected traits, so they need a secondary fine-tuning phase to be specialized to certain domains. In general, after initial SFT injects curated human-labeled data to the base transformers, a reward model (RM) is built to guide RL.
 
 {{< image src="/imgs/blog/reward_modeling_llm/RLHF.png" alt="RLHF" class="w-60" >}}
 
 ### RL Components in Language
 
-<span class="text-danger"><strong>How do we reward the task completion in language?</strong></span>
+<span class="text-danger"><strong>How do we reward completions in language?</strong></span>
 
-As rewarding the tokens/words makes no sense semantically/syntactically in practice (and it's also computionally expensive), one may take it granted to use the prompts and responses as observations and actions (Shao et al. 2024). However, this assumption is not entirely sound. When the prompts and responses are long either from text-length perspective or dialogue-turn perspective, its obsure which parts actually contribute/hinder (i.e., credit assignment). So people are designing a bunch of tricks for reward modeling to migrate this issue as discussed later in the RLVR section.
+As rewarding the tokens/words seems to mean trivial semantically/syntactically in practice and is also computionally expensive, one may take it granted to represent the sequences (prompts and responses) as the RL components (observations and actions). However, this assumption is not entirely sound. When the prompts and responses are long (either because of lengthy texts or turns), its obsure which parts actually contribute/hinder in which way (aka the credit assignment challenge), which would result in inefficient exploration. In practice, one usually attempt to migrate this issue by curated prompt and reward design.
 
 ### "Good" Justified by Humans
 
@@ -221,5 +221,6 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 <li>Uesato, J., Kushman, N., Kumar, R., Song, F., Siegel, N., Wang, L., ... & Higgins, I. (2022). Solving math word problems with process-and outcome-based feedback. arXiv preprint arXiv:2211.14275.</li>
 <li>Samvelyan, M., Rashid, T., De Witt, C. S., Farquhar, G., Nardelli, N., Rudner, T. G., ... & Whiteson, S. (2019). The starcraft multi-agent challenge. arXiv preprint arXiv:1902.04043.</li>
 <li>Gessler, T., Dizdarevic, T., Calinescu, A., Ellis, B., Lupu, A., & Foerster, J. N. (2025). Overcookedv2: Rethinking overcooked for zero-shot coordination. arXiv preprint arXiv:2503.17821.</li>
+<li>Liu, Z., Chen, C., Li, W., Qi, P., Pang, T., Du, C., ... & Lin, M. (2025). Understanding r1-zero-like training: A critical perspective. arXiv preprint arXiv:2503.20783.</li>
 
 {{< /references >}}
