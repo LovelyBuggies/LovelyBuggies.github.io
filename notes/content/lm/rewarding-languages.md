@@ -172,7 +172,7 @@ Given non-negative rewards ($r \geqslant 0$), agents are naturally encouraged to
 <strong>Clarification:</strong> This doesn't say SMAC's design is incorrect, The design of this environment is tricky :D All enemy agents must reach HP = 0 for the game to count as a win, the total amount of damage required is hence fixed, so there is no room to use less damage to win the game. But what remains optimizable is how you allocate that damage. For example, if an enemy unit is weak with only 1 HP left, it’s wasteful and risky to send in a powerful but fragile attacker. A smarter choice is to let a healthy or more defensive unit finish the kill.
 {{< /sidenote >}}
 
-Non-positive rewards ($r \leqslant 0$) are used less often, since designers typically wish to avoid letting agents to surrender prematurely when the termination is negative. But if the termination is positive, such as completing a task, non-positive rewards can be beneficial, as they push agents to solve the task quickly rather than prolonging interactions. It may be overly harsh to impose a large penalty every time the task is not completed, introducing a discount factor can be useful in this case. 
+Non-positive rewards ($r \leqslant 0$) are used less often, since designers typically wish to avoid letting agents to surrender prematurely when the termination is negative. But if there is a positive termination, such as completing a task, having non-positive rewards is not a bad idea, as they push agents to solve the task quickly rather than prolonging interactions. It may be overly harsh to impose a large penalty every time the task is not completed, introducing a discount factor can be useful in this case. 
 
 ### Dogma of LLM Reward
 
