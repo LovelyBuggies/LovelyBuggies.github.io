@@ -23,7 +23,7 @@ The section title might be overgeneralizing the usage of language into a few asp
 
 <span class="text-danger"><strong>Why do we humans need language?</strong></span>
 
-Language abstracts and compacts the real-world dynamics with vocabulary and syntax. Utilizing language to communicate, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. Ideally, a fantastic language system is complete, mapping the universe as neatly as possible. But in practice, it rarely achieves to compress the whole world and always has noises.
+Language abstracts and compacts the real-world dynamics with vocabulary and syntax. Utilizing language to communicate, we can not only represent the accessible (visible, audible, tangible) signals of the world, but also the inaccessible parts (like atoms, gravity, microorganisms). This allows us to represent the world in a way that can be transmitted, reasoned about, and built upon. Ideally, a fantastic language system is complete, mapping the universe as neatly as possible. But in practice, it rarely achieves to compress the whole world and always has a lot of noises.
 
 ### Solving Tasks in Language
 
