@@ -174,7 +174,7 @@ If it is destinated to fall into doom, given always-non-negative rewards ($r \ge
 
 Always-non-positive rewards ($r \leqslant 0$) are used less often, since designers typically wish to avoid letting agents to surrender prematurely when the termination is negative. But if there is a positive termination, such as completing a task, having non-positive rewards is not a bad idea, as they push agents to solve the task quickly rather than prolonging interactions. It may be overly harsh to impose a large penalty every time the task is not completed, introducing a discount factor can be useful in this case. 
 
-### Dogma of Reward Design
+### Dogma of LLM RM
 
 If we aim to train an LLM agent to automatically use external tools for task completion, the most natural terminal condition (besides reaching turn number limit) is when the task is accomplished perfectly — in which case a large bonus should be given. Employing discounted negative rewards is always not a bad idea, maximizing return incentivizes the agent to complete the task more quickly. If there is such a negative terminal condition, a hybrid scheme can also be adopted, combining both negative and positive rewards. When the agent reaches certain milestones, positive rewards can serve as encouragement to continue the turn — "you’ve achieved something, there is potential, let’s explore further". Conversely, when the agent fails to make any progress in a turn, negative rewards will try to imply agent to cut losses in time and quickly escape, because all it has in this episode is pain.
 
