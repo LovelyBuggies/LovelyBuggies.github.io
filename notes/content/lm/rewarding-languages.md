@@ -174,7 +174,7 @@ Given non-negative rewards ($r \geqslant 0$), agents are naturally encouraged to
 
 Non-positive rewards ($\leqslant 0$) are used less often, since designers typically wish to avoid letting agents to surrender prematurely. However, it makes more sense when the termination is negative. If the termination is positive, such as completing a task, non-positive rewards can be beneficial, as they push agents to solve the task quickly rather than prolonging interactions. It may be overly harsh to impose a large penalty every time the task is not completed, introducing a discount factor can be useful in this case. 
 
-### Dogma of LLM Reward Design
+### Dogma of LLM Reward
 
 Therefore, in LLM training, a useful practice is to employ discounted negative rewards, maximizing the return will encourage agents to complete the task faster. In addition, a hybrid scheme can also be applied by combining a negative lower limit with a positive upper limit. When the agent achieves progress, we can signal encouragement — "it gets something and has some potential, let's explore more". Conversely, when the agent fails to achieve the objective in a turn, it is often better to think about cutting losses in time, preventing wasted effort on unpromising trajectories.
 
