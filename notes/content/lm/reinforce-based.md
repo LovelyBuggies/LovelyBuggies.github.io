@@ -1,15 +1,15 @@
 ---
-date: 2025-09-18
-title: "All You Want to Know about LLM Rewards"
+date: 2025-09-29
+title: "On REINFORCE-Based Methods in RL Fine-Tuning "
 math: true
 postType: thought
-linkTitle: "Rewarding Languages"
-readingTime: 50
+linkTitle: "Reinforce-based Fine-Tuning"
+readingTime: 10
 ---
 
 {{< katex />}}
 
-# All You Want to Know about LLM Rewards
+# On REINFORCE-Based Methods in RL Fine-Tuning 
 {{< postbadges >}}
 {{< badge style="black" title="License" value="CC BY-NC" >}}
 
@@ -168,7 +168,7 @@ In RL training, people are careful when making the rewards for expected outcome 
 
 If it is destinated to fall into doom (e.g., an agent faces with an impossible mission), given always-non-negative rewards ($r \geqslant 0$) will encourage agents to strive longer. This could be great from tough spirit, but not efficient in the sense of training. In addition, achieving a positive objective in this case may be delayed or even become risky. Of course, one can strengthen the terminal outcomes by shaping them with dominant bonuses or penalties, as in SMAC (Samvelyan et al., 2019) or OverCook (Gessler et al., 2025). Yet, even with such shaping, the learned policy under always-non-negative rewards remains suboptimal from ideal: As ally losses are not penalized, once victory is secured (e.g., by winning the game or eliminating an enemy), agents may still take unnecessary risks to inflict additional damage.
 
-Note that in this section, we are just talking about the positivity of rewards (like REINFORCE). In reality, most of PG methods use advantages.
+Note that in this section, we are just talking about the positivity of rewards, in reality, most of PG methods use advantages.
 
 {{< sidenote >}}
 <strong>Clarification:</strong> This doesn't say SMAC's design is wrong, the initial objective is to win the game no matter what it takes. But what remains optimizable is in reality is how to bear less ally losses to win. For example, if an enemy unit is weak with only 1 HP left, it’s wasteful and risky to send in a powerful but fragile attacker. A smarter choice is to let a healthy or more defensive unit finish the kill.
@@ -187,7 +187,7 @@ If we aim to train an LLM agent to automatically use external tools for task com
 
 {{% tab "Plain" %}}
 ```tpl
-Liu, Shuo. (September 2025). All You Want to Know about LLM Rewards.
+Liu, Shuo. (September 2025). On REINFORCE-Based Methods in RL Fine-Tuning.
 LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languages/
 ```
 {{% /tab %}}
@@ -195,7 +195,7 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 {{% tab "BibTeX" %}}
 ```bibtex
 @article{liu2025allyouwanttoknowaboutllmrewards,
-  title   = {All You Want to Know about LLM Rewards},
+  title   = {On REINFORCE-Based Methods in RL Fine-Tuning},
   author  = {Liu, Shuo},
   journal = {lovelybuggies.github.io},
   year    = {2025},
@@ -211,18 +211,6 @@ LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languag
 ## References
 
 {{< references >}}
-<li>Achiam, J., Adler, S., Agarwal, S., Ahmad, L., Akkaya, I., Aleman, F. L., ... & Anadkat, S. (2024). Gpt-4 technical report. arXiv 2023. arXiv preprint arXiv:2303.08774.</li>
 <li>Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X., ... & Guo, D. (2024). Deepseekmath: Pushing the limits of mathematical reasoning in open language models. arXiv preprint arXiv:2402.03300. </li>
-<li>Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y., ... & Scialom, T. (2023). Llama 2: Open foundation and fine-tuned chat models. arXiv preprint arXiv:2307.09288.</li>
-<li>Sun, H., Shen, Y., & Ton, J. F. (2024). Rethinking bradley-terry models in preference-based reward modeling: Foundations, theory, and alternatives. arXiv preprint arXiv:2411.04991.</li>
-<li>Weng, L. (2024). “Reward Hacking in Reinforcement Learning.”</li>
-<li>Balunović, M., Dekoninck, J., Petrov, I., Jovanović, N., & Vechev, M. (2025). Matharena: Evaluating llms on uncontaminated math competitions. arXiv preprint arXiv:2505.23281.</li>
-<li>Guo, D., Yang, D., Zhang, H., Song, J., Zhang, R., Xu, R., ... & He, Y. (2025). Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948.</li>
-<li>Lifshitz, S., McIlraith, S. A., & Du, Y. (2025). Multi-agent verification: Scaling test-time compute with multiple verifiers. arXiv preprint arXiv:2502.20379.</li>
-<li>Lai, Y., Wang, S., Liu, S., Huang, X., & Wei, Z. (2024). ALaRM: Align language models via hierarchical rewards modeling. arXiv preprint arXiv:2403.06754.</li>
-<li>Uesato, J., Kushman, N., Kumar, R., Song, F., Siegel, N., Wang, L., ... & Higgins, I. (2022). Solving math word problems with process-and outcome-based feedback. arXiv preprint arXiv:2211.14275.</li>
-<li>Samvelyan, M., Rashid, T., De Witt, C. S., Farquhar, G., Nardelli, N., Rudner, T. G., ... & Whiteson, S. (2019). The starcraft multi-agent challenge. arXiv preprint arXiv:1902.04043.</li>
-<li>Gessler, T., Dizdarevic, T., Calinescu, A., Ellis, B., Lupu, A., & Foerster, J. N. (2025). Overcookedv2: Rethinking overcooked for zero-shot coordination. arXiv preprint arXiv:2503.17821.</li>
-<li>Liu, Z., Chen, C., Li, W., Qi, P., Pang, T., Du, C., ... & Lin, M. (2025). Understanding r1-zero-like training: A critical perspective. arXiv preprint arXiv:2503.20783.</li>
 
 {{< /references >}}
