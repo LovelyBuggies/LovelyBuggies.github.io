@@ -168,6 +168,8 @@ In RL training, people are careful when making the rewards for expected outcome 
 
 If it is destinated to fall into doom (e.g., an agent faces with an impossible mission), given always-non-negative rewards ($r \geqslant 0$) will encourage agents to strive longer. This could be great from tough spirit, but not efficient in the sense of training. In addition, achieving a positive objective in this case may be delayed or even become risky. Of course, one can strengthen the terminal outcomes by shaping them with dominant bonuses or penalties, as in SMAC (Samvelyan et al., 2019) or OverCook (Gessler et al., 2025). Yet, even with such shaping, the learned policy under always-non-negative rewards remains suboptimal from ideal: As ally losses are not penalized, once victory is secured (e.g., by winning the game or eliminating an enemy), agents may still take unnecessary risks to inflict additional damage.
 
+Note that in this section, we are just talking about the positivity of rewards, in reality, most of PG methods use advantages.
+
 {{< sidenote >}}
 <strong>Clarification:</strong> This doesn't say SMAC's design is wrong, the initial objective is to win the game no matter what it takes. But what remains optimizable is in reality is how to bear less ally losses to win. For example, if an enemy unit is weak with only 1 HP left, it’s wasteful and risky to send in a powerful but fragile attacker. A smarter choice is to let a healthy or more defensive unit finish the kill.
 {{< /sidenote >}}
