@@ -2,6 +2,7 @@
 date: 2025-09-18
 title: "All You Want to Know about LLM Rewards"
 math: true
+weight: 2
 postType: thought
 linkTitle: "Rewarding Languages"
 readingTime: 50

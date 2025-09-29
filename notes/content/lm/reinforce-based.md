@@ -2,6 +2,7 @@
 date: 2025-09-29
 title: "On REINFORCE-Based Methods in RL Fine-Tuning "
 math: true
+weight: 10
 postType: thought
 linkTitle: "Reinforce-based Fine-Tuning"
 readingTime: 10
