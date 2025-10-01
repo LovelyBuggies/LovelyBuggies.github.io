@@ -159,17 +159,15 @@ By interacting with external tools or models (should be stationary), agents can 
 <strong> Fun fact:</strong> I encountered this problem myself. Both black and autopep8 were installed in my pre-commit hooks. But I just let Claude Code to follow black, which led to formatting conflicts when git committing.
 {{< /sidenote >}}
 
-### Magic of Positivity
+### Magic of Positivity on REINFORCE
 
-In RL training, people are careful when making the rewards for expected outcome larger than less expected ones when designing rewards. But, the positivity of rewards are usually overlooked, or defaultly set to be non-negative.
+In RL training, people are careful when making the rewards for expected outcome larger than less expected ones when designing rewards. But, the positivity of rewards are usually overlooked, or defaultly set to be non-negative. Note that in this section, we are just talking about the effect of positivity on policy optimization directly using rewards (like REINFORCE). In reality, most of PG methods use advantages.
 
 <span class="text-danger"><strong>Does the reward positivity matters?</strong></span>
 
 <span><strong>Yes, it does,</strong></span> depending on the likelihood of different terminations. In the episodic cases, an episode either terminates by reaching horizon limit or triggers certain conditions (either positive or negative). Non-negative rewards ($\forall r, r \geqslant 0$) encourage the agent to stay longer in the environment to explore potential benefits ("don't push me away"), since it doesn't hurt anyway; non-positive rewards ($\forall r, r \leqslant 0$), on the contrary, makes the agent suffer and want to escape asap ("let me go"). 
 
 If it is destinated to fall into doom (e.g., an agent faces with an impossible mission), given always-non-negative rewards ($r \geqslant 0$) will encourage agents to strive longer. This could be great from tough spirit, but not efficient in the sense of training. In addition, achieving a positive objective in this case may be delayed or even become risky. Of course, one can strengthen the terminal outcomes by shaping them with dominant bonuses or penalties, as in SMAC (Samvelyan et al., 2019) or OverCook (Gessler et al., 2025). Yet, even with such shaping, the learned policy under always-non-negative rewards remains suboptimal from ideal: As ally losses are not penalized, once victory is secured (e.g., by winning the game or eliminating an enemy), agents may still take unnecessary risks to inflict additional damage.
-
-Note that in this section, we are just talking about the positivity of rewards (like REINFORCE). In reality, most of PG methods use advantages.
 
 {{< sidenote >}}
 <strong>Clarification:</strong> This doesn't say SMAC's design is wrong, the initial objective is to win the game no matter what it takes. But what remains optimizable is in reality is how to bear less ally losses to win. For example, if an enemy unit is weak with only 1 HP left, it’s wasteful and risky to send in a powerful but fragile attacker. A smarter choice is to let a healthy or more defensive unit finish the kill.
@@ -179,7 +177,7 @@ Always-non-positive rewards ($r \leqslant 0$) are used less often, since designe
 
 ### Dogma of LLM RM
 
-If we aim to train an LLM agent to automatically use external tools for task completion, the most natural terminal condition (besides reaching turn number limit) is when the task is accomplished perfectly and a large bonus would be given. Employing discounted negative rewards is always not a bad idea, maximizing return incentivizes the agent to complete the task more quickly. If there is such a negative terminal condition, a hybrid scheme can also be adopted, combining both negative and positive rewards. When the agent reaches certain milestones, positive rewards can serve as encouragement to continue the turn — "you’ve achieved something, there is potential, let’s explore further". Conversely, when the agent fails to make any progress in a turn, negative rewards will try to imply agent to cut losses in time and quickly escape, because all it has in this episode is pain.
+If we aim to train an LLM agent to automatically use external tools for task completion, the most natural terminal condition (besides reaching turn number limit) is when the task is accomplished perfectly and a large bonus would be given. If using REINFORCE-like methods, employing discounted negative rewards is always not a bad idea, maximizing return incentivizes the agent to complete the task more quickly. If there is such a negative terminal condition, a hybrid scheme can also be adopted, combining both negative and positive rewards. When the agent reaches certain milestones, positive rewards can serve as encouragement to continue the turn — "you’ve achieved something, there is potential, let’s explore further". Conversely, when the agent fails to make any progress in a turn, negative rewards will try to imply agent to cut losses in time and quickly escape, because all it has in this episode is pain.
 
 ## Citation
 
