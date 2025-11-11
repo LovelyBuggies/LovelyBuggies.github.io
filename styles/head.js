@@ -15,7 +15,6 @@ document.write(`
 
         <p><img src="./imgs/proto2.png" height=180 align="right" style="padding: 0px 0px 0px 0px;" />
             <b>Ph.D. Student</b> <br> <br> 
-            <a href = "https://llpr.ccs.neu.edu/"><em>Lab for Learning and Planning in Robotics</em></a><br>
             <a href = "https://www.khoury.northeastern.edu/research/"><em>Khoury College of Computer Sciences<br>Northeastern University</em><br></a>
         </p>
         Room 760, 815 Columbus Ave<br>
