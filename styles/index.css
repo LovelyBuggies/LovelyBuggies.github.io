@@ -88,7 +88,7 @@ li p, dd p {
     filter: invert(9%) sepia(69%) saturate(6361%) hue-rotate(8deg) brightness(86%) contrast(115%);
 }
 .filter-svg-green{
-    filter: brightness(0) saturate(100%) invert(33%) sepia(87%) saturate(447%) hue-rotate(71deg) brightness(91%) contrast(93%);
+	filter: brightness(0) saturate(100%) invert(23%) sepia(93%) saturate(2373%) hue-rotate(112deg) brightness(94%) contrast(105%);
 }
 .filter-svg-plum{
     filter: invert(34%) sepia(59%) saturate(421%) hue-rotate(233deg) brightness(88%) contrast(94%);
@@ -144,5 +144,5 @@ annotate {
 award {
 	font-size: 97%;
 	font-weight: bold;
-	color: #227722;
+	color: #008800;
 }
