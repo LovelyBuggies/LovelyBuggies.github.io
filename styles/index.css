@@ -85,13 +85,13 @@ li p, dd p {
     filter: invert(15%) sepia(88%) saturate(1567%) hue-rotate(202deg) brightness(94%) contrast(96%);
 }
 .filter-svg-red{
-    filter: invert(9%) sepia(69%) saturate(6361%) hue-rotate(8deg) brightness(86%) contrast(115%);
+    filter: invert(14%) sepia(63%) saturate(3063%) hue-rotate(348deg) brightness(94%) contrast(96%);
 }
 .filter-svg-green{
 	filter: brightness(0) saturate(100%) invert(23%) sepia(93%) saturate(2373%) hue-rotate(112deg) brightness(94%) contrast(105%);
 }
 .filter-svg-plum{
-    filter: invert(34%) sepia(59%) saturate(421%) hue-rotate(233deg) brightness(88%) contrast(94%);
+    filter: invert(38%) sepia(24%) saturate(821%) hue-rotate(278deg) brightness(99%) contrast(97%);
 }
 /*use hex-color-to-css-filter converter*/
 
@@ -144,5 +144,5 @@ annotate {
 award {
 	font-size: 97%;
 	font-weight: bold;
-	color: #008800;
+	color: #ab1a1a;
 }
