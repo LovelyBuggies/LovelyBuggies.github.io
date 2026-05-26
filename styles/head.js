@@ -23,7 +23,7 @@ document.write(`
         <br>
         <br>
 
-        <a href = "https://scholar.google.co.uk/citations?user=85_4lIYAAAAJ&hl"><img src="./imgs/icon/google-scholar.svg" class="filter-svg-blue" height="24"/></i></a> &nbsp
+        <a href = "https://scholar.google.co.uk/citations?user=K51u9a8AAAAJ&hl"><img src="./imgs/icon/google-scholar.svg" class="filter-svg-blue" height="24"/></i></a> &nbsp
         <a href = "https://github.com/LovelyBuggies"><img src="./imgs/icon/github.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
         <a href = "https://twitter.com/ShuoLiu14"><img src="./imgs/icon/x-twitter.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
         <a href = "https://orcid.org/my-orcid?orcid=0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
