@@ -77,8 +77,10 @@ li {
 	margin-top:0.9em;
 }
 
-li p, dd p {
-	margin-bottom: 0.3em;
+li-t {
+  display: list-item;
+  margin-bottom: 2px;
+  line-height: 1.5;
 }
 
 .filter-svg-blue{

@@ -13,11 +13,10 @@ document.write(`
         </span>
         </p>
 
-        <p><img src="./imgs/proto2.png" height=180 align="right" style="padding: 0px 0px 0px 0px;" />
-            <b>Ph.D. Student</b> <br> <br> 
+        <p><img src="./imgs/proto2.png" height=140 align="right" style="padding: 0px 20px 0px 0px;" />
             <a href = "https://www.khoury.northeastern.edu/research/"><em>Khoury College of Computer Sciences<br>Northeastern University</em><br></a>
         </p>
-        Room 760, 815 Columbus Ave<br>
+        Exp 760, 815 Columbus Ave<br>
         Boston, MA, 02120<br>
         liu [<font style="font-family:'Schoolbell'">dot</font>] shuo2 [<font style="font-family:'Schoolbell'">at</font>] northeastern [<font style="font-family:'Schoolbell'">dot</font>] edu
         <br>
@@ -26,7 +25,7 @@ document.write(`
         <a href = "https://scholar.google.co.uk/citations?user=K51u9a8AAAAJ&hl"><img src="./imgs/icon/google-scholar.svg" class="filter-svg-blue" height="24"/></i></a> &nbsp
         <a href = "https://github.com/LovelyBuggies"><img src="./imgs/icon/github.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
         <a href = "https://twitter.com/ShuoLiu14"><img src="./imgs/icon/x-twitter.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
-        <a href = "https://orcid.org/my-orcid?orcid=0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
+        <a href = "https://orcid.org/0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
         <a href = "https://www.researchgate.net/profile/Shuo-Liu-96"><img src="./imgs/icon/researchgate.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
         <!-- https://fontawesome.com/icons -->
 
