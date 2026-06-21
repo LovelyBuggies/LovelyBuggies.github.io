@@ -1,8 +1,8 @@
 ---
-title: '"Who is LovelyBuggies?"'
+title: 'Academic Page'
 weight: 9999
 bookHref: "https://lovelybuggies.github.io/"
-linkTitle: "Who is LovelyBuggies?"
+linkTitle: "Academic Page"
 bookHidden: true
 ---
 Go to LovelyBuggies's homepage →
