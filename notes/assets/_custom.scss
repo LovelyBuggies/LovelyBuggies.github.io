@@ -31,10 +31,15 @@
 // Match homepage name color (#224b8d) for clickable post titles
 .book-menu .book-menu-content nav li > label,
 .book-menu .book-menu-content nav li > span {
-  font-weight: 700;
+  font-weight: 660;
 }
 .book-menu .book-menu-content nav li > span {
   color: #000; /* ensure non-clickable section titles are black */
+  padding: 0.5em 0;
+  display: flex;
+}
+.book-menu .book-menu-content nav ul ul li > span {
+  font-size: calc(1em + 1pt);
 }
 
 .book-menu .book-menu-content nav a {
@@ -49,7 +54,7 @@
 /* Top-level section titles (non-clickable span or collapsible label) */
 .book-menu .book-menu-content nav > ul > li > label,
 .book-menu .book-menu-content nav > ul > li > span {
-  font-size: calc(1em + 2pt);
+  font-size: calc(1em + 4pt);
 }
 /* Ensure subsection links match article title size (no reduction) */
 .book-menu .book-menu-content nav li > label a { font-size: inherit; }
