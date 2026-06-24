@@ -1,5 +1,5 @@
 ---
-date: 2025-01-05
+date: 2024-01-05
 title: "Understand Bellman Equations"
 math: true
 weight: 1

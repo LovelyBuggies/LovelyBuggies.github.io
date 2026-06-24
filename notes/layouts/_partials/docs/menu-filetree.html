@@ -41,7 +41,7 @@
     </label>
   {{ else if .Page.Params.BookHref }}
     {{/* Inject Type tags just above the 'Who is LovelyBuggies?' link */}}
-    {{ if eq .Page.File.BaseFileName "who_is_lovelybuggies" }}
+    {{ if eq .Page.File.BaseFileName "academic_page" }}
       {{ partial "docs/type-tags" $.CurrentPage }}
     {{ end }}
     {{/* Override: open external bookHref in same tab (no target=_blank) */}}

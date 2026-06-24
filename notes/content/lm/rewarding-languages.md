@@ -14,7 +14,7 @@ readingTime: 50
 {{< postbadges >}}
 {{< badge style="black" title="License" value="CC BY-NC" >}}
 
-RL is everywhere these days when we talk about LLMs. However, the challenge arises in how we design an appropriate reward model for evaluating task completions in languages (e.g., English, code, even math). This post walks through the existing practices of LLM reward modeling, including what are working in which cases and why. Then it explores where the design of future LLM rewards should be heading.
+This post walks through the existing practices of LLM reward modeling, including what are working in which cases and why. Then it explores where the design of future LLM rewards should be heading.
 
 ## Human Languages
 
@@ -178,34 +178,6 @@ Always-non-positive rewards ($r \leqslant 0$) are used less often, since designe
 ### Dogma of LLM RM
 
 If we aim to train an LLM agent to automatically use external tools for task completion, the most natural terminal condition (besides reaching turn number limit) is when the task is accomplished perfectly and a large bonus would be given. If using REINFORCE-like methods, employing discounted negative rewards is always not a bad idea, maximizing return incentivizes the agent to complete the task more quickly. If there is such a negative terminal condition, a hybrid scheme can also be adopted, combining both negative and positive rewards. When the agent reaches certain milestones, positive rewards can serve as encouragement to continue the turn — "you’ve achieved something, there is potential, let’s explore further". Conversely, when the agent fails to make any progress in a turn, negative rewards will try to imply agent to cut losses in time and quickly escape, because all it has in this episode is pain.
-
-## Citation
-
-<div class="cite-block">
-{{< tabs >}}
-
-{{% tab "Plain" %}}
-```tpl
-Liu, Shuo. (September 2025). All You Want to Know about LLM Rewards.
-LovelyBuggies's Blog. https://lovelybuggies.github.io/notes/lm/rewarding-languages/
-```
-{{% /tab %}}
-
-{{% tab "BibTeX" %}}
-```bibtex
-@article{liu2025allyouwanttoknowaboutllmrewards,
-  title   = {All You Want to Know about LLM Rewards},
-  author  = {Liu, Shuo},
-  journal = {lovelybuggies.github.io},
-  year    = {2025},
-  month   = {September},
-  url     = {https://lovelybuggies.github.io/notes/lm/rewarding-languages/}
-}
-```
-{{% /tab %}}
-
-{{< /tabs >}}
-</div>
 
 ## References
 

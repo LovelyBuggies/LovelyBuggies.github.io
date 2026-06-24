@@ -26,7 +26,7 @@
     {{- $onlyPages := where $pages "Kind" "page" -}}
     {{- $onlySections := where $pages "Kind" "section" -}}
     {{- range $onlyPages.ByWeight -}}
-      {{- if eq .File.BaseFileName "who_is_lovelybuggies" -}}
+      {{- if eq .File.BaseFileName "academic_page" -}}
         {{- /* skip this special page from list */ -}}
       {{- else if .IsSection -}}
         <li class="section">
