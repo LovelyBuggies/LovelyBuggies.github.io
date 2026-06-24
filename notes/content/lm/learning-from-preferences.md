@@ -1,16 +1,16 @@
 ---
 date: 2026-06-18
-title: "Preference Learning"
+title: "Learning from Preferences"
 math: true
 weight: 1
 postType: review
-linkTitle: "Preference Learning"
+linkTitle: "Learning from Preferences"
 readingTime: 30
 ---
 
 {{< katex />}}
 
-# Preference Learning
+# Learning from Preferences
 {{< postbadges >}}
 
 ## Bradley-Terry Model
