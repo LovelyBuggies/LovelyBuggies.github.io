@@ -13,7 +13,7 @@ document.write(`
         </span>
         </p>
 
-        <p><img src="./imgs/proto2.png" height=140 align="right" style="padding: 0px 20px 0px 0px;" />
+        <p><img src="./imgs/photo2.png" height=140 align="right" style="padding: 0px 20px 0px 0px;" />
             <a href = "https://www.khoury.northeastern.edu/research/"><em>Khoury College of Computer Sciences<br>Northeastern University</em><br></a>
         </p>
         EXP 760, 815 Columbus Ave<br>
