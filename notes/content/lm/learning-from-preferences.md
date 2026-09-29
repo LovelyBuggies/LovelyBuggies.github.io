@@ -230,55 +230,104 @@ Substituting this margin into the BT loss yields
 \left[\log\sigma\!\left(m_\theta(x,y_w,y_l)\right)\right].}
 {{< /katex >}}
 
-### What the Update Changes
+## RLHF v.s. DPO
 
-For a single pair, differentiating $\ell=-\log\sigma(m_\theta)$ gives
+Here, **RLHF** refers specifically to fitting an explicit reward model and then optimizing a policy against it. **DPO** refers to fitting the policy directly on preference pairs. Both learn from human preferences; the distinction concerns how reward learning and policy optimization are coupled.
+
+### Equivalence Depends on What We Can Represent
+
+The previous derivation is exact over unrestricted response distributions. A neural network, however, represents only a family of policies $\Pi$. Through the log-ratio transformation, this also restricts the rewards DPO can represent:
 
 {{< katex display=true >}}
 \begin{aligned}
-\nabla_\theta\ell
-=-\beta\sigma(-m_\theta)\Bigl[
-&\nabla_\theta\log\pi_\theta(y_w\mid x) \\
--&\nabla_\theta\log\pi_\theta(y_l\mid x)
-\Bigr].
+\widehat r_\pi(x,y)
+&=\beta\log\frac{\pi(y\mid x)}{\pi_{\mathrm{ref}}(y\mid x)}, \\
+\mathcal{F}_{\Pi}
+&=\left\{\widehat r_\pi+c:\pi\in\Pi,\ c:\mathcal{X}\to\mathbb{R}\right\}.
 \end{aligned}
 {{< /katex >}}
 
-The frozen reference contributes to the margin but has no parameter gradient. The update favors a larger winner-to-loser probability ratio, with more weight on pairs whose implicit reward ordering is wrong. Shared model parameters mean that this does not guarantee the absolute probability of every winning response increases after an update.
+Here $\mathcal{X}$ is the prompt space, and the arbitrary $c(x)$ accounts for the reward offsets that BT cannot distinguish. Explicit reward learning can instead choose a separate class $\mathcal{F}$. Thus replacing a reward network with a policy likelihood ratio also changes the available reward parameterization.
 
-Consider a reference assigning probabilities $0.1$ and $0.2$ to a winner and loser, respectively. The following policies give different margins when $\beta=1$; all remaining probability belongs to other responses.
+[Shi et al., *Understanding the Performance Gap in Preference Learning*](https://arxiv.org/html/2505.19770v5) make this distinction precise. Assume BT preferences, response pairs drawn from a reference with full support, and exact optimization of population losses. The comparison below measures true KL-regularized value with the same policy class, prompt distribution, reference, and $\beta$. Here $r^\star$ is the true reward and $\pi^\star$ its unrestricted optimal policy; reward realizability allows prompt-dependent offsets.
 
-| Policy | Winner probability | Loser probability | Margin | Pair loss |
-| :--- | ---: | ---: | ---: | ---: |
-| Reference initialization | 0.10 | 0.20 | 0 | 0.693 |
-| More mass on the winner | 0.20 | 0.20 | $\log 2$ | 0.405 |
-| Both decrease, loser decreases more | 0.05 | 0.05 | $\log 2$ | 0.405 |
+| Reward class contains $r^\star$? | Policy class contains $\pi^\star$? | Result |
+| :---: | :---: | :--- |
+| Yes | Yes | Both attain the optimum. |
+| Yes | No | RLHF attains the best value within $\Pi$; DPO can be worse. |
+| No | Yes | DPO attains the optimum; RLHF can be worse. |
+| No | No | Neither method has a universal advantage. |
 
-The last two policies have the same loss on this pair. DPO constrains relative changes on observed comparisons, so a lower training loss alone does not establish better generation quality.
+Their finite-sample analysis also constructs a sparse-reward problem where explicit reward learning is more sample-efficient. This is a separation in a specified model, not a universal scaling law for neural networks.
 
-### Computing the Loss
+One way to read the policy-misspecification case is that a perfect reward model still lets RLHF ask for the best achievable policy. DPO asks for the best preference-likelihood fit through its restricted log-ratio rewards. Once the ideal policy is unavailable, these two optimization problems need not select the same approximation.
 
-With one sequence log-probability per response and model, the loss is small enough to implement directly:
+### Reward Parameterization Changes Generalization
 
-```python
-import torch.nn.functional as F
+Representational capacity is only part of the story. An explicit reward head and an implicit reward model can start from the same language model and fit the same BT comparisons:
 
-# Each input contains response log-probabilities, shape [batch_size].
-policy_logratio = policy_chosen_logps - policy_rejected_logps
-ref_logratio = (ref_chosen_logps - ref_rejected_logps).detach()
-margin = beta * (policy_logratio - ref_logratio)
-loss = -F.logsigmoid(margin).mean()
-```
+{{< katex display=true >}}
+\begin{aligned}
+r_{\mathrm{explicit}}(x,y)&=w^\top h_\phi(x,y), \\
+r_{\mathrm{implicit}}(x,y)&=\beta\log
+\frac{\pi_\theta(y\mid x)}{\pi_{\mathrm{ref}}(y\mid x)}.
+\end{aligned}
+{{< /katex >}}
 
-Compute these log-probabilities by summing next-token log-probabilities over the response, conditioning on the prompt and preceding response tokens. Mask out prompt and padding positions, handle the response-ending token consistently, and use the same tokenization for policy and reference. Averaging by response length would change the sequence-probability objective derived above. The reference stays frozen, and its log-probabilities can be cached when the dataset and preprocessing stay fixed.
+Here $h_\phi$ is the hidden representation of the prompt–response pair. The two scoring rules expose different routes for fitting the labels.
 
-At initialization, $\pi_\theta=\pi_{\mathrm{ref}}$ implies a zero margin for every pair and a loss of $\log 2$. This is a useful implementation check, even when the reference assigns very different probabilities to the two responses.
+[Razin et al. (2026), *Why is Your Language Model a Poor Implicit Reward Model?*](https://arxiv.org/html/2507.07981v3) connect this difference to generalization. Their analysis with frozen representations and their language-model experiments find stronger dependence on surface tokens in implicit reward models. Explicit heads are more robust to token-level changes such as paraphrasing and translation in the evaluated settings. Under domain shifts, however, implicit models can match or outperform explicit ones. The paper also challenges the explanation that an implicit model must learn to generate a good answer before it can recognize one: accurate verification need not imply efficient generation.
 
-The derivation connects DPO to an ideal KL-regularized solution under the preference model. It does not guarantee identical outcomes to PPO with finite data and restricted neural models. Likewise, $\beta$ inherits its role from the KL objective, but the empirical DPO loss does not impose a hard KL bound. Data coverage, annotation quality, and generalization still determine whether the learned preferences transfer to new generations.
-
-## RLHF v.s. DPO
+These results concern **reward-ranking generalization**, so they identify a possible source of RLHF/DPO differences without establishing that one always produces a better final policy. A comparison should separately measure preference prediction, the quality of newly generated responses, and training cost. The same training accuracy can hide different behavior outside the observed comparisons.
 
 ## Iterative Preference Learning
+
+The preceding comparison leaves another choice open: which responses receive feedback? Suppose a dataset compares only responses $a$ and $b$, while a policy can also generate $c$. Two reward functions that agree on $a$ and $b$ but disagree on $c$ produce identical observed comparisons. More epochs on that dataset cannot distinguish them. A model may generalize to $c$, but the observations themselves provide no evidence about its quality.
+
+### Iteration Changes the Available Evidence
+
+[Xiong et al. (2024), *Iterative Preference Learning from Human Feedback*](https://arxiv.org/html/2312.11456v4) distinguish offline learning without new oracle queries, online learning with new queries, and hybrid learning initialized from offline data. Their guarantees assume specified statistical models and exploration oracles; neural methods approximate these theoretical procedures.
+
+A DPO approximation uses a fixed reference $\pi_0$, current policy $\pi_t$, and comparison policy $q_t$:
+
+1. Draw prompts and response pairs from $\pi_t$ and $q_t$.
+2. Query preferences to form a batch $\mathcal{B}_t$.
+3. Accumulate the comparisons.
+4. Refit the policy and repeat.
+
+{{< katex display=true >}}
+\begin{aligned}
+y_a&\sim\pi_t(\cdot\mid x),\qquad y_b\sim q_t(\cdot\mid x), \\
+\mathcal{D}_{t+1}&=\mathcal{D}_t\cup\mathcal{B}_t, \\
+\pi_{t+1}&\in\arg\min_{\pi\in\Pi}
+\mathcal{L}_{\mathrm{DPO}}\!\left(\pi;\pi_0,\mathcal{D}_{t+1}\right).
+\end{aligned}
+{{< /katex >}}
+
+Their hybrid experiment (Appendix H.1) compares latest-policy and initial-policy responses. UltraRM simulates ground truth; no new human judgments are collected. Each round restarts DPO from the initial model on accumulated data. Their offline multi-step rejection-sampling method instead uses proxy feedback.
+
+The loop clarifies why an extra training epoch and an extra preference-learning round are different operations. An epoch reuses evidence. A round can expose a new response and obtain an assessment that was absent from the previous dataset. In the example above, comparing $c$ with $a$ could resolve uncertainty that repeatedly comparing $a$ with $b$ cannot.
+
+### Sampling, Feedback, and the Reference Are Separate Choices
+
+The three distributions in the loop have different jobs. The current policy $\pi_t$ determines the behavior we are improving. The comparison policy $q_t$ determines which alternatives we learn against. The reference $\pi_0$ defines the regularization target. Updating the first two does not require changing the third.
+
+To see why the reference matters, consider an idealized update with the same fixed reward $r$ at every round. If each round uses its predecessor as the KL reference and solves its objective exactly, then
+
+{{< katex display=true >}}
+\begin{aligned}
+\pi_{t+1}(y\mid x)
+&\propto\pi_t(y\mid x)\exp\!\left(\frac{r(x,y)}{\beta}\right), \\
+\pi_T(y\mid x)
+&\propto\pi_0(y\mid x)\exp\!\left(\frac{T\,r(x,y)}{\beta}\right).
+\end{aligned}
+{{< /katex >}}
+
+The second line follows by substitution across $T$ rounds. Relative to the original reference, this is equivalent to reducing the KL coefficient to $\beta/T$. Keeping $\pi_0$ fixed instead preserves the original regularized target. This example assumes exact distribution-level optimization and a fixed reward; it explains why resetting the reference changes the objective, rather than merely refreshing the data.
+
+Feedback is a separate choice as well. Repeatedly asking a reward model fitted on the original dataset to label new outputs can transfer its predictions to a policy, but those labels are not independent evidence that the predictions are correct. Human feedback, an external judge, and a proxy trained from existing labels provide different information.
+
+For the $a,b,c$ example, successful iteration needs both an opportunity to propose $c$ and feedback capable of judging it. Sampling only familiar alternatives leaves the information gap intact; labeling a new alternative incorrectly can reinforce the wrong behavior. This is why the sampling rule and the feedback source belong in the description of an iterative method alongside its optimization loss.
 
 ## References
 
@@ -288,6 +337,9 @@ The derivation connects DPO to an ideal KL-regularized solution under the prefer
 <li>Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., et al. (2022). Training language models to follow instructions with human feedback. <em>Advances in Neural Information Processing Systems</em>, 35, 27730–27744.</li>
 <li>Schulman, J., Wolski, F., Dhariwal, P., Radford, A., &amp; Klimov, O. (2017). Proximal policy optimization algorithms. arXiv:1707.06347.</li>
 <li>Rafailov, R., Sharma, A., Mitchell, E., Manning, C. D., Ermon, S., &amp; Finn, C. (2023). Direct preference optimization: Your language model is secretly a reward model. <em>Advances in Neural Information Processing Systems</em>, 36, 53728–53741.</li>
+<li>Shi, R., Song, M., Zhou, R., Zhang, Z., Fazel, M., &amp; Du, S. S. (2025; revised 2026). Understanding the performance gap in preference learning: A dichotomy of RLHF and DPO. arXiv:2505.19770.</li>
+<li>Razin, N., Lin, Y., Yao, J., &amp; Arora, S. (2026). Why is your language model a poor implicit reward model? <em>International Conference on Learning Representations</em>. arXiv:2507.07981.</li>
+<li>Xiong, W., Dong, H., Ye, C., Wang, Z., Zhong, H., Ji, H., Jiang, N., &amp; Zhang, T. (2024). Iterative preference learning from human feedback: Bridging theory and practice for RLHF under KL-constraint. <em>Proceedings of the International Conference on Machine Learning</em>. arXiv:2312.11456.</li>
 <li>Achiam, J., Adler, S., Agarwal, S., Ahmad, L., Akkaya, I., Aleman, F. L., ... & Anadkat, S. (2024). Gpt-4 technical report. arXiv 2023. arXiv preprint arXiv:2303.08774.</li>
 
 {{< /references >}}
