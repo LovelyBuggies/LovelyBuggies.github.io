@@ -56,11 +56,9 @@ This post discusses why the normative optimal Q-function is impractical to compu
 {{< katex display=true >}}
 Q^*(\vec{\theta}^t, \psi^{t+1}) = \begin{cases}
   R(\vec{\theta}^t, \psi^{t+1}), & t=h-1 \\
-  \begin{aligned}[t]
-    &R(\vec{\theta}^t, \psi^{t+1}) \\
-    &\quad {}+ \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \\
-    &\qquad Q^*(\vec{\theta}^{t+1}, \pi^*(\vec{\theta}^{t+1})).
-  \end{aligned} & 0\leqslant t < h-1
+  R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}}
+  P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) Q^*(\vec{\theta}^{t+1}, \pi^*(\vec{\theta}^{t+1})).
+    & 0\leqslant t < h-1
 \end{cases}\label{eq:normative-Q}
 {{< /katex >}}
 
@@ -118,11 +116,9 @@ To make optimal Q-value in Dec-POMDP computable, [Oliehoek, Spaan, and Vlassis (
 {{< katex display=true >}}
 Q^\circledast(\vec{\theta}^t, \psi^{t+1}) = \begin{cases}
   R(\vec{\theta}^t, \psi^{t+1}), & t=h-1 \\
-  \begin{aligned}[t]
-    &R(\vec{\theta}^t, \psi^{t+1}) \\
-    &\quad {}+ \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \\
-    &\qquad Q^\circledast(\vec{\theta}^{t+1}, \psi^{t+2, \circledast}),
-  \end{aligned} & 0\leqslant t < h-1
+  R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}}
+  P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) Q^\circledast(\vec{\theta}^{t+1}, \psi^{t+2, \circledast}),
+    & 0\leqslant t < h-1
 \end{cases}\label{eq:SR-Q}
 {{< /katex >}}
 

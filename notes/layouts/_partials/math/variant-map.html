@@ -1,0 +1,12 @@
+{{- $map := newScratch -}}
+{{- range site.Data.math_alphabets -}}
+  {{- $plain := split .plain "" -}}
+  {{- range $variant, $alphabet := . -}}
+    {{- if ne $variant "plain" -}}
+      {{- range $i, $glyph := split $alphabet "" -}}
+        {{- $map.SetInMap $variant (index $plain $i) $glyph -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $map.Values -}}

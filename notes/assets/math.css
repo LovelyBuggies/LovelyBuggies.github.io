@@ -1,3 +1,9 @@
+/* Text and operators without a mathematical Unicode bold glyph use font weight. */
+.katex [mathvariant="bold"],
+.katex [mathvariant="bold-italic"] { font-weight: bold; }
+
+.katex [mathvariant="bold"] { text-transform: none; }
+
 .math-display {
   max-width: 100%;
   overflow-x: auto;

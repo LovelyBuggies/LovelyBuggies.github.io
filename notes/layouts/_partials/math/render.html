@@ -9,7 +9,28 @@
   {{- else -}}
     {{- if $.display -}}<div class="math-display">{{- end -}}
     {{- range $labels -}}<span id="{{ index . 1 }}"></span>{{- end -}}
-    {{- .Value -}}
+    {{- /* MathML Core uses Unicode glyphs for these alphabets. KaTeX emits
+       legacy mathvariant attributes instead. Only rewrite presentation tokens. */ -}}
+    {{- $markup := string .Value -}}
+    {{- $variants := partialCached "math/variant-map.html" . -}}
+    {{- range findRESubmatch `<(mi|mn|mo)([^>]*) mathvariant="(bold|bold-italic|double-struck|script)"([^>]*)>([^<&]+)</m[ino]>` $markup -}}
+      {{- $alphabet := index $variants (index . 3) -}}
+      {{- $text := "" -}}
+      {{- $mapped := true -}}
+      {{- range split (index . 5) "" -}}
+        {{- with index $alphabet . -}}
+          {{- $text = print $text . -}}
+        {{- else -}}
+          {{- $mapped = false -}}
+          {{- break -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if $mapped -}}
+        {{- $token := printf "<%s%s%s>%s</%s>" (index . 1) (index . 2) (index . 4) $text (index . 1) -}}
+        {{- $markup = replace $markup (index . 0) $token -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $markup | safeHTML -}}
     {{- if $.display -}}</div>{{- end -}}
   {{- end -}}
 {{- end -}}

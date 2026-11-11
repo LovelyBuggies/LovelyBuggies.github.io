@@ -87,27 +87,6 @@ li-t {
     /* Match --site-blue on the black SVG icons. */
     filter: invert(21.94%) sepia(90%) saturate(1277%) hue-rotate(206.2deg) brightness(93.4%) contrast(101.6%) brightness(90%);
 }
-.filter-svg-red{
-    filter: invert(14%) sepia(63%) saturate(3063%) hue-rotate(348deg) brightness(94%) contrast(96%);
-}
-.filter-svg-green{
-	filter: brightness(0) saturate(100%) invert(23%) sepia(93%) saturate(2373%) hue-rotate(112deg) brightness(94%) contrast(105%);
-}
-.filter-svg-plum{
-    filter: invert(38%) sepia(24%) saturate(821%) hue-rotate(278deg) brightness(99%) contrast(97%);
-}
-/*use hex-color-to-css-filter converter*/
-
-#filtered-list paper {
-    color: #664b8d;
-}
-#filtered-list paper a {
-    color: #664b8d;
-}
-
-.no-border {
-    border-bottom: none;
-}
 
 img {
     border: none;
@@ -168,12 +147,6 @@ ps {
 	font-size: 88%;
 	font-weight: bold;
 	font-style: italic;
-}
-
-annotate {
-	font-size: 80%;
-	font-style: italic;
-	color: #888888;
 }
 
 .award {
