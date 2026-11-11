@@ -51,13 +51,17 @@ This post discusses why the normative optimal Q-function is impractical to compu
 
 <div id="defn:normative-Q" class="definition">
 
-<strong>Definition 1</strong>. The optimal Q-value function $Q^*$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{*}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, *}}, \forall \psi^{t+1}\in(\psi^{t,*},\Delta^t)$, is defined as, {{< katex display=true >}}
-Q^*(\vec{\theta}^t, \psi^{t+1}) = \left\{
-        \begin{aligned}
-        &R(\vec{\theta}^t, \psi^{t+1}), &t=h-1 \\ 
-        &R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) Q^*(\vec{\theta}^{t+1}, \pi^*(\vec{\theta}^{t+1})). &0\leqslant t < h-1 \\
-        \end{aligned}
-        \right .\label{eq:normative-Q}
+<strong>Definition 1</strong>. The optimal Q-value function $Q^*$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{*}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, *}}, \forall \psi^{t+1}\in(\psi^{t,*},\Delta^t)$, is defined as,
+
+{{< katex display=true >}}
+Q^*(\vec{\theta}^t, \psi^{t+1}) = \begin{cases}
+  R(\vec{\theta}^t, \psi^{t+1}), & t=h-1 \\
+  \begin{aligned}[t]
+    &R(\vec{\theta}^t, \psi^{t+1}) \\
+    &\quad {}+ \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \\
+    &\qquad Q^*(\vec{\theta}^{t+1}, \pi^*(\vec{\theta}^{t+1})).
+  \end{aligned} & 0\leqslant t < h-1
+\end{cases}\label{eq:normative-Q}
 {{< /katex >}}
 
 </div>
@@ -65,6 +69,7 @@ Q^*(\vec{\theta}^t, \psi^{t+1}) = \left\{
 Here, {{< katex >}}\pi^*(\vec{\theta}^{t+1})\equiv \psi^{t+2, *}{{< /katex >}} because of the consistent optimality of policy.
 
 <div id="prop:problem" class="proposition">
+
 <strong>Proposition 1</strong>. In a Dec-POMDP, computing the normative optimal Q-function defined above is impractical without already knowing an optimal joint policy (<a href="https://www.fransoliehoek.net/docs/Oliehoek08JAIR.pdf">Oliehoek, Spaan, and Vlassis 2008, Sec. 4.3.3</a>).
 
 </div>
@@ -73,16 +78,31 @@ Here, {{< katex >}}\pi^*(\vec{\theta}^{t+1})\equiv \psi^{t+2, *}{{< /katex >}} b
 
 *Proof.* We check the optima in 2 steps. The independent and dependent variables are marked in red.
 
-To calculate the Pareto optima of Bayesian game at $t$, {{< katex display=true >}}
-\textcolor{red}{\delta^{t, *}}
-    = \mathop{\mathrm{argmax}}_{\delta^t}\sum_{\vec{\theta}^t \in \vec{\Theta}^t_{\psi^{t, *}}} P(\vec{\theta}^t|\psi^{t, *}) \textcolor{red}{Q^*}(\vec{\theta}^t, (\psi^{t, *}, \delta^t)),
-{{< /katex >}}
- note that calculating {{< katex >}}\delta^{t,*}{{< /katex >}} depends on {{< katex >}}\psi^{t, *} = \delta^{[0, t), *}{{< /katex >}} and {{< katex >}}Q^*(\vec{\theta}^t, \cdot){{< /katex >}}.
+To calculate the Pareto optima of Bayesian game at $t$,
 
-According to Definition. <a href="#defn:normative-Q" data-reference-type="ref" data-reference="defn:normative-Q">1</a>, the optimal Bellman equation can be written as, {{< katex display=true >}}
-\textcolor{red}{Q^*}(\vec{\theta}^t, \psi^{t+1}) = R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \max_{\delta^{t+1}}Q^*(\vec{\theta}^{t+1}, (\textcolor{red}{\psi^{t+1, *}}, \delta^{t+1})),
+{{< katex display=true >}}
+\begin{aligned}
+  \textcolor{red}{\delta^{t, *}}
+    &= \mathop{\mathrm{argmax}}_{\delta^t}\sum_{\vec{\theta}^t \in \vec{\Theta}^t_{\psi^{t, *}}} P(\vec{\theta}^t|\psi^{t, *}) \\
+    &\qquad \textcolor{red}{Q^*}(\vec{\theta}^t, (\psi^{t, *}, \delta^t)),
+\end{aligned}
 {{< /katex >}}
- when {{< katex >}}0\leqslant t < h-1{{< /katex >}}. This indicates that {{< katex >}}Q^*(\vec{\theta}^t, \cdot){{< /katex >}} depends on {{< katex >}}\psi^{t+1, *}{{< /katex >}}. Consequently, calculating {{< katex >}}\delta^{t,*}{{< /katex >}} inherently depends on {{< katex >}}\delta^{[0, t], *}{{< /katex >}} (includes itself), making it self-dependent and impractical to solve. 
+
+note that calculating {{< katex >}}\delta^{t,*}{{< /katex >}} depends on {{< katex >}}\psi^{t, *} = \delta^{[0, t), *}{{< /katex >}} and {{< katex >}}Q^*(\vec{\theta}^t, \cdot){{< /katex >}}.
+
+According to Definition <a href="#defn:normative-Q" data-reference-type="ref" data-reference="defn:normative-Q">1</a>, the optimal Bellman equation can be written as,
+
+{{< katex display=true >}}
+\begin{aligned}
+  \textcolor{red}{Q^*}(\vec{\theta}^t, \psi^{t+1})
+    &= R(\vec{\theta}^t, \psi^{t+1}) \\
+    &\quad {}+ \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \\
+    &\qquad \max_{\delta^{t+1}}Q^*(\vec{\theta}^{t+1}, (\textcolor{red}{\psi^{t+1, *}}, \delta^{t+1})),
+\end{aligned}
+{{< /katex >}}
+
+when {{< katex >}}0\leqslant t < h-1{{< /katex >}}. This indicates that {{< katex >}}Q^*(\vec{\theta}^t, \cdot){{< /katex >}} depends on {{< katex >}}\psi^{t+1, *}{{< /katex >}}. Consequently, calculating {{< katex >}}\delta^{t,*}{{< /katex >}} inherently depends on {{< katex >}}\delta^{[0, t], *}{{< /katex >}} (includes itself), making it self-dependent and impractical to solve.
+
 Note that the dependency of {{< katex >}}P(o^{t+1}\mid\vec{\theta}^t, \psi^{t+1}){{< /katex >}} does not create the circularity above, just as the stochasticity {{< katex >}}P(s^{t+1}\mid s^t, a){{< /katex >}} does not. When Q-values are estimated from samples, [Sutton and Barto (2018, Sec. 6.7)](https://mitpress.mit.edu/9780262039246/reinforcement-learning/) discuss double learning as a way to reduce maximization bias. Single-agent (PO)MDP, where belief states are available, does not have this issue because the Q-value need not be history-dependent (Markov property).
 
 </div>
@@ -93,14 +113,17 @@ To make optimal Q-value in Dec-POMDP computable, [Oliehoek, Spaan, and Vlassis (
 
 <div class="definition">
 
-<strong>Definition 2</strong>. The sequentially rational optimal Q-value function $Q^\circledast$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal subsequent joint policy {{< katex >}}\xi^{t, \circledast}_{\psi}{{< /katex >}}, {{< katex >}}\forall\, \vec{\theta}^t\in \vec{\Theta}^t_{\Psi^{t}}\,,\ \forall\, \psi^{t+1}\in\Psi^{t+1}{{< /katex >}}, is defined as, 
+<strong>Definition 2</strong>. The sequentially rational optimal Q-value function $Q^\circledast$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal subsequent joint policy {{< katex >}}\xi^{t, \circledast}_{\psi}{{< /katex >}}, {{< katex >}}\forall\, \vec{\theta}^t\in \vec{\Theta}^t_{\Psi^{t}}\,,\ \forall\, \psi^{t+1}\in\Psi^{t+1}{{< /katex >}}, is defined as,
+
 {{< katex display=true >}}
-Q^\circledast(\vec{\theta}^t, \psi^{t+1}) = \left\{
-        \begin{aligned}
-        &R(\vec{\theta}^t, \psi^{t+1}), &t=h-1\\ 
-        &R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) Q^\circledast(\vec{\theta}^{t+1}, \psi^{t+2, \circledast}), &0\leqslant t < h-1 \\
-        \end{aligned}
-        \right .\label{eq:SR-Q}
+Q^\circledast(\vec{\theta}^t, \psi^{t+1}) = \begin{cases}
+  R(\vec{\theta}^t, \psi^{t+1}), & t=h-1 \\
+  \begin{aligned}[t]
+    &R(\vec{\theta}^t, \psi^{t+1}) \\
+    &\quad {}+ \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \\
+    &\qquad Q^\circledast(\vec{\theta}^{t+1}, \psi^{t+2, \circledast}),
+  \end{aligned} & 0\leqslant t < h-1
+\end{cases}\label{eq:SR-Q}
 {{< /katex >}}
 
 where {{< katex >}}\psi^{t+2, \circledast}=(\psi^{t+1}, \delta^{t+1, \circledast}_{\psi}), \forall \ \psi^{t+1} \in \Psi^{t+1}{{< /katex >}}.

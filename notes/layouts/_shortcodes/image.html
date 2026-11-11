@@ -6,5 +6,7 @@
 </button>
 <div class="article-image-viewer" popover id="{{ $id }}">
   <button type="button" popovertarget="{{ $id }}" popovertargetaction="hide" aria-label="{{ i18n "closeImage" }}">×</button>
-  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy">
+  <div class="article-image-scroll" tabindex="0" role="region" aria-label="{{ $alt | default (i18n "image") }}">
+    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy">
+  </div>
 </div>

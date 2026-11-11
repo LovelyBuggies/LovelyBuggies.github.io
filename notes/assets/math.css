@@ -1,12 +1,53 @@
 .math-display {
   max-width: 100%;
   overflow-x: auto;
-  margin-block: 1.15em;
-  padding-block: .2em;
+  overflow-y: hidden;
+  margin-block: .7em;
 }
 
 .math-display > .katex {
   display: block;
   width: max-content;
   margin-inline: auto;
+  /* Keep tall operators and accents inside the scrollable box. */
+  padding-block: .65em;
+}
+
+/* Chromium centers MathML cells even when KaTeX specifies columnalign. */
+.math-display mtable[columnalign="left left"] > mtr > mtd {
+  text-align: left;
+}
+
+.math-display mtable[columnalign="right"] > mtr > mtd {
+  text-align: right;
+}
+
+/* Each aligned pair meets at & with zero space between its columns. */
+.math-display mtable[columnalign^="right left"][columnspacing^="0em"] > mtr > mtd:nth-child(odd) {
+  text-align: right;
+  padding-inline-end: 0;
+}
+
+.math-display mtable[columnalign^="right left"][columnspacing^="0em"] > mtr > mtd:nth-child(even) {
+  text-align: left;
+  padding-inline-start: 0;
+}
+
+@media (max-width: 32rem) {
+  .math-display { font-size: .94em; }
+
+  /* Give equations on their own line the full text width, including the list indent. */
+  .prose :is(ol, ul):has(> li > .math-display) { padding-inline-start: 2rem; }
+  .prose li > .math-display { margin-inline-start: -2rem; max-width: none; }
+
+  /* A long inline expression can move to the next line and scroll there if needed. */
+  :not(.math-display) > .katex {
+    display: inline-grid;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align: middle;
+    line-height: normal;
+    padding-block: .1em;
+  }
 }

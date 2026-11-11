@@ -14,82 +14,74 @@ This post is about the clichés of the Bellman equations, but retold in a new wa
 Bellman equations establish recursive relations between states and succeeding states, which can be applied as updating rules for value prediction. [Bellman and Kalaba (1957)](https://doi.org/10.1073/pnas.43.8.749) applied dynamic programming recursions to problems in statistical communication theory.
 
 <div class="definition">
+
   <strong>Definition 1.</strong> The Bellman equations for V-values are (<a href="https://mitpress.mit.edu/9780262039246/reinforcement-learning/">Sutton and Barto, 2018</a>),
 
-
-
 {{< katex display=true >}}
-
 \begin{equation}
-
 \begin{aligned}
-
 V^\pi(s) &\doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ Q^\pi(s, a) \right] \\
-&= \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\ 
-
+&= \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
 V^*(s) &\doteq \max_{a} \left[ Q^*(s, a) \right] \\
 &= \max_{a} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^*(s')\right] \right].\nonumber
-
 \end{aligned}
-
 \end{equation}
-
 {{< /katex >}}
 
 The Bellman equations for Q-values are,
 
 {{< katex display=true >}}
-
 \begin{equation}
-
 \begin{aligned}
-
-Q^\pi(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
-= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right] \\
-Q^*(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right] \\
-= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right].\nonumber
-
+Q^\pi(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^\pi(s')\right] \\
+&= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\mathbb{E}_{a'\sim\pi(a'|s')} Q^\pi(s', a')\right] \\
+Q^*(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[V^*(s')\right] \\
+&= R(s, a) + \gamma \mathbb{E}_{s'\sim P(\cdot|s,a)} \left[\max_{a'} Q^*(s', a')\right].\nonumber
 \end{aligned}
-
 \end{equation}
-
 {{< /katex >}}
+
 </div>
 
-$V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, and {{< katex display=true >}}
-\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
+$V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.g., vectors and functions, and
 
+{{< katex display=true >}}
+\tilde{\pi}(s) \doteq \mathop{\mathrm{argmax}}_a Q^\pi (s,a).
 {{< /katex >}}
 
 {{< sidenote id="curse-of-dimension" >}}
 <strong>The Curse of Dimensionality.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? <a href="https://doi.org/10.1515/9781400874668">Bellman (1961)</a> used the term “curse of dimensionality” to describe the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
 {{< /sidenote >}}
 
-
 ## Bellman Operators
 
 A succinct representation is to define the Bellman Equation as a unary mathematical operator. The V-value Bellman and optimal Bellman Operators are,
+
 {{< katex display=true >}}
-(\mathcal{T}^\pi\circ V^\pi)(s) \doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
-(\mathcal{T}^*\circ V^\pi)(s) \doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
+\begin{aligned}
+(\mathcal{T}^\pi\circ V^\pi)(s) &\doteq \mathbb{E}_{a \sim \pi(\cdot|s)} \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right] \\
+(\mathcal{T}^*\circ V^\pi)(s) &\doteq \max_a \left[ R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[V^\pi(s')\right] \right]
+\end{aligned}
 {{< /katex >}}
 
 The Bellman and optimal Bellman Operators {{< katex >}}\mathcal{T}^\pi{{< /katex >}} for Q-values are,
 
 {{< katex display=true >}}
-(\mathcal{T}^\pi\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \mathbb{E}_{a' \sim \pi(a'|s')} Q^\pi(s', a') \right] \\
-(\mathcal{T}^*\circ Q^\pi)(s, a) \doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right]
+\begin{aligned}
+(\mathcal{T}^\pi\circ Q^\pi)(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \mathbb{E}_{a' \sim \pi(a'|s')} Q^\pi(s', a') \right] \\
+(\mathcal{T}^*\circ Q^\pi)(s, a) &\doteq R(s, a) + \gamma \mathbb{E}_{s' \sim P(\cdot|s,a)} \left[ \max_{a'} Q^\pi(s', a') \right]
+\end{aligned}
 {{< /katex >}}
 
 For convenience, we use Q-value as the representative in the following parts of this post.
-
-
 
 ## Bellman Properties
 
 <div class="proposition">
 
-<strong>Proposition 1</strong> ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
+<strong>Proposition 1</strong> ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm,
+
+{{< katex display=true >}}
 \begin{aligned}
         \|\mathcal{T}^\pi \circ Q - \mathcal{T}^\pi \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty,\\
         \text{and }\|\mathcal{T}^* \circ Q - \mathcal{T}^* \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty.
@@ -97,7 +89,6 @@ For convenience, we use Q-value as the representative in the following parts of 
 {{< /katex >}}
 
 <strong>Corollary 1</strong> (Fixed-point Iteration). For any {{< katex >}}Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}, after {{< katex >}}k\to \infty{{< /katex >}} iterations of Bellman transformation, {{< katex >}}Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0{{< /katex >}}, or {{< katex >}}Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0{{< /katex >}}, according to <a href="https://doi.org/10.4064/fm-3-1-133-181">Banach’s Fixed Point Theorem</a>:
-
 
 {{< katex display=true >}}
 Q^{\pi,\,\infty} = Q^{*,\,\infty} = Q^* ,
@@ -107,7 +98,6 @@ which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or 
 
 <strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to {{< katex >}}Q^*{{< /katex >}} (<strong>deterministically</strong> maximizes) is optimal (<a href="https://sites.ualberta.ca/~szepesva/rlbook.html">Szepesvári, 2010</a>):
 
-
 {{< katex display=true >}}
 \tilde{\pi}^{*} \doteq \mathop{\mathrm{argmax}}_a Q^* = \pi^*.
 {{< /katex >}}
@@ -115,8 +105,10 @@ which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or 
 **Proposition 2** (Monotone). *Bellman Operators are monotonic. For any Q-values {{< katex >}}Q,Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}:*
 
 {{< katex display=true >}}
-\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) ,\\
-\left (Q\leqslant Q'\right ) \Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right )\, .
+\begin{aligned}
+\left (Q\leqslant Q'\right ) &\Leftrightarrow \left (\mathcal{T}^\pi \circ Q\leqslant \mathcal{T}^\pi \circ Q'\right ) ,\\
+\left (Q\leqslant Q'\right ) &\Leftrightarrow \left (\mathcal{T}^* \circ Q\leqslant \mathcal{T}^* \circ Q'\right )\, .
+\end{aligned}
 {{< /katex >}}
 
 </div>
@@ -135,32 +127,44 @@ According to the Fundamental Theorem, we can find {{< katex >}}\pi^*{{< /katex >
 
 ### Look-up Table
 
-When the transition model is unavailable (model-free), we can use the residuals (RHS minus LHS) of the Bellman Equations as learning objective, {{< katex display=true >}}
+When the transition model is unavailable (model-free), we can use the residuals (RHS minus LHS) of the Bellman Equations as learning objective,
+
+{{< katex display=true >}}
 \begin{aligned}
     (\mathcal{B}^\pi\circ Q) (s,a) &\doteq  r + \gamma Q(s', \pi(s')) - Q(s, a),\\
     (\mathcal{B}^*\circ Q) (s,a) &\doteq  r + \gamma \max_{a'} Q(s', a') - Q(s, a).
 \end{aligned}
 {{< /katex >}}
- Assuming that our sampling and parameter updating roughly follow the true state distribution {{< katex >}}\mu(s){{< /katex >}}, the expectation of Bellman residual will be closed to 0 at the optima. This approach is called temporal difference (TD) learning.
 
-In **TD-learning** with learning rate $\alpha$, the update rule for Q-values is, {{< katex display=true >}}
+Assuming that our sampling and parameter updating roughly follow the true state distribution {{< katex >}}\mu(s){{< /katex >}}, the expectation of Bellman residual will be closed to 0 at the optima. This approach is called temporal difference (TD) learning.
+
+In **TD-learning** with learning rate $\alpha$, the update rule for Q-values is,
+
+{{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td-learning}
 {{< /katex >}}
- Under the [stochastic approximation step-size conditions](https://doi.org/10.1214/aoms/1177729586), let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. For a fixed policy, the TD iterates {{< katex >}}Q^{\pi,k}(s,a){{< /katex >}} converge to its action values {{< katex >}}Q^\pi(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ([Jaakkola, Jordan, and Singh, 1994](https://doi.org/10.1162/neco.1994.6.6.1185); see also their [1993 conference paper](https://papers.nips.cc/paper_files/paper/1993/hash/5807a685d1a9ab3b599035bc566ce2b9-Abstract.html)).
 
-In **Q-learning** that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
+Under the [stochastic approximation step-size conditions](https://doi.org/10.1214/aoms/1177729586), let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. For a fixed policy, the TD iterates {{< katex >}}Q^{\pi,k}(s,a){{< /katex >}} converge to its action values {{< katex >}}Q^\pi(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ([Jaakkola, Jordan, and Singh, 1994](https://doi.org/10.1162/neco.1994.6.6.1185); see also their [1993 conference paper](https://papers.nips.cc/paper_files/paper/1993/hash/5807a685d1a9ab3b599035bc566ce2b9-Abstract.html)).
+
+In **Q-learning** that relies on optimal Bellman Equation, the Q-value update is,
+
+{{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}
 {{< /katex >}}
+
 According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following Q-learning updates, {{< katex >}}Q^{*, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ([Watkins and Dayan, 1992](https://doi.org/10.1023/A:1022676722315)).
 
 However, the nice property of convergence only holds in the tabular case and cannot be extended to a function approximation as discussed later.
 
 ### Function Approximation
 
-To introduce generalization to the value function, we represent the approximated Q-value in a parameterized functional form. Our goal is to minimize the mean squared value error, {{< katex display=true >}}
+To introduce generalization to the value function, we represent the approximated Q-value in a parameterized functional form. Our goal is to minimize the mean squared value error,
+
+{{< katex display=true >}}
 \mathcal{L}(\theta) = \frac{1}{2}\sum_{s \in \mathcal{S}} \mu(s) \Big[ Q^\text{target} - Q_\theta(s, a) \Big]^2,
 {{< /katex >}}
- where {{< katex >}}Q^\text{target}{{< /katex >}} is the ground truth and {{< katex >}}Q_\theta{{< /katex >}} is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
+
+where {{< katex >}}Q^\text{target}{{< /katex >}} is the ground truth and {{< katex >}}Q_\theta{{< /katex >}} is the prediction. Just like TD-learning, the Bellman residual can be applied for the value function approximation.
 
 {{% columns ratio="1:1" %}}
 ![Figure 1](/imgs/understanding_bellman/ga.png)
@@ -170,21 +174,27 @@ To introduce generalization to the value function, we represent the approximated
 <p class="figcaption"><em>Figure 2.</em> Gradient descent by semi-gradient.</p>
 {{% /columns %}}
 
-Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is, {{< katex display=true >}}
+Similar to stochastic gradient methods with unbiased target estimators, if we use the Bellman Equation to get target Q-value $Q^\text{target}$, but here we just ignore its potential gradient change, the gradient ascent for Bellman residual is,
+
+{{< katex display=true >}}
 \begin{aligned}
-    \Delta_\text{semi} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[Q^\text{target} - Q_\theta(s, a) \Big]^2 \\ 
+    \Delta_\text{semi} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[Q^\text{target} - Q_\theta(s, a) \Big]^2 \\
     &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \label{eq:semi-grad}
 \end{aligned}
 {{< /katex >}}
+
 where {{< katex >}}Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a'){{< /katex >}}, since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., [Baird’s counter-example](https://doi.org/10.1016/B978-1-55860-377-6.50013-X) (the star problem).
 
-The **Full Gradient of Bellman Residual** should include all gradient components, including the gradient of the target estimation, {{< katex display=true >}}
+The **Full Gradient of Bellman Residual** should include all gradient components, including the gradient of the target estimation,
+
+{{< katex display=true >}}
 \begin{aligned}
     \Delta_\text{full} \theta &= -\frac{1}{2}\alpha \nabla_\theta  \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big]^2 \\
-    & = -\alpha \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big] \Big[ \gamma\nabla_\theta Q_\theta(s', a') - \nabla_\theta Q_\theta(s, a) \Big].
+    &= -\alpha \Big[ r + \gamma Q_\theta(s', a') - Q_\theta(s, a) \Big] \Big[ \gamma\nabla_\theta Q_\theta(s', a') - \nabla_\theta Q_\theta(s, a) \Big].
 \end{aligned}
 {{< /katex >}}
- If the approximation system is general enough and the value functions are continuous, the full Bellman residual gradient is guaranteed to converge to the optima. However, this is at the sacrifice of learning speed, as illustrated by the hall problem.
+
+If the approximation system is general enough and the value functions are continuous, the full Bellman residual gradient is guaranteed to converge to the optima. However, this is at the sacrifice of learning speed, as illustrated by the hall problem.
 
 In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure 2 represents the case where the semi gradient may diverge. [Baird (1995)](https://doi.org/10.1016/B978-1-55860-377-6.50013-X) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed,
 
@@ -200,48 +210,48 @@ In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$,
 
 - Soft Bellman Equation: entropy-regularized form encouraging exploration (weight $\lambda$).
 
-{{< katex display=true >}}
-Q(s, a) = R(s,a) + \gamma 
-\mathbb{E}_{\substack{a'\sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a)}} 
-\Big[\, Q(s', a') - \lambda \, \log \pi(a'\mid s') \,\Big].
-{{< /katex >}}
+  {{< katex display=true >}}
+  Q(s, a) = R(s,a) + \gamma
+  \mathbb{E}_{\substack{a'\sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a)}}
+  \Big[\, Q(s', a') - \lambda \, \log \pi(a'\mid s') \,\Big].
+  {{< /katex >}}
 
 - Continuous-Time (HJB): continuous-time analogue with dynamics $f(s,a)$.
 
-{{< katex display=true >}}
-\frac{\partial Q(s,a)}{\partial t} + \max_{a} \Big[\, R(s,a) + \nabla_s Q(s,a)^\top f(s,a) \,\Big] = 0.
-{{< /katex >}}
+  {{< katex display=true >}}
+  \frac{\partial Q(s,a)}{\partial t} + \max_{a} \Big[\, R(s,a) + \nabla_s Q(s,a)^\top f(s,a) \,\Big] = 0.
+  {{< /katex >}}
 
 - Distributional Bellman Equation: models the return distribution $\mathcal{Q}$ (risk-sensitive RL).
 
-{{< katex display=true >}}
-\mathcal{Q}(s, a) \stackrel{\text{D}}{=} R(s,a) + \gamma \, \mathcal{Q}(s', a').
-{{< /katex >}}
+  {{< katex display=true >}}
+  \mathcal{Q}(s, a) \stackrel{\text{D}}{=} R(s,a) + \gamma \, \mathcal{Q}(s', a').
+  {{< /katex >}}
 
 - Multi-Agent Bellman Equations: cooperative multi-agent generalizations.
   - Joint form (joint action $\mathbf{a}$):
 
     {{< katex display=true >}}
-    Q(s, \mathbf{a}) = R(s, \mathbf{a}) + \gamma 
-    \mathbb{E}_{\substack{\mathbf{a}' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, \mathbf{a})}} 
+    Q(s, \mathbf{a}) = R(s, \mathbf{a}) + \gamma
+    \mathbb{E}_{\substack{\mathbf{a}' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, \mathbf{a})}}
     \Big[\, Q(s', \mathbf{a}') \,\Big].
     {{< /katex >}}
 
   - Individual form (per-agent $Q_i$ with shared reward):
 
     {{< katex display=true >}}
-    Q_i(s, a_i) = R(s, \mathbf{a}) + \gamma 
-    \mathbb{E}_{\substack{a_i' \sim \pi_i(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a_i)}} 
+    Q_i(s, a_i) = R(s, \mathbf{a}) + \gamma
+    \mathbb{E}_{\substack{a_i' \sim \pi_i(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a_i)}}
     \Big[\, Q_i(s', a_i') \,\Big].
     {{< /katex >}}
 
 - Multi-Task Bellman Equation: adds auxiliary objectives/constraints $\phi(s,a)$.
 
-{{< katex display=true >}}
-Q(s, a) = R(s,a) + \phi(s,a) + \gamma 
-\mathbb{E}_{\substack{a' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a)}} 
-\Big[\, Q(s', a') \,\Big].
-{{< /katex >}}
+  {{< katex display=true >}}
+  Q(s, a) = R(s,a) + \phi(s,a) + \gamma
+  \mathbb{E}_{\substack{a' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a)}}
+  \Big[\, Q(s', a') \,\Big].
+  {{< /katex >}}
 
 <!-- footnote converted to hint above -->
 <!-- migrated from leaf-bundle to single-file naming -->

@@ -30,21 +30,27 @@ An intuitive way to calculate policy gradient is to replace {{< katex >}}J(\thet
 We omit {{< katex >}}\theta{{< /katex >}} in subscripts/superscripts and gradients, assuming {{< katex >}}\pi{{< /katex >}} depends on {{< katex >}}\theta{{< /katex >}} and all gradients are w.r.t. {{< katex >}}\theta{{< /katex >}}; i.e., {{< katex >}}V^{\pi} \equiv V^{\pi_{\theta}}{{< /katex >}}, {{< katex >}}Q^{\pi} \equiv Q^{\pi_{\theta}}{{< /katex >}} and {{< katex >}}\nabla \equiv \nabla_{\theta}{{< /katex >}}.
 
 <div id="them:PG" class="theorem">
-<strong>Theorem 1</strong>. Taking the state-value function as the optimizing target, the objective gradient follows, {{< katex display=true >}}
+
+<strong>Theorem 1</strong>. Taking the state-value function as the optimizing target, the objective gradient follows,
+
+{{< katex display=true >}}
 \label{equ:pgthem}
     \nabla J(\theta) \propto \sum_s d^\pi(s) \sum_a Q^\pi(s,a) \nabla \pi(a|s),
 {{< /katex >}}
- where {{< katex >}}d^\pi(s){{< /katex >}} is the stationary distribution of the policy {{< katex >}}\pi_{\theta}{{< /katex >}}.
+
+where {{< katex >}}d^\pi(s){{< /katex >}} is the stationary distribution of the policy {{< katex >}}\pi_{\theta}{{< /katex >}}.
 
 To sample with expectation equals or approximates the expression,
 
 {{< katex display=true >}}
 \label{equ:pgtheorem-sample}
-\nabla J(\theta) \propto \sum_s d^\pi(s)\sum_a Q^\pi(s,a) \, \nabla\pi(a|s) \\
-= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a) \, \nabla\pi(a|s) \right] \\
-= \mathbb{E}_{d^\pi}\!\left[\sum_a \pi(a|s) \, Q^\pi(s,a) \, \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
-= \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
-= \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \nabla\ln\pi(a|s) \right] \, .
+\begin{aligned}
+\nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a Q^\pi(s,a) \, \nabla\pi(a|s) \\
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a) \, \nabla\pi(a|s) \right] \\
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a \pi(a|s) \, Q^\pi(s,a) \, \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
+&= \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \frac{\nabla\pi(a|s)}{\pi(a|s)} \right] \\
+&= \mathbb{E}_{\pi}\!\left[Q^\pi(s,a) \, \nabla\ln\pi(a|s) \right] \, .
+\end{aligned}
 {{< /katex >}}
 
 </div>
@@ -58,14 +64,14 @@ The eligibility vector {{< katex >}}\nabla\ln\pi(a|s){{< /katex >}} is the only 
 {{< katex display=true >}}
 \begin{aligned}
 \nabla V^{\pi}(s) &= \nabla\!\left[ \sum_a \pi(a\mid s)\, Q^\pi (s,a)\right] \\
-&= \sum_a\!\left[ 
-  \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+&= \sum_a\!\left[
+  \nabla\pi(a\mid s)\, Q^\pi (s,a)
   + \pi(a\mid s)\, \nabla Q^\pi (s,a) \right] \\
-    &= \sum_a\!\left[ 
-    \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+    &= \sum_a\!\left[
+    \nabla\pi(a\mid s)\, Q^\pi (s,a)
   + \pi(a\mid s)\, \nabla \sum_{s'} P(s'\mid s,a)\, (r + V^\pi(s')) \right] \\
-    &\stackrel{\text{(i)}}{=} \sum_a\!\left[ 
-    \nabla\pi(a\mid s)\, Q^\pi (s,a) 
+    &\stackrel{\text{(i)}}{=} \sum_a\!\left[
+    \nabla\pi(a\mid s)\, Q^\pi (s,a)
   + \pi(a\mid s) \sum_{s'} P(s'\mid s,a)\, \nabla V^\pi(s') \right] ,
 \end{aligned}
 {{< /katex >}}
@@ -76,12 +82,12 @@ Let $\phi(s) = \sum_a \nabla\pi(a\mid s)\, Q^\pi (s,a)$, and denote by $\rho^\pi
 
 {{< katex display=true >}}
 \begin{aligned}
-\nabla V^{\pi}(s) 
+\nabla V^{\pi}(s)
 &= \phi(s) + \sum_a \pi(a\mid s) \sum_{s'} P(s'\mid s,a)\, \nabla V^\pi(s') \\
 &= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\, \nabla V^\pi(s') \\
 &= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\!\left[ \phi(s') + \sum_{s''} \rho^\pi(s' \to s'',1)\, \nabla V^\pi(s'') \right] \\
 &= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\, \phi(s') + \sum_{s''} \rho^\pi(s \to s'',2)\, \nabla V^\pi(s'') \\
-&= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\, \phi(s') 
+&= \phi(s) + \sum_{s'} \rho^\pi(s \to s',1)\, \phi(s')
   + \sum_{s''} \rho^\pi(s \to s'',2)\, \phi(s'')
   + \sum_{s'''} \rho^\pi(s \to s''',3)\, \nabla V^\pi(s''') \\
 &\quad \vdots \\
@@ -107,15 +113,17 @@ Let $\eta(s)$ be the expected number of visits to $s$ (episodic: $\sum_s \eta(s)
 
 <div id="them:PG-baseline" class="theorem">
 
-<strong>Theorem 2</strong>. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, {{< katex display=true >}}
+<strong>Theorem 2</strong>. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$,
+
+{{< katex display=true >}}
 \label{equ:reinforce-baseline}
     \begin{aligned}
         \nabla J(\theta) &\propto \sum_s d^\pi(s)\sum_a (Q^\pi (s,a) -b(s)) \nabla\pi(a|s) \\
         &= \mathbb{E}_{\pi} \left[(Q^\pi(s,a) -b(s)) \nabla\ln\pi(a|s)\right].
     \end{aligned}
 {{< /katex >}}
-This will reduce the variance while keeping it unbiased
 
+This will reduce the variance while keeping it unbiased
 
 </div>
 
@@ -128,13 +136,13 @@ According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >
 {{< katex display=true >}}
 \begin{aligned}
 &\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]\\
-= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
  - \mathbb{E}_{d^\pi}\!\left[\sum_a b(s)\, \nabla\ln\pi(a\mid s)\right] \\
-= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
  - \mathbb{E}_{d^\pi}\!\left[b(s)\, \nabla \sum_a \pi(a\mid s)\right] \\
-= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]
  - \mathbb{E}_{d^\pi}\!\left[b(s)\, \nabla 1\right] \\
-= &\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
+&= \mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
 \end{aligned}
 {{< /katex >}}
 
@@ -143,21 +151,21 @@ Using a quadratic-term-only approximation and independence assumptions for facto
 {{< katex display=true >}}
 \begin{aligned}
 &\mathbb{V}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right] \\
-\stackrel{\text{(i)}}{\gtrapprox} &\sum_a \mathbb{E}_{d^\pi}\!\left[\big((Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\big)^2\right]
+&\stackrel{\text{(i)}}{\gtrapprox} \sum_a \mathbb{E}_{d^\pi}\!\left[\big((Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\big)^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a (Q^\pi(s,a) - b(s))\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-\stackrel{\text{(ii)}}{\approx} &\sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a) - b(s))^2\right]\, \mathbb{E}_{d^\pi}\!\left[(\nabla\ln\pi(a\mid s))^2\right]
+&\stackrel{\text{(ii)}}{\approx} \sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a) - b(s))^2\right]\, \mathbb{E}_{d^\pi}\!\left[(\nabla\ln\pi(a\mid s))^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-< &\sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a)\, \nabla\ln\pi(a\mid s))^2\right]
+&< \sum_a \mathbb{E}_{d^\pi}\!\left[(Q^\pi(s,a)\, \nabla\ln\pi(a\mid s))^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-\stackrel{\text{(iii)}}{\lessapprox} &\mathbb{E}_{d^\pi}\!\left[\left(\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right)^2\right]
+&\stackrel{\text{(iii)}}{\lessapprox} \mathbb{E}_{d^\pi}\!\left[\left(\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right)^2\right]
  - \Big(\mathbb{E}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right]\Big)^2 \\
-= &\mathbb{V}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
+&= \mathbb{V}_{d^\pi}\!\left[\sum_a Q^\pi(s,a)\, \nabla\ln\pi(a\mid s)\right] \, .
 \end{aligned}
 {{< /katex >}}
 
 In approximations (i) and (iii), we keep only quadratic terms and omit cross-products. But this won’t affect the property of the inequality because the deduction loss caused by
 $\prod_a (Q^\pi(s,a) - b(s)) \nabla\ln\pi(a\mid s)$ is less than the increase we compensate for
-$\prod_a Q^\pi(s,a) \nabla\ln\pi(a\mid s)$. In (ii), we assume the independence among the values involved in the expectation for factorization.. Hence, using a baseline reduces variance; choosing $b(s) \approx V^\pi(s)$ yields near-optimal variance.
+$\prod_a Q^\pi(s,a) \nabla\ln\pi(a\mid s)$. In (ii), we assume the independence among the values involved in the expectation for factorization. Hence, using a baseline reduces variance; choosing $b(s) \approx V^\pi(s)$ yields near-optimal variance.
 
 {{% /details %}}
 
@@ -167,12 +175,14 @@ Off-policy sampling reuses any past episodes, which has a higher efficiency and 
 
 {{< katex display=true >}}
 \label{equ:pgthem-off-policy}
-\nabla J(\theta) = \nabla \Bigl(\sum_s d^\beta(s) \, V^\pi(s)\Bigr) \\
-= \nabla\Bigl(\sum_s d^\beta(s) \sum_a \pi(a|s) \, Q^\pi(s,a)\Bigr) \\
-= \sum_s d^\beta(s) \sum_a \Bigl(\nabla \pi(a|s) \, Q^\pi(s,a) + \pi(a|s) \, \nabla Q^\pi(s,a)\Bigr) \\
-\stackrel{\text{(i)}}{\approx} \sum_s d^\beta(s) \sum_a Q^\pi(s,a) \, \nabla \pi(a|s) \\
-= \mathbb{E}_{d^\beta}\!\left[\sum_a \beta(a|s) \, \frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \frac{\nabla \pi(a|s)}{\pi(a|s)}\right] \\
-= \mathbb{E}_{\beta}\!\left[\frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \nabla\ln \pi(a|s)\right] \, .
+\begin{aligned}
+\nabla J(\theta) &= \nabla \Bigl(\sum_s d^\beta(s) \, V^\pi(s)\Bigr) \\
+&= \nabla\Bigl(\sum_s d^\beta(s) \sum_a \pi(a|s) \, Q^\pi(s,a)\Bigr) \\
+&= \sum_s d^\beta(s) \sum_a \Bigl(\nabla \pi(a|s) \, Q^\pi(s,a) + \pi(a|s) \, \nabla Q^\pi(s,a)\Bigr) \\
+&\stackrel{\text{(i)}}{\approx} \sum_s d^\beta(s) \sum_a Q^\pi(s,a) \, \nabla \pi(a|s) \\
+&= \mathbb{E}_{d^\beta}\!\left[\sum_a \beta(a|s) \, \frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \frac{\nabla \pi(a|s)}{\pi(a|s)}\right] \\
+&= \mathbb{E}_{\beta}\!\left[\frac{\pi(a|s)}{\beta(a|s)} \, Q^\pi(s,a) \, \nabla\ln \pi(a|s)\right] \, .
+\end{aligned}
 {{< /katex >}}
 
 where {{< katex >}}d^\beta(s){{< /katex >}} is the stationary distribution of the behavior policy {{< katex >}}\beta{{< /katex >}}, and {{< katex >}}Q^\pi{{< /katex >}} is the Q-function estimated regard to the target policy {{< katex >}}\pi{{< /katex >}}. Because of hard computation in reality (i), we ignore the approximation term {{< katex >}}\nabla Q^\pi(s,a){{< /katex >}}.
@@ -205,7 +215,7 @@ or learn it off-policy-ly by following a different stochastic behavior $\beta(a\
 
 {{< katex display=true >}}
 \label{equ:pgthem-deterministic-offpolicy}
-\begin{aligned}  
+\begin{aligned}
 \nabla_{\theta} J(\theta) &=\nabla_{\theta} \left(\int_s d^\beta(s) Q^\mu(s,a)\big\rvert_{a=\mu_{\theta}(s)}ds\right)\\
 &=\mathbb{E}_{d^\beta} [ \,\nabla_{\theta} \mu_{\theta}(s) \nabla_a Q^\mu(s,a)\big\rvert_{a=\mu_{\theta}(s)}],
 \end{aligned}
@@ -268,8 +278,10 @@ In the multi-agent setting, the PPO algorithm can be implemented independently (
 
 {{< katex display=true >}}
 \label{equ:MAPPO}
-J^\text{IPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{i, \text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{i, \text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\pi_{\theta_{i,\text{old}}}}(s, a) \right) \right] \\
-J^\text{MAPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right] \, .
+\begin{aligned}
+J^\text{IPPO}(\theta_i) &= \mathbb{E}_{\pi_{\theta_{i, \text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{A}^{\pi_{\theta_{i, \text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{A}^{\pi_{\theta_{i,\text{old}}}}(s, a) \right) \right] \\
+J^\text{MAPPO}(\theta_i) &= \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right] \, .
+\end{aligned}
 {{< /katex >}}
 
 Note that there are some other instantiations of IPPO, but not all of them are vulnerable to non-convergence issues. The one with full actor critic parameter or information sharing can be regarded as a centralized method. Besides, for cases where a general solution is still intangible even with parameter sharing (e.g. the exclusive game), [heterogeneous-agent PPO](https://arxiv.org/abs/2109.11251) allows the agents to take turns learning by using others’ information, which can work well with strong assumptions. [PettingZoo](https://papers.neurips.cc/paper_files/paper/2021/hash/803f7c4c3ff61b71be53a0c803bfb57f-Abstract.html) provides agent-cycle and parallel environment interfaces.

@@ -128,19 +128,27 @@ article .text-danger {
   background: rgb(0 0 0 / 65%);
 }
 
-.article-image-viewer > img {
-  display: block;
+.article-image-scroll {
   max-width: 94vw;
-  max-height: 94vh;
-  object-fit: contain;
+  max-height: calc(94vh - 44px);
+  overflow: auto;
+}
+
+.article-image-scroll > img {
+  display: block;
+  /* A wide diagram stays legible when panned on a small screen. */
+  max-width: max(48rem, 94vw);
+  height: auto;
 }
 
 .article-image-viewer > button {
-  position: absolute;
-  inset: 0.35rem 0.35rem auto auto;
+  display: block;
+  margin-inline-start: auto;
+  width: 44px;
+  height: 44px;
   background: Canvas;
   color: CanvasText;
-  border: 1px solid;
+  border: 0;
   font: inherit;
   cursor: pointer;
 }

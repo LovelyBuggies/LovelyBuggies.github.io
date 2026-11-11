@@ -110,6 +110,26 @@ class BlogTranslationTests(unittest.TestCase):
                 Text("Learning from Preferences", "yaml"), "Learning from Preferences"
             )
 
+    def test_bold_label_stays_attached_to_its_translation(self):
+        db = sqlite3.connect(":memory:")
+        self.addCleanup(db.close)
+        db.execute("CREATE TABLE phrases (source TEXT PRIMARY KEY, target TEXT NOT NULL)")
+        options = SimpleNamespace(model="test", endpoint="unused", cache_only=False)
+        source = (
+            "---\ntitle: DPO\ndate: 2026-01-01\n---\n"
+            "The **full gradient** includes the target gradient.\n"
+            "Keep `**literal**` and $x^{**}$ intact.\n"
+        )
+        with patch.object(self.engine, "_request_batch", return_value={"s0": "全梯度"}):
+            parts = list(slots(source, self.engine, db=db, options=options))
+        body = [p for p in parts if isinstance(p, Text) and p.mode == "prose"]
+        self.assertEqual(
+            restore(body[0], "ZXQ00000QXZ包含目标梯度。"),
+            "<strong>全梯度</strong>包含目标梯度。",
+        )
+        self.assertIn("`**literal**`", body[1].literals)
+        self.assertIn("$x^{**}$", body[1].literals)
+
     def test_long_math_line_recovers_each_gap_once(self):
         unit = Text(
             "ZXQ00000QXZ, ZXQ00001QXZ: ZXQ00002QXZ given the actions ZXQ00003QXZ;",

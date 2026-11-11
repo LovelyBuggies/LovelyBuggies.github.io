@@ -121,10 +121,11 @@ class Text:
     literals: tuple = ()
 
 
-# Keep inline labels intact so prose cannot move inside a link or theorem label.
+# Translate an inline label as a unit so the surrounding prose cannot move inside it.
 LINK = re.compile(
     r'(?P<html><(?P<tag>a|strong|em|b|i)\b(?:[^>"\']|"[^"]*"|\'[^\']*\')*>)(?P<html_label>[^<>\n]+)</(?P=tag)>'
-    r"|!?\[(?P<md_label>[^\[\]\n]+)\]\(",
+    r"|!?\[(?P<md_label>[^\[\]\n]+)\]\("
+    r"|(?<![\\*])\*\*(?![\s*])(?P<strong_label>[^*<>\[\]_$`{}\\|\n]+?)(?<!\s)\*\*(?!\*)",
     re.I,
 )
 
@@ -152,6 +153,10 @@ class InlineLink:
 
 def inline_links(body):
     for m in LINK.finditer(body):
+        if m["strong_label"] is not None:
+            # HTML preserves the exact emphasis boundary next to Chinese punctuation.
+            yield m.span(), InlineLink("<strong>", m["strong_label"], "</strong>")
+            continue
         name = "html_label" if m["html"] else "md_label"
         label = m[name]
         if re.search(r"[<>_$*`{}\\]", label):
@@ -542,7 +547,15 @@ def translate_unit(unit, options, engine):
 
 def fill_cache(parts, db, options, engine):
     result = {}
+    # These paired labels name the two different updates derived in the same post.
+    terminology = {
+        "Full Gradient of Bellman Residual": "贝尔曼残差的全梯度",
+        "Semi Gradient of Bellman Residual": "贝尔曼残差的半梯度",
+    }
     for unit in dict.fromkeys(p for p in parts if isinstance(p, Text)):
+        if unit.mode == "link" and unit.value in terminology:
+            result[unit] = terminology[unit.value]
+            continue
         if technical_label(unit.value):
             result[unit] = unit.value
             continue

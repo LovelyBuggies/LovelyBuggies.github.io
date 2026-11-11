@@ -10,24 +10,17 @@ readingTime: 10
 ## Dec-POMDP
 
 <div class="definition">
-  <strong>Definition 1</strong>. A Dec-POMDP is a tuple {{< katex >}}\langle \mathbb{I}, \mathcal{S}, \{\mathbb{A}_i\}, T, R, \{\mathbb{O}_i\}, O, \mathcal{H}, \gamma\rangle{{< /katex >}}:
+
+<strong>Definition 1</strong>. A Dec-POMDP is a tuple {{< katex >}}\langle \mathbb{I}, \mathcal{S}, \{\mathbb{A}_i\}, T, R, \{\mathbb{O}_i\}, O, \mathcal{H}, \gamma\rangle{{< /katex >}}:
 
 - {{< katex >}}\mathbb{I}{{< /katex >}} is a finite sets of agents, {{< katex >}}|\mathbb{I}|=n{{< /katex >}};
-
 - {{< katex >}}\mathcal{S}{{< /katex >}} is a set of states with designated initial state distribution {{< katex >}}b^0{{< /katex >}};
-
 - {{< katex >}}\mathbb{A}_i{{< /katex >}} is a set of actions for agent {{< katex >}}i{{< /katex >}} with {{< katex >}}\mathbb{A}\doteq \times_i \mathbb{A}_i{{< /katex >}} the set of joint actions;
-
 - {{< katex >}}T{{< /katex >}} is the state transition probability function, {{< katex >}}T{{< /katex >}}: {{< katex >}}\mathcal{S} \times \mathbb{A} \times \mathcal{S} \rightarrow [0, 1]{{< /katex >}}, that specifies the probability of transitioning from state {{< katex >}}s \in \mathcal{S}{{< /katex >}} to {{< katex >}}s' \in \mathcal{S}{{< /katex >}} when the actions {{< katex >}}\boldsymbol{a} \in \mathbb{A}{{< /katex >}} are taken by agents (i.e., {{< katex >}}T(s, \boldsymbol{a}, s')=P(s'|s, \textbf{a}){{< /katex >}});
-
 - {{< katex >}}R{{< /katex >}} is the joint reward function, where {{< katex >}}R{{< /katex >}}: {{< katex >}}\mathcal{S} \times \mathbb{A} \rightarrow \mathbb{R}{{< /katex >}};
-
 - {{< katex >}}\mathbb{O}_i{{< /katex >}} is a set of observations for each agent {{< katex >}}i{{< /katex >}}, with {{< katex >}}\mathbb{O}\doteq\times_i \mathbb{O}_i{{< /katex >}} the set of joint observations;
-
 - {{< katex >}}O{{< /katex >}} is an observation probability function, {{< katex >}}O{{< /katex >}}: {{< katex >}}\mathbb{A} \times \mathcal{S} \times \mathbb{O}{{< /katex >}}, that specifies the probability of seeing observation {{< katex >}}\boldsymbol{o}' \in \mathbb{O}{{< /katex >}} given the actions {{< katex >}}\boldsymbol{a} \in \mathbb{A}{{< /katex >}} are taken and state {{< katex >}}s' \in \mathcal{S}{{< /katex >}} is observed (i.e., {{< katex >}}O(\boldsymbol{a}, s', \boldsymbol{o}')=P(\boldsymbol{o}'|\textbf{a},s'){{< /katex >}});
-
 - {{< katex >}}\mathcal{H}{{< /katex >}} is the horizon (the number of steps until termination);
-
 - {{< katex >}}\gamma{{< /katex >}} is the discount factor for the return.
 
 In Dec-POMDP, since the states are not directly observable, each agent maintains its local observation-action history, {{< katex >}}h_i^t=\{a_i^{0}, o_i^{1}, \cdots o_i^t\} {{< /katex >}}, to infer information about the state. A solution to a Dec-POMDP is a joint policy $\boldsymbol{\pi}:\mathbb{H}_i\to\mathbb{A}_i, \forall i \in \mathbb{I}$ over joint observation-action history {{< katex >}}\boldsymbol{h}=\{\boldsymbol{a}^{0}, \boldsymbol{o}^{1}, \cdots \boldsymbol{o}^{\mathcal{H}-1}\}{{< /katex >}}, where an optimal solution maximizes the expected return, 
@@ -43,7 +36,9 @@ In Dec-POMDP, the Bellman recursive formulation of the history V-function is,
 {{< katex display=true >}}
 \label{eq:decpomdp-V}
 \begin{aligned}
-    V^{\boldsymbol{\pi}}(\boldsymbol{h}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\left[R(s, \boldsymbol{\pi}(\boldsymbol{h}))+\gamma \sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h})) \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') V^{\boldsymbol{\pi}}(\boldsymbol{h}') \right]\\
+    V^{\boldsymbol{\pi}}(\boldsymbol{h}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\Bigl[R(s, \boldsymbol{\pi}(\boldsymbol{h}))\\
+    &\quad {}+\gamma \sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h}))\\
+    &\qquad \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') V^{\boldsymbol{\pi}}(\boldsymbol{h}') \Bigr]\\
     &\equiv R(\boldsymbol{h}, \boldsymbol{\pi})+\gamma\sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{h}, \boldsymbol{\pi}) V^{\boldsymbol{\pi}}(\boldsymbol{h}').
 \end{aligned}
 {{< /katex >}}
@@ -56,7 +51,9 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 \label{eq:decpomdp-q}
 \small
 \begin{aligned}
-    Q^{\boldsymbol{\pi}}(\boldsymbol{h}, \boldsymbol{\pi}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\left[R(s, \boldsymbol{\pi}(\boldsymbol{h}))+\gamma\sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h})) \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') Q^{\boldsymbol{\pi}}(\boldsymbol{h}', \boldsymbol{\pi}(\boldsymbol{h}')) \right]\\
+    Q^{\boldsymbol{\pi}}(\boldsymbol{h}, \boldsymbol{\pi}) &= \sum_{s} P(s|b^0, \boldsymbol{h})\Bigl[R(s, \boldsymbol{\pi}(\boldsymbol{h}))\\
+    &\quad {}+\gamma\sum_{s'}P(s'|s, \boldsymbol{\pi}(\boldsymbol{h}))\\
+    &\qquad \sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{\pi}(\boldsymbol{h}), s') Q^{\boldsymbol{\pi}}(\boldsymbol{h}', \boldsymbol{\pi}(\boldsymbol{h}')) \Bigr]\\
     &\equiv R(\boldsymbol{h}, \boldsymbol{\pi})+\gamma\sum_{\boldsymbol{o}'}P(\boldsymbol{o}'|\boldsymbol{h}, \boldsymbol{\pi}) Q^{\boldsymbol{\pi}}(\boldsymbol{h}', \boldsymbol{\pi}) .
 \end{aligned}
 {{< /katex >}}
@@ -67,12 +64,14 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 
 {{< /sidenote >}}
 
-## Special Classes of Dec-POMDP 
+## Special Classes of Dec-POMDP
 
 - **Centralized:** MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy {{< katex >}}\mathbb{H}\to\mathbb{A}{{< /katex >}}.
 - **Decentralized:** A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) {{< katex >}}T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i'){{< /katex >}} and reward-independence (RI) {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n}){{< /katex >}}. The networked distributed POMDP ([Nair et al., 2005](https://cdn.aaai.org/AAAI/2005/AAAI05-022.pdf)) represents the factored one with TI and block-RI, i.e., {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n}){{< /katex >}}, where {{< katex >}}{\mathcal{N}(i)}{{< /katex >}} are the neighbors of {{< katex >}}i{{< /katex >}}.
 
 [Amato et al. (2013)](https://people.csail.mit.edu/camato/publications/DecPOMDP-survey-final.pdf) summarize the **worst-case complexity** of finite-horizon problems. The TI Dec-MDP rows below assume independent observations as well as independent transitions.
+
+<div id="tab:complexity">
 
 | **Model**              | **Complexity**  |
 |:-----------------------|:----------------|
@@ -87,12 +86,12 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 | Dec-POMDP              | NEXP-complete   |
 | ND-POMDP               | NEXP-complete   |
 
+</div>
 
 {{% details title="Related Theorems" open=false %}}
 
-<span id="tab:complexity" label="tab:complexity"></span>
-
 <div class="theorem">
+
 <strong>Theorem 1</strong>. An MDP is P-complete in finite and infinite horizons (<a href="https://doi.org/10.1287/moor.12.3.441">Papadimitriou and Tsitsiklis 1987</a>).
 
 <strong>Theorem 2</strong>. A finite POMDP is PSPACE-complete (<a href="https://doi.org/10.1287/moor.12.3.441">Papadimitriou and Tsitsiklis 1987</a>).
