@@ -1,5 +1,7 @@
 skipToContent = { other = "Skip to content" }
 navigation = { other = "Blog navigation" }
+switchLanguage = { other = "Switch to {{ . }}" }
+rightsReserved = { other = "All rights reserved." }
 articles = { other = "Articles" }
 backToBlog = { other = "Back to the blog" }
 academicHome = { other = "Academic homepage" }

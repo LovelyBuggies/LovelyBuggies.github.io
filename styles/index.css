@@ -119,6 +119,18 @@ img {
     padding-right: 24px;
 }
 
+.profile-links {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8em;
+    max-width: 100%;
+}
+
+.profile-links img {
+    display: block;
+}
+
 .profile-icon {
     height: 1.75em;
 }

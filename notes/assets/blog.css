@@ -1,4 +1,6 @@
 :root {
+  --column-width: 900px;
+  --column-padding: 1.5rem;
   --blue: #1e3f95;
   --ink: #1a1a2e;
   --muted: #606a79;
@@ -20,14 +22,23 @@ h1, h2, h3, h4 { font-family: var(--serif); line-height: 1.25; font-weight: 600;
 .skip-link { position: fixed; top: -5rem; left: 1rem; z-index: 3; padding: .6rem; background: white; }
 .skip-link:focus { top: .5rem; }
 .site-header { position: sticky; top: 0; z-index: 2; background: white; border-bottom: 1px solid var(--rule); }
+.navigation, .reading-column {
+  width: 100%; max-width: var(--column-width); margin-inline: auto;
+  padding-inline: var(--column-padding);
+}
 .navigation {
-  max-width: 900px; margin: auto; min-height: 60px; padding: 0 1.5rem;
+  min-height: 60px;
   display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
 }
 .brand { font: 600 1.35rem/1.25 var(--serif); color: var(--ink); text-decoration: none; }
-.language-switch { color: var(--blue); font-size: .94rem; text-underline-offset: .2em; }
+.language-switch {
+  display: inline-flex; align-items: center; justify-content: flex-end;
+  margin-inline-end: 4px;
+  min-width: 44px; min-height: 44px; color: var(--blue);
+}
+.language-switch:hover { color: #142f72; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.reading-column { width: 100%; max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; flex: 1; }
+.reading-column { padding-block: 2.5rem 3rem; flex: 1; }
 .archive-title, .post-heading h1 { margin: 0; font-size: 2rem; }
 .archive-title { padding-bottom: .8rem; margin-bottom: .75rem; border-bottom: 1px solid var(--rule); }
 .post-entry { padding: 1.5rem 0; border-bottom: 1px solid var(--rule); }
@@ -75,6 +86,6 @@ summary { cursor: pointer; }
   .adjacent-posts [rel=next] { margin-left: 0; text-align: left; }
 }
 @media (max-width: 480px) {
-  .reading-column { padding: 1.5rem 1rem 2.5rem; }
-  .navigation { padding-inline: 1rem; }
+  :root { --column-padding: 1rem; }
+  .reading-column { padding-block: 1.5rem 2.5rem; }
 }

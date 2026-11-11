@@ -30,10 +30,15 @@
   <header class="site-header">
     <nav class="navigation" aria-label="{{ i18n "navigation" }}">
       <a class="brand" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
-      {{ range $translations }}<a class="language-switch" href="{{ .RelPermalink }}" lang="{{ .Language.LanguageCode }}" hreflang="{{ .Language.LanguageCode }}">{{ .Language.LanguageName }}</a>{{ end }}
+      {{ range $translations }}
+        {{ $label := i18n "switchLanguage" .Language.LanguageName }}
+        <a class="language-switch" href="{{ .RelPermalink }}" hreflang="{{ .Language.LanguageCode }}" aria-label="{{ $label }}" title="{{ $label }}">
+          {{ partial "language-icon.html" .Language.Lang }}
+        </a>
+      {{ end }}
     </nav>
   </header>
   <main class="reading-column" id="main">{{ block "main" . }}{{ end }}</main>
-  <footer class="site-footer">© {{ now.Year }} <a href="/">{{ site.Params.authorName }}</a></footer>
+  <footer class="site-footer">© {{ now.Year }} <a href="/">{{ site.Params.authorName }}</a>. {{ i18n "rightsReserved" }}</footer>
 </body>
 </html>

@@ -1,5 +1,7 @@
 skipToContent = { other = "跳转到正文" }
 navigation = { other = "博客导航" }
+switchLanguage = { other = "切换至{{ . }}" }
+rightsReserved = { other = "保留所有权利。" }
 articles = { other = "文章列表" }
 backToBlog = { other = "返回文章列表" }
 academicHome = { other = "学术主页" }

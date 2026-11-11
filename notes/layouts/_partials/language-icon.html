@@ -1,0 +1,9 @@
+{{- $toChinese := eq . "zh" -}}
+<svg width="24" height="22" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="lang-han" d="m5.6 1.6 1 1.5M1 4.4h11.2M3.2 4.4c.9 3.8 3.8 6.6 8.6 8.6M10 4.4c-1 3.8-4 6.7-8.8 8.6"/>
+    <path id="lang-latin" d="M1 13 6.6 1.8 12.2 13M3 9h7.2"/>
+  </defs>
+  <use href="{{ cond $toChinese "#lang-han" "#lang-latin" }}"/>
+  <use href="{{ cond $toChinese "#lang-latin" "#lang-han" }}" x="11" y="7.5"/>
+</svg>

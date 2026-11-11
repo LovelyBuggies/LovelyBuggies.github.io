@@ -23,11 +23,13 @@ document.write(`
         <br>
         <br>
 
-        <a href = "https://scholar.google.co.uk/citations?user=K51u9a8AAAAJ&hl"><img src="./imgs/icon/google-scholar.svg" class="scholar-icon filter-svg-blue"/></i></a> &nbsp
-        <a href = "https://github.com/LovelyBuggies"><img src="./imgs/icon/github.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
-        <a href = "https://twitter.com/ShuoLiu14"><img src="./imgs/icon/x-twitter.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
-        <a href = "https://orcid.org/0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
-        <a href="https://www.linkedin.com/in/shuo-liu-035138395/" title="Shuo Liu on LinkedIn"><img src="./imgs/icon/linkedin.svg" class="profile-icon filter-svg-blue" alt="Shuo Liu on LinkedIn"></a> &nbsp
+        <span class="profile-links">
+            <a href="https://scholar.google.co.uk/citations?user=K51u9a8AAAAJ&amp;hl"><img src="./imgs/icon/google-scholar.svg" class="scholar-icon filter-svg-blue" alt="Google Scholar"></a>
+            <a href="https://github.com/LovelyBuggies"><img src="./imgs/icon/github.svg" class="profile-icon filter-svg-blue" alt="GitHub"></a>
+            <a href="https://twitter.com/ShuoLiu14"><img src="./imgs/icon/x-twitter.svg" class="profile-icon filter-svg-blue" alt="X"></a>
+            <a href="https://orcid.org/0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="profile-icon filter-svg-blue" alt="ORCID"></a>
+            <a href="https://www.linkedin.com/in/shuo-liu-035138395/" title="Shuo Liu on LinkedIn"><img src="./imgs/icon/linkedin.svg" class="profile-icon filter-svg-blue" alt="Shuo Liu on LinkedIn"></a>
+        </span>
         <!-- https://fontawesome.com/icons -->
 
 `);
