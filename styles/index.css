@@ -148,6 +148,10 @@ paper {
     -webkit-text-stroke: 0.4px currentColor;
 }
 
+.publications .resource-link {
+    -webkit-text-stroke: 0.3px currentColor;
+}
+
 top-bar {
 	font-size: 50%;
 	font-weight: bold;
