@@ -2,11 +2,13 @@
 
 
 html {
+  --site-blue: #1e3f95;
   background-color: #eeeeee; 
 }
 
 body { 
   font-family: Ubuntu 11, Georgia, Verdana;
+  font-size: 115%;
   color: #000;
   background-color: #ffffff; 
   text-align:left;
@@ -22,15 +24,12 @@ body {
 }
 
 #layout-content {
-	padding-top: 2.0em;
-	padding-bottom: 2.0em;
-	padding-left: 2.0em;
-	padding-right: 2.0em;
+	padding: 2rem;
 }
 
 
 a, a > tt {
-	color: #224488;
+	color: var(--site-blue);
 }
 
 em {
@@ -39,7 +38,7 @@ em {
 
 
 h1, h2, h3 {
-	color: #224b8d;
+	color: var(--site-blue);
 	margin-top: 0.7em;
 	margin-bottom: 0.5em;
 	padding-bottom: 0.2em;
@@ -54,6 +53,7 @@ h1 {
 }
 
 h2 {
+	margin-top: 1.1em;
 	padding-top: 0.8em;
 	font-size: 125%;
 }
@@ -84,7 +84,8 @@ li-t {
 }
 
 .filter-svg-blue{
-    filter: invert(15%) sepia(88%) saturate(1567%) hue-rotate(202deg) brightness(94%) contrast(96%);
+    /* Match --site-blue on the black SVG icons. */
+    filter: invert(21.94%) sepia(90%) saturate(1277%) hue-rotate(206.2deg) brightness(93.4%) contrast(101.6%) brightness(90%);
 }
 .filter-svg-red{
     filter: invert(14%) sepia(63%) saturate(3063%) hue-rotate(348deg) brightness(94%) contrast(96%);
@@ -112,18 +113,45 @@ img {
     border: none;
 }
 
+.profile-portrait {
+    float: right;
+    height: 10.725rem;
+    padding-right: 24px;
+}
+
+.profile-icon {
+    height: 1.75em;
+}
+
+.scholar-icon {
+    height: 1.5em;
+}
+
 conf {
 	color: #111111;
 	font-weight: bold;
 }
 
 paper {
-	color: #224488;
+	color: var(--site-blue);
+}
+
+.publications paper,
+.selected-papers paper {
+    /* This serif face has regular and bold weights; a light stroke adds subtle emphasis. */
+    font-weight: 400;
+    -webkit-text-stroke: 0.5px currentColor;
+}
+
+.publications .publication-venue {
+    font-weight: 400;
+    -webkit-text-stroke: 0.4px currentColor;
 }
 
 top-bar {
 	font-size: 50%;
 	font-weight: bold;
+	word-spacing: 2px;
 }
 
 sub {
@@ -143,8 +171,90 @@ annotate {
 	color: #888888;
 }
 
-award {
+.award {
 	font-size: 85%;
 	font-weight: bold;
-	color: #ab1515;
+	color: #941414;
+}
+
+.citation-dialog {
+    --panel-padding: clamp(0.875rem, 2.5vw, 1.5rem);
+    box-sizing: border-box;
+    width: min(54rem, calc(100vw - 2rem));
+    max-height: 85vh;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #cbd3df;
+    border-top: 2px solid var(--site-blue);
+    border-radius: 0.5rem;
+    background: white;
+    color: #263449;
+    box-shadow: 0 0.75rem 2.5rem #17233b29;
+}
+
+.citation-dialog[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+.citation-dialog::backdrop {
+    background: #19233759;
+}
+
+.citation-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem var(--panel-padding);
+    border-bottom: 1px solid #dce2eb;
+}
+
+.citation-dialog h2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1.3rem;
+}
+
+.citation-dialog button {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid #cbd3df;
+    border-radius: 0.35rem;
+    background: white;
+    color: var(--site-blue);
+    font: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.citation-dialog button:hover {
+    background: #f0f3f9;
+}
+
+.citation-dialog button:focus-visible {
+    outline: 2px solid var(--site-blue);
+    outline-offset: 2px;
+}
+
+.citation-dialog pre {
+    min-height: 0;
+    margin: 0;
+    padding: 1.15rem var(--panel-padding) 1.35rem;
+    overflow: auto;
+    background: #f7f9fc;
+    font: 0.875rem/1.65 ui-monospace, SFMono-Regular, Consolas, monospace;
+    white-space: normal;
+    user-select: text;
+}
+
+.citation-dialog pre > span {
+    display: block;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.citation-dialog .bibtex-field {
+    padding-inline-start: var(--value-indent);
+    text-indent: calc(-1 * var(--value-indent));
 }

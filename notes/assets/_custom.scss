@@ -27,8 +27,15 @@
   height: auto;
 }
 
+// Match the academic site's blue on the light sidebar.
+@media (prefers-color-scheme: light) {
+  body {
+    --sidebar-link: #1e3f95;
+    --color-link: #0e4dab;
+  }
+}
+
 // Sidebar tweaks: bold non-clickable section titles; color post links
-// Match homepage name color (#224b8d) for clickable post titles
 .book-menu .book-menu-content nav li > label,
 .book-menu .book-menu-content nav li > span {
   font-weight: 660;
@@ -43,7 +50,7 @@
 }
 
 .book-menu .book-menu-content nav a {
-  color: #224b8d;
+  color: var(--sidebar-link, var(--color-link));
 }
 
 .book-menu .book-menu-content nav a:hover {

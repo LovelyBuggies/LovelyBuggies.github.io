@@ -1,5 +1,6 @@
 document.write(`
-        <p style="color: #224b8d;
+        <p style="display: flow-root;
+                  color: var(--site-blue);
                   margin-top: 0.7em;
                   margin-bottom: 0.5em;
                   padding-bottom: 0.4em;
@@ -13,7 +14,7 @@ document.write(`
         </span>
         </p>
 
-        <p><img src="./imgs/photo2.png" height=156 align="right" style="padding: 0px 30px 0px 0px;" />
+        <p><img class="profile-portrait" src="./imgs/portrait.webp" alt="Shuo Liu" />
             <a href = "https://www.khoury.northeastern.edu/research/"><em>Khoury College of Computer Sciences<br>Northeastern University</em><br></a>
         </p>
         EXP 760, 815 Columbus Ave<br>
@@ -22,11 +23,11 @@ document.write(`
         <br>
         <br>
 
-        <a href = "https://scholar.google.co.uk/citations?user=K51u9a8AAAAJ&hl"><img src="./imgs/icon/google-scholar.svg" class="filter-svg-blue" height="24"/></i></a> &nbsp
-        <a href = "https://github.com/LovelyBuggies"><img src="./imgs/icon/github.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
-        <a href = "https://twitter.com/ShuoLiu14"><img src="./imgs/icon/x-twitter.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
-        <a href = "https://orcid.org/0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
-        <a href = "https://www.researchgate.net/profile/Shuo-Liu-96"><img src="./imgs/icon/researchgate.svg" class="filter-svg-blue" height="28"></i></a> &nbsp
+        <a href = "https://scholar.google.co.uk/citations?user=K51u9a8AAAAJ&hl"><img src="./imgs/icon/google-scholar.svg" class="scholar-icon filter-svg-blue"/></i></a> &nbsp
+        <a href = "https://github.com/LovelyBuggies"><img src="./imgs/icon/github.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
+        <a href = "https://twitter.com/ShuoLiu14"><img src="./imgs/icon/x-twitter.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
+        <a href = "https://orcid.org/0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
+        <a href = "https://www.researchgate.net/profile/Shuo-Liu-96"><img src="./imgs/icon/researchgate.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
         <!-- https://fontawesome.com/icons -->
 
 `);
