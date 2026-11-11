@@ -1,27 +1,20 @@
 ---
 date: 2024-01-05
-title: "Understand Bellman Equations"
+title: "Understanding Bellman Equations"
+description: "A fresh look at Bellman equations for value prediction, from recursive updates to the difference between full gradients and semi-gradients."
 math: true
-weight: 1
 postType: review
-linkTitle: "Understanding Bellman"
 readingTime: 35
 ---
-
-{{< katex />}}
-
-# Understanding Bellman Equations
-
-{{< postbadges >}}
 
 This post is about the clichés of the Bellman equations, but retold in a new way :)
 
 ## Bellman Equations
 
-Bellman equations establish recusive relations between states and succeeding states, which can be applied as updating rules for value prediction.
+Bellman equations establish recursive relations between states and succeeding states, which can be applied as updating rules for value prediction. [Bellman and Kalaba (1957)](https://doi.org/10.1073/pnas.43.8.749) applied dynamic programming recursions to problems in statistical communication theory.
 
 <div class="definition">
-  <strong>Definition 1.</strong> The Bellman equations for V-values are (Sutton and Barto 2018),
+  <strong>Definition 1.</strong> The Bellman equations for V-values are (<a href="https://mitpress.mit.edu/9780262039246/reinforcement-learning/">Sutton and Barto, 2018</a>),
 
 
 
@@ -69,7 +62,7 @@ $V^\pi(s)$ and $Q^\pi(s,a)$ are value representations following policy $\pi$, e.
 {{< /katex >}}
 
 {{< sidenote id="curse-of-dimension" >}}
-<strong>The Curse of Dimension.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? (Bellman 1957) coined the “curse of dimension”, which describes the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
+<strong>The Curse of Dimensionality.</strong> Why do we mostly use MDP (where the future evolution is independent of its history) and hence Bellman Equations to model RL problems? <a href="https://doi.org/10.1515/9781400874668">Bellman (1961)</a> used the term “curse of dimensionality” to describe the exponential increase in the state space size as dimensionality grows, making calculations extremely complex. Breaking this curse often requires altering the problem or its constraints, though complete solutions are not always achievable.
 {{< /sidenote >}}
 
 
@@ -95,6 +88,7 @@ For convenience, we use Q-value as the representative in the following parts of 
 ## Bellman Properties
 
 <div class="proposition">
+
 <strong>Proposition 1</strong> ($\gamma$-contraction). Given any $Q,\ Q' \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}$, Bellman Operators are $\gamma$-contraction Operators in $L^\infty$ norm, {{< katex display=true >}}
 \begin{aligned}
         \|\mathcal{T}^\pi \circ Q - \mathcal{T}^\pi \circ Q'\|_\infty &\leqslant \gamma \|Q-Q'\|_\infty,\\
@@ -102,7 +96,7 @@ For convenience, we use Q-value as the representative in the following parts of 
     \end{aligned}
 {{< /katex >}}
 
-<strong>Corollary 1</strong> (Fixed-point Iteration). For any {{< katex >}}Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}, after {{< katex >}}k\to \infty{{< /katex >}} iterations of Bellman transformation, {{< katex >}}Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0{{< /katex >}}, or {{< katex >}}Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0{{< /katex >}}, according to <a href="https://en.wikipedia.org/wiki/Banach_fixed-point_theorem">Banach’s Fixed Point Theorem</a>:
+<strong>Corollary 1</strong> (Fixed-point Iteration). For any {{< katex >}}Q^0 \mapsto \mathbb{R}^{|\mathcal{S}| \times |\mathcal{A}|}{{< /katex >}}, after {{< katex >}}k\to \infty{{< /katex >}} iterations of Bellman transformation, {{< katex >}}Q^{\pi, \infty} \doteq \lim_{k \to\infty} (\mathcal{T}^\pi)^k \circ Q^0{{< /katex >}}, or {{< katex >}}Q^{*, \infty} \doteq \lim_{k\to\infty} (\mathcal{T}^*)^k \circ Q^0{{< /katex >}}, according to <a href="https://doi.org/10.4064/fm-3-1-133-181">Banach’s Fixed Point Theorem</a>:
 
 
 {{< katex display=true >}}
@@ -111,7 +105,7 @@ Q^{\pi,\,\infty} = Q^{*,\,\infty} = Q^* ,
 
 which uniquely satisfies,  {{< katex >}}\mathcal{T}^{\pi}(Q^*) = Q^*,  \text{or } \mathcal{T}^{*}(Q^*) = Q^* .{{< /katex >}}
 
-<strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to {{< katex >}}Q^*{{< /katex >}} (<strong>deterministically</strong> maximizes) is optimal (Szepesvári 2010):
+<strong>Theorem 1</strong> (Fundamental theorem). Any memoryless policy that is greedy to {{< katex >}}Q^*{{< /katex >}} (<strong>deterministically</strong> maximizes) is optimal (<a href="https://sites.ualberta.ca/~szepesva/rlbook.html">Szepesvári, 2010</a>):
 
 
 {{< katex display=true >}}
@@ -152,12 +146,12 @@ When the transition model is unavailable (model-free), we can use the residuals 
 In **TD-learning** with learning rate $\alpha$, the update rule for Q-values is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^\pi\circ Q) (s,a). \label{eq:td-learning}
 {{< /katex >}}
- [According to Stochastic Approximation Theorem](https://en.wikipedia.org/wiki/Stochastic_approximation), let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following TD-learning updates, {{< katex >}}Q^{\pi, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} (Jaakkola, Jordan, and Singh 1994).
+ Under the [stochastic approximation step-size conditions](https://doi.org/10.1214/aoms/1177729586), let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty,\sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. For a fixed policy, the TD iterates {{< katex >}}Q^{\pi,k}(s,a){{< /katex >}} converge to its action values {{< katex >}}Q^\pi(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ([Jaakkola, Jordan, and Singh, 1994](https://doi.org/10.1162/neco.1994.6.6.1185); see also their [1993 conference paper](https://papers.nips.cc/paper_files/paper/1993/hash/5807a685d1a9ab3b599035bc566ce2b9-Abstract.html)).
 
 In **Q-learning** that relies on optimal Bellman Equation, the Q-value update is, {{< katex display=true >}}
 Q(s, a) \leftarrow Q(s, a) + \alpha (\mathcal{B}^*\circ Q) (s,a). \label{eq:q-learning}
 {{< /katex >}}
-According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following Q-learning updates, {{< katex >}}Q^{*, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} (Watkins and Dayan 1992).
+According to Stochastic Approximation Theorem, let {{< katex >}}k{{< /katex >}} be the visitation times of state-action pair, and learning rates {{< katex >}}0 \leqslant \alpha^k < 1{{< /katex >}} satisfies {{< katex >}}\forall (s, a){{< /katex >}}, {{< katex >}}\sum_{k=1}^\infty \alpha^k(s, a) = \infty, \sum_{k=1}^\infty [\alpha^k(s, a)]^2 < \infty{{< /katex >}}. Following Q-learning updates, {{< katex >}}Q^{*, k}(s, a){{< /katex >}} converges to {{< katex >}}Q^*(s, a){{< /katex >}} as {{< katex >}}k \to \infty{{< /katex >}} ([Watkins and Dayan, 1992](https://doi.org/10.1023/A:1022676722315)).
 
 However, the nice property of convergence only holds in the tabular case and cannot be extended to a function approximation as discussed later.
 
@@ -182,7 +176,7 @@ Similar to stochastic gradient methods with unbiased target estimators, if we us
     &= \alpha \Big[Q^\text{target} - Q_\theta(s, a) \Big] \nabla_\theta Q_\theta(s, a), \label{eq:semi-grad}
 \end{aligned}
 {{< /katex >}}
-where {{< katex >}}Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a'){{< /katex >}}, since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., Baird’s counter-example (the star problem).
+where {{< katex >}}Q^\text{target} = r + \gamma Q_{\textcolor{red}{\theta}}(s', a'){{< /katex >}}, since we neglects a part of the gradient of {{< katex >}}Q^\text{target}{{< /katex >}}, it is called **Semi Gradient of Bellman Residual** ({{< katex >}}\theta{{< /katex >}} in red). Though semi-gradient methods are fast and simple, they could have divergence issue, e.g., [Baird’s counter-example](https://doi.org/10.1016/B978-1-55860-377-6.50013-X) (the star problem).
 
 The **Full Gradient of Bellman Residual** should include all gradient components, including the gradient of the target estimation, {{< katex display=true >}}
 \begin{aligned}
@@ -192,7 +186,7 @@ The **Full Gradient of Bellman Residual** should include all gradient components
 {{< /katex >}}
  If the approximation system is general enough and the value functions are continuous, the full Bellman residual gradient is guaranteed to converge to the optima. However, this is at the sacrifice of learning speed, as illustrated by the hall problem.
 
-In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure 2 represents the case where the semi gradient may diverge. (Baird 1995) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed, 
+In contrast to Figure 1 where $\Delta_\text{semi}$ boosts $\Delta_\text{full}$, Figure 2 represents the case where the semi gradient may diverge. [Baird (1995)](https://doi.org/10.1016/B978-1-55860-377-6.50013-X) combined these 2 methods: to keep stable, $\Delta_\text{B}$ should stay in the same direction as $\Delta_\text{full}$ (above the perpendicular axis); meanwhile, $\Delta_\text{B}$ should stay as close as possible to $\Delta_\text{semi}$ to increase learning speed,
 
 {{< katex display=true >}}
 \begin{aligned}
@@ -248,20 +242,6 @@ Q(s, a) = R(s,a) + \phi(s,a) + \gamma
 \mathbb{E}_{\substack{a' \sim \pi(\cdot\mid s'),\\ s' \sim P(\cdot \mid s, a)}} 
 \Big[\, Q(s', a') \,\Big].
 {{< /katex >}}
-
-## References
-
-{{< references >}}
-<li>Baird, L. (1995, July). Residual algorithms: Reinforcement learning with function approximation. In Proceedings of the twelfth international conference on machine learning (pp. 30-37).</li>
-<li>Bellman, R., & Kalaba, R. (1957). Dynamic programming and statistical communication theory. Proceedings of the National Academy of Sciences, 43(8), 749-751.</li>
-<li>Jaakkola, T., Jordan, M., & Singh, S. (1993). Convergence of stochastic iterative dynamic programming algorithms. Advances in neural information processing systems, 6.
-</li>
-<li>Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction (Vol. 1, No. 1, pp. 9-11). Cambridge: MIT press.</li>
-<li>Szepesvári, C. (2022). Algorithms for reinforcement learning. Springer nature.</li>
-<li>Watkins, C. J., & Dayan, P. (1992). Q-learning. Machine learning, 8(3), 279-292.</li>
-{{< /references >}}
-
-
 
 <!-- footnote converted to hint above -->
 <!-- migrated from leaf-bundle to single-file naming -->

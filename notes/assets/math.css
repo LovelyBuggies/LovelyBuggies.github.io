@@ -1,0 +1,12 @@
+.math-display {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: 1.15em;
+  padding-block: .2em;
+}
+
+.math-display > .katex {
+  display: block;
+  width: max-content;
+  margin-inline: auto;
+}

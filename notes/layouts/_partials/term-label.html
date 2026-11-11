@@ -1,0 +1,2 @@
+{{- $key := printf "tag_%s" (replace (.Data.Term | urlize) "-" "_") -}}
+{{- return (or (i18n $key) .LinkTitle) -}}

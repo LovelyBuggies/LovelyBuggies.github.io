@@ -27,7 +27,7 @@ document.write(`
         <a href = "https://github.com/LovelyBuggies"><img src="./imgs/icon/github.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
         <a href = "https://twitter.com/ShuoLiu14"><img src="./imgs/icon/x-twitter.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
         <a href = "https://orcid.org/0000-0003-0177-6102"><img src="./imgs/icon/orcid.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
-        <a href = "https://www.researchgate.net/profile/Shuo-Liu-96"><img src="./imgs/icon/researchgate.svg" class="profile-icon filter-svg-blue"></i></a> &nbsp
+        <a href="https://www.linkedin.com/in/shuo-liu-035138395/" title="Shuo Liu on LinkedIn"><img src="./imgs/icon/linkedin.svg" class="profile-icon filter-svg-blue" alt="Shuo Liu on LinkedIn"></a> &nbsp
         <!-- https://fontawesome.com/icons -->
 
 `);

@@ -1,0 +1,7 @@
+{{- $title := .Title -}}
+{{- if eq .Kind "term" -}}
+  {{- $title = partial "term-label.html" . -}}
+{{- else if eq .Kind "taxonomy" -}}
+  {{- $title = i18n "tags" -}}
+{{- end -}}
+{{- return $title -}}

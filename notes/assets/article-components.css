@@ -1,0 +1,183 @@
+.article-aside,
+article :is(.definition, .theorem, .proposition, .corollary) {
+  margin-block: 1.5em;
+  padding-inline-start: 1.1em;
+  border-inline-start: 2px solid var(--rule);
+}
+
+.article-aside {
+  color: var(--muted);
+  font-size: 0.94em;
+  font-style: italic;
+}
+
+article .text-danger {
+  color: #9a3030;
+}
+
+.article-details {
+  margin-block: 1.5em;
+  padding-block: 0.6em;
+  border-block: 1px solid var(--rule);
+}
+
+.article-details > summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.article-tabs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 1.1em;
+  margin-block: 1.5em;
+}
+
+.article-tabs > input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+
+.article-tabs > label {
+  padding-block: 0.35em;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.article-tabs > input:checked + label {
+  color: var(--blue);
+  border-bottom-color: currentColor;
+  font-weight: bold;
+}
+
+.article-tabs > input:focus-visible + label {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.article-tab-panel {
+  display: none;
+  order: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+.article-tabs > input:checked + label + .article-tab-panel {
+  display: block;
+}
+
+.article-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4em 1.5em;
+  margin-block: 1.5em;
+}
+
+.article-columns > p {
+  margin: 0;
+}
+
+.article-columns img {
+  width: 100%;
+  height: auto;
+}
+
+.article-columns > .figcaption {
+  grid-row: 2;
+  font-size: 0.9em;
+}
+
+.article-image {
+  display: block;
+  max-width: 100%;
+  margin: 1.5em auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: zoom-in;
+}
+
+.article-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.article-image.w-60 {
+  width: 60%;
+}
+
+.article-image.wide-grpo {
+  width: 92%;
+}
+
+.article-image-viewer {
+  max-width: 96vw;
+  max-height: 96vh;
+  padding: 0;
+  border: 0;
+  background: Canvas;
+  color: CanvasText;
+}
+
+.article-image-viewer::backdrop {
+  background: rgb(0 0 0 / 65%);
+}
+
+.article-image-viewer > img {
+  display: block;
+  max-width: 94vw;
+  max-height: 94vh;
+  object-fit: contain;
+}
+
+.article-image-viewer > button {
+  position: absolute;
+  inset: 0.35rem 0.35rem auto auto;
+  background: Canvas;
+  color: CanvasText;
+  border: 1px solid;
+  font: inherit;
+  cursor: pointer;
+}
+
+.article-pdf {
+  width: 100%;
+  height: 30rem;
+}
+
+.article-badge,
+.article-references {
+  font-size: 0.9em;
+}
+
+.article-references > li::marker {
+  content: "[" counter(list-item) "]  ";
+}
+
+@media (max-width: 36rem) {
+  .article-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .article-columns > .figcaption {
+    grid-row: auto;
+    margin-block-end: 1em;
+  }
+
+  .article-image.w-60 {
+    width: 100%;
+  }
+}
+
+@media print {
+  .article-tabs,
+  .article-tab-panel,
+  .article-tabs > label {
+    display: block;
+  }
+}

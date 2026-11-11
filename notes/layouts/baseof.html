@@ -1,0 +1,39 @@
+{{- $translations := slice -}}
+{{- range .Translations -}}
+  {{- if or (not .IsHome) (partial "blog-posts.html" .Site.RegularPages) -}}
+    {{- $translations = $translations | append . -}}
+  {{- end -}}
+{{- end -}}
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if not .IsHome }}{{ partial "archive-title.html" . }} · {{ end }}{{ site.Title }}</title>
+  <meta name="description" content="{{ .Description | default site.Params.description }}">
+  <meta name="author" content="{{ site.Params.authorName }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ if $translations }}
+    <link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}">
+    {{ range $translations }}<link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}">{{ end }}
+  {{ end }}
+  <link rel="icon" href="/imgs/icon/nameicon.svg" type="image/svg+xml">
+  {{ with site.Home.OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" title="{{ site.Title }} · {{ i18n "rss" }}" href="{{ .RelPermalink }}">{{ end }}
+  {{ partial "blog-fonts.html" . }}
+  {{ range slice "blog.css" "article-components.css" "math.css" }}
+    {{ with resources.Get . | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}">{{ end }}
+  {{ end }}
+  {{ with resources.Get "blog.js" | minify | fingerprint }}<script defer src="{{ .RelPermalink }}"></script>{{ end }}
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ i18n "skipToContent" }}</a>
+  <header class="site-header">
+    <nav class="navigation" aria-label="{{ i18n "navigation" }}">
+      <a class="brand" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+      {{ range $translations }}<a class="language-switch" href="{{ .RelPermalink }}" lang="{{ .Language.LanguageCode }}" hreflang="{{ .Language.LanguageCode }}">{{ .Language.LanguageName }}</a>{{ end }}
+    </nav>
+  </header>
+  <main class="reading-column" id="main">{{ block "main" . }}{{ end }}</main>
+  <footer class="site-footer">© {{ now.Year }} <a href="/">{{ site.Params.authorName }}</a></footer>
+</body>
+</html>

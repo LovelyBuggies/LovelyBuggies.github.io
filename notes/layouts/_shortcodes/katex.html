@@ -1,0 +1,3 @@
+{{- with .Inner -}}
+  {{- partial "math/render.html" (dict "tex" . "display" (eq (printf "%v" ($.Get "display")) "true") "position" $.Position) -}}
+{{- end -}}

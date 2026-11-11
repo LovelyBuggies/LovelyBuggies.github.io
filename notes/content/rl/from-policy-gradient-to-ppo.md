@@ -1,23 +1,17 @@
 ---
 date: 2025-03-10
 title: "From Policy Gradient to PPO"
+description: "Following the policy gradient from its derivation to proximal policy optimization and group relative policy optimization."
 math: true
-weight: 4
 postType: review
 readingTime: 15
-linkTitle: "From Policy Gradient to PPO"
 ---
 
-{{< katex />}}
-
-# From Policy Gradient to PPO
-{{< postbadges >}}
-
-PPO (Schulman et al. 2017) is a shining jewel in the world of RL. In this post, we’ll dive into its backstory and recent advances.
+PPO ([Schulman et al., 2017](https://arxiv.org/abs/1707.06347)) is a shining jewel in the world of RL. In this post, we’ll dive into its backstory and recent advances.
 
 ## Policy Gradient
 
-Compared with value-based methods (Q-learning), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. Policy gradient (PG) methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}},
+Compared with value-based methods ([Q-learning](https://doi.org/10.1023/A:1022676722315)), Policy-based methods aim directly at learning the parameterized policy that can select actions without consulting a value function. Policy gradient (PG) methods seek to maximize a performance measure {{< katex >}}J(\theta){{< /katex >}} with the policy’s parameter {{< katex >}}\theta{{< /katex >}}, where the updates approximate gradient ascent in {{< katex >}}J{{< /katex >}},
 
 {{< katex display=true >}}
 \label{eq:pg}
@@ -32,7 +26,7 @@ There are 2 main advantages of PG methods,
 
 ### PG Theorem
 
-An intuitive way to calculate policy gradient is to replace {{< katex >}}J(\theta){{< /katex >}} with {{< katex >}}V^{\pi_{\theta}} (s_0){{< /katex >}}. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. PG theorem provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
+An intuitive way to calculate policy gradient is to replace {{< katex >}}J(\theta){{< /katex >}} with {{< katex >}}V^{\pi_{\theta}} (s_0){{< /katex >}}. However, the calculation is hard as it directly depends on both the action selection and indirectly the distribution of states following the target selection. The [policy gradient theorem](https://proceedings.neurips.cc/paper/1999/hash/464d828b85b0bed98e80ade0a5c43b0f-Abstract.html) provides a nice reformulation of the derivative of the objective function to not involve the state distribution derivation.
 We omit {{< katex >}}\theta{{< /katex >}} in subscripts/superscripts and gradients, assuming {{< katex >}}\pi{{< /katex >}} depends on {{< katex >}}\theta{{< /katex >}} and all gradients are w.r.t. {{< katex >}}\theta{{< /katex >}}; i.e., {{< katex >}}V^{\pi} \equiv V^{\pi_{\theta}}{{< /katex >}}, {{< katex >}}Q^{\pi} \equiv Q^{\pi_{\theta}}{{< /katex >}} and {{< katex >}}\nabla \equiv \nabla_{\theta}{{< /katex >}}.
 
 <div id="them:PG" class="theorem">
@@ -112,6 +106,7 @@ Let $\eta(s)$ be the expected number of visits to $s$ (episodic: $\sum_s \eta(s)
 ### PG with Baseline
 
 <div id="them:PG-baseline" class="theorem">
+
 <strong>Theorem 2</strong>. PG theorem can be generalized to include a comparison of the action value to an arbitrary baseline $b(s)$, as long as $b(s)$ does not depend on $a$, {{< katex display=true >}}
 \label{equ:reinforce-baseline}
     \begin{aligned}
@@ -124,7 +119,7 @@ This will reduce the variance while keeping it unbiased
 
 </div>
 
-According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem 1 can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by Generalized Advantage Estimation or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
+According to the Theorem 2, the expected return {{< katex >}}Q(s,a){{< /katex >}} in Theorem 1 can be replaced by {{< katex >}}G{{< /katex >}} (expected return of the full or following trajectory by Monte Carlo), {{< katex >}}A{{< /katex >}} (advantage by [Generalized Advantage Estimation](https://arxiv.org/abs/1506.02438) or state-value prediction), and {{< katex >}}\delta{{< /katex >}} (TD-residual by critic prediction).
 
 {{% details "Proof of Theorem 2" %}}
 
@@ -188,7 +183,7 @@ Since the intent of this post is to introduce how PPO comes from PG, we do not f
 
 {{% details "Deterministic PG" %}}
 
-Sometimes we hope the policy function to be deterministic to reduce the gradient estimation variance and improve the exploration efficiency for continuous action space (the deterministic PG is a special case of the stochastic PG, with $\sigma=0$ in the re-parameterization $\pi_{\mu_{\theta}, \sigma}$) (i.e., a decision $a=\mu_{\theta}(s)$). PG for a deterministic policy in continuous action space is,
+Sometimes we hope the policy function to be deterministic to reduce the gradient estimation variance and improve the exploration efficiency for continuous action space (the deterministic PG is a special case of the stochastic PG, with $\sigma=0$ in the re-parameterization $\pi_{\mu_{\theta}, \sigma}$) (i.e., a decision $a=\mu_{\theta}(s)$). The [deterministic policy gradient](https://proceedings.mlr.press/v32/silver14.html) for a continuous action space is,
 
 {{< katex display=true >}}
 \label{equ:pgthem-deterministic}
@@ -224,7 +219,7 @@ Due to the efficiency of the GPU-cluster in training, some workers (machines or 
 
 <p><strong>Centralized v.s. Decentralized</strong> These workers can either share a central parameter server or update their own weights in a decentralized manner, where aggregation techniques such as AllReduce may be utilized. Rather than merely collecting rollouts and calculating the gradient according to its replay buffer, the workers can be further decentralized into <em>agents</em> with their parameters, which is closely related to PG in multi-agent setting.</p>
 
-<p><strong>Synchronous v.s. Asynchronous</strong> In the centralized paradigm, weight updates can be conducted synchronously, where gradients from all workers are aggregated (typically through summation or averaging) before updating the model parameters. This ensures a globally consistent update but may introduce inefficiencies due to synchronization delays. Alternatively, asynchronous updating allows each worker to update the global parameters independently, without waiting for all gradients to be collected. This method can improve computational throughput but may lead to stale gradients and slower convergence. The difference between these 2 approaches is exemplified in Advantage Actor-Critic (A2C) and Asynchronous Advantage Actor-Critic (A3C).</p>
+<p><strong>Synchronous v.s. Asynchronous</strong> In the centralized paradigm, weight updates can be conducted synchronously, where gradients from all workers are aggregated (typically through summation or averaging) before updating the model parameters. This ensures a globally consistent update but may introduce inefficiencies due to synchronization delays. Alternatively, asynchronous updating allows each worker to update the global parameters independently, without waiting for all gradients to be collected. This method can improve computational throughput but may lead to stale gradients and slower convergence. The difference between these 2 approaches is exemplified in Advantage Actor-Critic (A2C) and <a href="https://proceedings.mlr.press/v48/mniha16.html">Asynchronous Advantage Actor-Critic (A3C)</a>.</p>
 
 {{% /details %}}
 
@@ -234,7 +229,7 @@ In this section, we introduce standard PPO and it variants in different domains.
 
 ### Clip-PPO
 
-(Schulman et al., 2017) proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate {{< katex >}}\hat{A}^{\pi_{\theta_{\text{old}}}}{{< /katex >}} to reduce the variance of policy gradient methods and maintain low bias (Schulman et al., 2015).
+[Schulman et al. (2017)](https://arxiv.org/abs/1707.06347) proposed the standard PPO that uses a clipped surrogate objective to ensure the policy updates are small and controlled (proximal). Since the advantage under current policy is intangible, we can use Generalized Advantage Estimation (GAE) of the last policy to estimate {{< katex >}}\hat{A}^{\pi_{\theta_{\text{old}}}}{{< /katex >}} to reduce the variance of policy gradient methods and maintain low bias ([Schulman et al., 2015](https://arxiv.org/abs/1506.02438)).
 
 {{< katex display=true >}}
 \label{equ:Clip-PPO}
@@ -252,7 +247,7 @@ J^{\text{CLIP+}}(\theta) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ J^{\tex
 
 ### KL-PPO
 
-Another formulation of PPO to improve training stability, so-called Trust Region Policy Optimization (TRPO), enforces a KL divergence constraint on the size of the policy update at each iteration (Schulman et al., 2017).
+Trust Region Policy Optimization (TRPO) constrains the KL divergence at each policy update ([Schulman et al., 2015](https://proceedings.mlr.press/v37/schulman15.html)). The KL-penalty variant of PPO instead subtracts a penalty from the objective ([Schulman et al., 2017](https://arxiv.org/abs/1707.06347)):
 
 {{< katex display=true >}}
 \label{alg:TRPO}
@@ -264,12 +259,12 @@ where {{< katex >}}\mathcal{D}_\text{KL}(\pi_{\theta_{\text{old}}} \| \pi_{\thet
 Sometimes, the KL-penalty can be combined with policy clipping to achieve better performance in practice.
 
 {{< sidenote >}}
-<strong>Adaptive-KL-PPO:</strong> (Schulman et al. 2017) also mentioned Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive {{< katex >}}\left( \mathcal{D}_\text{KL} \gg \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is increased to penalize large updates; else if the update is too conservative {{< katex >}}\left( \mathcal{D}_\text{KL} \ll \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is decreased to allow larger updates.
+<strong>Adaptive-KL-PPO:</strong> <a href="https://arxiv.org/abs/1707.06347">Schulman et al. (2017)</a> also described Adaptive-KL-PPO, where the KL penalty coefficient is adjusted dynamically. If the policy update is too aggressive {{< katex >}}\left( \mathcal{D}_\text{KL} \gg \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is increased to penalize large updates; else if the update is too conservative {{< katex >}}\left( \mathcal{D}_\text{KL} \ll \mathcal{D}_\text{threshold} \right){{< /katex >}}, {{< katex >}}c{{< /katex >}} is decreased to allow larger updates.
 {{< /sidenote >}}
 
 ### Multi-Agent PPO
 
-In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). In IPPO, each agent has its own actor and critic and learns independently according to a joint reward (Witt et al., 2020). Like IPPO, MAPPO employs weight sharing between agents’ critics, and the advantage in MAPPO is estimated through joint GAE (Yu et al., 2022).
+In the multi-agent setting, the PPO algorithm can be implemented independently (IPPO) or by a centralized critic (MAPPO). IPPO estimates values from each agent’s local observations ([Schroeder de Witt et al., 2020](https://arxiv.org/abs/2011.09533)). MAPPO uses GAE with a centralized critic that can also see global information ([Yu et al., 2022](https://proceedings.neurips.cc/paper_files/paper/2022/hash/9c1535a02f0ce079433344e14d910597-Abstract-Datasets_and_Benchmarks.html)).
 
 {{< katex display=true >}}
 \label{equ:MAPPO}
@@ -277,11 +272,11 @@ J^\text{IPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{i, \text{old}}}} \left[ \min 
 J^\text{MAPPO}(\theta_i) = \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[ \min \left( \frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)} \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a), \text{clip}(\frac{\pi_{\theta_i}(a|s)}{\pi_{\theta_{i, \text{old}}}(a|s)}, 1 - \epsilon, 1 + \epsilon) \hat{\boldsymbol{A}}^{\pi_{\theta_{\text{old}}}}(s, a) \right) \right] \, .
 {{< /katex >}}
 
-Note that there are some other instantiations of IPPO, but not all of them are vulnerable to non-convergence issues. The one with full actor critic parameter or information sharing can be regarded as a centralized method. Besides, for cases where a general solution is still intangible even with parameter sharing (e.g. the exclusive game), heterogeneous-agent PPO allows the agents to take turns learning by using others’ information, which can work well with strong assumptions. A great example is PettingZoo’s agent cycle and parallel environments.
+Note that there are some other instantiations of IPPO, but not all of them are vulnerable to non-convergence issues. The one with full actor critic parameter or information sharing can be regarded as a centralized method. Besides, for cases where a general solution is still intangible even with parameter sharing (e.g. the exclusive game), [heterogeneous-agent PPO](https://arxiv.org/abs/2109.11251) allows the agents to take turns learning by using others’ information, which can work well with strong assumptions. [PettingZoo](https://papers.neurips.cc/paper_files/paper/2021/hash/803f7c4c3ff61b71be53a0c803bfb57f-Abstract.html) provides agent-cycle and parallel environment interfaces.
 
 ### GRPO
 
-As DeepSeek has made a splash in the LLM community, the RL method GRPO involved has received a lot of attention (Zhihong Shao 2024). GRPO is a variant of PPO, where the advantage is estimated using group-relative comparisons rather than GAE. This approach eliminates the critic model, which improves the training efficiency and stability. The DeepSeek framework consists of: (i) a frozen *reference model*, which is a stable baseline for computing rewards; (ii) a given *reward model*, responsible for evaluating generated outputs and assigning scores; (iii) a *value model*, which estimates the expected return of a given state to aid in policy optimization; and (iv) a *policy model*, which generates {{< katex >}}|\mathcal{G}|{{< /katex >}} responses and is continuously updated to improve performance based on feedback from the other components. The learning objective for GRPO is:
+As DeepSeek has made a splash in the LLM community, the RL method GRPO involved has received a lot of attention ([Shao et al., 2024](https://arxiv.org/abs/2402.03300)). GRPO is a variant of PPO, where the advantage is estimated using group-relative comparisons rather than GAE. This approach eliminates the critic model, which improves the training efficiency and stability. In DeepSeekMath, the frozen *reference model* anchors the KL penalty, the *reward model* scores generated outputs, and the *policy model* generates {{< katex >}}|\mathcal{G}|{{< /katex >}} responses per prompt. The group’s rewards supply the baseline for the policy update. The learning objective for GRPO is:
 
 {{< katex display=true >}}
 \small
@@ -297,19 +292,6 @@ where the advantage {{< katex >}}\hat{A}^\mathcal{G}_i=\frac{r_i-\text{mean}(r)}
 is a positive unbiased estimator, which measures the difference between the policy of trained model and reference model (like direct policy optimization).
 
 {{< image src="imgs/from_pg_2_ppo/grpo.png" alt="GRPO" class="wide-grpo" >}}
-
-
-## References
-
-{{< references >}}
-<li>Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). Proximal policy optimization algorithms. *arXiv preprint arXiv:1707.06347*. </li>
-<li>Schulman, J., Moritz, P., Levine, S., Jordan, M., & Abbeel, P. (2015). High-dimensional continuous control using generalized advantage estimation. *arXiv preprint arXiv:1506.02438*.</li>
-<li>Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X., ... & Guo, D. (2024). Deepseekmath: Pushing the limits of mathematical reasoning in open language models. *arXiv preprint arXiv:2402.03300*.</li>
-<li>De Witt, C. S., Gupta, T., Makoviichuk, D., Makoviychuk, V., Torr, P. H., Sun, M., & Whiteson, S. (2020). Is independent learning all you need in the starcraft multi-agent challenge?. arXiv preprint arXiv:2011.09533.</li>
-<li>Yu, C., Velu, A., Vinitsky, E., Gao, J., Wang, Y., Bayen, A., & Wu, Y. (2022). The surprising effectiveness of ppo in cooperative multi-agent games. Advances in neural information processing systems, 35, 24611-24624. </li>
-{{< /references >}}
-
-
 
 <!-- footnotes converted to hints above -->
 <!-- moved to root content -->

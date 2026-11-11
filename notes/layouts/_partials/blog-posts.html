@@ -1,0 +1,2 @@
+{{/* All dated articles, including nested sections. Utility pages have no date. */}}
+{{ return (where . "Date.Year" "gt" 1).ByDate.Reverse }}

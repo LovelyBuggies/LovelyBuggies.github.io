@@ -1,0 +1,23 @@
+skipToContent = { other = "跳转到正文" }
+navigation = { other = "博客导航" }
+articles = { other = "文章列表" }
+backToBlog = { other = "返回文章列表" }
+academicHome = { other = "学术主页" }
+adjacentArticles = { other = "相邻文章" }
+older = { other = "更早的文章" }
+newer = { other = "更新的文章" }
+contents = { other = "目录" }
+readingTime = { other = "阅读约 {{ .Minutes }} 分钟" }
+rss = { other = "RSS 订阅" }
+tags = { other = "标签" }
+tag_rl = { other = "强化学习（RL）" }
+tag_multi_agent_rl = { other = "多智能体强化学习" }
+tag_llm = { other = "大语言模型（LLM）" }
+browseByType = { other = "按文章类型浏览" }
+type_review = { other = "综述" }
+type_thought = { other = "随笔" }
+topics = { other = "主题" }
+viewPDF = { other = "查看 PDF" }
+image = { other = "图片" }
+enlargeImage = { other = "放大{{ . }}" }
+closeImage = { other = "关闭大图" }

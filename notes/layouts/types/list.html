@@ -1,32 +1,4 @@
 {{ define "main" }}
-<article class="markdown book-article">
-  <h1 id="types-title"></h1>
-  <ul id="types-results"></ul>
-</article>
-
-{{ $typesData := resources.Get "types-data.json" | resources.ExecuteAsTemplate "types-data.json" . | resources.Minify | resources.Fingerprint }}
-<script>
-(function(){
-  const params = new URLSearchParams(location.search);
-  const t = (params.get('t') || '').toLowerCase();
-  const labelFor = (slug) => slug === 'review' || slug === 'overview' ? 'Review' : (slug === 'thought' ? 'Thought' : (slug ? slug.charAt(0).toUpperCase()+slug.slice(1) : ''));
-  document.getElementById('types-title').textContent = labelFor(t);
-  const list = document.getElementById('types-results');
-  fetch('{{ $typesData.RelPermalink }}').then(r=>r.json()).then(items => {
-    let slug = t;
-    if (t === 'overview') slug = 'review';
-    const filtered = slug ? items.filter(i => i.type === slug) : items;
-    filtered.sort((a,b)=>a.title.localeCompare(b.title));
-    for (const p of filtered) {
-      const li = document.createElement('li');
-      li.innerHTML = '<a></a><small></small>';
-      const a = li.querySelector('a'), small = li.querySelector('small');
-      a.href = p.href;
-      a.textContent = p.title;
-      small.textContent = p.date;
-      list.appendChild(li);
-    }
-  });
-})();
-</script>
+  <h1 class="archive-title" data-type-heading data-review="{{ i18n "type_review" }}" data-thought="{{ i18n "type_thought" }}">{{ i18n "browseByType" }}</h1>
+  {{ partial "archive-list.html" (partial "blog-posts.html" site.RegularPages) }}
 {{ end }}

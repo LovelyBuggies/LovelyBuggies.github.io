@@ -1,19 +1,13 @@
 ---
 date: 2024-11-11
-title: 'Optimal Q in Dec-POMDP'
+title: "Optimal Q-Functions in Dec-POMDP"
+description: "Why the normative optimal Q-function is difficult to compute in a Dec-POMDP, and how sequential rationality gives an alternative."
 math: true
 postType: thought
-linkTitle: 'Optimal Q in Dec-POMDP'
 readingTime: 45
-weight: 3
 ---
 
-{{< katex />}}
-
-# Optimal Q-Functions in Dec-POMDP
-{{< postbadges >}}
-
-This post discusses why the normative optimal Q-functions cannot be solved and an alternative to use.
+This post discusses why the normative optimal Q-function is impractical to compute directly and how sequential rationality gives an alternative.
 
 ## Notions
 
@@ -30,18 +24,18 @@ This post discusses why the normative optimal Q-functions cannot be solved and a
 
 {{% tab "Policy & History" %}}
 - $\delta^{t}$: decision rule (temporal policy component) at $t$.
-- $\delta^{t,\*}$: optimal decision rule at $t$ given $\psi^{t-1,*}$.
+- $\delta^{t,*}$: optimal decision rule at $t$ given $\psi^{t-1,*}$.
 - $\delta^{t,\circledast}_\psi$: optimal decision at $t$ given non‑optimal $\psi^{t-1}$.
 - $\Delta^t$: decision rule space at $t$.
 - $\psi^{t} = \delta^{[0,t)}$: past joint policy until $t$.
-- $\psi^{t,\*} = \delta^{[0,t),\*}$: optimal past joint policy until $t$.
+- $\psi^{t,*} = \delta^{[0,t),*}$: optimal past joint policy until $t$.
 - $\psi^{t,\circledast}$: past joint policy with non‑optimal $\psi^{t-1}$ and optimal $\delta^{t-1,\circledast}_\psi$.
 - $\Psi^{t}$: past joint policy space at $t$.
 - $\xi^{t} = \delta^{[t,h)}$: subsequent joint policy from $t$.
-- $\xi^{t,\*} = \delta^{[t,h),*}$: optimal subsequent joint policy from $t$.
+- $\xi^{t,*} = \delta^{[t,h),*}$: optimal subsequent joint policy from $t$.
 - $\xi^{t,\circledast}_\psi$: optimal subsequent policy from $t$ given non‑optimal $\psi^t$.
 - $\pi = \delta^{[0,h)}$: joint pure policy.
-- $\pi^\* = \delta^{[0,h),*}$: joint optimal pure policy.
+- $\pi^* = \delta^{[0,h),*}$: joint optimal pure policy.
 {{% /tab %}}
 
 {{% tab "Rewards & Q" %}}
@@ -57,7 +51,7 @@ This post discusses why the normative optimal Q-functions cannot be solved and a
 
 <div id="defn:normative-Q" class="definition">
 
-<strong>Definition 1</strong>. The optimal Q-value function $Q^\*$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{\*}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, \*}}, \forall \psi^{t+1}\in(\psi^{t,\*},\Delta^t)$, is defined as, {{< katex display=true >}}
+<strong>Definition 1</strong>. The optimal Q-value function $Q^*$ in Dec-POMDP, the expected cumulative reward over time steps $[t,h)$ induced by optimal joint policy $\pi^{*}$, $\forall \vec{\theta}^t\in \vec{\Theta}^t_{\psi^{t, *}}, \forall \psi^{t+1}\in(\psi^{t,*},\Delta^t)$, is defined as, {{< katex display=true >}}
 Q^*(\vec{\theta}^t, \psi^{t+1}) = \left\{
         \begin{aligned}
         &R(\vec{\theta}^t, \psi^{t+1}), &t=h-1 \\ 
@@ -71,7 +65,7 @@ Q^*(\vec{\theta}^t, \psi^{t+1}) = \left\{
 Here, {{< katex >}}\pi^*(\vec{\theta}^{t+1})\equiv \psi^{t+2, *}{{< /katex >}} because of the consistent optimality of policy.
 
 <div id="prop:problem" class="proposition">
-<strong>Proposition 1</strong>. In Dec-POMDP, deriving an optimal policy from the normative optimal history-policy value function defined above is impractical (clarified in Sec. 4.3.3, (Oliehoek, Spaan, and Vlassis 2008).
+<strong>Proposition 1</strong>. In a Dec-POMDP, computing the normative optimal Q-function defined above is impractical without already knowing an optimal joint policy (<a href="https://www.fransoliehoek.net/docs/Oliehoek08JAIR.pdf">Oliehoek, Spaan, and Vlassis 2008, Sec. 4.3.3</a>).
 
 </div>
 
@@ -89,13 +83,13 @@ According to Definition. <a href="#defn:normative-Q" data-reference-type="ref" d
 \textcolor{red}{Q^*}(\vec{\theta}^t, \psi^{t+1}) = R(\vec{\theta}^t, \psi^{t+1}) + \sum_{o^{t+1} \in \mathcal{O}} P(o^{t+1}|\vec{\theta}^t, \psi^{t+1}) \max_{\delta^{t+1}}Q^*(\vec{\theta}^{t+1}, (\textcolor{red}{\psi^{t+1, *}}, \delta^{t+1})),
 {{< /katex >}}
  when {{< katex >}}0\leqslant t < h-1{{< /katex >}}. This indicates that {{< katex >}}Q^*(\vec{\theta}^t, \cdot){{< /katex >}} depends on {{< katex >}}\psi^{t+1, *}{{< /katex >}}. Consequently, calculating {{< katex >}}\delta^{t,*}{{< /katex >}} inherently depends on {{< katex >}}\delta^{[0, t], *}{{< /katex >}} (includes itself), making it self-dependent and impractical to solve. 
-Note that the dependency of {{< katex >}}P(o^{t+1}\mid\vec{\theta}^t, \psi^{t+1}){{< /katex >}} is not problematic and can be handled analogously to how the stochasticity {{< katex >}}P(s^{t+1}\mid s^t, a){{< /katex >}} is treated via double learning (Sutton and Barto 2018, Sec. 6.7). Single-agent (PO)MDP, where belief states are available, does not have this issue because the Q-value need not be history-dependent (Markov property).
+Note that the dependency of {{< katex >}}P(o^{t+1}\mid\vec{\theta}^t, \psi^{t+1}){{< /katex >}} does not create the circularity above, just as the stochasticity {{< katex >}}P(s^{t+1}\mid s^t, a){{< /katex >}} does not. When Q-values are estimated from samples, [Sutton and Barto (2018, Sec. 6.7)](https://mitpress.mit.edu/9780262039246/reinforcement-learning/) discuss double learning as a way to reduce maximization bias. Single-agent (PO)MDP, where belief states are available, does not have this issue because the Q-value need not be history-dependent (Markov property).
 
 </div>
 
 ## Sequentially Rational Optimal Q-Value Function
 
-To make optimal Q-value in Dec-POMDP computable, (Oliehoek, Spaan, and Vlassis 2008) defined another form of Q-value function and eliminated the dependency on past optimality.
+To make optimal Q-value in Dec-POMDP computable, [Oliehoek, Spaan, and Vlassis (2008, Sec. 4.4)](https://www.fransoliehoek.net/docs/Oliehoek08JAIR.pdf) defined another form of Q-value function and eliminated the dependency on past optimality.
 
 <div class="definition">
 
@@ -118,17 +112,8 @@ Note that the only difference of {{< katex >}}Q^\circledast{{< /katex >}} from {
 Beyond solving the problem of Proposition <a href="#prop:problem" data-reference-type="ref" data-reference="prop:problem">1</a>, another advantage of {{< katex >}}Q^\circledast{{< /katex >}} is that it allows for the computation of optimal subsequent policy {{< katex >}}\xi^{t, *}_\psi{{< /katex >}} following any past policy {{< katex >}}\psi^{t}{{< /katex >}}. This is beneficial in online applications where agents may occasionally deviate from the optimal policy. 
 
 {{< sidenote >}}
-<strong>Open question: </strong> We have seen some advantages of defining the optimal Q-value function as $Q^\circledast$, what are the downsides to defining it this way (e.g., high computational costs)?
+<strong>Open question: </strong> We have seen some advantages of defining the optimal Q-value function as {{< katex >}}Q^\circledast{{< /katex >}}, what are the downsides to defining it this way (e.g., high computational costs)?
 {{< /sidenote >}}
-
-## References
-
-{{< references >}}
-<li>Oliehoek, F. A., Spaan, M. T., & Vlassis, N. (2008). Optimal and approximate Q-value functions for decentralized POMDPs. Journal of Artificial Intelligence Research, 32, 289-353.</li>
-<li>Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction (Vol. 1, No. 1, pp. 9-11). Cambridge: MIT press.</li>
-{{< /references >}}
-
-
 
 <!-- footnotes converted to hints above -->
 <!-- migrated from leaf-bundle to single-file naming -->

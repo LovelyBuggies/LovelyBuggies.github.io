@@ -1,0 +1,8 @@
+{{- $src := partial "article-image-url" (dict "Page" .Page "Destination" .Destination) -}}
+{{- if eq (lower (path.Ext (urls.Parse $src).Path)) ".pdf" -}}
+  <object class="article-pdf" data="{{ $src }}" type="application/pdf">
+    <a href="{{ $src }}">{{ or .Title .PlainText (i18n "viewPDF") }}</a>
+  </object>
+{{- else -}}
+  <img src="{{ $src }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
+{{- end -}}

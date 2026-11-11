@@ -7,27 +7,40 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      TRANSLATOR_REV: 27f309ede6857b453ba8d1c984d6ff42aa32c92a
+      OLLAMA_MODEL: translategemma:4b
+      OLLAMA_HOST: 127.0.0.1:11434
+      OLLAMA_NO_CLOUD: '1'
     steps:
-      - name: Checkout
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out the CoMLRL documentation translator
         uses: actions/checkout@v4
         with:
-          submodules: recursive
-          fetch-depth: 0
+          repository: OpenMLRL/CoMLRL
+          ref: ${{ env.TRANSLATOR_REV }}
+          path: .translation-engine
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /LICENSE
+            /docs/scripts/translations.py
+            /docs/data/languages.json
 
-      - name: Sync & init submodules
-        run: |
-          git submodule sync --recursive
-          git submodule update --init --recursive
+      - name: Check technical Markdown translation rules
+        run: python3 scripts/test_translate_blog.py
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -35,35 +48,93 @@ jobs:
           hugo-version: '0.150.0'
           extended: true
 
-      - name: Build blog (Hugo)
-        run: |
-          rm -rf dist
-          mkdir -p dist
-          # Build Hugo notes site into dist/notes
-          hugo -s notes --minify -d ../dist/notes
+      - name: Build the English source for stable heading anchors
+        run: HUGO_DISABLELANGUAGES=zh hugo -s notes -d "$RUNNER_TEMP/blog-en" --panicOnWarning
 
-      - name: Copy root site files
+      - name: Restore blog translations
+        id: translations
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/blog-translations
+          key: blog-zh-v1-${{ env.TRANSLATOR_REV }}-${{ env.OLLAMA_MODEL }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            blog-zh-v1-${{ env.TRANSLATOR_REV }}-${{ env.OLLAMA_MODEL }}-
+
+      - name: Check for missing or updated articles
+        id: cached
         run: |
-          rsync -av \
-            --exclude '.git' \
-            --exclude 'notes' \
-            --exclude '.github' \
-            --exclude '.DS_Store' \
-            ./ dist/
-          # Disable Jekyll for GitHub Pages
+          if python3 scripts/translate_blog.py --english-site "$RUNNER_TEMP/blog-en" \
+              --cache-dir "$RUNNER_TEMP/blog-translations" --model "$OLLAMA_MODEL" --cache-only; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Restore the translation model
+        if: steps.cached.outputs.ready != 'true'
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/blog-models
+          key: ollama-linux-amd64-translategemma-4b-v1
+
+      - name: Start Ollama on the runner
+        if: steps.cached.outputs.ready != 'true'
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/ollama"
+          archive="$RUNNER_TEMP/ollama.tar.zst"
+          curl --fail --location --retry 3 --output "$archive" \
+            https://github.com/ollama/ollama/releases/download/v0.40.5/ollama-linux-amd64.tar.zst
+          echo "dc5eabc292f9949546c90a97c820f924b035e05243b0de13c7f366182562169c  $archive" | sha256sum --check
+          tar --zstd -xf "$archive" -C "$RUNNER_TEMP/ollama"
+          rm "$archive"
+          export OLLAMA_MODELS="$RUNNER_TEMP/blog-models"
+          export PATH="$RUNNER_TEMP/ollama/bin:$PATH"
+          nohup ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &
+          curl --fail --silent --show-error --retry 30 --retry-connrefused \
+            --retry-delay 2 "http://$OLLAMA_HOST/api/version"
+          ollama pull "$OLLAMA_MODEL"
+
+      - name: Translate changed articles into Simplified Chinese
+        id: translate
+        if: steps.cached.outputs.ready != 'true'
+        run: |
+          python3 scripts/translate_blog.py --english-site "$RUNNER_TEMP/blog-en" \
+            --cache-dir "$RUNNER_TEMP/blog-translations" --model "$OLLAMA_MODEL"
+
+      # Keep completed articles so a retry can resume after a later article fails.
+      - name: Save new translations
+        if: "!cancelled() && (steps.translate.outcome == 'success' || steps.translate.outcome == 'failure')"
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/blog-translations
+          key: ${{ steps.translations.outputs.cache-primary-key }}
+
+      - name: Build and verify both languages
+        run: |
+          mkdir -p dist
+          hugo -s notes --minify --panicOnWarning -d ../dist/notes
+          python3 scripts/check_blog_languages.py dist/notes
+
+      - name: Add the academic site
+        run: |
+          cp -R index.html research.html publications.html software.html assets imgs styles dist/
           touch dist/.nojekyll
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

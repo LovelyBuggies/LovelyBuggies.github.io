@@ -1,5 +1,4 @@
-{{ $variant := default "default" (.Get 0) }}
-<blockquote class="book-hint {{ $variant }} {{ if eq $variant "default" }}sidenote{{ end }}">
+<aside class="article-aside"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
   {{ .Inner | safeHTML }}
-</blockquote>
+</aside>
 

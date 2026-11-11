@@ -1,0 +1,15 @@
+{{- $tex := trim .tex " \t\r\n" -}}
+{{- $labelPattern := `\\label\{([^}]+)\}` -}}
+{{- $labels := findRESubmatch $labelPattern $tex -}}
+{{- $tex = replaceRE $labelPattern "" $tex -}}
+{{- $options := dict "output" "mathml" "displayMode" .display -}}
+{{- with try (transform.ToMath $tex $options) -}}
+  {{- with .Err -}}
+    {{- errorf "Invalid formula at %s: %s" $.position . -}}
+  {{- else -}}
+    {{- if $.display -}}<div class="math-display">{{- end -}}
+    {{- range $labels -}}<span id="{{ index . 1 }}"></span>{{- end -}}
+    {{- .Value -}}
+    {{- if $.display -}}</div>{{- end -}}
+  {{- end -}}
+{{- end -}}

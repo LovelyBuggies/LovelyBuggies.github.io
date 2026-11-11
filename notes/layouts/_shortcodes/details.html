@@ -1,0 +1,8 @@
+{{- $title := cond .IsNamedParams (.Get "title") (.Get 0) -}}
+{{- $open := cond .IsNamedParams (in (slice "true" true) (.Get "open")) (in .Params "open") -}}
+<details class="article-details"{{ if $open }} open{{ end }}>
+<summary>{{ $title | .Page.RenderString }}</summary>
+
+{{ .Inner }}
+
+</details>

@@ -1,0 +1,31 @@
+{{ define "main" }}
+  <article>
+    <header class="post-heading">
+      {{- $titleID := .Title | anchorize }}
+      {{- range .Translations }}{{ if eq .Language.Lang "en" }}{{ $titleID = .Title | anchorize }}{{ end }}{{ end }}
+      <h1 id="{{ $titleID }}">{{ .Title }}</h1>
+      <div class="post-meta">
+        {{ partial "post-time.html" . }}
+        {{ with .Params.postType }}<a class="type-link" href="{{ "types/" | relLangURL }}?t={{ . }}">{{ or (i18n (printf "type_%s" .)) (. | title) }}</a>{{ end }}
+        <span>{{ site.Params.authorName }}</span>
+        {{ partial "post-tags.html" . }}
+      </div>
+    </header>
+    {{ with .Fragments.Headings }}
+      <details class="contents"><summary>{{ i18n "contents" }}</summary>{{ $.TableOfContents }}</details>
+    {{ end }}
+    <div class="prose">{{ .Content }}</div>
+    <footer class="post-footer">
+      <a href="{{ site.Home.RelPermalink }}">← {{ i18n "backToBlog" }}</a>
+      <nav class="adjacent-posts" aria-label="{{ i18n "adjacentArticles" }}">
+        {{ $posts := partial "blog-posts.html" site.RegularPages }}
+        {{ range $i, $post := $posts }}
+          {{ if eq $post.RelPermalink $.RelPermalink }}
+            {{ if lt (add $i 1) (len $posts) }}{{ with index $posts (add $i 1) }}<a rel="prev" href="{{ .RelPermalink }}"><span>← {{ i18n "older" }}</span> {{ .Title }}</a>{{ end }}{{ end }}
+            {{ if gt $i 0 }}{{ with index $posts (sub $i 1) }}<a rel="next" href="{{ .RelPermalink }}"><span>{{ i18n "newer" }} →</span> {{ .Title }}</a>{{ end }}{{ end }}
+          {{ end }}
+        {{ end }}
+      </nav>
+    </footer>
+  </article>
+{{ end }}

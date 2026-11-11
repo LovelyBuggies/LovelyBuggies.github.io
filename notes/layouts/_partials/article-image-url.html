@@ -1,0 +1,12 @@
+{{- $src := .Destination -}}
+{{- $url := urls.Parse $src -}}
+{{- if not (or $url.Scheme $url.Host (hasPrefix $src "#")) -}}
+  {{- $path := strings.TrimPrefix "/" (strings.TrimPrefix "./" $url.Path) -}}
+  {{- $path = replaceRE "^imgs/blog/" "imgs/" $path -}}
+  {{- with or (.Page.Resources.Get $path) (resources.Get $path) -}}
+    {{- $src = .RelPermalink -}}
+    {{- with $url.RawQuery -}}{{- $src = printf "%s?%s" $src . -}}{{- end -}}
+    {{- with $url.Fragment -}}{{- $src = printf "%s#%s" $src . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $src -}}

@@ -1,0 +1,23 @@
+skipToContent = { other = "Skip to content" }
+navigation = { other = "Blog navigation" }
+articles = { other = "Articles" }
+backToBlog = { other = "Back to the blog" }
+academicHome = { other = "Academic homepage" }
+adjacentArticles = { other = "Adjacent articles" }
+older = { other = "Older" }
+newer = { other = "Newer" }
+contents = { other = "Contents" }
+readingTime = { other = "{{ .Minutes }} min read" }
+rss = { other = "RSS" }
+tags = { other = "Tags" }
+tag_rl = { other = "RL" }
+tag_multi_agent_rl = { other = "Multi-Agent RL" }
+tag_llm = { other = "LLM" }
+browseByType = { other = "Browse by type" }
+type_review = { other = "Review" }
+type_thought = { other = "Thought" }
+topics = { other = "Topics" }
+viewPDF = { other = "View PDF" }
+image = { other = "image" }
+enlargeImage = { other = "Enlarge {{ . }}" }
+closeImage = { other = "Close enlarged image" }

@@ -31,7 +31,7 @@
         "bcmaac": String.raw`@inproceedings{chen2026belief,
   title = {Belief-Conditioned Multi-Agent Actor Critic for Decentralized {LLM} Collaboration},
   author = {Chen, Tianle and Liu, Shuo and Amato, Christopher},
-  booktitle = {{PTA}: From Pretrained Representations to Acting Agents, {NeurIPS} 2026 Workshop},
+  booktitle = {From Pretrained Representations to Acting Agents, {NeurIPS} 2026 Workshop},
   year = {2026},
   url = {https://openreview.net/forum?id=az4kbwdYyi}
 }`,

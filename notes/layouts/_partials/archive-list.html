@@ -1,0 +1,7 @@
+{{ range . }}
+  <article class="post-entry" data-post-type="{{ .Params.postType }}">
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <div class="post-meta">{{ partial "post-time.html" . }}{{ partial "post-tags.html" . }}</div>
+    <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 210 }}{{ end }}</p>
+  </article>
+{{ end }}

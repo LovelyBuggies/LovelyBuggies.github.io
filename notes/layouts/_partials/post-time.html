@@ -1,0 +1,2 @@
+<time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format ":date_long" .Date }}</time>
+<span>{{ i18n "readingTime" (dict "Minutes" (.Params.readingTime | default .ReadingTime)) }}</span>

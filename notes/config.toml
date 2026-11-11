@@ -1,43 +1,42 @@
 baseURL = "https://lovelybuggies.github.io/notes/"
-languageCode = "en-us"
-title = "LovelyBuggies's Blog"
-enableGitInfo = true
+title = "Shuo's Blog"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 cleanDestinationDir = true
-
-# Local build output directory (Actions overrides with -d ../dist/notes)
 publishDir = "public"
 
-# Use a local theme (no Go/Hugo Modules required)
-theme = "book"
-
 [params]
-  BookTheme = "auto"
-  BookToC = true
-  BookSearch = true
-  BookRepo = "https://github.com/LovelyBuggies/LovelyBuggies.github.io"
-  BookDateFormat = "Jan 2, 2006"
-  # Show all content from the root instead of the 'docs' section
-  BookSection = "/"
-  # Use custom favicon for the site
-  # Use homepage favicon served from site root
-  BookFavicon = "/imgs/icon/nameicon.svg"
-  # Show page last modified time (needs enableGitInfo)
-  ShowLastMod = true
-  # Enable KaTeX for math rendering across the site
-  BookMath = true
-  AuthorName = "Shuo Liu"
+  authorName = "Shuo Liu"
+  description = "Shuo Liu's articles on reinforcement learning, multi-agent systems, and language models."
 
-[markup]
-  [markup.smartypants]
-    quotes = false
-    dashes = ""
-    ellipses = false
-    fractions = false
-    angledQuotes = false
-  [markup.highlight]
-    style = "github"
-    noClasses = false
-  [markup.goldmark.extensions]
-    typographer = false
-  [markup.goldmark.renderer]
-    unsafe = true
+[languages.en]
+  languageCode = "en-US"
+  languageName = "English"
+  weight = 1
+
+[languages.zh]
+  languageCode = "zh-CN"
+  languageName = "中文"
+  hasCJKLanguage = true
+  weight = 2
+  [languages.zh.params]
+    description = "Shuo Liu 关于强化学习、多智能体系统与语言模型的文章。"
+
+[taxonomies]
+  tag = "tags"
+
+[markup.highlight]
+  style = "github"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.goldmark.extensions]
+  typographer = false
+
+[markup.goldmark.extensions.passthrough]
+  enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+  block = [['\[', '\]'], ['$$', '$$']]
+  inline = [['\(', '\)'], ['$', '$']]

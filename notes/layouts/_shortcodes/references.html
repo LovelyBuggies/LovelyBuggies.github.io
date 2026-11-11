@@ -1,0 +1,7 @@
+{{- if in .Inner "<li" -}}
+  <ol class="article-references">{{ .Inner | safeHTML }}</ol>
+{{- else -}}
+  {{- $list := .Page.RenderString (dict "display" "block") .Inner -}}
+  {{- $list = replaceRE "^\\s*<(?:ul|ol)>" "<ol class=\"article-references\">" $list -}}
+  {{- replaceRE "</(?:ul|ol)>\\s*$" "</ol>" $list | safeHTML -}}
+{{- end -}}

@@ -28,3 +28,11 @@ dist/
 build/
 
 # Legacy entries removed: notes-src/* (no longer used)
+
+# Translations are materialized during a Pages build; localized section metadata is source.
+.translation-engine/
+.cache/blog-translations/
+scripts/__pycache__/
+notes/content/**/*.zh.md
+!notes/content/**/_index.zh.md
+!notes/content/academic_page.zh.md

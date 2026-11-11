@@ -1,62 +1,14 @@
 {{ define "main" }}
-<article class="markdown book-article">
   {{ if .IsHome }}
-    <h2>Welcome to LovelyBuggies' blog</h2>
+    <h1 class="visually-hidden">{{ i18n "articles" }}</h1>
   {{ else }}
-    <h1>{{ .Title }}</h1>
+    <h1 class="archive-title">{{ partial "archive-title.html" . }}</h1>
   {{ end }}
-  {{- with .Content }}{{ . }}{{ end -}}
-
-  {{ template "section-tree" . }}
-
-  {{/* Type tags buttons under the article list */}}
-  <div class="list-sep" style="height: 16px;"></div>
-  {{ partial "docs/type-tags" . }}
-  
-  {{/* Home link (replaces sidebar item) */}}
-  <p class="home-link"><a href="https://lovelybuggies.github.io/">Academic Page</a></p>
-</article>
-{{ end }}
-
-{{/* Recursive section tree similar to sidebar file tree */}}
-{{ define "section-tree" }}
-  {{- $pages := where .Pages "Params.bookHidden" "ne" true -}}
-  {{- if gt (len $pages) 0 -}}
-  <ul>
-    {{- $onlyPages := where $pages "Kind" "page" -}}
-    {{- $onlySections := where $pages "Kind" "section" -}}
-    {{- range $onlyPages.ByWeight -}}
-      {{- if eq .File.BaseFileName "academic_page" -}}
-        {{- /* skip this special page from list */ -}}
-      {{- else if .IsSection -}}
-        <li class="section">
-          {{- if .Content -}}
-            <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
-          {{- else -}}
-            <span>{{ partial "docs/title" . }}</span>
-          {{- end -}}
-          {{ template "section-tree" . }}
-        </li>
-      {{- else if and .IsPage .Content -}}
-        <li class="page">
-          <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
-        </li>
-      {{- else if .IsPage -}}
-        <li class="page">
-          <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
-        </li>
-      {{- end -}}
-    {{- end -}}
-    {{- range $onlySections.ByWeight -}}
-      <li class="section">
-        {{- if .Content -}}
-          <a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
-        {{- else -}}
-          <span>{{ partial "docs/title" . }}</span>
-        {{- end -}}
-        {{ template "section-tree" . }}
-      </li>
-    {{- end -}}
-  </ul>
-  {{- end -}}
+  {{ if eq .Kind "taxonomy" }}
+    <ul class="tag-archive">
+      {{ range .Pages }}<li><a href="{{ .RelPermalink }}">{{ partial "term-label.html" . }}</a> ({{ len .RegularPages }})</li>{{ end }}
+    </ul>
+  {{ else }}
+    {{ partial "archive-list.html" (partial "blog-posts.html" .RegularPagesRecursive) }}
+  {{ end }}
 {{ end }}

@@ -1,0 +1,3 @@
+{{- $title := cond .IsNamedParams (.Get "title") (.Get 1) -}}
+{{- $value := cond .IsNamedParams (.Get "value") (.Get 2) -}}
+<span class="article-badge">{{ with $title }}{{ . }} {{ end }}<strong>{{ $value }}</strong></span>

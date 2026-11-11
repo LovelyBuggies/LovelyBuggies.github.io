@@ -1,17 +1,11 @@
 ---
 date: 2024-12-21
-title: "Intro to Dec-POMDP"
+title: "An Introduction to Dec-POMDP"
+description: "An introduction to decentralized partially observable Markov decision processes, their computational complexity, and representations of joint policies."
 math: true
 postType: review
-linkTitle: "Intro to Dec-POMDP"
 readingTime: 10
-weight: 2
 ---
-
-{{< katex />}}
-
-# An Introduction to Dec-POMDP
-{{< postbadges >}}
 
 ## Dec-POMDP
 
@@ -76,9 +70,9 @@ the Bellman recursive formulation of the **history-policy** Q-function is,
 ## Special Classes of Dec-POMDP 
 
 - **Centralized:** MMDP is a fully observable version of Dec-POMDP, but it does not specify decentralized control. Dec-MDP assumes that the joint observations uniquely determine the state, while agents still act with local observations. Similarly, MPOMDP does not specify whether the control is decentralized, which could have a centralized policy {{< katex >}}\mathbb{H}\to\mathbb{A}{{< /katex >}}.
-- **Decentralized:** A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) {{< katex >}}T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i'){{< /katex >}} and reward-independence (RI) {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n}){{< /katex >}}. Network-distributed POMDP (ND-POMDP) represents the factored one with TI and block-RI, i.e., {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n}){{< /katex >}}, where {{< katex >}}{\mathcal{N}(i)}{{< /katex >}} are the neighbors of {{< katex >}}i{{< /katex >}}.
+- **Decentralized:** A decentralized control model might be factorized with independent local variables, e.g., transition-independence (TI) {{< katex >}}T(s, \boldsymbol{a}, s')=\Pi_{i=1}^{n} T(s_i, a_i, s_i'){{< /katex >}} and reward-independence (RI) {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_i, \pi_i)\rangle_{i=1}^{n}){{< /katex >}}. The networked distributed POMDP ([Nair et al., 2005](https://cdn.aaai.org/AAAI/2005/AAAI05-022.pdf)) represents the factored one with TI and block-RI, i.e., {{< katex >}}R(s,\boldsymbol{\pi})=f_\text{mono}(\langle R(s_{i, \mathcal{N}(i)}, \pi_{i, \mathcal{N}(i)})\rangle_{i=1}^{n}){{< /katex >}}, where {{< katex >}}{\mathcal{N}(i)}{{< /katex >}} are the neighbors of {{< katex >}}i{{< /katex >}}.
 
-The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013)
+[Amato et al. (2013)](https://people.csail.mit.edu/camato/publications/DecPOMDP-survey-final.pdf) summarize the **worst-case complexity** of finite-horizon problems. The TI Dec-MDP rows below assume independent observations as well as independent transitions.
 
 | **Model**              | **Complexity**  |
 |:-----------------------|:----------------|
@@ -99,49 +93,22 @@ The **worst-case complexity** of finite-horizon problems is: (Amato et al., 2013
 <span id="tab:complexity" label="tab:complexity"></span>
 
 <div class="theorem">
-<strong>Theorem 1</strong>. An MDP is P-complete in finite and infinite horizons (Papadimitriou and Tsitsiklis 1987).
+<strong>Theorem 1</strong>. An MDP is P-complete in finite and infinite horizons (<a href="https://doi.org/10.1287/moor.12.3.441">Papadimitriou and Tsitsiklis 1987</a>).
 
-<strong>Theorem 2</strong>. A finite POMDP is PSPACE-complete (Papadimitriou and Tsitsiklis 1987).
+<strong>Theorem 2</strong>. A finite POMDP is PSPACE-complete (<a href="https://doi.org/10.1287/moor.12.3.441">Papadimitriou and Tsitsiklis 1987</a>).
 
-<strong>Theorem 3</strong>. The complexity of an infinite POMDP is undecidable (Madani, Hanks, and Condon 1999), leading to the undecidability of the infinite Dec-POMDP complexity.
+<strong>Theorem 3</strong>. The complexity of an infinite POMDP is undecidable (<a href="https://cdn.aaai.org/AAAI/1999/AAAI99-077.pdf">Madani, Hanks, and Condon 1999</a>), leading to the undecidability of the infinite Dec-POMDP complexity.
 
-<strong>Theorem 4</strong>. A finite Dec-POMDP ($n\geqslant2$) is NEXP-complete, and a finite Dec-MDP ($n\geqslant3$) is also NEXP-complete (Bernstein et al. 2002).
+<strong>Theorem 4</strong>. A finite Dec-POMDP ($n\geqslant2$) is NEXP-complete, and a finite Dec-MDP ($n\geqslant3$) is also NEXP-complete (<a href="https://doi.org/10.1287/moor.27.4.819.297">Bernstein et al. 2002</a>).
 
-<strong>Fact 1</strong>. A Dec-MDP with TI and RI can be solved independently, resulting in P-complete.
+<strong>Fact 1</strong>. With independent transitions, observations, and rewards, a Dec-MDP can be solved independently for each agent and is P-complete (<a href="https://people.csail.mit.edu/camato/publications/DecPOMDP-survey-final.pdf">Amato et al. 2013, Theorem 5</a>).
 
-<strong>Theorem 5</strong>. A Dec-MDP with TI and joint reward is NP-complete, a Dec-MDP with RI but no TI is NEXP-complete (Becker et al. 2004).
+<strong>Theorem 5</strong>. A Dec-MDP with independent transitions and observations but joint reward is NP-complete (<a href="https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume22/becker04a.pdf">Becker et al. 2004</a>). Reward independence alone leaves the problem NEXP-complete (<a href="https://proceedings.neurips.cc/paper/2009/hash/fec8d47d412bcbeece3d9128ae855a7a-Abstract.html">Allen and Zilberstein 2009</a>).
 
-<strong>Fact 2</strong>. An ND-POMDP has the same worst-case complexity as a Dec-POMDP (Nair et al. 2005).
+<strong>Fact 2</strong>. An ND-POMDP has the same worst-case complexity as a Dec-POMDP (<a href="https://people.csail.mit.edu/camato/publications/DecPOMDP-survey-final.pdf">Amato et al. 2013, Table I</a>).
 
 </div>
 
 {{% /details %}}
-
-
-## References
-
-{{< references >}}
-<li>Amato, C., Chowdhary, G., Geramifard, A., Üre, N. K., & Kochenderfer, M. J. (2013, December). Decentralized control of partially observable Markov decision processes. In 52nd IEEE Conference on Decision and Control (pp. 2398-2405). IEEE.</li>
-<li>Becker, R., Zilberstein, S., Lesser, V., & Goldman, C. V. (2004). Solving transition independent decentralized Markov decision processes. Journal of Artificial Intelligence Research, 22, 423-455.</li>
-<li>Bernstein, D. S., Givan, R., Immerman, N., & Zilberstein, S. (2002). The complexity of decentralized control of Markov decision processes. Mathematics of operations research, 27(4), 819-840.</li>
-<li>Carlin, A., & Zilberstein, S. (2008, May). Value-based observation compression for DEC-POMDPs. In Proceedings of the 7th international joint conference on Autonomous agents and multiagent systems-Volume 1 (pp. 501-508).</li>
-<li>Chi, C., Xu, Z., Feng, S., Cousineau, E., Du, Y., Burchfiel, B., ... & Song, S. (2023). Diffusion policy: Visuomotor policy learning via action diffusion. The International Journal of Robotics Research, 02783649241273668.</li>
-<li>Dibangoye, J. S., Mouaddib, A. I., & Chai-draa, B. (2009, May). Point-based incremental pruning heuristic for solving finite-horizon DEC-POMDPs. In Proceedings of The 8th International Conference on Autonomous Agents and Multiagent Systems-Volume 1 (pp. 569-576).</li>
-<li>Hansen, E. A., Bernstein, D. S., & Zilberstein, S. (2004, July). Dynamic programming for partially observable stochastic games. In AAAI (Vol. 4, pp. 709-715).</li>
-<li>Kumar, A., & Zilberstein, S. (2010). Point-based backup for decentralized POMPDs: Complexity and new algorithms.</li>
-<li>Madani, O., Hanks, S., & Condon, A. (1999). On the undecidability of probabilistic planning and infinite-horizon partially observable Markov decision problems. Aaai/iaai, 10(315149.315395).</li>
-<li>Nair, R., Varakantham, P., Tambe, M., & Yokoo, M. (2005, July). Networked distributed POMDPs: A synthesis of distributed constraint optimization and POMDPs. In AAAI (Vol. 5, pp. 133-139).</li>
-<li>Nair, R., Tambe, M., Yokoo, M., Pynadath, D., & Marsella, S. (2003, August). Taming decentralized POMDPs: Towards efficient policy computation for multiagent settings. In IJCAI (Vol. 3, pp. 705-711).</li>
-<li>Papadimitriou, C. H., & Tsitsiklis, J. N. (1987). The complexity of Markov decision processes. Mathematics of operations research, 12(3), 441-450.</li>
-<li>Seuken, S., & Zilberstein, S. (2012). Improved memory-bounded dynamic programming for decentralized POMDPs. arXiv preprint arXiv:1206.5295.</li>
-<li>Seuken, S., & Zilberstein, S. (2007). Memory-Bounded Dynamic Programming for DEC-POMDPs. In IJCAI (pp. 2009-2015).</li>
-<li>Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction (Vol. 1, No. 1, pp. 9-11). Cambridge: MIT press.</li>
-<li>Szer, D., Charpillet, F., & Zilberstein, S. (2012). MAA*: A heuristic search algorithm for solving decentralized POMDPs. arXiv preprint arXiv:1207.1359.</li>
-<li>Wu, F., Zilberstein, S., & Chen, X. (2010, May). Point-based policy generation for decentralized POMDPs. In Proceedings of the 9th International Conference on Autonomous Agents and Multiagent Systems: volume 1-Volume 1 (pp. 1307-1314).</li>
-{{< /references >}}
-
-
-
-</div>
 <!-- moved to root content -->
 <!-- moved back under rl/marl/ -->
