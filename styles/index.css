@@ -127,20 +127,9 @@ img {
     height: 1.5em;
 }
 
-conf {
-	color: #111111;
-	font-weight: bold;
-}
-
-paper {
-	color: var(--site-blue);
-}
-
 .publications paper,
 .selected-papers paper {
-    /* This serif face has regular and bold weights; a light stroke adds subtle emphasis. */
-    font-weight: 400;
-    -webkit-text-stroke: 0.5px currentColor;
+    font-weight: bold;
 }
 
 .publications .publication-venue {
