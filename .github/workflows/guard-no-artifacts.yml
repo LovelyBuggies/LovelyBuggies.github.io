@@ -1,4 +1,4 @@
-name: Guard: No Artifacts
+name: "Guard: No Artifacts"
 
 on:
   pull_request:
