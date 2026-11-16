@@ -11,10 +11,6 @@ article :is(.definition, .theorem, .proposition, .corollary) {
   font-style: italic;
 }
 
-article .text-danger {
-  color: #9a3030;
-}
-
 .article-details {
   margin-block: 1.5em;
   padding-block: 0.6em;
@@ -107,10 +103,6 @@ article .text-danger {
   height: auto;
 }
 
-.article-image.w-60 {
-  width: 60%;
-}
-
 .article-image.wide-grpo {
   width: 92%;
 }
@@ -158,15 +150,6 @@ article .text-danger {
   height: 30rem;
 }
 
-.article-badge,
-.article-references {
-  font-size: 0.9em;
-}
-
-.article-references > li::marker {
-  content: "[" counter(list-item) "]  ";
-}
-
 @media (max-width: 36rem) {
   .article-columns {
     grid-template-columns: 1fr;
@@ -175,10 +158,6 @@ article .text-danger {
   .article-columns > .figcaption {
     grid-row: auto;
     margin-block-end: 1em;
-  }
-
-  .article-image.w-60 {
-    width: 100%;
   }
 }
 
