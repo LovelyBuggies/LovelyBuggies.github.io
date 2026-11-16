@@ -4,7 +4,7 @@ title: "Optimal Q-Functions in Dec-POMDP"
 description: "Why the normative optimal Q-function is difficult to compute in a Dec-POMDP, and how sequential rationality gives an alternative."
 math: true
 postType: thought
-readingTime: 45
+readingTime: 20
 ---
 
 This post discusses why the normative optimal Q-function is impractical to compute directly and how sequential rationality gives an alternative.

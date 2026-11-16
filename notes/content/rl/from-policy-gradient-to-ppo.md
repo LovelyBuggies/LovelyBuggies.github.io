@@ -4,7 +4,7 @@ title: "From Policy Gradient to PPO"
 description: "Following the policy gradient from its derivation to proximal policy optimization and group relative policy optimization."
 math: true
 postType: review
-readingTime: 15
+readingTime: 25
 ---
 
 PPO ([Schulman et al., 2017](https://arxiv.org/abs/1707.06347)) is a shining jewel in the world of RL. In this post, we’ll dive into its backstory and recent advances.

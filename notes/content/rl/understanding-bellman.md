@@ -4,7 +4,7 @@ title: "Understanding Bellman Equations"
 description: "A fresh look at Bellman equations for value prediction, from recursive updates to the difference between full gradients and semi-gradients."
 math: true
 postType: review
-readingTime: 35
+readingTime: 20
 ---
 
 This post is about the clichés of the Bellman equations, but retold in a new way :)
